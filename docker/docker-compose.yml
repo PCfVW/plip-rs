@@ -1,7 +1,7 @@
 # PLIP-rs Docker Compose
 #
 # Usage:
-#   Local (RTX 3070 Ti):  docker compose --profile local run plip-local
+#   Local (RTX 5060 Ti):  docker compose --profile local run plip-local
 #   H100 (RIKEN):         docker compose --profile h100 run plip-h100
 #
 # Or pull pre-built from GitHub Container Registry:
@@ -12,7 +12,7 @@ version: '3.8'
 
 services:
   # =============================================================================
-  # RTX 3070 Ti (Local / Rennes)
+  # RTX 5060 Ti (Local / Rennes)
   # =============================================================================
   plip-local:
     profiles: ["local"]

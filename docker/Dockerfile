@@ -1,7 +1,7 @@
 # PLIP-rs: Programming Language Internal Probing
-# Multi-target Dockerfile for RTX 3070 Ti (local) and H100 (RIKEN)
+# Multi-target Dockerfile for RTX 5060 Ti (local) and H100 (RIKEN)
 #
-# Build for RTX 3070 Ti:  docker build --build-arg TARGET=local -t plip-rs:local .
+# Build for RTX 5060 Ti:  docker build --build-arg TARGET=local -t plip-rs:local .
 # Build for H100:         docker build --build-arg TARGET=h100 -t plip-rs:h100 .
 
 ARG TARGET=local

@@ -22,7 +22,7 @@ env:
 
 jobs:
   build-local:
-    name: Build (RTX 3070 Ti / Local)
+    name: Build (RTX 5060 Ti / Local)
     runs-on: ubuntu-latest
     if: github.event.inputs.target != 'h100'
     permissions:
@@ -53,7 +53,7 @@ jobs:
             type=semver,pattern={{version}},suffix=-local
             type=raw,value=local,enable={{is_default_branch}}
 
-      - name: Build and push (local/RTX 3070 Ti)
+      - name: Build and push (local/RTX 5060 Ti)
         uses: docker/build-push-action@v5
         with:
           context: .
