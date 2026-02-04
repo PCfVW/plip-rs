@@ -1,6 +1,9 @@
 # PLIP-rs: Programming Language Internal Probing in Rust
 
-**PLIP** investigates how transformer models internally process test-related syntax, measuring attention patterns from test markers (Python `>>>`, Rust `#[test]`) to function tokens. Part of the [Amphigraphic](https://github.com/PCfVW/Amphigraphic) research project.
+[![CI](https://github.com/PCfVW/plip-rs/actions/workflows/ci.yml/badge.svg)](https://github.com/PCfVW/plip-rs/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+
+**PLIP** investigates how transformer models internally process test-related syntax, measuring attention patterns from test markers (Python `>>>`, Rust `#[test]`) to function tokens. Supplementary material for AIware 2026, developed as part of the [d-Heap Priority Queue](https://github.com/PCfVW/d-Heap-priority-queue) research project.
 
 **Key Finding:** Python doctest markers show **2.8-4.4× stronger attention** to function tokens than Rust test attributes, with **p < 0.0002** across all tested architectures.
 

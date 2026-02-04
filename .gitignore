@@ -28,9 +28,7 @@ Thumbs.db
 hf_cache/
 .cache/
 
-# Experiment outputs
-outputs/
-results/
+# Large experiment artifacts (but keep JSON results for reproducibility)
 *.npy
 activations/
 

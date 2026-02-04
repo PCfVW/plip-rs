@@ -1,0 +1,940 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "layer": 2,
+  "n_heads": 28,
+  "sample_results": [
+    {
+      "id": "py_simple_add",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.09384326,
+      "marker_token_pos": 9,
+      "target_token_positions": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "edges_knocked_out": 4,
+      "top_changed_tokens": [
+        {
+          "token": " Hindered",
+          "baseline_prob": 0.1215337,
+          "ablated_prob": 0.16845374,
+          "diff": 0.04692004
+        },
+        {
+          "token": "aeper",
+          "baseline_prob": 0.08352881,
+          "ablated_prob": 0.1166845,
+          "diff": 0.033155687
+        },
+        {
+          "token": "class",
+          "baseline_prob": 0.045060415,
+          "ablated_prob": 0.017343601,
+          "diff": 0.027716814
+        },
+        {
+          "token": "ylko",
+          "baseline_prob": 0.011129136,
+          "ablated_prob": 0.021924367,
+          "diff": 0.010795231
+        },
+        {
+          "token": "acades",
+          "baseline_prob": 0.039456215,
+          "ablated_prob": 0.050185375,
+          "diff": 0.01072916
+        }
+      ]
+    },
+    {
+      "id": "py_long_name",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000033953304,
+      "marker_token_pos": 11,
+      "target_token_positions": [
+        0,
+        1,
+        6
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": " ",
+          "baseline_prob": 0.14381117,
+          "ablated_prob": 0.145787,
+          "diff": 0.0019758344
+        },
+        {
+          "token": "2",
+          "baseline_prob": 0.08454222,
+          "ablated_prob": 0.083718434,
+          "diff": 0.00082378834
+        },
+        {
+          "token": "4",
+          "baseline_prob": 0.048170708,
+          "ablated_prob": 0.047701325,
+          "diff": 0.00046938285
+        },
+        {
+          "token": "5",
+          "baseline_prob": 0.04668865,
+          "ablated_prob": 0.04623371,
+          "diff": 0.0004549399
+        },
+        {
+          "token": "6",
+          "baseline_prob": 0.0146912355,
+          "ablated_prob": 0.0144348685,
+          "diff": 0.00025636703
+        }
+      ]
+    },
+    {
+      "id": "py_multi_param",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.00005975846,
+      "marker_token_pos": 16,
+      "target_token_positions": [
+        0,
+        1,
+        4,
+        7,
+        10
+      ],
+      "edges_knocked_out": 5,
+      "top_changed_tokens": [
+        {
+          "token": "input",
+          "baseline_prob": 0.019823711,
+          "ablated_prob": 0.019528681,
+          "diff": 0.00029502995
+        },
+        {
+          "token": "return",
+          "baseline_prob": 0.036747355,
+          "ablated_prob": 0.03648438,
+          "diff": 0.0002629757
+        },
+        {
+          "token": "･",
+          "baseline_prob": 0.007885328,
+          "ablated_prob": 0.008140766,
+          "diff": 0.0002554385
+        },
+        {
+          "token": "type",
+          "baseline_prob": 0.023176266,
+          "ablated_prob": 0.023010409,
+          "diff": 0.00016585737
+        },
+        {
+          "token": "name",
+          "baseline_prob": 0.0061892644,
+          "ablated_prob": 0.006049703,
+          "diff": 0.00013956148
+        }
+      ]
+    },
+    {
+      "id": "py_complex_params",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0000484252,
+      "marker_token_pos": 18,
+      "target_token_positions": [
+        0,
+        1,
+        3,
+        6,
+        9,
+        12
+      ],
+      "edges_knocked_out": 6,
+      "top_changed_tokens": [
+        {
+          "token": "かどう",
+          "baseline_prob": 0.07514149,
+          "ablated_prob": 0.07662199,
+          "diff": 0.0014804974
+        },
+        {
+          "token": "んじゃないか",
+          "baseline_prob": 0.014118668,
+          "ablated_prob": 0.014396844,
+          "diff": 0.00027817674
+        },
+        {
+          "token": "のではない",
+          "baseline_prob": 0.0116137,
+          "ablated_prob": 0.011842522,
+          "diff": 0.00022882223
+        },
+        {
+          "token": "なのだ",
+          "baseline_prob": 0.016377943,
+          "ablated_prob": 0.016570667,
+          "diff": 0.00019272417
+        },
+        {
+          "token": "�",
+          "baseline_prob": 0.012076336,
+          "ablated_prob": 0.012218444,
+          "diff": 0.00014210772
+        }
+      ]
+    },
+    {
+      "id": "py_single_char_param",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0004369902,
+      "marker_token_pos": 7,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "odzi",
+          "baseline_prob": 0.15010749,
+          "ablated_prob": 0.1566372,
+          "diff": 0.0065297186
+        },
+        {
+          "token": "iedy",
+          "baseline_prob": 0.1254195,
+          "ablated_prob": 0.12985681,
+          "diff": 0.0044373125
+        },
+        {
+          "token": "rire",
+          "baseline_prob": 0.02266284,
+          "ablated_prob": 0.023282042,
+          "diff": 0.000619201
+        },
+        {
+          "token": "opsis",
+          "baseline_prob": 0.0102950595,
+          "ablated_prob": 0.009858238,
+          "diff": 0.00043682195
+        },
+        {
+          "token": "ylko",
+          "baseline_prob": 0.009823615,
+          "ablated_prob": 0.010250945,
+          "diff": 0.0004273299
+        }
+      ]
+    },
+    {
+      "id": "py_multiple_doctests",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000030303918,
+      "marker_token_pos": 10,
+      "target_token_positions": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "edges_knocked_out": 4,
+      "top_changed_tokens": [
+        {
+          "token": " Hindered",
+          "baseline_prob": 0.089640535,
+          "ablated_prob": 0.09032367,
+          "diff": 0.0006831363
+        },
+        {
+          "token": "acades",
+          "baseline_prob": 0.08486995,
+          "ablated_prob": 0.085516736,
+          "diff": 0.0006467849
+        },
+        {
+          "token": "class",
+          "baseline_prob": 0.08035325,
+          "ablated_prob": 0.07971036,
+          "diff": 0.0006428957
+        },
+        {
+          "token": " Fucked",
+          "baseline_prob": 0.06981212,
+          "ablated_prob": 0.07034415,
+          "diff": 0.00053203106
+        },
+        {
+          "token": "Prostit",
+          "baseline_prob": 0.061129533,
+          "ablated_prob": 0.06159539,
+          "diff": 0.00046585873
+        }
+      ]
+    },
+    {
+      "id": "py_list_operations",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000036902482,
+      "marker_token_pos": 9,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "omi",
+          "baseline_prob": 0.016585298,
+          "ablated_prob": 0.016311612,
+          "diff": 0.0002736859
+        },
+        {
+          "token": "wise",
+          "baseline_prob": 0.02489748,
+          "ablated_prob": 0.025067316,
+          "diff": 0.00016983598
+        },
+        {
+          "token": " class",
+          "baseline_prob": 0.017111773,
+          "ablated_prob": 0.016961394,
+          "diff": 0.0001503788
+        },
+        {
+          "token": "-cli",
+          "baseline_prob": 0.012421814,
+          "ablated_prob": 0.012312653,
+          "diff": 0.00010916125
+        },
+        {
+          "token": "-inch",
+          "baseline_prob": 0.0059600514,
+          "ablated_prob": 0.0058617014,
+          "diff": 0.00009834999
+        }
+      ]
+    },
+    {
+      "id": "py_string_manipulation",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000059770562,
+      "marker_token_pos": 12,
+      "target_token_positions": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "edges_knocked_out": 4,
+      "top_changed_tokens": [
+        {
+          "token": " Hindered",
+          "baseline_prob": 0.21194418,
+          "ablated_prob": 0.20915455,
+          "diff": 0.0027896315
+        },
+        {
+          "token": "-Semit",
+          "baseline_prob": 0.13684145,
+          "ablated_prob": 0.13932697,
+          "diff": 0.0024855286
+        },
+        {
+          "token": "ampie",
+          "baseline_prob": 0.08835147,
+          "ablated_prob": 0.08718859,
+          "diff": 0.0011628866
+        },
+        {
+          "token": " darm",
+          "baseline_prob": 0.1784749,
+          "ablated_prob": 0.17889938,
+          "diff": 0.00042447448
+        },
+        {
+          "token": "acades",
+          "baseline_prob": 0.1082505,
+          "ablated_prob": 0.108507946,
+          "diff": 0.00025744736
+        }
+      ]
+    },
+    {
+      "id": "py_default_args",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000026949683,
+      "marker_token_pos": 14,
+      "target_token_positions": [
+        0,
+        1,
+        3,
+        5,
+        7
+      ],
+      "edges_knocked_out": 5,
+      "top_changed_tokens": [
+        {
+          "token": "iedy",
+          "baseline_prob": 0.07124846,
+          "ablated_prob": 0.07017993,
+          "diff": 0.001068525
+        },
+        {
+          "token": "eczy",
+          "baseline_prob": 0.03064358,
+          "ablated_prob": 0.03018401,
+          "diff": 0.00045957044
+        },
+        {
+          "token": "Prostit",
+          "baseline_prob": 0.014934489,
+          "ablated_prob": 0.015177474,
+          "diff": 0.00024298579
+        },
+        {
+          "token": "➢",
+          "baseline_prob": 0.014475002,
+          "ablated_prob": 0.014710513,
+          "diff": 0.00023551099
+        },
+        {
+          "token": ".Disclaimer",
+          "baseline_prob": 0.014029653,
+          "ablated_prob": 0.014257917,
+          "diff": 0.00022826437
+        }
+      ]
+    },
+    {
+      "id": "py_nested_structure",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000009027409,
+      "marker_token_pos": 9,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "2",
+          "baseline_prob": 0.09355783,
+          "ablated_prob": 0.09308913,
+          "diff": 0.00046869367
+        },
+        {
+          "token": " ",
+          "baseline_prob": 0.15790872,
+          "ablated_prob": 0.15834996,
+          "diff": 0.00044123828
+        },
+        {
+          "token": "1",
+          "baseline_prob": 0.090679355,
+          "ablated_prob": 0.090932734,
+          "diff": 0.00025337934
+        },
+        {
+          "token": "3",
+          "baseline_prob": 0.0445402,
+          "ablated_prob": 0.044317074,
+          "diff": 0.00022312626
+        },
+        {
+          "token": "5",
+          "baseline_prob": 0.035789058,
+          "ablated_prob": 0.03560977,
+          "diff": 0.00017928705
+        }
+      ]
+    },
+    {
+      "id": "rust_simple_add",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.000024160783,
+      "marker_token_pos": 25,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "1",
+          "baseline_prob": 0.1828383,
+          "ablated_prob": 0.18478738,
+          "diff": 0.0019490719
+        },
+        {
+          "token": "#",
+          "baseline_prob": 0.08704408,
+          "ablated_prob": 0.086608104,
+          "diff": 0.00043597817
+        },
+        {
+          "token": "package",
+          "baseline_prob": 0.06939759,
+          "ablated_prob": 0.06905,
+          "diff": 0.00034759194
+        },
+        {
+          "token": "<?",
+          "baseline_prob": 0.018532755,
+          "ablated_prob": 0.018296428,
+          "diff": 0.00023632683
+        },
+        {
+          "token": "class",
+          "baseline_prob": 0.07863778,
+          "ablated_prob": 0.07885757,
+          "diff": 0.00021979213
+        }
+      ]
+    },
+    {
+      "id": "rust_option_return",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.00002915478,
+      "marker_token_pos": 35,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "aeper",
+          "baseline_prob": 0.20189263,
+          "ablated_prob": 0.20408268,
+          "diff": 0.0021900535
+        },
+        {
+          "token": " Hindered",
+          "baseline_prob": 0.19876258,
+          "ablated_prob": 0.19780372,
+          "diff": 0.0009588599
+        },
+        {
+          "token": " darm",
+          "baseline_prob": 0.046116628,
+          "ablated_prob": 0.045537002,
+          "diff": 0.00057962537
+        },
+        {
+          "token": " Fucked",
+          "baseline_prob": 0.06452876,
+          "ablated_prob": 0.06421746,
+          "diff": 0.00031130016
+        },
+        {
+          "token": "ylko",
+          "baseline_prob": 0.019375049,
+          "ablated_prob": 0.019131528,
+          "diff": 0.00024352036
+        }
+      ]
+    },
+    {
+      "id": "rust_should_panic",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000075865687,
+      "marker_token_pos": 39,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "class",
+          "baseline_prob": 0.20810646,
+          "ablated_prob": 0.20701605,
+          "diff": 0.0010904074
+        },
+        {
+          "token": "1",
+          "baseline_prob": 0.398014,
+          "ablated_prob": 0.39903387,
+          "diff": 0.0010198653
+        },
+        {
+          "token": "#",
+          "baseline_prob": 0.06756227,
+          "ablated_prob": 0.06720827,
+          "diff": 0.00035399944
+        },
+        {
+          "token": "//",
+          "baseline_prob": 0.019661743,
+          "ablated_prob": 0.019558722,
+          "diff": 0.00010302104
+        },
+        {
+          "token": "import",
+          "baseline_prob": 0.035050847,
+          "ablated_prob": 0.03514066,
+          "diff": 0.000089813024
+        }
+      ]
+    },
+    {
+      "id": "rust_result_type",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.00001430277,
+      "marker_token_pos": 32,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "GameObjectWithTag",
+          "baseline_prob": 0.024655197,
+          "ablated_prob": 0.024315426,
+          "diff": 0.0003397707
+        },
+        {
+          "token": "てしまって",
+          "baseline_prob": 0.017212102,
+          "ablated_prob": 0.016974904,
+          "diff": 0.00023719855
+        },
+        {
+          "token": "かどう",
+          "baseline_prob": 0.12718119,
+          "ablated_prob": 0.12740372,
+          "diff": 0.00022253394
+        },
+        {
+          "token": ".habbo",
+          "baseline_prob": 0.096001394,
+          "ablated_prob": 0.096169375,
+          "diff": 0.00016798079
+        },
+        {
+          "token": "アニ",
+          "baseline_prob": 0.008791082,
+          "ablated_prob": 0.008669932,
+          "diff": 0.000121149234
+        }
+      ]
+    },
+    {
+      "id": "rust_multiple_assertions",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.000023409995,
+      "marker_token_pos": 41,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "class",
+          "baseline_prob": 0.21302512,
+          "ablated_prob": 0.21162756,
+          "diff": 0.001397565
+        },
+        {
+          "token": "import",
+          "baseline_prob": 0.06199384,
+          "ablated_prob": 0.06255698,
+          "diff": 0.00056314096
+        },
+        {
+          "token": "def",
+          "baseline_prob": 0.026663223,
+          "ablated_prob": 0.026905423,
+          "diff": 0.00024219975
+        },
+        {
+          "token": "1",
+          "baseline_prob": 0.008389954,
+          "ablated_prob": 0.00859949,
+          "diff": 0.00020953547
+        },
+        {
+          "token": "/*\\n",
+          "baseline_prob": 0.027942814,
+          "ablated_prob": 0.027759494,
+          "diff": 0.00018331967
+        }
+      ]
+    },
+    {
+      "id": "rust_generic_complex",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.00005159626,
+      "marker_token_pos": 45,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "✕",
+          "baseline_prob": 0.24041015,
+          "ablated_prob": 0.23855993,
+          "diff": 0.0018502176
+        },
+        {
+          "token": "▿",
+          "baseline_prob": 0.051992342,
+          "ablated_prob": 0.053229917,
+          "diff": 0.001237575
+        },
+        {
+          "token": "➢",
+          "baseline_prob": 0.07447559,
+          "ablated_prob": 0.07506621,
+          "diff": 0.0005906224
+        },
+        {
+          "token": "----</",
+          "baseline_prob": 0.07218421,
+          "ablated_prob": 0.071628675,
+          "diff": 0.00055553764
+        },
+        {
+          "token": "‼",
+          "baseline_prob": 0.049611434,
+          "ablated_prob": 0.049229622,
+          "diff": 0.00038181245
+        }
+      ]
+    },
+    {
+      "id": "rust_tuple_return",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000613313,
+      "marker_token_pos": 52,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": " Hindered",
+          "baseline_prob": 0.1771756,
+          "ablated_prob": 0.17983252,
+          "diff": 0.0026569217
+        },
+        {
+          "token": "-Semit",
+          "baseline_prob": 0.11261966,
+          "ablated_prob": 0.1107916,
+          "diff": 0.0018280596
+        },
+        {
+          "token": ".Disclaimer",
+          "baseline_prob": 0.05488644,
+          "ablated_prob": 0.055709515,
+          "diff": 0.0008230731
+        },
+        {
+          "token": "Prostit",
+          "baseline_prob": 0.02592652,
+          "ablated_prob": 0.02631531,
+          "diff": 0.00038878992
+        },
+        {
+          "token": "ylko",
+          "baseline_prob": 0.020509563,
+          "ablated_prob": 0.020176647,
+          "diff": 0.00033291616
+        }
+      ]
+    },
+    {
+      "id": "rust_vec_operations",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000452693,
+      "marker_token_pos": 38,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "#",
+          "baseline_prob": 0.094832726,
+          "ablated_prob": 0.094082184,
+          "diff": 0.0007505417
+        },
+        {
+          "token": "1",
+          "baseline_prob": 0.01609771,
+          "ablated_prob": 0.015722713,
+          "diff": 0.00037499703
+        },
+        {
+          "token": "def",
+          "baseline_prob": 0.03772185,
+          "ablated_prob": 0.03742331,
+          "diff": 0.00029854104
+        },
+        {
+          "token": "//",
+          "baseline_prob": 0.033289418,
+          "ablated_prob": 0.033025954,
+          "diff": 0.0002634637
+        },
+        {
+          "token": " Fucked",
+          "baseline_prob": 0.0103125805,
+          "ablated_prob": 0.010555728,
+          "diff": 0.00024314784
+        }
+      ]
+    },
+    {
+      "id": "rust_reference_params",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000020248442,
+      "marker_token_pos": 30,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "2",
+          "baseline_prob": 0.016686369,
+          "ablated_prob": 0.016558183,
+          "diff": 0.00012818538
+        },
+        {
+          "token": "4",
+          "baseline_prob": 0.0065857265,
+          "ablated_prob": 0.0066380478,
+          "diff": 0.000052321237
+        },
+        {
+          "token": "int",
+          "baseline_prob": 0.0045617996,
+          "ablated_prob": 0.0045980415,
+          "diff": 0.000036241952
+        },
+        {
+          "token": "1",
+          "baseline_prob": 0.32484305,
+          "ablated_prob": 0.3248758,
+          "diff": 0.000032752752
+        },
+        {
+          "token": "print",
+          "baseline_prob": 0.0033900416,
+          "ablated_prob": 0.0034169746,
+          "diff": 0.000026932918
+        }
+      ]
+    },
+    {
+      "id": "rust_cfg_test_module",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.00025653813,
+      "marker_token_pos": 65,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "0",
+          "baseline_prob": 0.1960312,
+          "ablated_prob": 0.18774466,
+          "diff": 0.008286536
+        },
+        {
+          "token": "2",
+          "baseline_prob": 0.076766916,
+          "ablated_prob": 0.07765457,
+          "diff": 0.0008876547
+        },
+        {
+          "token": "4",
+          "baseline_prob": 0.067219354,
+          "ablated_prob": 0.06799661,
+          "diff": 0.00077725947
+        },
+        {
+          "token": "\\n",
+          "baseline_prob": 0.049564447,
+          "ablated_prob": 0.050137553,
+          "diff": 0.0005731061
+        },
+        {
+          "token": "3",
+          "baseline_prob": 0.023596214,
+          "ablated_prob": 0.023869054,
+          "diff": 0.00027284026
+        }
+      ]
+    }
+  ],
+  "python_stats": {
+    "language": "python",
+    "is_baseline": false,
+    "n_samples": 10,
+    "mean_kl": 0.009458534,
+    "std_kl": 0.028128495,
+    "min_kl": 0.000009027409,
+    "max_kl": 0.09384326,
+    "median_kl": 0.000042663843
+  },
+  "rust_stats": {
+    "language": "rust",
+    "is_baseline": false,
+    "n_samples": 10,
+    "mean_kl": 0.00005153747,
+    "std_kl": 0.00007069067,
+    "min_kl": 0.0000020248442,
+    "max_kl": 0.00025653813,
+    "median_kl": 0.00002665778
+  },
+  "welch_t_statistic": 1.0032852,
+  "welch_p_value": 0.33754385,
+  "significant_difference": false
+}

@@ -1,0 +1,107 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "layer": 27,
+  "python_doctest": {
+    "mean": 0.0,
+    "std_dev": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 2,
+    "samples": [
+      {
+        "id": "py_test_add",
+        "attention_to_targets": [
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      },
+      {
+        "id": "py_test_multiply",
+        "attention_to_targets": [
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      }
+    ]
+  },
+  "rust_test": {
+    "mean": 0.03533720038831234,
+    "std_dev": 0.0019094058979286924,
+    "min": 0.03398704652984937,
+    "max": 0.03668735424677531,
+    "n": 2,
+    "samples": [
+      {
+        "id": "rust_test_add",
+        "attention_to_targets": [
+          0.036435674875974655,
+          0.03652627393603325,
+          0.037100113928318024
+        ],
+        "mean_attention": 0.03668735424677531
+      },
+      {
+        "id": "rust_test_multiply",
+        "attention_to_targets": [
+          0.033049993216991425,
+          0.03456197679042816,
+          0.034349169582128525
+        ],
+        "mean_attention": 0.03398704652984937
+      }
+    ]
+  },
+  "python_baseline": {
+    "mean": 0.0,
+    "std_dev": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1,
+    "samples": [
+      {
+        "id": "py_baseline_comment",
+        "attention_to_targets": [
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      }
+    ]
+  },
+  "rust_baseline": {
+    "mean": 0.0,
+    "std_dev": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1,
+    "samples": [
+      {
+        "id": "rust_baseline_derive",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      }
+    ]
+  },
+  "python_vs_rust": {
+    "t": -26.17272110642314,
+    "df": 2.0,
+    "p_value": 0.0014566409714904527
+  },
+  "python_test_vs_baseline": {
+    "t": 0.0,
+    "df": 1.0,
+    "p_value": 1.0
+  },
+  "rust_test_vs_baseline": {
+    "t": 26.17272110642314,
+    "df": 1.0,
+    "p_value": 0.024311964175164125
+  }
+}

@@ -1,0 +1,504 @@
+{
+  "experiment": "steering_generation_n50",
+  "model": "Qwen/Qwen2.5-Coder-3B-Instruct",
+  "layer": 20,
+  "scale": 3.0,
+  "temperature": 0.0,
+  "max_tokens": 150,
+  "chat_template": true,
+  "duration_secs": 479.4612031,
+  "samples": [
+    {
+      "id": "arith_01_add",
+      "category": "arithmetic",
+      "baseline_has_test": true,
+      "steered_has_test": true,
+      "baseline_tokens": 136,
+      "steered_tokens": 150,
+      "change": "KEPT"
+    },
+    {
+      "id": "arith_02_subtract",
+      "category": "arithmetic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 67,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "arith_03_multiply",
+      "category": "arithmetic",
+      "baseline_has_test": true,
+      "steered_has_test": true,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "KEPT"
+    },
+    {
+      "id": "arith_04_divide",
+      "category": "arithmetic",
+      "baseline_has_test": true,
+      "steered_has_test": true,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "KEPT"
+    },
+    {
+      "id": "arith_05_modulo",
+      "category": "arithmetic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 123,
+      "change": "NONE"
+    },
+    {
+      "id": "arith_06_power",
+      "category": "arithmetic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "arith_07_abs",
+      "category": "arithmetic",
+      "baseline_has_test": true,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "LOST"
+    },
+    {
+      "id": "arith_08_min",
+      "category": "arithmetic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 8,
+      "steered_tokens": 8,
+      "change": "NONE"
+    },
+    {
+      "id": "arith_09_max",
+      "category": "arithmetic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 11,
+      "steered_tokens": 11,
+      "change": "NONE"
+    },
+    {
+      "id": "arith_10_clamp",
+      "category": "arithmetic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "string_01_len",
+      "category": "string",
+      "baseline_has_test": true,
+      "steered_has_test": true,
+      "baseline_tokens": 150,
+      "steered_tokens": 145,
+      "change": "KEPT"
+    },
+    {
+      "id": "string_02_reverse",
+      "category": "string",
+      "baseline_has_test": true,
+      "steered_has_test": true,
+      "baseline_tokens": 150,
+      "steered_tokens": 138,
+      "change": "KEPT"
+    },
+    {
+      "id": "string_03_uppercase",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 51,
+      "steered_tokens": 33,
+      "change": "NONE"
+    },
+    {
+      "id": "string_04_lowercase",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": true,
+      "baseline_tokens": 118,
+      "steered_tokens": 65,
+      "change": "GAINED"
+    },
+    {
+      "id": "string_05_concat",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 39,
+      "steered_tokens": 46,
+      "change": "NONE"
+    },
+    {
+      "id": "string_06_contains",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 48,
+      "steered_tokens": 104,
+      "change": "NONE"
+    },
+    {
+      "id": "string_07_starts_with",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": true,
+      "baseline_tokens": 56,
+      "steered_tokens": 150,
+      "change": "GAINED"
+    },
+    {
+      "id": "string_08_ends_with",
+      "category": "string",
+      "baseline_has_test": true,
+      "steered_has_test": false,
+      "baseline_tokens": 54,
+      "steered_tokens": 115,
+      "change": "LOST"
+    },
+    {
+      "id": "string_09_repeat",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": true,
+      "baseline_tokens": 103,
+      "steered_tokens": 128,
+      "change": "GAINED"
+    },
+    {
+      "id": "string_10_trim",
+      "category": "string",
+      "baseline_has_test": false,
+      "steered_has_test": true,
+      "baseline_tokens": 29,
+      "steered_tokens": 123,
+      "change": "GAINED"
+    },
+    {
+      "id": "coll_01_sum",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 63,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_02_product",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_03_average",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 26,
+      "steered_tokens": 16,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_04_find_min",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 104,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_05_find_max",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 109,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_06_count",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_07_filter_even",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 47,
+      "steered_tokens": 60,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_08_double_all",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_09_first",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 93,
+      "change": "NONE"
+    },
+    {
+      "id": "coll_10_last",
+      "category": "collection",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 70,
+      "steered_tokens": 60,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_01_unwrap_or",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 76,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_02_is_some",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 83,
+      "steered_tokens": 126,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_03_map",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_04_and_then",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_05_filter",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 41,
+      "steered_tokens": 25,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_06_zip",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_07_flatten",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 129,
+      "steered_tokens": 105,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_08_take",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 67,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_09_replace",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 114,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "opt_10_xor",
+      "category": "option",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "gen_01_identity",
+      "category": "generic",
+      "baseline_has_test": false,
+      "steered_has_test": true,
+      "baseline_tokens": 104,
+      "steered_tokens": 103,
+      "change": "GAINED"
+    },
+    {
+      "id": "gen_02_swap",
+      "category": "generic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 99,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "gen_03_pair",
+      "category": "generic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "gen_04_default",
+      "category": "generic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 91,
+      "change": "NONE"
+    },
+    {
+      "id": "gen_05_clone_val",
+      "category": "generic",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 112,
+      "change": "NONE"
+    },
+    {
+      "id": "edge_01_divide_zero",
+      "category": "edge_case",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "edge_02_index_panic",
+      "category": "edge_case",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "edge_03_unwrap_panic",
+      "category": "edge_case",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    },
+    {
+      "id": "edge_04_empty_vec",
+      "category": "edge_case",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 97,
+      "change": "NONE"
+    },
+    {
+      "id": "edge_05_negative_sqrt",
+      "category": "edge_case",
+      "baseline_has_test": false,
+      "steered_has_test": false,
+      "baseline_tokens": 150,
+      "steered_tokens": 150,
+      "change": "NONE"
+    }
+  ],
+  "summary": {
+    "baseline_preserved": 7,
+    "steered_preserved": 10,
+    "total": 50,
+    "improvement": 3,
+    "improvement_pct": 6.0,
+    "baseline_rate": 14.000000000000002,
+    "steered_rate": 20.0,
+    "fisher_exact_p": 0.29788788702437
+  },
+  "by_category": {
+    "string": {
+      "total": 10,
+      "baseline_preserved": 3,
+      "steered_preserved": 6
+    },
+    "option": {
+      "total": 10,
+      "baseline_preserved": 0,
+      "steered_preserved": 0
+    },
+    "generic": {
+      "total": 5,
+      "baseline_preserved": 0,
+      "steered_preserved": 1
+    },
+    "arithmetic": {
+      "total": 10,
+      "baseline_preserved": 4,
+      "steered_preserved": 3
+    },
+    "edge_case": {
+      "total": 5,
+      "baseline_preserved": 0,
+      "steered_preserved": 0
+    },
+    "collection": {
+      "total": 10,
+      "baseline_preserved": 0,
+      "steered_preserved": 0
+    }
+  }
+}

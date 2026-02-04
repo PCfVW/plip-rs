@@ -1,0 +1,227 @@
+    Finished `release` profile [optimized] target(s) in 0.40s
+     Running `target\release\examples\ablation_experiment.exe --model Qwen/Qwen2.5-Coder-7B-Instruct --scan-layers`
+=== Ablation Experiment: Does Removing Attention Break Preservation? ===
+
+Loading corpus from: corpus/attention_samples_universal.json
+Loaded 10 Python samples, 10 Rust samples
+
+Loading model: Qwen/Qwen2.5-Coder-7B-Instruct
+[2m2026-02-01T16:26:58.599363Z[0m [32m INFO[0m [2mplip_rs::model[0m[2m:[0m Using CUDA device
+[2m2026-02-01T16:26:58.599393Z[0m [32m INFO[0m [2mplip_rs::model[0m[2m:[0m Loading model: Qwen/Qwen2.5-Coder-7B-Instruct
+[2m2026-02-01T16:26:58.599397Z[0m [32m INFO[0m [2mplip_rs::model[0m[2m:[0m Architecture: Qwen2
+[2m2026-02-01T16:26:58.599404Z[0m [32m INFO[0m [2mplip_rs::model[0m[2m:[0m Device: Cuda(CudaDevice(DeviceId(1)))
+[2m2026-02-01T16:26:58.599413Z[0m [32m INFO[0m [2mplip_rs::model[0m[2m:[0m Dtype: F16
+[2m2026-02-01T16:26:58.600651Z[0m [32m INFO[0m [2mhf_hub[0m[2m:[0m Using token file found "C:\\Users\\Eric JACOPIN\\.cache\\huggingface\\token"
+[2m2026-02-01T16:26:58.805867Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Loading Qwen2 from: Qwen/Qwen2.5-Coder-7B-Instruct
+[2m2026-02-01T16:26:58.806011Z[0m [32m INFO[0m [2mhf_hub[0m[2m:[0m Using token file found "C:\\Users\\Eric JACOPIN\\.cache\\huggingface\\token"
+[2m2026-02-01T16:26:58.807008Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Model config: 28 layers, 3584 hidden, 152064 vocab
+[2m2026-02-01T16:26:58.807151Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Model is sharded, loading index...
+[2m2026-02-01T16:26:58.807541Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Downloading 4 shard files...
+[2m2026-02-01T16:26:58.808063Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Loading weights from 4 file(s)...
+[2m2026-02-01T16:26:59.658346Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Loading layer 1/28
+[2m2026-02-01T16:27:03.674015Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Loading layer 10/28
+[2m2026-02-01T16:27:07.861976Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Loading layer 20/28
+[2m2026-02-01T16:27:13.383339Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Loading separate lm_head...
+[2m2026-02-01T16:27:15.965255Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Model loaded successfully with 28 layers (vocab_size: 152064)
+Model loaded: 28 layers, 16 heads
+
+=== Layer Scan: Finding Most Important Layers ===
+
+Layer  0: [2m2026-02-01T16:27:17.243681Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:18.325104Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:19.210394Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:21.017762Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  1: [2m2026-02-01T16:27:22.711345Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:22.717071Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:23.974949Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:25.980393Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  2: [2m2026-02-01T16:27:27.887495Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:27.896367Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:29.360122Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:31.182987Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  3: [2m2026-02-01T16:27:33.021655Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:33.028383Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:35.694874Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:35.700591Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  4: [2m2026-02-01T16:27:37.660850Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:39.160124Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:40.625852Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:42.380040Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  5: [2m2026-02-01T16:27:44.375304Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:44.384747Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:47.384059Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:47.390418Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  6: [2m2026-02-01T16:27:49.461373Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:50.738540Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:52.160329Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:53.853486Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  7: [2m2026-02-01T16:27:55.885197Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:57.139403Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:27:58.452170Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:27:58.559916Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  8: [2m2026-02-01T16:28:02.446616Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:02.452695Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:05.315057Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:05.321637Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer  9: [2m2026-02-01T16:28:09.110204Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:09.116054Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:10.572053Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:12.418505Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 10: [2m2026-02-01T16:28:14.427179Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:15.855657Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:17.393555Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:28:17.400281Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:19.537916Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:21.547460Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 11: [2m2026-02-01T16:28:22.311822Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:22.317662Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:23.557732Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:28:25.022704Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:26.102232Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:27.462743Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 12: [2m2026-02-01T16:28:29.016757Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:29.024923Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:30.269379Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:28:31.817970Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:31.823473Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:33.811431Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 13: [2m2026-02-01T16:28:35.808416Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:35.815920Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:37.120345Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:28:38.490618Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:38.587977Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:40.921122Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 14: [2m2026-02-01T16:28:42.864867Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:42.870576Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:44.438784Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:28:45.912532Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:45.918750Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:47.989683Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 15: [2m2026-02-01T16:28:49.999952Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:51.220265Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:52.618658Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:28:52.630146Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:55.046061Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:55.074103Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 16: [2m2026-02-01T16:28:57.155704Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:28:58.520414Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:28:59.024890Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:00.524011Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:00.914707Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:03.097008Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 17: [2m2026-02-01T16:29:05.141324Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:06.368891Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:06.696520Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:08.554172Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:08.753656Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:10.627175Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 18: [2m2026-02-01T16:29:13.025229Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:14.354818Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:15.752614Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:16.034151Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:17.687035Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:20.078378Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 19: [2m2026-02-01T16:29:21.680581Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:21.686724Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:23.553578Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:25.363967Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:25.369529Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:28.176203Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 20: [2m2026-02-01T16:29:29.815067Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:29.821096Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:31.129957Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:32.601762Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:29:32.608067Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:33.060434Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:35.087456Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:36.994445Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 21: [2m2026-02-01T16:29:37.152308Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:38.630512Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:40.549825Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:40.555168Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:29:40.852106Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:42.494348Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:45.107294Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:45.115336Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 22: [2m2026-02-01T16:29:46.724721Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:46.731299Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:48.474255Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:48.609908Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:29:49.919515Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:51.676787Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:53.679070Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:53.685851Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 23: [2m2026-02-01T16:29:55.512428Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:55.520333Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:29:56.752351Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:29:58.370825Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:29:58.381490Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:29:59.989402Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:01.673879Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:01.782181Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 24: [2m2026-02-01T16:30:03.755452Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:05.267939Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:06.662436Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:06.669466Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:30:08.051354Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:08.057079Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:10.020582Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:12.034808Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 25: [2m2026-02-01T16:30:13.594764Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:13.604565Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:14.872878Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:16.302260Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:30:17.831563Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:17.838103Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:19.846375Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:21.736937Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 26: [2m2026-02-01T16:30:21.749387Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:23.255588Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:24.647856Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:24.653446Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:30:25.874691Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:27.913849Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:29.916033Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:29.923574Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+Layer 27: [2m2026-02-01T16:30:31.721840Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:31.866192Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:33.798334Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:33.955725Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+[2m2026-02-01T16:30:35.407093Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with attention)
+[2m2026-02-01T16:30:37.577284Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with attention)
+[2m2026-02-01T16:30:37.594817Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 10/28 (with intervention)
+[2m2026-02-01T16:30:39.888511Z[0m [32m INFO[0m [2mplip_rs::forward_qwen2[0m[2m:[0m Processed layer 20/28 (with intervention)
+Error: shape mismatch in broadcast_add, lhs: [1, 28, 28, 28], rhs: [1, 16, 28, 28]
+
+=== Top Layers by Effect ===
+
+Top layers for Python doctest:
+
+Top layers for Rust test:

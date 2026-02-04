@@ -1,0 +1,940 @@
+{
+  "model": "bigcode/starcoder2-3b",
+  "layer": 0,
+  "n_heads": 24,
+  "sample_results": [
+    {
+      "id": "py_simple_add",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.000003866383,
+      "marker_token_pos": 10,
+      "target_token_positions": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "edges_knocked_out": 4,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.94885576,
+          "ablated_prob": 0.948571,
+          "diff": 0.0002847314
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.0062696813,
+          "ablated_prob": 0.006194778,
+          "diff": 0.00007490348
+        },
+        {
+          "token": ".",
+          "baseline_prob": 0.0075331945,
+          "ablated_prob": 0.0074723293,
+          "diff": 0.00006086519
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.008050431,
+          "ablated_prob": 0.008111136,
+          "diff": 0.000060705468
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.0032910095,
+          "ablated_prob": 0.003341832,
+          "diff": 0.000050822506
+        }
+      ]
+    },
+    {
+      "id": "py_long_name",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0000023384096,
+      "marker_token_pos": 13,
+      "target_token_positions": [
+        0,
+        1,
+        8
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.7982901,
+          "ablated_prob": 0.79768693,
+          "diff": 0.0006031394
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.019219195,
+          "ablated_prob": 0.019279841,
+          "diff": 0.000060645863
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.01556418,
+          "ablated_prob": 0.0156132905,
+          "diff": 0.000049110502
+        },
+        {
+          "token": "b",
+          "baseline_prob": 0.0061789225,
+          "ablated_prob": 0.006210537,
+          "diff": 0.000031614676
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.0061910027,
+          "ablated_prob": 0.006210537,
+          "diff": 0.000019534491
+        }
+      ]
+    },
+    {
+      "id": "py_multi_param",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0000027565388,
+      "marker_token_pos": 19,
+      "target_token_positions": [
+        0,
+        1,
+        7,
+        10,
+        13
+      ],
+      "edges_knocked_out": 5,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.8477143,
+          "ablated_prob": 0.84706324,
+          "diff": 0.00065106153
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.029007187,
+          "ablated_prob": 0.029098352,
+          "diff": 0.000091165304
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.015048731,
+          "ablated_prob": 0.0150960265,
+          "diff": 0.000047295354
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.009907826,
+          "ablated_prob": 0.009938965,
+          "diff": 0.00003113877
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.007992321,
+          "ablated_prob": 0.00801744,
+          "diff": 0.000025119632
+        }
+      ]
+    },
+    {
+      "id": "py_complex_params",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0000016528669,
+      "marker_token_pos": 24,
+      "target_token_positions": [
+        0,
+        1,
+        5,
+        9,
+        13,
+        17
+      ],
+      "edges_knocked_out": 6,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.85258484,
+          "ablated_prob": 0.8521266,
+          "diff": 0.0004582405
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.018544026,
+          "ablated_prob": 0.018679425,
+          "diff": 0.0001353994
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.010607421,
+          "ablated_prob": 0.010684872,
+          "diff": 0.00007745065
+        },
+        {
+          "token": "X",
+          "baseline_prob": 0.0048945216,
+          "ablated_prob": 0.0049302583,
+          "diff": 0.00003573671
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.00882828,
+          "ablated_prob": 0.008858069,
+          "diff": 0.000029789284
+        }
+      ]
+    },
+    {
+      "id": "py_single_char_param",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 7.235228e-7,
+      "marker_token_pos": 8,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.9347876,
+          "ablated_prob": 0.934882,
+          "diff": 0.00009441376
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.013703662,
+          "ablated_prob": 0.013758685,
+          "diff": 0.00005502347
+        },
+        {
+          "token": ".",
+          "baseline_prob": 0.0057573398,
+          "ablated_prob": 0.0057804575,
+          "diff": 0.000023117755
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.004431583,
+          "ablated_prob": 0.004414751,
+          "diff": 0.000016831793
+        },
+        {
+          "token": "f",
+          "baseline_prob": 0.0010754521,
+          "ablated_prob": 0.0010609559,
+          "diff": 0.000014496152
+        }
+      ]
+    },
+    {
+      "id": "py_multiple_doctests",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 1.343394e-7,
+      "marker_token_pos": 11,
+      "target_token_positions": [
+        0,
+        1,
+        3,
+        6
+      ],
+      "edges_knocked_out": 4,
+      "top_changed_tokens": [
+        {
+          "token": ",",
+          "baseline_prob": 0.015199658,
+          "ablated_prob": 0.015317308,
+          "diff": 0.000117649324
+        },
+        {
+          "token": "_",
+          "baseline_prob": 0.9257905,
+          "ablated_prob": 0.925696,
+          "diff": 0.00009447336
+        },
+        {
+          "token": ".",
+          "baseline_prob": 0.0057691396,
+          "ablated_prob": 0.0057460614,
+          "diff": 0.000023078173
+        },
+        {
+          "token": "<fim_pad>",
+          "baseline_prob": 0.0012116416,
+          "ablated_prob": 0.0012186375,
+          "diff": 0.0000069958623
+        },
+        {
+          "token": "E",
+          "baseline_prob": 0.00072491873,
+          "ablated_prob": 0.0007192039,
+          "diff": 0.000005714828
+        }
+      ]
+    },
+    {
+      "id": "py_list_operations",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0000010577481,
+      "marker_token_pos": 12,
+      "target_token_positions": [
+        0,
+        1,
+        7
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.8288767,
+          "ablated_prob": 0.82847965,
+          "diff": 0.00039702654
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.03876708,
+          "ablated_prob": 0.038900167,
+          "diff": 0.000133086
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.011549405,
+          "ablated_prob": 0.011589054,
+          "diff": 0.000039649196
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.009426349,
+          "ablated_prob": 0.00945871,
+          "diff": 0.000032361597
+        },
+        {
+          "token": ".",
+          "baseline_prob": 0.005308398,
+          "ablated_prob": 0.0053266217,
+          "diff": 0.000018223654
+        }
+      ]
+    },
+    {
+      "id": "py_string_manipulation",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 0.0000018681985,
+      "marker_token_pos": 14,
+      "target_token_positions": [
+        0,
+        1,
+        5,
+        7
+      ],
+      "edges_knocked_out": 4,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.8775966,
+          "ablated_prob": 0.87804085,
+          "diff": 0.00044423342
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.022579238,
+          "ablated_prob": 0.022414867,
+          "diff": 0.00016437098
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.0120857945,
+          "ablated_prob": 0.012044772,
+          "diff": 0.000041022897
+        },
+        {
+          "token": "<fim_pad>",
+          "baseline_prob": 0.0013612958,
+          "ablated_prob": 0.0013382529,
+          "diff": 0.0000230429
+        },
+        {
+          "token": "R",
+          "baseline_prob": 0.003291191,
+          "ablated_prob": 0.0032736193,
+          "diff": 0.000017571729
+        }
+      ]
+    },
+    {
+      "id": "py_default_args",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 3.7519916e-7,
+      "marker_token_pos": 16,
+      "target_token_positions": [
+        0,
+        1,
+        5,
+        7,
+        9
+      ],
+      "edges_knocked_out": 5,
+      "top_changed_tokens": [
+        {
+          "token": "-",
+          "baseline_prob": 0.035896238,
+          "ablated_prob": 0.035758767,
+          "diff": 0.00013747066
+        },
+        {
+          "token": "_",
+          "baseline_prob": 0.8799379,
+          "ablated_prob": 0.8799988,
+          "diff": 0.000060915947
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.010905054,
+          "ablated_prob": 0.010948492,
+          "diff": 0.000043437816
+        },
+        {
+          "token": "C",
+          "baseline_prob": 0.0011720539,
+          "ablated_prob": 0.0011767225,
+          "diff": 0.0000046686037
+        },
+        {
+          "token": "f",
+          "baseline_prob": 0.0021140412,
+          "ablated_prob": 0.0021183207,
+          "diff": 0.0000042794272
+        }
+      ]
+    },
+    {
+      "id": "py_nested_structure",
+      "language": "python",
+      "is_baseline": false,
+      "kl_divergence": 9.0928984e-7,
+      "marker_token_pos": 10,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.8651931,
+          "ablated_prob": 0.86552,
+          "diff": 0.00032687187
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.026538001,
+          "ablated_prob": 0.026444526,
+          "diff": 0.000093474984
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.011638971,
+          "ablated_prob": 0.011688939,
+          "diff": 0.00004996825
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.010151691,
+          "ablated_prob": 0.010115934,
+          "diff": 0.0000357572
+        },
+        {
+          "token": ".",
+          "baseline_prob": 0.009315715,
+          "ablated_prob": 0.009282902,
+          "diff": 0.00003281329
+        }
+      ]
+    },
+    {
+      "id": "rust_simple_add",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000032547646,
+      "marker_token_pos": 28,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.7826856,
+          "ablated_prob": 0.783205,
+          "diff": 0.0005193949
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.022818573,
+          "ablated_prob": 0.022656022,
+          "diff": 0.00016255118
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.021021456,
+          "ablated_prob": 0.020871704,
+          "diff": 0.00014975108
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.02029526,
+          "ablated_prob": 0.020150684,
+          "diff": 0.00014457665
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.01568296,
+          "ablated_prob": 0.015632186,
+          "diff": 0.000050773844
+        }
+      ]
+    },
+    {
+      "id": "rust_option_return",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000033985202,
+      "marker_token_pos": 42,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.7911563,
+          "ablated_prob": 0.7922113,
+          "diff": 0.0010550022
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.024553128,
+          "ablated_prob": 0.024394542,
+          "diff": 0.00015858561
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.012737996,
+          "ablated_prob": 0.012655722,
+          "diff": 0.00008227397
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.01254051,
+          "ablated_prob": 0.012459513,
+          "diff": 0.000080997124
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.024842555,
+          "ablated_prob": 0.024778701,
+          "diff": 0.00006385334
+        }
+      ]
+    },
+    {
+      "id": "rust_should_panic",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.000003602381,
+      "marker_token_pos": 42,
+      "target_token_positions": [
+        0,
+        1,
+        2
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.8321912,
+          "ablated_prob": 0.8317175,
+          "diff": 0.00047373772
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.027066074,
+          "ablated_prob": 0.026945205,
+          "diff": 0.00012086891
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.013088298,
+          "ablated_prob": 0.012979051,
+          "diff": 0.00010924693
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.013346442,
+          "ablated_prob": 0.013443461,
+          "diff": 0.00009701867
+        },
+        {
+          "token": ".",
+          "baseline_prob": 0.0045055603,
+          "ablated_prob": 0.004467953,
+          "diff": 0.00003760727
+        }
+      ]
+    },
+    {
+      "id": "rust_result_type",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 8.5537397e-7,
+      "marker_token_pos": 39,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.8046753,
+          "ablated_prob": 0.80451024,
+          "diff": 0.00016504526
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.024778346,
+          "ablated_prob": 0.02467668,
+          "diff": 0.000101665035
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.013953792,
+          "ablated_prob": 0.014005533,
+          "diff": 0.00005174149
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.009933447,
+          "ablated_prob": 0.00997028,
+          "diff": 0.000036832877
+        },
+        {
+          "token": "e",
+          "baseline_prob": 0.0027909342,
+          "ablated_prob": 0.0028067594,
+          "diff": 0.000015825266
+        }
+      ]
+    },
+    {
+      "id": "rust_multiple_assertions",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000024330327,
+      "marker_token_pos": 47,
+      "target_token_positions": [
+        0,
+        1,
+        3
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.72082424,
+          "ablated_prob": 0.7202996,
+          "diff": 0.0005246401
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.016820239,
+          "ablated_prob": 0.01687378,
+          "diff": 0.000053541735
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.016175866,
+          "ablated_prob": 0.016227357,
+          "diff": 0.000051490963
+        },
+        {
+          "token": "<fim_pad>",
+          "baseline_prob": 0.005904459,
+          "ablated_prob": 0.005934835,
+          "diff": 0.000030376017
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.036028188,
+          "ablated_prob": 0.036001965,
+          "diff": 0.000026222318
+        }
+      ]
+    },
+    {
+      "id": "rust_generic_complex",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 3.7574574e-7,
+      "marker_token_pos": 57,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.7469301,
+          "ablated_prob": 0.74701023,
+          "diff": 0.00008010864
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.016501835,
+          "ablated_prob": 0.016439265,
+          "diff": 0.000062569976
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.016501835,
+          "ablated_prob": 0.016439265,
+          "diff": 0.000062569976
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.012407677,
+          "ablated_prob": 0.01236063,
+          "diff": 0.000047047623
+        },
+        {
+          "token": "R",
+          "baseline_prob": 0.0059649074,
+          "ablated_prob": 0.005953907,
+          "diff": 0.000011000317
+        }
+      ]
+    },
+    {
+      "id": "rust_tuple_return",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.000001919029,
+      "marker_token_pos": 59,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.81684965,
+          "ablated_prob": 0.8163303,
+          "diff": 0.00051933527
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.03217147,
+          "ablated_prob": 0.032276854,
+          "diff": 0.00010538474
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.008760901,
+          "ablated_prob": 0.008824001,
+          "diff": 0.0000630999
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.015496454,
+          "ablated_prob": 0.015547215,
+          "diff": 0.000050760806
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.013049324,
+          "ablated_prob": 0.013092069,
+          "diff": 0.000042744912
+        }
+      ]
+    },
+    {
+      "id": "rust_vec_operations",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.000011568064,
+      "marker_token_pos": 47,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.79742426,
+          "ablated_prob": 0.7992161,
+          "diff": 0.0017918348
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.032657493,
+          "ablated_prob": 0.03247616,
+          "diff": 0.00018133223
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.015792131,
+          "ablated_prob": 0.01564322,
+          "diff": 0.00014891103
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.013143379,
+          "ablated_prob": 0.013019443,
+          "diff": 0.00012393668
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.012250976,
+          "ablated_prob": 0.012135455,
+          "diff": 0.00011552032
+        }
+      ]
+    },
+    {
+      "id": "rust_reference_params",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000031352697,
+      "marker_token_pos": 35,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.7911433,
+          "ablated_prob": 0.7919144,
+          "diff": 0.0007711053
+        },
+        {
+          "token": "-",
+          "baseline_prob": 0.021165773,
+          "ablated_prob": 0.021021528,
+          "diff": 0.0001442451
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.024552725,
+          "ablated_prob": 0.024480842,
+          "diff": 0.0000718832
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.013612372,
+          "ablated_prob": 0.013678969,
+          "diff": 0.000066597015
+        },
+        {
+          "token": ",",
+          "baseline_prob": 0.011418078,
+          "ablated_prob": 0.011384648,
+          "diff": 0.000033429824
+        }
+      ]
+    },
+    {
+      "id": "rust_cfg_test_module",
+      "language": "rust",
+      "is_baseline": false,
+      "kl_divergence": 0.0000051896573,
+      "marker_token_pos": 72,
+      "target_token_positions": [
+        0,
+        1,
+        4
+      ],
+      "edges_knocked_out": 3,
+      "top_changed_tokens": [
+        {
+          "token": "_",
+          "baseline_prob": 0.7420839,
+          "ablated_prob": 0.74086523,
+          "diff": 0.0012186766
+        },
+        {
+          "token": "d",
+          "baseline_prob": 0.016523356,
+          "ablated_prob": 0.016690671,
+          "diff": 0.00016731583
+        },
+        {
+          "token": "x",
+          "baseline_prob": 0.01380578,
+          "ablated_prob": 0.01389121,
+          "diff": 0.00008543022
+        },
+        {
+          "token": "n",
+          "baseline_prob": 0.011006927,
+          "ablated_prob": 0.011075038,
+          "diff": 0.000068111345
+        },
+        {
+          "token": "con",
+          "baseline_prob": 0.005891583,
+          "ablated_prob": 0.0059280405,
+          "diff": 0.000036457554
+        }
+      ]
+    }
+  ],
+  "python_stats": {
+    "language": "python",
+    "is_baseline": false,
+    "n_samples": 10,
+    "mean_kl": 0.0000015682496,
+    "std_kl": 0.0000011077723,
+    "min_kl": 1.343394e-7,
+    "max_kl": 0.000003866383,
+    "median_kl": 0.0000013553075
+  },
+  "rust_stats": {
+    "language": "rust",
+    "is_baseline": false,
+    "n_samples": 10,
+    "mean_kl": 0.000003573184,
+    "std_kl": 0.000002974927,
+    "min_kl": 3.7574574e-7,
+    "max_kl": 0.000011568064,
+    "median_kl": 0.0000031950171
+  },
+  "welch_t_statistic": -1.8947339,
+  "welch_p_value": 0.08438921,
+  "significant_difference": false
+}

@@ -1,0 +1,107 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "layer": 27,
+  "python_doctest": {
+    "mean": 0.03548083093483001,
+    "std_dev": 0.038357159144662194,
+    "min": 0.008358223596587777,
+    "max": 0.06260343827307224,
+    "n": 2,
+    "samples": [
+      {
+        "id": "py_test_add",
+        "attention_to_targets": [
+          0.010815070010721684,
+          0.005901377182453871
+        ],
+        "mean_attention": 0.008358223596587777
+      },
+      {
+        "id": "py_test_multiply",
+        "attention_to_targets": [
+          0.008312147110700607,
+          0.11689472943544388
+        ],
+        "mean_attention": 0.06260343827307224
+      }
+    ]
+  },
+  "rust_test": {
+    "mean": 0.036926952501138054,
+    "std_dev": 0.0041576548966981,
+    "min": 0.03398704652984937,
+    "max": 0.039866858472426735,
+    "n": 2,
+    "samples": [
+      {
+        "id": "rust_test_add",
+        "attention_to_targets": [
+          0.037661418318748474,
+          0.039097923785448074,
+          0.04284123331308365
+        ],
+        "mean_attention": 0.039866858472426735
+      },
+      {
+        "id": "rust_test_multiply",
+        "attention_to_targets": [
+          0.033049993216991425,
+          0.03456197679042816,
+          0.034349169582128525
+        ],
+        "mean_attention": 0.03398704652984937
+      }
+    ]
+  },
+  "python_baseline": {
+    "mean": 0.03390830010175705,
+    "std_dev": 0.0,
+    "min": 0.03390830010175705,
+    "max": 0.03390830010175705,
+    "n": 1,
+    "samples": [
+      {
+        "id": "py_baseline_comment",
+        "attention_to_targets": [
+          0.03517695888876915,
+          0.03263964131474495
+        ],
+        "mean_attention": 0.03390830010175705
+      }
+    ]
+  },
+  "rust_baseline": {
+    "mean": 0.0,
+    "std_dev": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1,
+    "samples": [
+      {
+        "id": "rust_baseline_derive",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      }
+    ]
+  },
+  "python_vs_rust": {
+    "t": -0.05300745536946125,
+    "df": 1.0234949246663494,
+    "p_value": 0.9661352110421255
+  },
+  "python_test_vs_baseline": {
+    "t": 0.05797860115224724,
+    "df": 1.0,
+    "p_value": 0.9631309511578554
+  },
+  "rust_test_vs_baseline": {
+    "t": 12.560589645304697,
+    "df": 1.0,
+    "p_value": 0.05057722856629776
+  }
+}

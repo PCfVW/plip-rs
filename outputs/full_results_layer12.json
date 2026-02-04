@@ -1,0 +1,310 @@
+{
+  "model": "Qwen/Qwen2.5-Coder-7B-Instruct",
+  "layer": 12,
+  "python_doctest": {
+    "mean": 0.06719750088329116,
+    "std_dev": 0.01849155676853714,
+    "min": 0.03865065146237612,
+    "max": 0.0878731906414032,
+    "n": 10,
+    "samples": [
+      {
+        "id": "py_simple_add",
+        "attention_to_targets": [
+          0.0573425330221653,
+          0.051137108355760574
+        ],
+        "mean_attention": 0.054239820688962936
+      },
+      {
+        "id": "py_long_name",
+        "attention_to_targets": [
+          0.08113425225019455
+        ],
+        "mean_attention": 0.08113425225019455
+      },
+      {
+        "id": "py_multi_param",
+        "attention_to_targets": [
+          0.0590471550822258,
+          0.0623866505920887,
+          0.05631474405527115
+        ],
+        "mean_attention": 0.05924951657652855
+      },
+      {
+        "id": "py_complex_params",
+        "attention_to_targets": [
+          0.0381796732544899,
+          0.0399693101644516,
+          0.038471769541502,
+          0.037981852889060974
+        ],
+        "mean_attention": 0.03865065146237612
+      },
+      {
+        "id": "py_single_char_param",
+        "attention_to_targets": [
+          0.0788617879152298
+        ],
+        "mean_attention": 0.0788617879152298
+      },
+      {
+        "id": "py_multiple_doctests",
+        "attention_to_targets": [
+          0.08205413818359375,
+          0.08569445461034775
+        ],
+        "mean_attention": 0.08387429639697075
+      },
+      {
+        "id": "py_list_operations",
+        "attention_to_targets": [
+          0.0878731906414032
+        ],
+        "mean_attention": 0.0878731906414032
+      },
+      {
+        "id": "py_string_manipulation",
+        "attention_to_targets": [
+          0.0632738396525383,
+          0.06353650987148285
+        ],
+        "mean_attention": 0.06340517476201057
+      },
+      {
+        "id": "py_default_args",
+        "attention_to_targets": [
+          0.04179423302412033,
+          0.0403050035238266,
+          0.040098123252391815
+        ],
+        "mean_attention": 0.04073245326677958
+      },
+      {
+        "id": "py_nested_structure",
+        "attention_to_targets": [
+          0.0839538648724556
+        ],
+        "mean_attention": 0.0839538648724556
+      }
+    ]
+  },
+  "rust_test": {
+    "mean": 0.029346571800609428,
+    "std_dev": 0.009780937748467906,
+    "min": 0.018350375195344288,
+    "max": 0.04860769212245941,
+    "n": 10,
+    "samples": [
+      {
+        "id": "rust_simple_add",
+        "attention_to_targets": [
+          0.04227011650800705,
+          0.04018838331103325,
+          0.040584564208984375
+        ],
+        "mean_attention": 0.041014354676008224
+      },
+      {
+        "id": "rust_option_return",
+        "attention_to_targets": [
+          0.0276870746165514,
+          0.028052467852830887,
+          0.0276412982493639
+        ],
+        "mean_attention": 0.027793613572915394
+      },
+      {
+        "id": "rust_should_panic",
+        "attention_to_targets": [
+          0.0233230609446764,
+          0.022567477077245712,
+          0.023132052272558212
+        ],
+        "mean_attention": 0.023007530098160107
+      },
+      {
+        "id": "rust_result_type",
+        "attention_to_targets": [
+          0.0457087941467762,
+          0.050652097910642624,
+          0.04946218430995941
+        ],
+        "mean_attention": 0.04860769212245941
+      },
+      {
+        "id": "rust_multiple_assertions",
+        "attention_to_targets": [
+          0.027398791164159775,
+          0.024919237941503525,
+          0.024981090798974037
+        ],
+        "mean_attention": 0.02576637330154578
+      },
+      {
+        "id": "rust_generic_complex",
+        "attention_to_targets": [
+          0.025838036090135574,
+          0.02522713877260685,
+          0.020639419555664062
+        ],
+        "mean_attention": 0.023901531472802162
+      },
+      {
+        "id": "rust_tuple_return",
+        "attention_to_targets": [
+          0.01857648603618145,
+          0.01875741221010685,
+          0.018778664991259575
+        ],
+        "mean_attention": 0.018704187745849293
+      },
+      {
+        "id": "rust_vec_operations",
+        "attention_to_targets": [
+          0.03350939229130745,
+          0.0334843248128891,
+          0.027488982304930687
+        ],
+        "mean_attention": 0.03149423313637575
+      },
+      {
+        "id": "rust_reference_params",
+        "attention_to_targets": [
+          0.03480203077197075,
+          0.034889768809080124,
+          0.0347856804728508
+        ],
+        "mean_attention": 0.03482582668463389
+      },
+      {
+        "id": "rust_cfg_test_module",
+        "attention_to_targets": [
+          0.015620095655322075,
+          0.024821283295750618,
+          0.014609746634960175
+        ],
+        "mean_attention": 0.018350375195344288
+      }
+    ]
+  },
+  "python_baseline": {
+    "mean": 0.06345084309577942,
+    "std_dev": 0.01815883731497981,
+    "min": 0.04260281287133694,
+    "max": 0.086190365254879,
+    "n": 5,
+    "samples": [
+      {
+        "id": "py_comment_false_doctest",
+        "attention_to_targets": [
+          0.08094242960214615,
+          0.07570866495370865
+        ],
+        "mean_attention": 0.0783255472779274
+      },
+      {
+        "id": "py_multiline_comment_marker",
+        "attention_to_targets": [
+          0.0585741326212883,
+          0.05485916510224342
+        ],
+        "mean_attention": 0.05671664886176586
+      },
+      {
+        "id": "py_string_literal_marker",
+        "attention_to_targets": [
+          0.086190365254879
+        ],
+        "mean_attention": 0.086190365254879
+      },
+      {
+        "id": "py_commented_code",
+        "attention_to_targets": [
+          0.0534188412129879
+        ],
+        "mean_attention": 0.0534188412129879
+      },
+      {
+        "id": "py_malformed_docstring",
+        "attention_to_targets": [
+          0.04415784776210785,
+          0.041047777980566025
+        ],
+        "mean_attention": 0.04260281287133694
+      }
+    ]
+  },
+  "rust_baseline": {
+    "mean": 0.0,
+    "std_dev": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 5,
+    "samples": [
+      {
+        "id": "rust_derive_debug",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      },
+      {
+        "id": "rust_cfg_feature",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      },
+      {
+        "id": "rust_allow_dead_code",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      },
+      {
+        "id": "rust_inline_attribute",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      },
+      {
+        "id": "rust_repr_c",
+        "attention_to_targets": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "mean_attention": 0.0
+      }
+    ]
+  },
+  "python_vs_rust": {
+    "t": 5.721839831110751,
+    "df": 13.670427611833299,
+    "p_value": 0.000057888485597956674
+  },
+  "python_test_vs_baseline": {
+    "t": 0.3743992233319389,
+    "df": 8.238865869797351,
+    "p_value": 0.717560500422326
+  },
+  "rust_test_vs_baseline": {
+    "t": 9.488048160017286,
+    "df": 13.0,
+    "p_value": 3.2989476861366995e-7
+  }
+}
