@@ -205,9 +205,10 @@ fn main() -> Result<()> {
     println!("=== Ablation Experiment: Does Removing Attention Break Preservation? ===\n");
 
     // Find corpus file
-    let corpus_path = args.corpus.clone().unwrap_or_else(|| {
-        PathBuf::from("corpus/attention_samples_universal.json")
-    });
+    let corpus_path = args
+        .corpus
+        .clone()
+        .unwrap_or_else(|| PathBuf::from("corpus/attention_samples_universal.json"));
 
     println!("Loading corpus from: {}", corpus_path.display());
     let corpus_content = fs::read_to_string(&corpus_path)?;
