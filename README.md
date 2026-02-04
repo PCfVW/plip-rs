@@ -14,7 +14,7 @@
 The **universal corpus format** works with ANY model without preprocessing:
 
 ```bash
-# Prerequisites: Rust 1.75+, CUDA 12.x (or --cpu for CPU mode)
+# Prerequisites: Rust 1.87+, CUDA 13.1 (or --cpu for CPU mode)
 cargo build --release
 
 # Scan attention patterns for any model

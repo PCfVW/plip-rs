@@ -49,3 +49,6 @@ docker/outputs/
 tmp/
 temp/
 *.tmp
+
+# Local dev scripts (machine-specific paths)
+run.ps1

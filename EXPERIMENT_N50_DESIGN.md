@@ -121,7 +121,7 @@ The model completes the function body. Test preservation is measured by detectin
 ### 4.1 Commands
 
 ```bash
-cd experiment/plip-rs
+cd plip-rs
 
 # Phase 1: Dose calibration
 cargo run --release --example steering_calibrate -- \

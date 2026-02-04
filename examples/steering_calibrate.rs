@@ -70,15 +70,7 @@ fn main() -> Result<()> {
 
     // Find corpus file
     let corpus_path = args.corpus.clone().unwrap_or_else(|| {
-        let candidates = [
-            PathBuf::from("corpus/attention_samples_universal.json"),
-            PathBuf::from("experiment/plip-rs/corpus/attention_samples_universal.json"),
-        ];
-        let default = candidates[0].clone();
-        candidates
-            .into_iter()
-            .find(|p| p.exists())
-            .unwrap_or(default)
+        PathBuf::from("corpus/attention_samples_universal.json")
     });
 
     println!("Loading corpus from: {}", corpus_path.display());

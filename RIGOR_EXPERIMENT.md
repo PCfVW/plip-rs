@@ -119,7 +119,7 @@ Compare test-context vs non-test context:
 
 ### Phase 1: Corpus Creation (2 hours)
 
-**File**: `experiment/plip-rs/corpus/attention_samples.json`
+**File**: `corpus/attention_samples.json`
 
 ```json
 {
@@ -164,7 +164,7 @@ Compare test-context vs non-test context:
 
 ### Phase 2: Multi-Sample Analysis Code (4 hours)
 
-**File**: `experiment/plip-rs/examples/statistical_attention.rs`
+**File**: `examples/statistical_attention.rs`
 
 **Before running the full experiment, validate with a quick test:**
 
