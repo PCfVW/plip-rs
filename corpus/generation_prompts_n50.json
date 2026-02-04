@@ -1,0 +1,258 @@
+{
+  "_format_version": "1.0",
+  "_description": "50 Rust code completion prompts for steering generation experiment",
+  "_experiment": "n50_steering_qwen3b",
+  "_created": "2026-02-02",
+  "prompts": [
+    {
+      "id": "arith_01_add",
+      "category": "arithmetic",
+      "prompt": "/// Adds two integers\n///\n/// #[test]\n/// fn test_add() {\n///     assert_eq!(add(2, 3), 5);\n///     assert_eq!(add(-1, 1), 0);\n/// }\nfn add(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_02_subtract",
+      "category": "arithmetic",
+      "prompt": "/// Subtracts b from a\n///\n/// #[test]\n/// fn test_subtract() {\n///     assert_eq!(subtract(10, 3), 7);\n///     assert_eq!(subtract(5, 8), -3);\n/// }\nfn subtract(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_03_multiply",
+      "category": "arithmetic",
+      "prompt": "/// Multiplies two integers\n///\n/// #[test]\n/// fn test_multiply() {\n///     assert_eq!(multiply(4, 5), 20);\n///     assert_eq!(multiply(-2, 3), -6);\n/// }\nfn multiply(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_04_divide",
+      "category": "arithmetic",
+      "prompt": "/// Divides a by b (integer division)\n///\n/// #[test]\n/// fn test_divide() {\n///     assert_eq!(divide(10, 3), 3);\n///     assert_eq!(divide(15, 5), 3);\n/// }\nfn divide(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_05_modulo",
+      "category": "arithmetic",
+      "prompt": "/// Returns the remainder of a divided by b\n///\n/// #[test]\n/// fn test_modulo() {\n///     assert_eq!(modulo(10, 3), 1);\n///     assert_eq!(modulo(15, 5), 0);\n/// }\nfn modulo(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_06_power",
+      "category": "arithmetic",
+      "prompt": "/// Raises base to the power of exp\n///\n/// #[test]\n/// fn test_power() {\n///     assert_eq!(power(2, 3), 8);\n///     assert_eq!(power(5, 0), 1);\n/// }\nfn power(base: u32, exp: u32) -> u32 {"
+    },
+    {
+      "id": "arith_07_abs",
+      "category": "arithmetic",
+      "prompt": "/// Returns the absolute value\n///\n/// #[test]\n/// fn test_abs() {\n///     assert_eq!(abs(-5), 5);\n///     assert_eq!(abs(3), 3);\n/// }\nfn abs(n: i32) -> i32 {"
+    },
+    {
+      "id": "arith_08_min",
+      "category": "arithmetic",
+      "prompt": "/// Returns the smaller of two values\n///\n/// #[test]\n/// fn test_min() {\n///     assert_eq!(min(3, 7), 3);\n///     assert_eq!(min(10, 2), 2);\n/// }\nfn min(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_09_max",
+      "category": "arithmetic",
+      "prompt": "/// Returns the larger of two values\n///\n/// #[test]\n/// fn test_max() {\n///     assert_eq!(max(3, 7), 7);\n///     assert_eq!(max(10, 2), 10);\n/// }\nfn max(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "arith_10_clamp",
+      "category": "arithmetic",
+      "prompt": "/// Clamps value between min and max bounds\n///\n/// #[test]\n/// fn test_clamp() {\n///     assert_eq!(clamp(5, 0, 10), 5);\n///     assert_eq!(clamp(-5, 0, 10), 0);\n///     assert_eq!(clamp(15, 0, 10), 10);\n/// }\nfn clamp(value: i32, min_val: i32, max_val: i32) -> i32 {"
+    },
+    {
+      "id": "string_01_len",
+      "category": "string",
+      "prompt": "/// Returns the length of a string\n///\n/// #[test]\n/// fn test_len() {\n///     assert_eq!(string_len(\"hello\"), 5);\n///     assert_eq!(string_len(\"\"), 0);\n/// }\nfn string_len(s: &str) -> usize {"
+    },
+    {
+      "id": "string_02_reverse",
+      "category": "string",
+      "prompt": "/// Reverses a string\n///\n/// #[test]\n/// fn test_reverse() {\n///     assert_eq!(reverse(\"hello\"), \"olleh\");\n///     assert_eq!(reverse(\"ab\"), \"ba\");\n/// }\nfn reverse(s: &str) -> String {"
+    },
+    {
+      "id": "string_03_uppercase",
+      "category": "string",
+      "prompt": "/// Converts string to uppercase\n///\n/// #[test]\n/// fn test_uppercase() {\n///     assert_eq!(to_upper(\"hello\"), \"HELLO\");\n///     assert_eq!(to_upper(\"World\"), \"WORLD\");\n/// }\nfn to_upper(s: &str) -> String {"
+    },
+    {
+      "id": "string_04_lowercase",
+      "category": "string",
+      "prompt": "/// Converts string to lowercase\n///\n/// #[test]\n/// fn test_lowercase() {\n///     assert_eq!(to_lower(\"HELLO\"), \"hello\");\n///     assert_eq!(to_lower(\"World\"), \"world\");\n/// }\nfn to_lower(s: &str) -> String {"
+    },
+    {
+      "id": "string_05_concat",
+      "category": "string",
+      "prompt": "/// Concatenates two strings\n///\n/// #[test]\n/// fn test_concat() {\n///     assert_eq!(concat(\"hello\", \" world\"), \"hello world\");\n///     assert_eq!(concat(\"\", \"test\"), \"test\");\n/// }\nfn concat(a: &str, b: &str) -> String {"
+    },
+    {
+      "id": "string_06_contains",
+      "category": "string",
+      "prompt": "/// Checks if string contains substring\n///\n/// #[test]\n/// fn test_contains() {\n///     assert!(contains_substr(\"hello world\", \"world\"));\n///     assert!(!contains_substr(\"hello\", \"xyz\"));\n/// }\nfn contains_substr(s: &str, sub: &str) -> bool {"
+    },
+    {
+      "id": "string_07_starts_with",
+      "category": "string",
+      "prompt": "/// Checks if string starts with prefix\n///\n/// #[test]\n/// fn test_starts_with() {\n///     assert!(starts_with(\"hello world\", \"hello\"));\n///     assert!(!starts_with(\"hello\", \"world\"));\n/// }\nfn starts_with(s: &str, prefix: &str) -> bool {"
+    },
+    {
+      "id": "string_08_ends_with",
+      "category": "string",
+      "prompt": "/// Checks if string ends with suffix\n///\n/// #[test]\n/// fn test_ends_with() {\n///     assert!(ends_with(\"hello world\", \"world\"));\n///     assert!(!ends_with(\"hello\", \"xyz\"));\n/// }\nfn ends_with(s: &str, suffix: &str) -> bool {"
+    },
+    {
+      "id": "string_09_repeat",
+      "category": "string",
+      "prompt": "/// Repeats a string n times\n///\n/// #[test]\n/// fn test_repeat() {\n///     assert_eq!(repeat(\"ab\", 3), \"ababab\");\n///     assert_eq!(repeat(\"x\", 0), \"\");\n/// }\nfn repeat(s: &str, n: usize) -> String {"
+    },
+    {
+      "id": "string_10_trim",
+      "category": "string",
+      "prompt": "/// Trims whitespace from both ends\n///\n/// #[test]\n/// fn test_trim() {\n///     assert_eq!(trim_str(\"  hello  \"), \"hello\");\n///     assert_eq!(trim_str(\"no_spaces\"), \"no_spaces\");\n/// }\nfn trim_str(s: &str) -> String {"
+    },
+    {
+      "id": "coll_01_sum",
+      "category": "collection",
+      "prompt": "/// Sums all elements in a slice\n///\n/// #[test]\n/// fn test_sum() {\n///     assert_eq!(sum(&[1, 2, 3, 4]), 10);\n///     assert_eq!(sum(&[]), 0);\n/// }\nfn sum(arr: &[i32]) -> i32 {"
+    },
+    {
+      "id": "coll_02_product",
+      "category": "collection",
+      "prompt": "/// Computes product of all elements\n///\n/// #[test]\n/// fn test_product() {\n///     assert_eq!(product(&[1, 2, 3, 4]), 24);\n///     assert_eq!(product(&[5]), 5);\n/// }\nfn product(arr: &[i32]) -> i32 {"
+    },
+    {
+      "id": "coll_03_average",
+      "category": "collection",
+      "prompt": "/// Computes average of elements\n///\n/// #[test]\n/// fn test_average() {\n///     assert_eq!(average(&[2, 4, 6]), 4.0);\n///     assert_eq!(average(&[10]), 10.0);\n/// }\nfn average(arr: &[i32]) -> f64 {"
+    },
+    {
+      "id": "coll_04_find_min",
+      "category": "collection",
+      "prompt": "/// Finds minimum element in slice\n///\n/// #[test]\n/// fn test_find_min() {\n///     assert_eq!(find_min(&[3, 1, 4, 1, 5]), Some(1));\n///     assert_eq!(find_min(&[]), None);\n/// }\nfn find_min(arr: &[i32]) -> Option<i32> {"
+    },
+    {
+      "id": "coll_05_find_max",
+      "category": "collection",
+      "prompt": "/// Finds maximum element in slice\n///\n/// #[test]\n/// fn test_find_max() {\n///     assert_eq!(find_max(&[3, 1, 4, 1, 5]), Some(5));\n///     assert_eq!(find_max(&[]), None);\n/// }\nfn find_max(arr: &[i32]) -> Option<i32> {"
+    },
+    {
+      "id": "coll_06_count",
+      "category": "collection",
+      "prompt": "/// Counts elements equal to target\n///\n/// #[test]\n/// fn test_count() {\n///     assert_eq!(count(&[1, 2, 1, 3, 1], 1), 3);\n///     assert_eq!(count(&[1, 2, 3], 5), 0);\n/// }\nfn count(arr: &[i32], target: i32) -> usize {"
+    },
+    {
+      "id": "coll_07_filter_even",
+      "category": "collection",
+      "prompt": "/// Filters even numbers from a vector\n///\n/// #[test]\n/// fn test_filter_even() {\n///     assert_eq!(filter_even(vec![1, 2, 3, 4, 5, 6]), vec![2, 4, 6]);\n///     assert_eq!(filter_even(vec![1, 3, 5]), vec![]);\n/// }\nfn filter_even(nums: Vec<i32>) -> Vec<i32> {"
+    },
+    {
+      "id": "coll_08_double_all",
+      "category": "collection",
+      "prompt": "/// Doubles all elements in a vector\n///\n/// #[test]\n/// fn test_double_all() {\n///     assert_eq!(double_all(vec![1, 2, 3]), vec![2, 4, 6]);\n///     assert_eq!(double_all(vec![]), vec![]);\n/// }\nfn double_all(nums: Vec<i32>) -> Vec<i32> {"
+    },
+    {
+      "id": "coll_09_first",
+      "category": "collection",
+      "prompt": "/// Gets first element of slice\n///\n/// #[test]\n/// fn test_first() {\n///     assert_eq!(first(&[1, 2, 3]), Some(&1));\n///     assert_eq!(first::<i32>(&[]), None);\n/// }\nfn first<T>(arr: &[T]) -> Option<&T> {"
+    },
+    {
+      "id": "coll_10_last",
+      "category": "collection",
+      "prompt": "/// Gets last element of slice\n///\n/// #[test]\n/// fn test_last() {\n///     assert_eq!(last(&[1, 2, 3]), Some(&3));\n///     assert_eq!(last::<i32>(&[]), None);\n/// }\nfn last<T>(arr: &[T]) -> Option<&T> {"
+    },
+    {
+      "id": "opt_01_unwrap_or",
+      "category": "option",
+      "prompt": "/// Unwraps option or returns default\n///\n/// #[test]\n/// fn test_unwrap_or() {\n///     assert_eq!(unwrap_or_default(Some(5), 0), 5);\n///     assert_eq!(unwrap_or_default(None, 10), 10);\n/// }\nfn unwrap_or_default(opt: Option<i32>, default: i32) -> i32 {"
+    },
+    {
+      "id": "opt_02_is_some",
+      "category": "option",
+      "prompt": "/// Checks if option has value\n///\n/// #[test]\n/// fn test_is_some() {\n///     assert!(has_value(Some(5)));\n///     assert!(!has_value(None::<i32>));\n/// }\nfn has_value<T>(opt: Option<T>) -> bool {"
+    },
+    {
+      "id": "opt_03_map",
+      "category": "option",
+      "prompt": "/// Doubles value if present\n///\n/// #[test]\n/// fn test_map_double() {\n///     assert_eq!(map_double(Some(5)), Some(10));\n///     assert_eq!(map_double(None), None);\n/// }\nfn map_double(opt: Option<i32>) -> Option<i32> {"
+    },
+    {
+      "id": "opt_04_and_then",
+      "category": "option",
+      "prompt": "/// Parses string to int if present\n///\n/// #[test]\n/// fn test_parse_opt() {\n///     assert_eq!(parse_opt(Some(\"42\")), Some(42));\n///     assert_eq!(parse_opt(None), None);\n/// }\nfn parse_opt(opt: Option<&str>) -> Option<i32> {"
+    },
+    {
+      "id": "opt_05_filter",
+      "category": "option",
+      "prompt": "/// Keeps value only if positive\n///\n/// #[test]\n/// fn test_filter_positive() {\n///     assert_eq!(filter_positive(Some(5)), Some(5));\n///     assert_eq!(filter_positive(Some(-3)), None);\n///     assert_eq!(filter_positive(None), None);\n/// }\nfn filter_positive(opt: Option<i32>) -> Option<i32> {"
+    },
+    {
+      "id": "opt_06_zip",
+      "category": "option",
+      "prompt": "/// Zips two options into tuple\n///\n/// #[test]\n/// fn test_zip_opts() {\n///     assert_eq!(zip_opts(Some(1), Some(2)), Some((1, 2)));\n///     assert_eq!(zip_opts(Some(1), None::<i32>), None);\n/// }\nfn zip_opts<A, B>(a: Option<A>, b: Option<B>) -> Option<(A, B)> {"
+    },
+    {
+      "id": "opt_07_flatten",
+      "category": "option",
+      "prompt": "/// Flattens nested option\n///\n/// #[test]\n/// fn test_flatten_opt() {\n///     assert_eq!(flatten_opt(Some(Some(5))), Some(5));\n///     assert_eq!(flatten_opt(Some(None::<i32>)), None);\n///     assert_eq!(flatten_opt(None), None);\n/// }\nfn flatten_opt(opt: Option<Option<i32>>) -> Option<i32> {"
+    },
+    {
+      "id": "opt_08_take",
+      "category": "option",
+      "prompt": "/// Takes value from mutable option\n///\n/// #[test]\n/// fn test_take_opt() {\n///     let mut opt = Some(5);\n///     assert_eq!(take_opt(&mut opt), Some(5));\n///     assert_eq!(opt, None);\n/// }\nfn take_opt(opt: &mut Option<i32>) -> Option<i32> {"
+    },
+    {
+      "id": "opt_09_replace",
+      "category": "option",
+      "prompt": "/// Replaces option value\n///\n/// #[test]\n/// fn test_replace_opt() {\n///     let mut opt = Some(5);\n///     assert_eq!(replace_opt(&mut opt, 10), Some(5));\n///     assert_eq!(opt, Some(10));\n/// }\nfn replace_opt(opt: &mut Option<i32>, value: i32) -> Option<i32> {"
+    },
+    {
+      "id": "opt_10_xor",
+      "category": "option",
+      "prompt": "/// Returns Some if exactly one option has value\n///\n/// #[test]\n/// fn test_xor_opts() {\n///     assert_eq!(xor_opts(Some(1), None), Some(1));\n///     assert_eq!(xor_opts(None, Some(2)), Some(2));\n///     assert_eq!(xor_opts(Some(1), Some(2)), None);\n/// }\nfn xor_opts(a: Option<i32>, b: Option<i32>) -> Option<i32> {"
+    },
+    {
+      "id": "gen_01_identity",
+      "category": "generic",
+      "prompt": "/// Returns the input unchanged\n///\n/// #[test]\n/// fn test_identity() {\n///     assert_eq!(identity(42), 42);\n///     assert_eq!(identity(\"hello\"), \"hello\");\n/// }\nfn identity<T>(x: T) -> T {"
+    },
+    {
+      "id": "gen_02_swap",
+      "category": "generic",
+      "prompt": "/// Swaps elements of a tuple\n///\n/// #[test]\n/// fn test_swap() {\n///     assert_eq!(swap((1, \"a\")), (\"a\", 1));\n///     assert_eq!(swap((true, 5)), (5, true));\n/// }\nfn swap<A, B>(pair: (A, B)) -> (B, A) {"
+    },
+    {
+      "id": "gen_03_pair",
+      "category": "generic",
+      "prompt": "/// Creates a pair from two values\n///\n/// #[test]\n/// fn test_pair() {\n///     assert_eq!(make_pair(1, 2), (1, 2));\n///     assert_eq!(make_pair(\"a\", \"b\"), (\"a\", \"b\"));\n/// }\nfn make_pair<A, B>(a: A, b: B) -> (A, B) {"
+    },
+    {
+      "id": "gen_04_default",
+      "category": "generic",
+      "prompt": "/// Returns default value of type\n///\n/// #[test]\n/// fn test_get_default() {\n///     assert_eq!(get_default::<i32>(), 0);\n///     assert_eq!(get_default::<String>(), \"\");\n/// }\nfn get_default<T: Default>() -> T {"
+    },
+    {
+      "id": "gen_05_clone_val",
+      "category": "generic",
+      "prompt": "/// Clones a value\n///\n/// #[test]\n/// fn test_clone_val() {\n///     let s = String::from(\"hello\");\n///     assert_eq!(clone_val(&s), s);\n/// }\nfn clone_val<T: Clone>(x: &T) -> T {"
+    },
+    {
+      "id": "edge_01_divide_zero",
+      "category": "edge_case",
+      "prompt": "/// Divides, panics on zero\n///\n/// #[test]\n/// #[should_panic]\n/// fn test_divide_panic() {\n///     safe_divide(10, 0);\n/// }\nfn safe_divide(a: i32, b: i32) -> i32 {"
+    },
+    {
+      "id": "edge_02_index_panic",
+      "category": "edge_case",
+      "prompt": "/// Gets element at index, panics if out of bounds\n///\n/// #[test]\n/// #[should_panic]\n/// fn test_index_panic() {\n///     get_at(&[1, 2, 3], 10);\n/// }\nfn get_at<T: Clone>(arr: &[T], idx: usize) -> T {"
+    },
+    {
+      "id": "edge_03_unwrap_panic",
+      "category": "edge_case",
+      "prompt": "/// Unwraps option, panics if None\n///\n/// #[test]\n/// #[should_panic]\n/// fn test_unwrap_panic() {\n///     unwrap_strict(None::<i32>);\n/// }\nfn unwrap_strict<T>(opt: Option<T>) -> T {"
+    },
+    {
+      "id": "edge_04_empty_vec",
+      "category": "edge_case",
+      "prompt": "/// Pops from vec, panics if empty\n///\n/// #[test]\n/// #[should_panic]\n/// fn test_pop_panic() {\n///     let mut v: Vec<i32> = vec![];\n///     pop_strict(&mut v);\n/// }\nfn pop_strict<T>(v: &mut Vec<T>) -> T {"
+    },
+    {
+      "id": "edge_05_negative_sqrt",
+      "category": "edge_case",
+      "prompt": "/// Square root, panics on negative\n///\n/// #[test]\n/// #[should_panic]\n/// fn test_sqrt_panic() {\n///     int_sqrt(-4);\n/// }\nfn int_sqrt(n: i32) -> i32 {"
+    }
+  ]
+}

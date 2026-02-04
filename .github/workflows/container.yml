@@ -1,0 +1,130 @@
+name: Container
+
+on:
+  push:
+    branches: [main, master]
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      target:
+        description: 'Build target'
+        required: true
+        default: 'both'
+        type: choice
+        options:
+          - local
+          - h100
+          - both
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-local:
+    name: Build (RTX 3070 Ti / Local)
+    runs-on: ubuntu-latest
+    if: github.event.inputs.target != 'h100'
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch,suffix=-local
+            type=semver,pattern={{version}},suffix=-local
+            type=raw,value=local,enable={{is_default_branch}}
+
+      - name: Build and push (local/RTX 3070 Ti)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            TARGET=local
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  build-h100:
+    name: Build (H100 / RIKEN)
+    runs-on: ubuntu-latest
+    if: github.event.inputs.target != 'local'
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=ref,event=branch,suffix=-h100
+            type=semver,pattern={{version}},suffix=-h100
+            type=raw,value=h100,enable={{is_default_branch}}
+            type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Build and push (H100/RIKEN)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: docker/Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            TARGET=h100
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  notify-riken:
+    name: Notify RIKEN
+    runs-on: ubuntu-latest
+    needs: [build-h100]
+    if: success() && github.ref == 'refs/heads/main'
+    steps:
+      - name: Create release summary
+        run: |
+          echo "## PLIP-rs Container Published" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**H100 container ready for RIKEN:**" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`bash" >> $GITHUB_STEP_SUMMARY
+          echo "docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:h100" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "See [RIKEN_INSTRUCTIONS.md](docs/RIKEN_INSTRUCTIONS.md) for usage." >> $GITHUB_STEP_SUMMARY

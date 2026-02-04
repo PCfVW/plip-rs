@@ -1,0 +1,73 @@
+# PLIP-rs Docker Compose
+#
+# Usage:
+#   Local (RTX 3070 Ti):  docker compose --profile local run plip-local
+#   H100 (RIKEN):         docker compose --profile h100 run plip-h100
+#
+# Or pull pre-built from GitHub Container Registry:
+#   docker compose --profile h100 pull
+#   docker compose --profile h100 run plip-h100
+
+version: '3.8'
+
+services:
+  # =============================================================================
+  # RTX 3070 Ti (Local / Rennes)
+  # =============================================================================
+  plip-local:
+    profiles: ["local"]
+    image: ghcr.io/pcfvw/plip-rs:local
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: local
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PLIP_TARGET=local
+      - RUST_LOG=info
+    volumes:
+      - ./corpus:/data/corpus:ro
+      - ./outputs:/data/outputs
+      - hf_cache:/data/hf_cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # =============================================================================
+  # H100 (RIKEN Osaka)
+  # =============================================================================
+  plip-h100:
+    profiles: ["h100"]
+    image: ghcr.io/pcfvw/plip-rs:h100
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        TARGET: h100
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - PLIP_TARGET=h100
+      - RUST_LOG=info
+      - HF_TOKEN=${HF_TOKEN:-}
+    volumes:
+      - ./corpus:/data/corpus:ro
+      - ./outputs:/data/outputs
+      - hf_cache:/data/hf_cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+volumes:
+  hf_cache:
+    name: plip-hf-cache

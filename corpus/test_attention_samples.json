@@ -1,0 +1,46 @@
+{
+  "python_doctest": [
+    {
+      "id": "py_test_add",
+      "code": "def add(a, b):\n    \"\"\"\n    >>> add(2, 3)\n    5\n    \"\"\"\n    return a + b",
+      "doctest_token_pos": 9,
+      "function_param_positions": [1, 2, 4, 10]
+    },
+    {
+      "id": "py_test_multiply",
+      "code": "def multiply(x, y):\n    \"\"\"\n    >>> multiply(3, 4)\n    12\n    \"\"\"\n    return x * y",
+      "doctest_token_pos": 9,
+      "function_param_positions": [1, 2, 4, 10]
+    }
+  ],
+  "rust_test": [
+    {
+      "id": "rust_test_add",
+      "code": "fn add(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn test_add() {\n    assert_eq!(add(2, 3), 5);\n}",
+      "test_attr_token_pos": 25,
+      "function_token_positions": [0, 1, 2]
+    },
+    {
+      "id": "rust_test_multiply",
+      "code": "fn multiply(x: i32, y: i32) -> i32 {\n    x * y\n}\n\n#[test]\nfn test_multiply() {\n    assert_eq!(multiply(3, 4), 12);\n}",
+      "test_attr_token_pos": 25,
+      "function_token_positions": [0, 1, 2]
+    }
+  ],
+  "python_baseline": [
+    {
+      "id": "py_baseline_comment",
+      "code": "def add(a, b):\n    # >>> this is just a comment\n    return a + b",
+      "marker_token_pos": 8,
+      "function_param_positions": [1, 2, 4]
+    }
+  ],
+  "rust_baseline": [
+    {
+      "id": "rust_baseline_derive",
+      "code": "#[derive(Debug)]\nstruct Point {\n    x: i32,\n    y: i32,\n}\n\nfn create_point(x: i32, y: i32) -> Point {\n    Point { x, y }\n}",
+      "marker_token_pos": 0,
+      "struct_token_positions": [5, 6, 11, 16]
+    }
+  ]
+}

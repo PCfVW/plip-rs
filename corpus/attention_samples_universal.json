@@ -1,0 +1,354 @@
+{
+  "_format_version": "2.0",
+  "_description": "Universal corpus with character positions - works with any model",
+  "python_doctest": [
+    {
+      "id": "py_simple_add",
+      "code": "def add(a, b):\n    \"\"\"\n    >>> add(2, 3)\n    5\n    \"\"\"\n    return a + b",
+      "marker_char_pos": 27,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "id": "py_long_name",
+      "code": "def calculate_fibonacci_sequence(n):\n    \"\"\"\n    >>> calculate_fibonacci_sequence(5)\n    8\n    \"\"\"\n    if n <= 1:\n        return n\n    return calculate_fibonacci_sequence(n-1) + calculate_fibonacci_sequence(n-2)",
+      "marker_char_pos": 49,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        33
+      ]
+    },
+    {
+      "id": "py_multi_param",
+      "code": "def merge_sorted_arrays(arr1, arr2, arr3):\n    \"\"\"\n    >>> merge_sorted_arrays([1], [2], [3])\n    [1, 2, 3]\n    \"\"\"\n    return sorted(arr1 + arr2 + arr3)",
+      "marker_char_pos": 55,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        24,
+        30,
+        36
+      ]
+    },
+    {
+      "id": "py_complex_params",
+      "code": "def process_data(input_dict, transform_fn, output_format, verbose=True):\n    \"\"\"\n    >>> process_data({'a': 1}, lambda x: x*2, 'json')\n    '{\"a\": 2}'\n    \"\"\"\n    result = {k: transform_fn(v) for k, v in input_dict.items()}\n    return str(result) if output_format == 'json' else result",
+      "marker_char_pos": 85,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        17,
+        29,
+        43,
+        58
+      ]
+    },
+    {
+      "id": "py_single_char_param",
+      "code": "def f(x):\n    \"\"\"\n    >>> f(10)\n    100\n    \"\"\"\n    return x * x",
+      "marker_char_pos": 22,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        6
+      ]
+    },
+    {
+      "id": "py_multiple_doctests",
+      "code": "def divide(numerator, denominator):\n    \"\"\"\n    >>> divide(10, 2)\n    5.0\n    >>> divide(7, 2)\n    3.5\n    \"\"\"\n    return numerator / denominator",
+      "marker_char_pos": 48,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        11,
+        22
+      ]
+    },
+    {
+      "id": "py_list_operations",
+      "code": "def filter_even_numbers(numbers):\n    \"\"\"\n    >>> filter_even_numbers([1, 2, 3, 4, 5, 6])\n    [2, 4, 6]\n    \"\"\"\n    return [n for n in numbers if n % 2 == 0]",
+      "marker_char_pos": 46,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        24
+      ]
+    },
+    {
+      "id": "py_string_manipulation",
+      "code": "def reverse_words(text, separator=' '):\n    \"\"\"\n    >>> reverse_words('hello world')\n    'world hello'\n    \"\"\"\n    return separator.join(text.split(separator)[::-1])",
+      "marker_char_pos": 52,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        18,
+        24
+      ]
+    },
+    {
+      "id": "py_default_args",
+      "code": "def create_range(start, end, step=1):\n    \"\"\"\n    >>> create_range(0, 10, 2)\n    [0, 2, 4, 6, 8]\n    \"\"\"\n    return list(range(start, end, step))",
+      "marker_char_pos": 50,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        17,
+        24,
+        29
+      ]
+    },
+    {
+      "id": "py_nested_structure",
+      "code": "def flatten(nested_list):\n    \"\"\"\n    >>> flatten([[1, 2], [3, 4]])\n    [1, 2, 3, 4]\n    \"\"\"\n    return [item for sublist in nested_list for item in sublist]",
+      "marker_char_pos": 38,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        12
+      ]
+    }
+  ],
+  "rust_test": [
+    {
+      "id": "rust_simple_add",
+      "code": "fn add(a: i32, b: i32) -> i32 {\n    a + b\n}\n\n#[test]\nfn test_add() {\n    assert_eq!(add(2, 3), 5);\n}",
+      "marker_char_pos": 45,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        6
+      ]
+    },
+    {
+      "id": "rust_option_return",
+      "code": "fn find_first<T: PartialEq>(arr: &[T], target: &T) -> Option<usize> {\n    arr.iter().position(|x| x == target)\n}\n\n#[test]\nfn test_find_first() {\n    assert_eq!(find_first(&[1, 2, 3], &2), Some(1));\n}",
+      "marker_char_pos": 114,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        13
+      ]
+    },
+    {
+      "id": "rust_should_panic",
+      "code": "fn divide(a: i32, b: i32) -> i32 {\n    if b == 0 { panic!(\"division by zero\"); }\n    a / b\n}\n\n#[test]\n#[should_panic]\nfn test_divide_by_zero() {\n    divide(10, 0);\n}",
+      "marker_char_pos": 94,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        9
+      ]
+    },
+    {
+      "id": "rust_result_type",
+      "code": "fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {\n    s.parse::<i32>()\n}\n\n#[test]\nfn test_parse_number() {\n    assert!(parse_number(\"42\").is_ok());\n    assert!(parse_number(\"abc\").is_err());\n}",
+      "marker_char_pos": 91,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        15
+      ]
+    },
+    {
+      "id": "rust_multiple_assertions",
+      "code": "fn factorial(n: u64) -> u64 {\n    match n {\n        0 | 1 => 1,\n        _ => n * factorial(n - 1),\n    }\n}\n\n#[test]\nfn test_factorial() {\n    assert_eq!(factorial(0), 1);\n    assert_eq!(factorial(1), 1);\n    assert_eq!(factorial(5), 120);\n}",
+      "marker_char_pos": 108,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        12
+      ]
+    },
+    {
+      "id": "rust_generic_complex",
+      "code": "fn map_values<T, U, F>(vec: Vec<T>, f: F) -> Vec<U>\nwhere\n    F: Fn(T) -> U,\n{\n    vec.into_iter().map(f).collect()\n}\n\n#[test]\nfn test_map_values() {\n    let result = map_values(vec![1, 2, 3], |x| x * 2);\n    assert_eq!(result, vec![2, 4, 6]);\n}",
+      "marker_char_pos": 119,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        13
+      ]
+    },
+    {
+      "id": "rust_tuple_return",
+      "code": "fn min_max(arr: &[i32]) -> (i32, i32) {\n    let min = *arr.iter().min().unwrap();\n    let max = *arr.iter().max().unwrap();\n    (min, max)\n}\n\n#[test]\nfn test_min_max() {\n    assert_eq!(min_max(&[1, 5, 3]), (1, 5));\n}",
+      "marker_char_pos": 142,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        10
+      ]
+    },
+    {
+      "id": "rust_vec_operations",
+      "code": "fn filter_even(numbers: Vec<i32>) -> Vec<i32> {\n    numbers.into_iter().filter(|&n| n % 2 == 0).collect()\n}\n\n#[test]\nfn test_filter_even() {\n    assert_eq!(filter_even(vec![1, 2, 3, 4]), vec![2, 4]);\n}",
+      "marker_char_pos": 109,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        14
+      ]
+    },
+    {
+      "id": "rust_reference_params",
+      "code": "fn concat_strings(s1: &str, s2: &str) -> String {\n    format!(\"{}{}\", s1, s2)\n}\n\n#[test]\nfn test_concat() {\n    assert_eq!(concat_strings(\"hello\", \" world\"), \"hello world\");\n}",
+      "marker_char_pos": 81,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        17
+      ]
+    },
+    {
+      "id": "rust_cfg_test_module",
+      "code": "fn is_prime(n: u32) -> bool {\n    if n < 2 { return false; }\n    (2..=(n as f64).sqrt() as u32).all(|i| n % i != 0)\n}\n\n#[cfg(test)]\nmod tests {\n    use super::*;\n    #[test]\n    fn test_is_prime() {\n        assert!(is_prime(7));\n        assert!(!is_prime(8));\n    }\n}",
+      "marker_char_pos": 166,
+      "marker_pattern": "#[test]",
+      "target_char_positions": [
+        0,
+        3,
+        11
+      ]
+    }
+  ],
+  "python_baseline": [
+    {
+      "id": "py_comment_false_doctest",
+      "code": "def add(a, b):\n    # >>> this is just a comment, not a doctest\n    return a + b",
+      "marker_char_pos": 21,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        8,
+        11
+      ]
+    },
+    {
+      "id": "py_multiline_comment_marker",
+      "code": "def multiply(x, y):\n    # Some explanation:\n    # >>> multiply(2, 3) would return 6\n    # but this isn't a real test\n    return x * y",
+      "marker_char_pos": 50,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        13,
+        16
+      ]
+    },
+    {
+      "id": "py_string_literal_marker",
+      "code": "def process(data):\n    example = \">>> process([1, 2, 3])\"\n    return [x * 2 for x in data]",
+      "marker_char_pos": 34,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        12
+      ]
+    },
+    {
+      "id": "py_commented_code",
+      "code": "def calculate(n):\n    # Old test (commented out):\n    # >>> calculate(5)\n    # 25\n    return n ** 2",
+      "marker_char_pos": 56,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        14
+      ]
+    },
+    {
+      "id": "py_malformed_docstring",
+      "code": "def transform(value, scale):\n    \"\"\"This function transforms a value\n    Example usage (not a doctest):\n    >>> transform(10, 2)\n    returns 20\n    \"\"\"\n    return value * scale",
+      "marker_char_pos": 108,
+      "marker_pattern": ">>>",
+      "target_char_positions": [
+        0,
+        4,
+        14,
+        21
+      ]
+    }
+  ],
+  "rust_baseline": [
+    {
+      "id": "rust_derive_debug",
+      "code": "#[derive(Debug)]\nstruct Point {\n    x: i32,\n    y: i32,\n}\n\nfn create_point(x: i32, y: i32) -> Point {\n    Point { x, y }\n}",
+      "marker_char_pos": 0,
+      "marker_pattern": "#[",
+      "target_char_positions": [
+        17,
+        24,
+        59,
+        62
+      ]
+    },
+    {
+      "id": "rust_cfg_feature",
+      "code": "#[cfg(feature = \"serde\")]\nuse serde::{Serialize, Deserialize};\n\nfn process_data(input: &str) -> String {\n    input.to_uppercase()\n}",
+      "marker_char_pos": 0,
+      "marker_pattern": "#[",
+      "target_char_positions": [
+        64,
+        67
+      ]
+    },
+    {
+      "id": "rust_allow_dead_code",
+      "code": "#[allow(dead_code)]\nfn unused_helper(a: i32, b: i32) -> i32 {\n    a * b\n}\n\nfn main_function(x: i32) -> i32 {\n    x + 1\n}",
+      "marker_char_pos": 0,
+      "marker_pattern": "#[",
+      "target_char_positions": [
+        20,
+        23
+      ]
+    },
+    {
+      "id": "rust_inline_attribute",
+      "code": "#[inline]\nfn fast_add(a: u64, b: u64) -> u64 {\n    a + b\n}\n\nfn compute(x: u64, y: u64) -> u64 {\n    fast_add(x, y) * 2\n}",
+      "marker_char_pos": 0,
+      "marker_pattern": "#[",
+      "target_char_positions": [
+        10,
+        13
+      ]
+    },
+    {
+      "id": "rust_repr_c",
+      "code": "#[repr(C)]\nstruct FFIStruct {\n    count: u32,\n    data: *const u8,\n}\n\nfn create_ffi_struct() -> FFIStruct {\n    FFIStruct { count: 0, data: std::ptr::null() }\n}",
+      "marker_char_pos": 0,
+      "marker_pattern": "#[",
+      "target_char_positions": [
+        11,
+        18,
+        70,
+        73
+      ]
+    }
+  ]
+}

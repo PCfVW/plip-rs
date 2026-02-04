@@ -1,0 +1,166 @@
+[package]
+name = "plip-rs"
+version = "1.0.0"
+edition = "2021"
+authors = ["Eric Jacopin"]
+description = "Programming Language Internal Probing - Mechanistic interpretability for code models"
+license = "Apache-2.0"
+keywords = ["interpretability", "transformers", "rust", "python", "probing"]
+
+[dependencies]
+# Candle ML framework
+candle-core = "0.9"
+candle-nn = "0.9"
+candle-transformers = "0.9"
+
+# HuggingFace integration
+tokenizers = "0.21"
+hf-hub = "0.4"
+
+# Serialization
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+safetensors = "0.4"
+
+# Error handling
+anyhow = "1.0"
+
+# CLI
+clap = { version = "4.4", features = ["derive"] }
+
+# Linear algebra for probing
+ndarray = "0.15"
+linfa = "0.7"
+linfa-logistic = "0.7"
+
+# Random number generation
+rand = "0.8"
+
+# Statistics
+statrs = "0.17"
+
+# File system utilities
+dirs = "5.0"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+[dev-dependencies]
+tempfile = "3.10"
+
+[features]
+default = ["cuda"]
+cuda = [
+    "candle-core/cuda",
+    "candle-nn/cuda",
+    "candle-transformers/cuda"
+]
+
+[[bin]]
+name = "plip-rs"
+path = "src/main.rs"
+
+[[example]]
+name = "load_model"
+path = "examples/load_model.rs"
+
+[[example]]
+name = "tokenize"
+path = "examples/tokenize.rs"
+
+[[example]]
+name = "inference"
+path = "examples/inference.rs"
+
+[[example]]
+name = "logit_lens"
+path = "examples/logit_lens.rs"
+
+[[example]]
+name = "list_tensors"
+path = "examples/list_tensors.rs"
+
+[[example]]
+name = "test_emergence"
+path = "examples/test_emergence.rs"
+
+[[example]]
+name = "attention_patterns"
+path = "examples/attention_patterns.rs"
+
+[[example]]
+name = "multi_sample_attention"
+path = "examples/multi_sample_attention.rs"
+
+[[example]]
+name = "statistical_attention"
+path = "examples/statistical_attention.rs"
+
+[[example]]
+name = "verify_tokens"
+path = "examples/verify_tokens.rs"
+
+[[example]]
+name = "layer_scan"
+path = "examples/layer_scan.rs"
+
+[[example]]
+name = "verify_full_corpus"
+path = "examples/verify_full_corpus.rs"
+
+[[example]]
+name = "list_models"
+path = "examples/list_models.rs"
+
+[[example]]
+name = "verify_positions"
+path = "examples/verify_positions.rs"
+
+[[example]]
+name = "attention_ablation"
+path = "examples/attention_ablation.rs"
+
+[[example]]
+name = "ablation_experiment"
+path = "examples/ablation_experiment.rs"
+
+[[example]]
+name = "steering_calibrate"
+path = "examples/steering_calibrate.rs"
+
+[[example]]
+name = "steering_experiment"
+path = "examples/steering_experiment.rs"
+
+[[example]]
+name = "steering_generate"
+path = "examples/steering_generate.rs"
+
+[[example]]
+name = "steering_generate_n50"
+path = "examples/steering_generate_n50.rs"
+
+[[example]]
+name = "analyze_gained"
+path = "examples/analyze_gained.rs"
+
+[[example]]
+name = "convert_corpus"
+path = "examples/convert_corpus.rs"
+
+[[example]]
+name = "layer_scan_universal"
+path = "examples/layer_scan_universal.rs"
+
+[[example]]
+name = "verify_positions_universal"
+path = "examples/verify_positions_universal.rs"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+
+[profile.dev]
+opt-level = 1  # Faster builds during development

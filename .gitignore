@@ -1,0 +1,53 @@
+# Rust
+/target/
+Cargo.lock
+**/*.rs.bk
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+*.local
+
+# Build artifacts
+*.so
+*.dylib
+*.dll
+
+# HuggingFace cache
+hf_cache/
+.cache/
+
+# Experiment outputs
+outputs/
+results/
+*.npy
+activations/
+
+# Large model files (download at runtime)
+*.safetensors
+*.bin
+*.pt
+*.onnx
+
+# Logs
+*.log
+logs/
+
+# Docker
+docker/outputs/
+
+# Temporary
+tmp/
+temp/
+*.tmp
