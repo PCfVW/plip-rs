@@ -84,6 +84,8 @@ plip-rs/
 | Qwen2.5-Coder-7B | ~14 GB | RTX 5060 Ti (16GB) |
 | CodeGemma-7B | ~14 GB | RTX 5060 Ti (16GB) |
 
+> **Important:** The RTX 5060 Ti comes in 8GB and 16GB variants. The **16GB model is required** — the 7B-parameter models need ~14 GB VRAM for attention extraction, which exceeds the 8GB variant's capacity.
+
 ## Usage
 
 ### Attention Analysis (Primary Use Case)
