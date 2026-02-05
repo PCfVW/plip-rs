@@ -86,6 +86,10 @@ plip-rs/
 
 > **Important:** The RTX 5060 Ti comes in 8GB and 16GB variants. The **16GB model is required** — the 7B-parameter models need ~14 GB VRAM for attention extraction, which exceeds the 8GB variant's capacity.
 
+### Continuous Integration
+
+The [CI workflow](https://github.com/PCfVW/plip-rs/actions/workflows/ci.yml) runs on every push: `cargo check`, `cargo test`, `cargo fmt`, and `cargo clippy` — all in CPU mode (`--no-default-features`). CUDA-dependent functionality (model loading, attention extraction, steering) is tested locally on RTX 5060 Ti 16GB before each release.
+
 ## Usage
 
 ### Attention Analysis (Primary Use Case)

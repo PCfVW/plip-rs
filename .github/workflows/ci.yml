@@ -89,23 +89,3 @@ jobs:
 
       - name: Run clippy (no CUDA)
         run: cargo clippy --no-default-features -- -D warnings
-
-  # GPU tests run only on self-hosted runner with CUDA
-  test-cuda:
-    name: Test (CUDA)
-    runs-on: self-hosted
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: [check, test, fmt, clippy]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Install Rust toolchain
-        uses: dtolnay/rust-toolchain@stable
-
-      - name: Check CUDA availability
-        run: nvidia-smi
-
-      - name: Run CUDA tests
-        run: cargo test --features cuda
-        env:
-          CUDA_VISIBLE_DEVICES: "0"
