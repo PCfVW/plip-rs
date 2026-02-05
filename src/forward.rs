@@ -674,6 +674,7 @@ pub struct PlipStarCoder2 {
     n_layers: usize,
     hidden_size: usize,
     vocab_size: usize,
+    n_heads: usize,
 }
 
 impl PlipStarCoder2 {
@@ -752,6 +753,7 @@ impl PlipStarCoder2 {
             n_layers: config.num_hidden_layers,
             hidden_size: config.hidden_size,
             vocab_size: config.vocab_size,
+            n_heads: config.num_attention_heads,
         })
     }
 
@@ -919,8 +921,7 @@ impl PlipStarCoder2 {
 
     /// Number of attention heads
     pub fn n_heads(&self) -> usize {
-        // StarCoder2-3B has 24 heads (from config)
-        24
+        self.n_heads
     }
 
     /// Apply logit lens: project intermediate activation through final norm + lm_head

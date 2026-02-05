@@ -131,7 +131,7 @@ impl ModelBackend {
 
     fn n_heads(&self) -> usize {
         match self {
-            ModelBackend::StarCoder2(_) => 24, // StarCoder2-3B has 24 heads
+            ModelBackend::StarCoder2(m) => m.n_heads(),
             ModelBackend::Qwen2(m) => m.n_heads(),
             ModelBackend::Gemma(m) => m.n_heads(),
         }
