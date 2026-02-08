@@ -132,7 +132,7 @@ At runtime, PLIP-rs converts character positions to token positions using the mo
 
 ### Validated Results
 
-With perfect positioning, all 4 tested models achieve p < 0.0002:
+With perfect positioning, 4 of 6 tested models achieve p < 0.0002. Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed attention patterns:
 
 | Model | Best Layer | Python μ | Rust μ | Ratio | p-value |
 |-------|------------|----------|--------|-------|---------|
@@ -140,6 +140,8 @@ With perfect positioning, all 4 tested models achieve p < 0.0002:
 | Qwen-3B | 14 | 8.47% | 3.05% | 2.78× | 0.000009 |
 | StarCoder2-3B | 23 | 7.19% | 2.41% | 2.98× | 0.000004 |
 | CodeGemma-7B | 24 | 5.23% | 1.20% | 4.35× | 0.000114 |
+| Phi-3-mini-4k | 14 | 17.30% | 14.03% | 1.23× | 0.146 |
+| Code-LLaMA-7B | — | 9.71% | 12.23% | 0.79× | 0.188 |
 
 ### Quick Start
 
@@ -515,6 +517,8 @@ Lists all cached models with their detected architecture:
 - **StarCoder2**: BigCode starcoder2 models
 - **Qwen2**: Qwen/Qwen2.5 models
 - **Gemma**: Google Gemma/CodeGemma models
+- **LLaMA**: Meta LLaMA/Code-LLaMA models
+- **Phi3**: Microsoft Phi-3 models
 - **Unknown**: Other architectures (may not work)
 
 #### Examples
@@ -534,6 +538,8 @@ cargo run --release --example list_models
 │ ✓ Qwen/Qwen2.5-Coder-3B-Instruct              │      Qwen2 │
 │ ✓ bigcode/starcoder2-3b                        │  StarCoder2 │
 │ ✓ google/codegemma-7b-it                       │      Gemma │
+│ ✓ codellama/CodeLlama-7b-hf                    │      LLaMA │
+│ ✓ microsoft/Phi-3-mini-4k-instruct             │       Phi3 │
 └────────────────────────────────────────────────┴────────────┘
 ```
 
@@ -1319,6 +1325,8 @@ CUDA_VISIBLE_DEVICES=1 cargo run --release -- --corpus corpus/samples.json
 |-------|----------------|--------------|------|
 | StarCoder2 3B | `bigcode/starcoder2-3b` | StarCoder2 | ~6 GB |
 | Qwen2.5-Coder 3B | `Qwen/Qwen2.5-Coder-3B-Instruct` | Qwen2 | ~6 GB |
+| Phi-3-mini-4k | `microsoft/Phi-3-mini-4k-instruct` | Phi3 | ~8 GB |
+| Code-LLaMA 7B | `codellama/CodeLlama-7b-hf` | LLaMA | ~13 GB |
 | Qwen2.5-Coder 7B | `Qwen/Qwen2.5-Coder-7B-Instruct` | Qwen2 | ~14 GB |
 | CodeGemma 7B | `google/codegemma-7b-it` | Gemma | ~14 GB |
 

@@ -13,8 +13,10 @@ use tracing::info;
 
 use crate::attention::AttentionCache;
 use crate::cache::ActivationCache;
+use crate::intervention::{KnockoutSpec, SteeringSpec};
 use crate::kv_cache::KVCache;
 use crate::masks::{create_causal_mask, create_generation_mask};
+use crate::model::PlipBackend;
 use rand::Rng;
 
 /// Model configuration (matches HuggingFace config.json for Gemma/CodeGemma)
@@ -742,8 +744,6 @@ pub struct PlipGemma {
     embed_tokens: Embedding,
     layers: Vec<DecoderLayer>,
     norm: GemmaRmsNorm,
-    /// Embedding weight tensor for tied lm_head (shape: [vocab_size, hidden_size])
-    embed_weight: Tensor,
     rotary: RotaryEmbedding,
     n_layers: usize,
     hidden_size: usize,
@@ -827,12 +827,6 @@ impl PlipGemma {
         let norm =
             GemmaRmsNorm::load(config.hidden_size, config.rms_norm_eps, vb_model.pp("norm"))?;
 
-        // Get embedding weights for logit lens
-        let embed_weight = vb_model.get(
-            (config.vocab_size, config.hidden_size),
-            "embed_tokens.weight",
-        )?;
-
         let head_dim = config
             .head_dim
             .unwrap_or(config.hidden_size / config.num_attention_heads);
@@ -853,7 +847,6 @@ impl PlipGemma {
             embed_tokens,
             layers,
             norm,
-            embed_weight,
             rotary,
             n_layers: config.num_hidden_layers,
             hidden_size: config.hidden_size,
@@ -1039,7 +1032,7 @@ impl PlipGemma {
 
     /// Apply logit lens: project intermediate activation through final norm + lm_head
     ///
-    /// Uses tied embeddings: logits = LayerNorm(activation) @ embed_weight.T
+    /// Uses tied embeddings: logits = LayerNorm(activation) @ embedding weight.T
     /// Returns logits tensor of shape (vocab_size,)
     pub fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> {
         // Apply final layer norm
@@ -1054,9 +1047,9 @@ impl PlipGemma {
     /// Use `logit_lens` when projecting unnormalized intermediate layer activations.
     pub fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
         // Project to vocabulary using tied embedding weights
-        // hidden: [hidden_size], embed_weight: [vocab_size, hidden_size]
-        // logits = hidden @ embed_weight.T = [vocab_size]
-        let logits = hidden.matmul(&self.embed_weight.t()?)?;
+        // hidden: [hidden_size], embedding weight: [vocab_size, hidden_size]
+        // logits = hidden @ embedding weight.T = [vocab_size]
+        let logits = hidden.matmul(&self.embed_tokens.embeddings().t()?)?;
         Ok(logits)
     }
 
@@ -1138,7 +1131,7 @@ impl PlipGemma {
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
 
         // Compute logits using tied embeddings
-        let logits = last_hidden.matmul(&self.embed_weight.t()?)?;
+        let logits = last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?;
 
         Ok(logits)
     }
@@ -1237,7 +1230,7 @@ impl PlipGemma {
         let seq_len = output.dim(1)?;
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
 
-        let logits = last_hidden.matmul(&self.embed_weight.t()?)?;
+        let logits = last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?;
 
         Ok(logits)
     }
@@ -1282,6 +1275,52 @@ impl PlipGemma {
         }
 
         Ok(tokens)
+    }
+}
+
+impl PlipBackend for PlipGemma {
+    fn n_layers(&self) -> usize { self.n_layers() }
+    fn d_model(&self) -> usize { self.d_model() }
+    fn vocab_size(&self) -> usize { self.vocab_size() }
+    fn n_heads(&self) -> usize { self.n_heads() }
+
+    fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
+        self.forward_with_cache(input_ids)
+    }
+    fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
+        self.forward_with_attention(input_ids)
+    }
+    fn forward_with_intervention(&self, input_ids: &Tensor, spec: &KnockoutSpec) -> Result<(Tensor, AttentionCache)> {
+        self.forward_with_intervention(input_ids, spec)
+    }
+
+    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> { self.logit_lens(activation) }
+    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> { self.project_to_vocab(hidden) }
+    fn logit_lens_top_k(&self, activation: &Tensor, k: usize) -> Result<Vec<(u32, f32)>> {
+        self.logit_lens_top_k(activation, k)
+    }
+
+    fn new_kv_cache(&self) -> KVCache { self.new_kv_cache() }
+    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
+        self.forward_with_kv_cache(input_ids, kv_cache)
+    }
+    fn generate(&self, prompt_ids: &[u32], max_tokens: usize, temperature: f32, stop_tokens: &[u32], device: &Device) -> Result<Vec<u32>> {
+        self.generate(prompt_ids, max_tokens, temperature, stop_tokens, device)
+    }
+
+    fn forward_with_steering(&self, input_ids: &Tensor, spec: &SteeringSpec) -> Result<(Tensor, AttentionCache)> {
+        self.forward_with_steering(input_ids, spec)
+    }
+    fn generate_with_prompt_steering(&self, prompt_ids: &[u32], max_tokens: usize, temperature: f32, stop_tokens: &[u32], spec: &SteeringSpec, device: &Device) -> Result<Vec<u32>> {
+        self.generate_with_prompt_steering(prompt_ids, max_tokens, temperature, stop_tokens, spec, device)
+    }
+
+    fn chat_template(&self, prompt: &str, system_prompt: Option<&str>) -> Option<String> {
+        let system =
+            system_prompt.unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
+        Some(format!(
+            "<start_of_turn>user\n{system}\n{prompt}<end_of_turn>\n<start_of_turn>model\n"
+        ))
     }
 }
 

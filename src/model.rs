@@ -12,7 +12,12 @@ use crate::attention::{AttentionAnalysis, AttentionCache};
 use crate::cache::ActivationCache;
 use crate::forward::PlipStarCoder2;
 use crate::forward_gemma::PlipGemma;
+use crate::forward_llama::PlipLlama;
+use crate::forward_phi3::PlipPhi3;
 use crate::forward_qwen2::PlipQwen2;
+use crate::intervention::{
+    measure_attention_to_targets, AblationResult, KnockoutSpec, SteeringResult, SteeringSpec,
+};
 use crate::kv_cache::KVCache;
 use crate::logit_lens::{decode_predictions, LogitLensAnalysis, LogitLensResult};
 use crate::positioning::EncodingWithOffsets;
@@ -26,6 +31,10 @@ pub enum ModelArchitecture {
     Qwen2,
     /// Gemma / CodeGemma (Google)
     Gemma,
+    /// LLaMA / Code-LLaMA (Meta)
+    Llama,
+    /// Phi-3 (Microsoft)
+    Phi3,
 }
 
 impl ModelArchitecture {
@@ -38,6 +47,10 @@ impl ModelArchitecture {
             ModelArchitecture::StarCoder2
         } else if model_lower.contains("gemma") || model_lower.contains("codegemma") {
             ModelArchitecture::Gemma
+        } else if model_lower.contains("llama") || model_lower.contains("codellama") {
+            ModelArchitecture::Llama
+        } else if model_lower.contains("phi") {
+            ModelArchitecture::Phi3
         } else {
             // Default to Qwen2 for unknown models (more likely to work)
             info!(
@@ -55,159 +68,72 @@ impl ModelArchitecture {
     }
 }
 
-/// Internal model backend enum
-enum ModelBackend {
-    StarCoder2(PlipStarCoder2),
-    Qwen2(PlipQwen2),
-    Gemma(PlipGemma),
-}
-
-/// Trait for models that support KV-cache generation with memory limits
+/// Unified backend trait for all model architectures.
 ///
-/// This trait provides a common interface for memory-limited generation
-/// across all model backends.
-trait MemoryLimitedGeneration {
-    /// Create a new KV-cache for this model
-    fn new_kv_cache(&self) -> KVCache;
+/// Implementing this trait is the only requirement for adding a new model to PLIP-RS.
+/// Optional capabilities (steering, chat template) have default implementations that
+/// return errors or `None`, so non-transformer architectures can skip them.
+pub trait PlipBackend {
+    // --- Metadata ---
+    fn n_layers(&self) -> usize;
+    fn d_model(&self) -> usize;
+    fn vocab_size(&self) -> usize;
+    fn n_heads(&self) -> usize;
 
-    /// Forward pass with KV-cache
-    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor>;
-}
-
-impl MemoryLimitedGeneration for PlipQwen2 {
-    fn new_kv_cache(&self) -> KVCache {
-        self.new_kv_cache()
-    }
-
-    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
-        PlipQwen2::forward_with_kv_cache(self, input_ids, kv_cache)
-    }
-}
-
-impl MemoryLimitedGeneration for PlipStarCoder2 {
-    fn new_kv_cache(&self) -> KVCache {
-        self.new_kv_cache()
-    }
-
-    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
-        PlipStarCoder2::forward_with_kv_cache(self, input_ids, kv_cache)
-    }
-}
-
-impl MemoryLimitedGeneration for PlipGemma {
-    fn new_kv_cache(&self) -> KVCache {
-        self.new_kv_cache()
-    }
-
-    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
-        PlipGemma::forward_with_kv_cache(self, input_ids, kv_cache)
-    }
-}
-
-impl ModelBackend {
-    fn n_layers(&self) -> usize {
-        match self {
-            ModelBackend::StarCoder2(m) => m.n_layers(),
-            ModelBackend::Qwen2(m) => m.n_layers(),
-            ModelBackend::Gemma(m) => m.n_layers(),
-        }
-    }
-
-    fn d_model(&self) -> usize {
-        match self {
-            ModelBackend::StarCoder2(m) => m.d_model(),
-            ModelBackend::Qwen2(m) => m.d_model(),
-            ModelBackend::Gemma(m) => m.d_model(),
-        }
-    }
-
-    fn vocab_size(&self) -> usize {
-        match self {
-            ModelBackend::StarCoder2(m) => m.vocab_size(),
-            ModelBackend::Qwen2(m) => m.vocab_size(),
-            ModelBackend::Gemma(m) => m.vocab_size(),
-        }
-    }
-
-    fn n_heads(&self) -> usize {
-        match self {
-            ModelBackend::StarCoder2(m) => m.n_heads(),
-            ModelBackend::Qwen2(m) => m.n_heads(),
-            ModelBackend::Gemma(m) => m.n_heads(),
-        }
-    }
-
-    fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.forward_with_cache(input_ids),
-            ModelBackend::Qwen2(m) => m.forward_with_cache(input_ids),
-            ModelBackend::Gemma(m) => m.forward_with_cache(input_ids),
-        }
-    }
-
-    fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.forward_with_attention(input_ids),
-            ModelBackend::Qwen2(m) => m.forward_with_attention(input_ids),
-            ModelBackend::Gemma(m) => m.forward_with_attention(input_ids),
-        }
-    }
-
+    // --- Forward passes ---
+    fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)>;
+    fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)>;
     fn forward_with_intervention(
         &self,
         input_ids: &Tensor,
-        spec: &crate::intervention::KnockoutSpec,
-    ) -> Result<(Tensor, AttentionCache)> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.forward_with_intervention(input_ids, spec),
-            ModelBackend::Qwen2(m) => m.forward_with_intervention(input_ids, spec),
-            ModelBackend::Gemma(m) => m.forward_with_intervention(input_ids, spec),
-        }
-    }
+        spec: &KnockoutSpec,
+    ) -> Result<(Tensor, AttentionCache)>;
+
+    // --- Logit lens ---
+    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor>;
+    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor>;
+    fn logit_lens_top_k(&self, activation: &Tensor, k: usize) -> Result<Vec<(u32, f32)>>;
+
+    // --- Generation (KV-cache) ---
+    fn new_kv_cache(&self) -> KVCache;
+    fn forward_with_kv_cache(
+        &self,
+        input_ids: &Tensor,
+        kv_cache: &mut KVCache,
+    ) -> Result<Tensor>;
+    fn generate(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        device: &Device,
+    ) -> Result<Vec<u32>>;
+
+    // --- Optional capabilities (default: unsupported) ---
 
     fn forward_with_steering(
         &self,
-        input_ids: &Tensor,
-        spec: &crate::intervention::SteeringSpec,
+        _input_ids: &Tensor,
+        _spec: &SteeringSpec,
     ) -> Result<(Tensor, AttentionCache)> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.forward_with_steering(input_ids, spec),
-            ModelBackend::Qwen2(m) => m.forward_with_steering(input_ids, spec),
-            ModelBackend::Gemma(m) => m.forward_with_steering(input_ids, spec),
-        }
+        anyhow::bail!("Steering not supported for this architecture")
     }
 
-    /// Apply logit lens to get logits from intermediate activation
-    ///
-    /// Note: Currently unused but kept for potential future direct access.
-    /// The `logit_lens_top_k` method is preferred for most use cases.
-    #[allow(dead_code)]
-    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.logit_lens(activation),
-            ModelBackend::Qwen2(m) => m.logit_lens(activation),
-            ModelBackend::Gemma(m) => m.logit_lens(activation),
-        }
+    fn generate_with_prompt_steering(
+        &self,
+        _prompt_ids: &[u32],
+        _max_tokens: usize,
+        _temperature: f32,
+        _stop_tokens: &[u32],
+        _spec: &SteeringSpec,
+        _device: &Device,
+    ) -> Result<Vec<u32>> {
+        anyhow::bail!("Prompt steering not supported for this architecture")
     }
 
-    /// Project hidden state directly to vocabulary logits (no normalization)
-    ///
-    /// Use this when the hidden state is already normalized (e.g., from forward pass output).
-    /// Use `logit_lens` when projecting unnormalized intermediate layer activations.
-    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.project_to_vocab(hidden),
-            ModelBackend::Qwen2(m) => m.project_to_vocab(hidden),
-            ModelBackend::Gemma(m) => m.project_to_vocab(hidden),
-        }
-    }
-
-    fn logit_lens_top_k(&self, activation: &Tensor, k: usize) -> Result<Vec<(u32, f32)>> {
-        match self {
-            ModelBackend::StarCoder2(m) => m.logit_lens_top_k(activation, k),
-            ModelBackend::Qwen2(m) => m.logit_lens_top_k(activation, k),
-            ModelBackend::Gemma(m) => m.logit_lens_top_k(activation, k),
-        }
+    fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
+        None
     }
 }
 
@@ -215,7 +141,7 @@ impl ModelBackend {
 ///
 /// Supports multiple model architectures with a unified interface.
 pub struct PlipModel {
-    model: ModelBackend,
+    model: Box<dyn PlipBackend>,
     tokenizer: Tokenizer,
     device: Device,
     architecture: ModelArchitecture,
@@ -277,18 +203,21 @@ impl PlipModel {
             .map_err(|e| anyhow::anyhow!("Tokenizer error: {e}"))?;
 
         // Load model based on architecture
-        let model = match architecture {
+        let model: Box<dyn PlipBackend> = match architecture {
             ModelArchitecture::StarCoder2 => {
-                let m = PlipStarCoder2::load(model_id, &device, dtype)?;
-                ModelBackend::StarCoder2(m)
+                Box::new(PlipStarCoder2::load(model_id, &device, dtype)?)
             }
             ModelArchitecture::Qwen2 => {
-                let m = PlipQwen2::load(model_id, &device, dtype)?;
-                ModelBackend::Qwen2(m)
+                Box::new(PlipQwen2::load(model_id, &device, dtype)?)
             }
             ModelArchitecture::Gemma => {
-                let m = PlipGemma::load(model_id, &device, dtype)?;
-                ModelBackend::Gemma(m)
+                Box::new(PlipGemma::load(model_id, &device, dtype)?)
+            }
+            ModelArchitecture::Llama => {
+                Box::new(PlipLlama::load(model_id, &device, dtype)?)
+            }
+            ModelArchitecture::Phi3 => {
+                Box::new(PlipPhi3::load(model_id, &device, dtype)?)
             }
         };
 
@@ -337,27 +266,9 @@ impl PlipModel {
             return prompt.to_string();
         }
 
-        match self.architecture {
-            ModelArchitecture::Qwen2 => {
-                let system = system_prompt
-                    .unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
-                format!(
-                    "<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
-                )
-            }
-            ModelArchitecture::Gemma => {
-                // Gemma uses <start_of_turn> format
-                let system = system_prompt
-                    .unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
-                format!(
-                    "<start_of_turn>user\n{system}\n{prompt}<end_of_turn>\n<start_of_turn>model\n"
-                )
-            }
-            ModelArchitecture::StarCoder2 => {
-                // StarCoder2 doesn't have a standard chat format, return as-is
-                prompt.to_string()
-            }
-        }
+        self.model
+            .chat_template(prompt, system_prompt)
+            .unwrap_or_else(|| prompt.to_string())
     }
 
     /// Get the EOS token ID for this model
@@ -599,8 +510,8 @@ impl PlipModel {
     pub fn forward_with_intervention(
         &self,
         text: &str,
-        spec: &crate::intervention::KnockoutSpec,
-    ) -> Result<crate::intervention::AblationResult> {
+        spec: &KnockoutSpec,
+    ) -> Result<AblationResult> {
         // Tokenize
         let encoding = self
             .tokenizer
@@ -623,7 +534,7 @@ impl PlipModel {
             self.model.forward_with_intervention(&input_tensor, spec)?;
         let ablated_logits = self.compute_logits(&ablated_output)?;
 
-        Ok(crate::intervention::AblationResult::new(
+        Ok(AblationResult::new(
             baseline_logits,
             ablated_logits,
             spec.clone(),
@@ -637,7 +548,7 @@ impl PlipModel {
     pub fn forward_ablated_only(
         &self,
         text: &str,
-        spec: &crate::intervention::KnockoutSpec,
+        spec: &KnockoutSpec,
     ) -> Result<(Tensor, AttentionCache)> {
         let encoding = self
             .tokenizer
@@ -685,8 +596,8 @@ impl PlipModel {
     pub fn forward_with_steering(
         &self,
         text: &str,
-        spec: &crate::intervention::SteeringSpec,
-    ) -> Result<crate::intervention::SteeringResult> {
+        spec: &SteeringSpec,
+    ) -> Result<SteeringResult> {
         let encoding = self
             .tokenizer
             .encode(text, false)
@@ -708,7 +619,7 @@ impl PlipModel {
             self.model.forward_with_steering(&input_tensor, spec)?;
         let steered_logits = self.compute_logits(&steered_output)?;
 
-        Ok(crate::intervention::SteeringResult::new(
+        Ok(SteeringResult::new(
             baseline_logits,
             steered_logits,
             spec.clone(),
@@ -722,7 +633,7 @@ impl PlipModel {
     pub fn forward_steered_only(
         &self,
         text: &str,
-        spec: &crate::intervention::SteeringSpec,
+        spec: &SteeringSpec,
     ) -> Result<(Tensor, AttentionCache)> {
         let encoding = self
             .tokenizer
@@ -751,8 +662,6 @@ impl PlipModel {
         to_positions: &[usize],
         layer: usize,
     ) -> Result<f32> {
-        use crate::intervention::measure_attention_to_targets;
-
         let attn_cache = self.get_attention(text)?;
         measure_attention_to_targets(&attn_cache, from_pos, to_positions, layer)
     }
@@ -832,7 +741,7 @@ impl PlipModel {
         max_tokens: usize,
         temperature: f32,
         system_prompt: Option<&str>,
-        steering: Option<&crate::intervention::SteeringSpec>,
+        steering: Option<&SteeringSpec>,
     ) -> Result<String> {
         let formatted = self.apply_chat_template(prompt, system_prompt);
         let stop_tokens: Vec<u32> = self.eos_token_id().into_iter().collect();
@@ -921,7 +830,7 @@ impl PlipModel {
         max_tokens: usize,
         temperature: f32,
         stop_tokens: &[u32],
-        steering: Option<&crate::intervention::SteeringSpec>,
+        steering: Option<&SteeringSpec>,
     ) -> Result<String> {
         // Tokenize prompt
         let encoding = self
@@ -935,29 +844,13 @@ impl PlipModel {
         // (Steering requires full context processing at each step for proper attention modification)
         // All backends now support KV-cache generation for efficient autoregressive generation
         if steering.is_none() {
-            let tokens = match &self.model {
-                ModelBackend::Qwen2(m) => m.generate(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    &self.device,
-                )?,
-                ModelBackend::StarCoder2(m) => m.generate(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    &self.device,
-                )?,
-                ModelBackend::Gemma(m) => m.generate(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    &self.device,
-                )?,
-            };
+            let tokens = self.model.generate(
+                &prompt_ids,
+                max_tokens,
+                temperature,
+                stop_tokens,
+                &self.device,
+            )?;
 
             let output = self
                 .tokenizer
@@ -975,32 +868,14 @@ impl PlipModel {
         // This is O(prompt_len²) + O(n*context_len) instead of O(n*context_len²)
         let tokens = if steering_spec.is_prompt_only(prompt_len) {
             // Use KV-cache with prompt-only steering
-            match &self.model {
-                ModelBackend::Qwen2(m) => m.generate_with_prompt_steering(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    steering_spec,
-                    &self.device,
-                )?,
-                ModelBackend::StarCoder2(m) => m.generate_with_prompt_steering(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    steering_spec,
-                    &self.device,
-                )?,
-                ModelBackend::Gemma(m) => m.generate_with_prompt_steering(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    steering_spec,
-                    &self.device,
-                )?,
-            }
+            self.model.generate_with_prompt_steering(
+                &prompt_ids,
+                max_tokens,
+                temperature,
+                stop_tokens,
+                steering_spec,
+                &self.device,
+            )?
         } else {
             // Steering affects generation positions - need full recomputation
             self.generate_with_steering_no_cache(
@@ -1020,36 +895,6 @@ impl PlipModel {
         Ok(output)
     }
 
-    /// Generate without KV-cache (for backends without cache support)
-    fn generate_no_cache(
-        &self,
-        prompt_ids: &[u32],
-        max_tokens: usize,
-        temperature: f32,
-        stop_tokens: &[u32],
-    ) -> Result<Vec<u32>> {
-        let mut tokens = prompt_ids.to_vec();
-
-        for _ in 0..max_tokens {
-            let input_tensor = Tensor::new(&tokens[..], &self.device)?.unsqueeze(0)?;
-            let (output, _) = self.model.forward_with_attention(&input_tensor)?;
-            let logits = self.compute_logits(&output)?;
-
-            let next_token = if temperature <= 0.0 {
-                self.argmax(&logits)?
-            } else {
-                self.sample_with_temperature(&logits, temperature)?
-            };
-
-            if stop_tokens.contains(&next_token) {
-                break;
-            }
-            tokens.push(next_token);
-        }
-
-        Ok(tokens)
-    }
-
     /// Generate with steering (requires full context at each step)
     fn generate_with_steering_no_cache(
         &self,
@@ -1057,7 +902,7 @@ impl PlipModel {
         max_tokens: usize,
         temperature: f32,
         stop_tokens: &[u32],
-        steering: &crate::intervention::SteeringSpec,
+        steering: &SteeringSpec,
     ) -> Result<Vec<u32>> {
         let mut tokens = prompt_ids.to_vec();
 
@@ -1077,11 +922,7 @@ impl PlipModel {
                 self.compute_logits(&output)?
             };
 
-            let next_token = if temperature <= 0.0 {
-                self.argmax(&logits)?
-            } else {
-                self.sample_with_temperature(&logits, temperature)?
-            };
+            let next_token = sample_token(&logits, temperature)?;
 
             if stop_tokens.contains(&next_token) {
                 break;
@@ -1103,7 +944,7 @@ impl PlipModel {
         max_tokens: usize,
         temperature: f32,
         stop_tokens: &[u32],
-        steering: Option<&crate::intervention::SteeringSpec>,
+        steering: Option<&SteeringSpec>,
     ) -> Result<GenerationResult> {
         let encoding = self
             .tokenizer
@@ -1123,16 +964,13 @@ impl PlipModel {
                 spec,
             )?
         } else {
-            match &self.model {
-                ModelBackend::Qwen2(m) => m.generate(
-                    &prompt_ids,
-                    max_tokens,
-                    temperature,
-                    stop_tokens,
-                    &self.device,
-                )?,
-                _ => self.generate_no_cache(&prompt_ids, max_tokens, temperature, stop_tokens)?,
-            }
+            self.model.generate(
+                &prompt_ids,
+                max_tokens,
+                temperature,
+                stop_tokens,
+                &self.device,
+            )?
         };
 
         let generated_tokens = tokens[prompt_len..].to_vec();
@@ -1206,33 +1044,15 @@ impl PlipModel {
 
         let prompt_ids: Vec<u32> = encoding.get_ids().to_vec();
 
-        // Use backend-specific KV-cache generation with memory enforcement
-        let tokens = match &self.model {
-            ModelBackend::Qwen2(m) => self.generate_with_memory_limit_impl(
-                m,
-                &prompt_ids,
-                max_tokens,
-                temperature,
-                stop_tokens,
-                max_bytes,
-            )?,
-            ModelBackend::StarCoder2(m) => self.generate_with_memory_limit_impl(
-                m,
-                &prompt_ids,
-                max_tokens,
-                temperature,
-                stop_tokens,
-                max_bytes,
-            )?,
-            ModelBackend::Gemma(m) => self.generate_with_memory_limit_impl(
-                m,
-                &prompt_ids,
-                max_tokens,
-                temperature,
-                stop_tokens,
-                max_bytes,
-            )?,
-        };
+        // Use KV-cache generation with memory enforcement via trait
+        let tokens = self.generate_with_memory_limit_impl(
+            &*self.model,
+            &prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            max_bytes,
+        )?;
 
         let output = self
             .tokenizer
@@ -1243,9 +1063,9 @@ impl PlipModel {
     }
 
     /// Internal implementation for memory-limited generation
-    fn generate_with_memory_limit_impl<M: MemoryLimitedGeneration>(
+    fn generate_with_memory_limit_impl(
         &self,
-        model: &M,
+        model: &dyn PlipBackend,
         prompt_ids: &[u32],
         max_tokens: usize,
         temperature: f32,
@@ -1269,7 +1089,7 @@ impl PlipModel {
         }
 
         // Sample first generated token
-        let mut next_token = self.sample_token(&logits, temperature)?;
+        let mut next_token = sample_token(&logits, temperature)?;
 
         if stop_tokens.contains(&next_token) {
             return Ok(tokens);
@@ -1294,7 +1114,7 @@ impl PlipModel {
                 }
             }
 
-            next_token = self.sample_token(&logits, temperature)?;
+            next_token = sample_token(&logits, temperature)?;
 
             if stop_tokens.contains(&next_token) {
                 break;
@@ -1305,59 +1125,60 @@ impl PlipModel {
         Ok(tokens)
     }
 
-    /// Sample a token from logits (helper for memory-limited generation)
-    fn sample_token(&self, logits: &Tensor, temperature: f32) -> Result<u32> {
-        if temperature <= 0.0 {
-            self.argmax(logits)
-        } else {
-            self.sample_with_temperature(logits, temperature)
+}
+
+/// Sample a token from logits
+fn sample_token(logits: &Tensor, temperature: f32) -> Result<u32> {
+    if temperature <= 0.0 {
+        argmax(logits)
+    } else {
+        sample_with_temperature(logits, temperature)
+    }
+}
+
+/// Argmax sampling (greedy)
+fn argmax(logits: &Tensor) -> Result<u32> {
+    let logits_f32 = logits.to_dtype(DType::F32)?;
+    let logits_vec: Vec<f32> = logits_f32.flatten_all()?.to_vec1()?;
+
+    let (max_idx, _) = logits_vec
+        .iter()
+        .enumerate()
+        .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal))
+        .ok_or_else(|| anyhow::anyhow!("Empty logits"))?;
+
+    Ok(max_idx as u32)
+}
+
+/// Temperature-based sampling
+fn sample_with_temperature(logits: &Tensor, temperature: f32) -> Result<u32> {
+    use rand::Rng;
+
+    let logits_f32 = logits.to_dtype(DType::F32)?;
+    let logits_vec: Vec<f32> = logits_f32.flatten_all()?.to_vec1()?;
+
+    // Apply temperature
+    let scaled: Vec<f32> = logits_vec.iter().map(|x| x / temperature).collect();
+
+    // Softmax
+    let max_val = scaled.iter().copied().fold(f32::NEG_INFINITY, f32::max);
+    let exp_vals: Vec<f32> = scaled.iter().map(|x| (x - max_val).exp()).collect();
+    let sum: f32 = exp_vals.iter().sum();
+    let probs: Vec<f32> = exp_vals.iter().map(|x| x / sum).collect();
+
+    // Sample from distribution
+    let mut rng = rand::thread_rng();
+    let r: f32 = rng.gen();
+    let mut cumsum = 0.0;
+    for (idx, &p) in probs.iter().enumerate() {
+        cumsum += p;
+        if r < cumsum {
+            return Ok(idx as u32);
         }
     }
 
-    /// Argmax sampling (greedy)
-    fn argmax(&self, logits: &Tensor) -> Result<u32> {
-        let logits_f32 = logits.to_dtype(DType::F32)?;
-        let logits_vec: Vec<f32> = logits_f32.flatten_all()?.to_vec1()?;
-
-        let (max_idx, _) = logits_vec
-            .iter()
-            .enumerate()
-            .max_by(|(_, a), (_, b)| a.partial_cmp(b).unwrap_or(std::cmp::Ordering::Equal))
-            .ok_or_else(|| anyhow::anyhow!("Empty logits"))?;
-
-        Ok(max_idx as u32)
-    }
-
-    /// Temperature-based sampling
-    fn sample_with_temperature(&self, logits: &Tensor, temperature: f32) -> Result<u32> {
-        use rand::Rng;
-
-        let logits_f32 = logits.to_dtype(DType::F32)?;
-        let logits_vec: Vec<f32> = logits_f32.flatten_all()?.to_vec1()?;
-
-        // Apply temperature
-        let scaled: Vec<f32> = logits_vec.iter().map(|x| x / temperature).collect();
-
-        // Softmax
-        let max_val = scaled.iter().copied().fold(f32::NEG_INFINITY, f32::max);
-        let exp_vals: Vec<f32> = scaled.iter().map(|x| (x - max_val).exp()).collect();
-        let sum: f32 = exp_vals.iter().sum();
-        let probs: Vec<f32> = exp_vals.iter().map(|x| x / sum).collect();
-
-        // Sample from distribution
-        let mut rng = rand::thread_rng();
-        let r: f32 = rng.gen();
-        let mut cumsum = 0.0;
-        for (idx, &p) in probs.iter().enumerate() {
-            cumsum += p;
-            if r < cumsum {
-                return Ok(idx as u32);
-            }
-        }
-
-        // Fallback to last token
-        Ok((probs.len() - 1) as u32)
-    }
+    // Fallback to last token
+    Ok((probs.len() - 1) as u32)
 }
 
 /// Result of text generation with details

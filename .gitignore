@@ -49,5 +49,8 @@ tmp/
 temp/
 *.tmp
 
+# Windows NUL device artifact
+NUL
+
 # Local dev scripts (machine-specific paths)
 run.ps1

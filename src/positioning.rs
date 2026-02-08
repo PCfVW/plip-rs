@@ -223,14 +223,8 @@ pub fn find_python_param_char_positions(code: &str) -> Vec<usize> {
                     let param = param.trim();
                     if !param.is_empty() {
                         // Get parameter name (before = or :)
-                        let name = param
-                            .split('=')
-                            .next()
-                            .unwrap()
-                            .split(':')
-                            .next()
-                            .unwrap()
-                            .trim();
+                        let before_eq = param.split('=').next().unwrap_or(param);
+                        let name = before_eq.split(':').next().unwrap_or(before_eq).trim();
 
                         // Find this parameter in the original string
                         if let Some(name_offset) = code[current_pos..].find(name) {

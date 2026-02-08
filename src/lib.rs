@@ -31,6 +31,8 @@
 //! - `forward`: StarCoder2 forward pass with activation capture hooks
 //! - `forward_qwen2`: Qwen2 forward pass with activation capture hooks
 //! - `forward_gemma`: Gemma/CodeGemma forward pass with activation capture hooks
+//! - `forward_llama`: LLaMA/Code-LLaMA forward pass with activation capture hooks
+//! - `forward_phi3`: Phi-3 forward pass with activation capture hooks
 //! - `cache`: ActivationCache for storing layer activations
 //! - `kv_cache`: KV-cache for efficient autoregressive generation
 //! - `masks`: Shared attention mask utilities (causal masks, generation masks)
@@ -49,6 +51,8 @@ pub mod corpus;
 pub mod experiment;
 pub mod forward;
 pub mod forward_gemma;
+pub mod forward_llama;
+pub mod forward_phi3;
 pub mod forward_qwen2;
 pub mod intervention;
 pub mod kv_cache;
@@ -65,6 +69,8 @@ pub use corpus::{CodeSample, Corpus};
 pub use experiment::{Experiment, ExperimentConfig, ExperimentResults};
 pub use forward::PlipStarCoder2;
 pub use forward_gemma::PlipGemma;
+pub use forward_llama::PlipLlama;
+pub use forward_phi3::PlipPhi3;
 pub use forward_qwen2::PlipQwen2;
 pub use intervention::{
     // Part 2: Amplification (Attention Steering)
@@ -86,7 +92,7 @@ pub use intervention::{
 pub use kv_cache::KVCache;
 pub use logit_lens::{LogitLensAnalysis, LogitLensResult, TokenPrediction};
 pub use masks::{clear_mask_caches, create_causal_mask, create_generation_mask};
-pub use model::{GenerationResult, ModelArchitecture, PlipModel};
+pub use model::{GenerationResult, ModelArchitecture, PlipBackend, PlipModel};
 pub use positioning::{EncodingWithOffsets, PositionConversion, TokenWithOffset};
 pub use probe::{ProbeResults, ProbeTrainer};
 pub use steering::{

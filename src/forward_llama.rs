@@ -1,13 +1,17 @@
-//! Qwen2 forward pass with per-layer activation capture
+//! LLaMA forward pass with per-layer activation capture
 //!
 //! Custom implementation that runs layer-by-layer to capture
 //! intermediate activations for PLIP probing experiments.
 //!
-//! Based on the Qwen2.5-Coder architecture from Alibaba.
+//! Based on the Code-LLaMA architecture from Meta.
+//! Adapted from forward_qwen2.rs with simplifications:
+//! - No bias on any projections (Q, K, V, O, MLP)
+//! - Always separate lm_head (no tie_word_embeddings)
+//! - Full MHA (num_key_value_heads == num_attention_heads for 7B)
 
 use anyhow::{Context, Result};
 use candle_core::{DType, Device, IndexOp, Module, Tensor, D};
-use candle_nn::{embedding, linear, linear_no_bias, Embedding, Linear, RmsNorm, VarBuilder};
+use candle_nn::{embedding, linear_no_bias, Embedding, Linear, RmsNorm, VarBuilder};
 use hf_hub::{api::sync::Api, Repo, RepoType};
 use rand::Rng;
 use tracing::info;
@@ -19,9 +23,9 @@ use crate::kv_cache::KVCache;
 use crate::masks::{create_causal_mask, create_generation_mask};
 use crate::model::PlipBackend;
 
-/// Model configuration (matches HuggingFace config.json for Qwen2.5-Coder)
+/// Model configuration (matches HuggingFace config.json for Code-LLaMA)
 #[derive(Debug, Clone, serde::Deserialize)]
-pub struct Qwen2Config {
+pub struct LlamaConfig {
     pub hidden_size: usize,
     pub intermediate_size: usize,
     pub num_attention_heads: usize,
@@ -34,8 +38,6 @@ pub struct Qwen2Config {
     pub rms_norm_eps: f64,
     #[serde(default = "default_max_position_embeddings")]
     pub max_position_embeddings: usize,
-    #[serde(default = "default_tie_word_embeddings")]
-    pub tie_word_embeddings: bool,
 }
 
 fn default_rope_theta() -> f64 {
@@ -43,15 +45,11 @@ fn default_rope_theta() -> f64 {
 }
 
 fn default_rms_norm_eps() -> f64 {
-    1e-6
+    1e-5
 }
 
 fn default_max_position_embeddings() -> usize {
-    32768
-}
-
-fn default_tie_word_embeddings() -> bool {
-    true
+    16384
 }
 
 /// Rotary Position Embeddings (RoPE)
@@ -113,7 +111,7 @@ fn apply_rotary_emb(x: &Tensor, cos: &Tensor, sin: &Tensor) -> Result<Tensor> {
     Ok(out.reshape(x.shape())?)
 }
 
-/// Multi-head attention with grouped query attention
+/// Multi-head attention (no bias on any projection)
 struct Attention {
     q_proj: Linear,
     k_proj: Linear,
@@ -125,25 +123,24 @@ struct Attention {
 }
 
 impl Attention {
-    fn load(vb: VarBuilder, config: &Qwen2Config) -> Result<Self> {
+    fn load(vb: VarBuilder, config: &LlamaConfig) -> Result<Self> {
         let head_dim = config.hidden_size / config.num_attention_heads;
-        // Q, K, V projections have bias in Qwen2
-        let q_proj = linear(
+        // LLaMA has NO bias on any projection (unlike Qwen2 which has bias on Q/K/V)
+        let q_proj = linear_no_bias(
             config.hidden_size,
             config.num_attention_heads * head_dim,
             vb.pp("q_proj"),
         )?;
-        let k_proj = linear(
+        let k_proj = linear_no_bias(
             config.hidden_size,
             config.num_key_value_heads * head_dim,
             vb.pp("k_proj"),
         )?;
-        let v_proj = linear(
+        let v_proj = linear_no_bias(
             config.hidden_size,
             config.num_key_value_heads * head_dim,
             vb.pp("v_proj"),
         )?;
-        // O projection has no bias
         let o_proj = linear_no_bias(
             config.num_attention_heads * head_dim,
             config.hidden_size,
@@ -193,9 +190,15 @@ impl Attention {
         let k = repeat_kv(k, self.num_heads / self.num_kv_heads)?;
         let v = repeat_kv(v, self.num_heads / self.num_kv_heads)?;
 
+        // Ensure tensors are contiguous for matmul
+        // (needed when n_rep=1 in repeat_kv, since transpose leaves non-contiguous layout)
+        let q = q.contiguous()?;
+        let k = k.contiguous()?;
+        let v = v.contiguous()?;
+
         // Scaled dot-product attention
         let scale = 1.0 / (self.head_dim as f64).sqrt();
-        let attn_weights = (q.matmul(&k.transpose(2, 3)?)? * scale)?;
+        let attn_weights = (q.matmul(&k.transpose(2, 3)?.contiguous()?)? * scale)?;
 
         // Causal mask
         let mask = create_causal_mask(seq_len, x.device(), x.dtype())?;
@@ -209,10 +212,7 @@ impl Attention {
         Ok((self.o_proj.forward(&attn_output)?, attn_weights))
     }
 
-    /// Forward pass with knockout mask applied
-    ///
-    /// The knockout mask is added to attention scores BEFORE softmax,
-    /// ensuring specified edges contribute exactly 0 to the output.
+    /// Forward pass with knockout mask applied (pre-softmax intervention)
     fn forward_with_intervention(
         &self,
         x: &Tensor,
@@ -244,9 +244,14 @@ impl Attention {
         let k = repeat_kv(k, self.num_heads / self.num_kv_heads)?;
         let v = repeat_kv(v, self.num_heads / self.num_kv_heads)?;
 
+        // Ensure tensors are contiguous for matmul
+        let q = q.contiguous()?;
+        let k = k.contiguous()?;
+        let v = v.contiguous()?;
+
         // Scaled dot-product attention
         let scale = 1.0 / (self.head_dim as f64).sqrt();
-        let attn_weights = (q.matmul(&k.transpose(2, 3)?)? * scale)?;
+        let attn_weights = (q.matmul(&k.transpose(2, 3)?.contiguous()?)? * scale)?;
 
         // Causal mask
         let mask = create_causal_mask(seq_len, x.device(), x.dtype())?;
@@ -268,20 +273,6 @@ impl Attention {
     }
 
     /// Forward pass with KV-cache for efficient generation
-    ///
-    /// When generating tokens, this method:
-    /// - Takes only the new token(s) as input
-    /// - Retrieves cached K,V from previous positions
-    /// - Computes Q only for new positions
-    /// - Concatenates new K,V with cached and stores back
-    /// - Returns output for the new positions only
-    ///
-    /// # Arguments
-    /// * `x` - Input hidden states [batch, new_seq_len, hidden_size]
-    /// * `rotary` - Rotary embeddings for position encoding
-    /// * `start_pos` - Starting position in the sequence (equals cached seq_len)
-    /// * `cache_k` - Mutable reference to cached keys for this layer
-    /// * `cache_v` - Mutable reference to cached values for this layer
     fn forward_with_cache(
         &self,
         x: &Tensor,
@@ -292,7 +283,6 @@ impl Attention {
     ) -> Result<Tensor> {
         let (b, seq_len, _) = x.dims3()?;
 
-        // Compute Q, K, V for new positions only
         let q = self.q_proj.forward(x)?;
         let k = self.k_proj.forward(x)?;
         let v = self.v_proj.forward(x)?;
@@ -300,20 +290,19 @@ impl Attention {
         // Reshape for multi-head attention
         let q = q
             .reshape((b, seq_len, self.num_heads, self.head_dim))?
-            .transpose(1, 2)?; // [b, num_heads, seq_len, head_dim]
+            .transpose(1, 2)?;
         let k = k
             .reshape((b, seq_len, self.num_kv_heads, self.head_dim))?
-            .transpose(1, 2)?; // [b, num_kv_heads, seq_len, head_dim]
+            .transpose(1, 2)?;
         let v = v
             .reshape((b, seq_len, self.num_kv_heads, self.head_dim))?
-            .transpose(1, 2)?; // [b, num_kv_heads, seq_len, head_dim]
+            .transpose(1, 2)?;
 
-        // Apply rotary embeddings to Q and K for the new positions
+        // Apply rotary embeddings
         let (q, k) = rotary.apply(&q, &k, start_pos)?;
 
         // Concatenate with cached K, V if available
         let (k, v) = if let (Some(prev_k), Some(prev_v)) = (cache_k.as_ref(), cache_v.as_ref()) {
-            // Concatenate along sequence dimension (dim 2)
             let k = Tensor::cat(&[prev_k, &k], 2)?;
             let v = Tensor::cat(&[prev_v, &v], 2)?;
             (k, v)
@@ -321,7 +310,7 @@ impl Attention {
             (k, v)
         };
 
-        // Update cache with new K, V
+        // Update cache
         *cache_k = Some(k.clone());
         *cache_v = Some(v.clone());
 
@@ -329,19 +318,18 @@ impl Attention {
         let k = repeat_kv(k, self.num_heads / self.num_kv_heads)?;
         let v = repeat_kv(v, self.num_heads / self.num_kv_heads)?;
 
+        // Ensure tensors are contiguous for matmul
+        let q = q.contiguous()?;
+        let k = k.contiguous()?;
+        let v = v.contiguous()?;
+
         // Total sequence length (cached + new)
         let total_seq_len = k.dim(2)?;
 
         // Scaled dot-product attention
-        // Q: [b, num_heads, seq_len, head_dim] (just new tokens)
-        // K: [b, num_heads, total_seq_len, head_dim] (all tokens)
         let scale = 1.0 / (self.head_dim as f64).sqrt();
-        let attn_weights = (q.matmul(&k.transpose(2, 3)?)? * scale)?;
-        // attn_weights: [b, num_heads, seq_len, total_seq_len]
+        let attn_weights = (q.matmul(&k.transpose(2, 3)?.contiguous()?)? * scale)?;
 
-        // Create causal mask for the new positions attending to all positions
-        // For generation, we need a mask that allows new tokens to see all previous tokens
-        // but not future tokens (in case seq_len > 1)
         let mask =
             create_generation_mask(seq_len, total_seq_len, start_pos, x.device(), x.dtype())?;
         let attn_weights = attn_weights.broadcast_add(&mask)?;
@@ -349,15 +337,11 @@ impl Attention {
         let attn_weights = candle_nn::ops::softmax_last_dim(&attn_weights)?;
         let attn_output = attn_weights.matmul(&v)?;
 
-        // Reshape back: [b, num_heads, seq_len, head_dim] -> [b, seq_len, hidden_size]
         let attn_output = attn_output.transpose(1, 2)?.reshape((b, seq_len, ()))?;
         Ok(self.o_proj.forward(&attn_output)?)
     }
 
     /// Forward pass with steering intervention applied (post-softmax)
-    ///
-    /// Steering modifies attention weights AFTER softmax and renormalizes
-    /// to maintain valid probability distributions.
     fn forward_with_steering(
         &self,
         x: &Tensor,
@@ -391,9 +375,14 @@ impl Attention {
         let k = repeat_kv(k, self.num_heads / self.num_kv_heads)?;
         let v = repeat_kv(v, self.num_heads / self.num_kv_heads)?;
 
+        // Ensure tensors are contiguous for matmul
+        let q = q.contiguous()?;
+        let k = k.contiguous()?;
+        let v = v.contiguous()?;
+
         // Scaled dot-product attention
         let scale = 1.0 / (self.head_dim as f64).sqrt();
-        let attn_weights = (q.matmul(&k.transpose(2, 3)?)? * scale)?;
+        let attn_weights = (q.matmul(&k.transpose(2, 3)?.contiguous()?)? * scale)?;
 
         // Causal mask
         let mask = create_causal_mask(seq_len, x.device(), x.dtype())?;
@@ -403,7 +392,6 @@ impl Attention {
         let attn_weights = candle_nn::ops::softmax_last_dim(&attn_weights)?;
 
         // INTERVENTION POINT B: Post-softmax steering
-        // Only apply if it's a steering intervention (Scale or SetValue), not Knockout
         let attn_weights = if steering_spec.is_steering() {
             apply_steering(&attn_weights, steering_spec, self.num_heads, seq_len)?
         } else {
@@ -417,23 +405,7 @@ impl Attention {
         Ok((self.o_proj.forward(&attn_output)?, attn_weights))
     }
 
-    /// Forward pass with steering AND KV-cache for efficient prompt-steered generation
-    ///
-    /// This combines steering intervention with KV-caching:
-    /// - Applies steering to attention weights (post-softmax)
-    /// - Caches K,V for subsequent generation steps
-    ///
-    /// Use this during prompt processing when you want to:
-    /// 1. Apply steering to the prompt's attention patterns
-    /// 2. Cache K,V for efficient generation afterwards
-    ///
-    /// # Arguments
-    /// * `x` - Input hidden states [batch, seq_len, hidden_size]
-    /// * `rotary` - Rotary embeddings for position encoding
-    /// * `start_pos` - Starting position (0 for prompt, >0 if concatenating)
-    /// * `steering_spec` - Steering specification for attention modification
-    /// * `cache_k` - Mutable reference to cached keys for this layer
-    /// * `cache_v` - Mutable reference to cached values for this layer
+    /// Forward pass with steering AND KV-cache
     fn forward_with_cache_and_steering(
         &self,
         x: &Tensor,
@@ -447,7 +419,6 @@ impl Attention {
 
         let (b, seq_len, _) = x.dims3()?;
 
-        // Compute Q, K, V
         let q = self.q_proj.forward(x)?;
         let k = self.k_proj.forward(x)?;
         let v = self.v_proj.forward(x)?;
@@ -455,15 +426,15 @@ impl Attention {
         // Reshape for multi-head attention
         let q = q
             .reshape((b, seq_len, self.num_heads, self.head_dim))?
-            .transpose(1, 2)?; // [b, num_heads, seq_len, head_dim]
+            .transpose(1, 2)?;
         let k = k
             .reshape((b, seq_len, self.num_kv_heads, self.head_dim))?
-            .transpose(1, 2)?; // [b, num_kv_heads, seq_len, head_dim]
+            .transpose(1, 2)?;
         let v = v
             .reshape((b, seq_len, self.num_kv_heads, self.head_dim))?
-            .transpose(1, 2)?; // [b, num_kv_heads, seq_len, head_dim]
+            .transpose(1, 2)?;
 
-        // Apply rotary embeddings to Q and K
+        // Apply rotary embeddings
         let (q, k) = rotary.apply(&q, &k, start_pos)?;
 
         // Concatenate with cached K, V if available
@@ -475,7 +446,7 @@ impl Attention {
             (k, v)
         };
 
-        // Update cache with new K, V (before GQA expansion)
+        // Update cache (before GQA expansion)
         *cache_k = Some(k.clone());
         *cache_v = Some(v.clone());
 
@@ -483,14 +454,18 @@ impl Attention {
         let k = repeat_kv(k, self.num_heads / self.num_kv_heads)?;
         let v = repeat_kv(v, self.num_heads / self.num_kv_heads)?;
 
-        // Total sequence length (cached + new)
+        // Ensure tensors are contiguous for matmul
+        let q = q.contiguous()?;
+        let k = k.contiguous()?;
+        let v = v.contiguous()?;
+
+        // Total sequence length
         let total_seq_len = k.dim(2)?;
 
         // Scaled dot-product attention
         let scale = 1.0 / (self.head_dim as f64).sqrt();
-        let attn_weights = (q.matmul(&k.transpose(2, 3)?)? * scale)?;
+        let attn_weights = (q.matmul(&k.transpose(2, 3)?.contiguous()?)? * scale)?;
 
-        // Create causal mask for the positions
         let mask =
             create_generation_mask(seq_len, total_seq_len, start_pos, x.device(), x.dtype())?;
         let attn_weights = attn_weights.broadcast_add(&mask)?;
@@ -499,7 +474,6 @@ impl Attention {
         let attn_weights = candle_nn::ops::softmax_last_dim(&attn_weights)?;
 
         // Apply steering (post-softmax)
-        // Note: Steering edges reference the FULL sequence positions
         let attn_weights = if steering_spec.is_steering() {
             apply_steering(&attn_weights, steering_spec, self.num_heads, total_seq_len)?
         } else {
@@ -508,7 +482,6 @@ impl Attention {
 
         let attn_output = attn_weights.matmul(&v)?;
 
-        // Reshape back
         let attn_output = attn_output.transpose(1, 2)?.reshape((b, seq_len, ()))?;
         Ok(self.o_proj.forward(&attn_output)?)
     }
@@ -524,7 +497,7 @@ fn repeat_kv(x: Tensor, n_rep: usize) -> Result<Tensor> {
     Ok(x.reshape((b, num_kv_heads * n_rep, seq_len, head_dim))?)
 }
 
-/// MLP block (Qwen2 style - SwiGLU with gate/up/down projections)
+/// MLP block (LLaMA style - SwiGLU, no bias)
 #[allow(clippy::upper_case_acronyms)]
 struct MLP {
     gate_proj: Linear,
@@ -533,7 +506,7 @@ struct MLP {
 }
 
 impl MLP {
-    fn load(vb: VarBuilder, config: &Qwen2Config) -> Result<Self> {
+    fn load(vb: VarBuilder, config: &LlamaConfig) -> Result<Self> {
         let gate_proj = linear_no_bias(
             config.hidden_size,
             config.intermediate_size,
@@ -576,7 +549,7 @@ struct DecoderLayer {
 }
 
 impl DecoderLayer {
-    fn load(vb: VarBuilder, config: &Qwen2Config) -> Result<Self> {
+    fn load(vb: VarBuilder, config: &LlamaConfig) -> Result<Self> {
         let self_attn = Attention::load(vb.pp("self_attn"), config)?;
         let mlp = MLP::load(vb.pp("mlp"), config)?;
         let input_layernorm = candle_nn::rms_norm(
@@ -603,14 +576,12 @@ impl DecoderLayer {
         Ok(output)
     }
 
-    /// Forward pass that also returns attention weights
     fn forward_with_attn(
         &self,
         x: &Tensor,
         rotary: &RotaryEmbedding,
         start_pos: usize,
     ) -> Result<(Tensor, Tensor)> {
-        // Pre-norm architecture
         let residual = x;
         let x = self.input_layernorm.forward(x)?;
         let (x, attn_weights) = self.self_attn.forward_with_attn(&x, rotary, start_pos)?;
@@ -622,7 +593,6 @@ impl DecoderLayer {
         Ok(((residual + x)?, attn_weights))
     }
 
-    /// Forward pass with optional knockout mask
     fn forward_with_intervention(
         &self,
         x: &Tensor,
@@ -630,7 +600,6 @@ impl DecoderLayer {
         start_pos: usize,
         knockout_mask: Option<&Tensor>,
     ) -> Result<(Tensor, Tensor)> {
-        // Pre-norm architecture
         let residual = x;
         let x = self.input_layernorm.forward(x)?;
         let (x, attn_weights) =
@@ -644,7 +613,6 @@ impl DecoderLayer {
         Ok(((residual + x)?, attn_weights))
     }
 
-    /// Forward pass with steering (post-softmax intervention)
     fn forward_with_steering(
         &self,
         x: &Tensor,
@@ -652,7 +620,6 @@ impl DecoderLayer {
         start_pos: usize,
         steering_spec: &crate::intervention::SteeringSpec,
     ) -> Result<(Tensor, Tensor)> {
-        // Pre-norm architecture
         let residual = x;
         let x = self.input_layernorm.forward(x)?;
         let (x, attn_weights) =
@@ -666,7 +633,6 @@ impl DecoderLayer {
         Ok(((residual + x)?, attn_weights))
     }
 
-    /// Forward pass with KV-cache for efficient generation
     fn forward_with_cache(
         &self,
         x: &Tensor,
@@ -675,7 +641,6 @@ impl DecoderLayer {
         cache_k: &mut Option<Tensor>,
         cache_v: &mut Option<Tensor>,
     ) -> Result<Tensor> {
-        // Pre-norm architecture
         let residual = x;
         let x = self.input_layernorm.forward(x)?;
         let x = self
@@ -689,11 +654,6 @@ impl DecoderLayer {
         Ok((residual + x)?)
     }
 
-    /// Forward pass with steering AND KV-cache
-    ///
-    /// Combines steering intervention with KV-caching. Use during prompt
-    /// processing when you want steered attention patterns AND want to
-    /// cache K,V for efficient subsequent generation.
     fn forward_with_cache_and_steering(
         &self,
         x: &Tensor,
@@ -703,7 +663,6 @@ impl DecoderLayer {
         cache_k: &mut Option<Tensor>,
         cache_v: &mut Option<Tensor>,
     ) -> Result<Tensor> {
-        // Pre-norm architecture
         let residual = x;
         let x = self.input_layernorm.forward(x)?;
         let x = self.self_attn.forward_with_cache_and_steering(
@@ -729,14 +688,12 @@ struct SafetensorsIndex {
     weight_map: std::collections::HashMap<String, String>,
 }
 
-/// Custom Qwen2 model with per-layer activation capture
-pub struct PlipQwen2 {
+/// Custom LLaMA model with per-layer activation capture
+pub struct PlipLlama {
     embed_tokens: Embedding,
     layers: Vec<DecoderLayer>,
     norm: RmsNorm,
-    /// Language modeling head (separate when tie_word_embeddings is false;
-    /// otherwise logits are computed via embed_tokens.embeddings().T)
-    lm_head: Option<Linear>,
+    lm_head: Linear, // Always separate (Code-LLaMA never ties embeddings)
     rotary: RotaryEmbedding,
     n_layers: usize,
     n_heads: usize,
@@ -744,10 +701,10 @@ pub struct PlipQwen2 {
     vocab_size: usize,
 }
 
-impl PlipQwen2 {
+impl PlipLlama {
     /// Load model from HuggingFace
     pub fn load(model_id: &str, device: &Device, dtype: DType) -> Result<Self> {
-        info!("Loading Qwen2 from: {}", model_id);
+        info!("Loading LLaMA from: {}", model_id);
 
         // Download model files
         let api = Api::new()?;
@@ -759,7 +716,7 @@ impl PlipQwen2 {
 
         // Load config
         let config_str = std::fs::read_to_string(&config_path).context("Failed to read config")?;
-        let config: Qwen2Config = serde_json::from_str(&config_str)?;
+        let config: LlamaConfig = serde_json::from_str(&config_str)?;
 
         info!(
             "Model config: {} layers, {} hidden, {} vocab",
@@ -820,18 +777,9 @@ impl PlipQwen2 {
         let norm =
             candle_nn::rms_norm(config.hidden_size, config.rms_norm_eps, vb_model.pp("norm"))?;
 
-        // Load separate lm_head only when not using weight tying
-        // When tie_word_embeddings is true, logits = hidden @ embed_tokens.embeddings().T
-        let lm_head = if config.tie_word_embeddings {
-            None
-        } else {
-            info!("Loading separate lm_head...");
-            Some(linear_no_bias(
-                config.hidden_size,
-                config.vocab_size,
-                vb.pp("lm_head"),
-            )?)
-        };
+        // LLaMA always has a separate lm_head
+        info!("Loading separate lm_head...");
+        let lm_head = linear_no_bias(config.hidden_size, config.vocab_size, vb.pp("lm_head"))?;
 
         let head_dim = config.hidden_size / config.num_attention_heads;
         let rotary = RotaryEmbedding::new(
@@ -864,14 +812,11 @@ impl PlipQwen2 {
     pub fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
         let mut cache = ActivationCache::with_capacity(self.n_layers);
 
-        // Embedding
         let mut hidden = self.embed_tokens.forward(input_ids)?;
 
-        // Run through each layer, capturing activations
         for (i, layer) in self.layers.iter().enumerate() {
             hidden = layer.forward(&hidden, &self.rotary, 0)?;
 
-            // Capture last token's activation for this layer
             let seq_len = hidden.dim(1)?;
             let last_token = hidden.i((.., seq_len - 1, ..))?.squeeze(1)?;
             cache.push(last_token);
@@ -881,9 +826,7 @@ impl PlipQwen2 {
             }
         }
 
-        // Final norm
         let output = self.norm.forward(&hidden)?;
-
         Ok((output, cache))
     }
 
@@ -891,15 +834,11 @@ impl PlipQwen2 {
     pub fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         let mut attn_cache = AttentionCache::with_capacity(self.n_layers);
 
-        // Embedding
         let mut hidden = self.embed_tokens.forward(input_ids)?;
 
-        // Run through each layer, capturing attention patterns
         for (i, layer) in self.layers.iter().enumerate() {
             let (new_hidden, attn_weights) = layer.forward_with_attn(&hidden, &self.rotary, 0)?;
             hidden = new_hidden;
-
-            // Store attention weights for this layer
             attn_cache.push(attn_weights);
 
             if (i + 1) % 10 == 0 {
@@ -911,15 +850,11 @@ impl PlipQwen2 {
             }
         }
 
-        // Final norm
         let output = self.norm.forward(&hidden)?;
-
         Ok((output, attn_cache))
     }
 
     /// Forward pass with attention knockout intervention
-    ///
-    /// Applies knockout masks to specified layers based on the spec.
     pub fn forward_with_intervention(
         &self,
         input_ids: &Tensor,
@@ -930,12 +865,9 @@ impl PlipQwen2 {
         let mut attn_cache = AttentionCache::with_capacity(self.n_layers);
         let seq_len = input_ids.dim(1)?;
 
-        // Embedding
         let mut hidden = self.embed_tokens.forward(input_ids)?;
 
-        // Run through each layer
         for (i, layer) in self.layers.iter().enumerate() {
-            // Create knockout mask if this layer is targeted
             let knockout_mask = if spec.applies_to_layer(i) {
                 Some(create_knockout_mask(
                     spec,
@@ -966,15 +898,11 @@ impl PlipQwen2 {
             }
         }
 
-        // Final norm
         let output = self.norm.forward(&hidden)?;
         Ok((output, attn_cache))
     }
 
     /// Forward pass with attention steering intervention (post-softmax)
-    ///
-    /// Applies steering to specified layers, modifying attention weights
-    /// after softmax and renormalizing.
     pub fn forward_with_steering(
         &self,
         input_ids: &Tensor,
@@ -982,16 +910,12 @@ impl PlipQwen2 {
     ) -> Result<(Tensor, AttentionCache)> {
         let mut attn_cache = AttentionCache::with_capacity(self.n_layers);
 
-        // Embedding
         let mut hidden = self.embed_tokens.forward(input_ids)?;
 
-        // Run through each layer
         for (i, layer) in self.layers.iter().enumerate() {
             let (new_hidden, attn_weights) = if spec.applies_to_layer(i) {
-                // Apply steering to this layer
                 layer.forward_with_steering(&hidden, &self.rotary, 0, spec)?
             } else {
-                // Normal forward pass
                 layer.forward_with_attn(&hidden, &self.rotary, 0)?
             };
 
@@ -1007,7 +931,6 @@ impl PlipQwen2 {
             }
         }
 
-        // Final norm
         let output = self.norm.forward(&hidden)?;
         Ok((output, attn_cache))
     }
@@ -1033,48 +956,22 @@ impl PlipQwen2 {
     }
 
     /// Apply logit lens: project intermediate activation through final norm + lm_head
-    ///
-    /// Uses tied embeddings: logits = LayerNorm(activation) @ embedding_weight.T
-    /// Or separate lm_head if not using weight tying.
-    /// Returns logits tensor of shape (vocab_size,)
-    ///
-    /// NOTE: This method applies normalization. Use for intermediate layer activations.
-    /// For already-normalized outputs (from forward pass), use `project_to_vocab` instead.
     pub fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> {
-        // Apply final layer norm
         let normed = self.norm.forward(activation)?;
-
-        // Project to vocabulary
         self.project_to_vocab(&normed)
     }
 
     /// Project hidden state directly to vocabulary logits (no normalization)
-    ///
-    /// Use this when the hidden state is already normalized (e.g., from forward pass output).
-    /// Use `logit_lens` when projecting unnormalized intermediate layer activations.
     pub fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
-        let logits = if let Some(ref lm_head) = self.lm_head {
-            // Use separate lm_head
-            lm_head.forward(hidden)?
-        } else {
-            // Use tied embedding weights
-            hidden.matmul(&self.embed_tokens.embeddings().t()?)?
-        };
-        Ok(logits)
+        Ok(self.lm_head.forward(hidden)?)
     }
 
     /// Get top-k token predictions from logits
-    ///
-    /// Returns Vec of (token_id, probability)
     pub fn top_k_from_logits(&self, logits: &Tensor, k: usize) -> Result<Vec<(u32, f32)>> {
-        // Convert to f32 for softmax
         let logits_f32 = logits.to_dtype(DType::F32)?;
-
-        // Softmax to get probabilities
         let probs = candle_nn::ops::softmax_last_dim(&logits_f32)?;
         let probs_vec: Vec<f32> = probs.flatten_all()?.to_vec1()?;
 
-        // Find top-k
         let mut indexed: Vec<(usize, f32)> = probs_vec.iter().copied().enumerate().collect();
         indexed.sort_by(|a, b| b.1.partial_cmp(&a.1).unwrap_or(std::cmp::Ordering::Equal));
 
@@ -1099,17 +996,6 @@ impl PlipQwen2 {
     }
 
     /// Forward pass with KV-cache for efficient generation
-    ///
-    /// This method is optimized for autoregressive generation:
-    /// - On first call (empty cache), processes the full prompt
-    /// - On subsequent calls, only processes new tokens using cached K,V
-    ///
-    /// # Arguments
-    /// * `input_ids` - Token IDs [batch, seq_len] - just the new tokens after first call
-    /// * `kv_cache` - Mutable KV-cache that accumulates across calls
-    ///
-    /// # Returns
-    /// * `Tensor` - Logits for the last position [batch, vocab_size]
     pub fn forward_with_kv_cache(
         &self,
         input_ids: &Tensor,
@@ -1117,10 +1003,8 @@ impl PlipQwen2 {
     ) -> Result<Tensor> {
         let start_pos = kv_cache.seq_len();
 
-        // Embedding
         let mut hidden = self.embed_tokens.forward(input_ids)?;
 
-        // Run through each layer with cache
         for (i, layer) in self.layers.iter().enumerate() {
             hidden = layer.forward_with_cache(
                 &hidden,
@@ -1131,34 +1015,15 @@ impl PlipQwen2 {
             )?;
         }
 
-        // Final norm
         let output = self.norm.forward(&hidden)?;
 
-        // Get last position and compute logits
         let seq_len = output.dim(1)?;
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
 
-        // Compute logits
-        let logits = if let Some(ref lm_head) = self.lm_head {
-            lm_head.forward(&last_hidden)?
-        } else {
-            last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?
-        };
-
-        Ok(logits)
+        Ok(self.lm_head.forward(&last_hidden)?)
     }
 
     /// Generate tokens autoregressively with KV-cache
-    ///
-    /// # Arguments
-    /// * `prompt_ids` - Initial token IDs [batch, prompt_len]
-    /// * `max_tokens` - Maximum tokens to generate
-    /// * `temperature` - Sampling temperature (0.0 = greedy)
-    /// * `stop_tokens` - Tokens that stop generation
-    /// * `device` - Device for tensor operations
-    ///
-    /// # Returns
-    /// Generated token IDs (including prompt)
     pub fn generate(
         &self,
         prompt_ids: &[u32],
@@ -1170,11 +1035,9 @@ impl PlipQwen2 {
         let mut kv_cache = self.new_kv_cache();
         let mut tokens = prompt_ids.to_vec();
 
-        // Process full prompt first
         let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
         let logits = self.forward_with_kv_cache(&prompt_tensor, &mut kv_cache)?;
 
-        // Sample first generated token
         let mut next_token = sample_from_logits(&logits, temperature)?;
 
         if stop_tokens.contains(&next_token) {
@@ -1182,9 +1045,7 @@ impl PlipQwen2 {
         }
         tokens.push(next_token);
 
-        // Generate remaining tokens one at a time
         for _ in 1..max_tokens {
-            // Only pass the new token (KV-cache has the rest)
             let input_tensor = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
             let logits = self.forward_with_kv_cache(&input_tensor, &mut kv_cache)?;
 
@@ -1200,18 +1061,6 @@ impl PlipQwen2 {
     }
 
     /// Forward pass with steering AND KV-cache for prompt-steered generation
-    ///
-    /// This method applies steering during the forward pass while also
-    /// populating the KV-cache. Use this for the prompt when you want
-    /// steered attention patterns and efficient subsequent generation.
-    ///
-    /// # Arguments
-    /// * `input_ids` - Token IDs [batch, seq_len]
-    /// * `kv_cache` - Mutable KV-cache to populate
-    /// * `steering_spec` - Steering specification
-    ///
-    /// # Returns
-    /// Logits for the last position [batch, vocab_size]
     pub fn forward_with_kv_cache_and_steering(
         &self,
         input_ids: &Tensor,
@@ -1220,12 +1069,9 @@ impl PlipQwen2 {
     ) -> Result<Tensor> {
         let start_pos = kv_cache.seq_len();
 
-        // Embedding
         let mut hidden = self.embed_tokens.forward(input_ids)?;
 
-        // Run through each layer with steering and cache
         for (i, layer) in self.layers.iter().enumerate() {
-            // Only apply steering to targeted layers
             if steering_spec.applies_to_layer(i) {
                 hidden = layer.forward_with_cache_and_steering(
                     &hidden,
@@ -1236,7 +1082,6 @@ impl PlipQwen2 {
                     &mut kv_cache.values[i],
                 )?;
             } else {
-                // Non-targeted layers use regular cache forward
                 hidden = layer.forward_with_cache(
                     &hidden,
                     &self.rotary,
@@ -1247,43 +1092,15 @@ impl PlipQwen2 {
             }
         }
 
-        // Final norm
         let output = self.norm.forward(&hidden)?;
 
-        // Get last position and compute logits
         let seq_len = output.dim(1)?;
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
 
-        // Compute logits
-        let logits = if let Some(ref lm_head) = self.lm_head {
-            lm_head.forward(&last_hidden)?
-        } else {
-            last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?
-        };
-
-        Ok(logits)
+        Ok(self.lm_head.forward(&last_hidden)?)
     }
 
     /// Generate with steering applied to prompt, then efficient KV-cache generation
-    ///
-    /// This is the hybrid approach:
-    /// 1. Process prompt with steering applied (attention patterns modified)
-    /// 2. Cache K,V from the steered forward pass
-    /// 3. Generate subsequent tokens efficiently using cache (no steering)
-    ///
-    /// This is useful when you want to see how steering the prompt's attention
-    /// patterns affects generation, without the O(n²) cost of full recomputation.
-    ///
-    /// # Arguments
-    /// * `prompt_ids` - Initial token IDs
-    /// * `max_tokens` - Maximum tokens to generate
-    /// * `temperature` - Sampling temperature (0.0 = greedy)
-    /// * `stop_tokens` - Tokens that stop generation
-    /// * `steering_spec` - Steering specification for prompt processing
-    /// * `device` - Device for tensor operations
-    ///
-    /// # Returns
-    /// Generated token IDs (including prompt)
     pub fn generate_with_prompt_steering(
         &self,
         prompt_ids: &[u32],
@@ -1296,12 +1113,10 @@ impl PlipQwen2 {
         let mut kv_cache = self.new_kv_cache();
         let mut tokens = prompt_ids.to_vec();
 
-        // Process prompt with steering (populates KV-cache)
         let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
         let logits =
             self.forward_with_kv_cache_and_steering(&prompt_tensor, &mut kv_cache, steering_spec)?;
 
-        // Sample first generated token
         let mut next_token = sample_from_logits(&logits, temperature)?;
 
         if stop_tokens.contains(&next_token) {
@@ -1309,7 +1124,6 @@ impl PlipQwen2 {
         }
         tokens.push(next_token);
 
-        // Generate remaining tokens using cache (no steering)
         for _ in 1..max_tokens {
             let input_tensor = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
             let logits = self.forward_with_kv_cache(&input_tensor, &mut kv_cache)?;
@@ -1326,7 +1140,7 @@ impl PlipQwen2 {
     }
 }
 
-impl PlipBackend for PlipQwen2 {
+impl PlipBackend for PlipLlama {
     fn n_layers(&self) -> usize { self.n_layers() }
     fn d_model(&self) -> usize { self.d_model() }
     fn vocab_size(&self) -> usize { self.vocab_size() }
@@ -1363,12 +1177,9 @@ impl PlipBackend for PlipQwen2 {
         self.generate_with_prompt_steering(prompt_ids, max_tokens, temperature, stop_tokens, spec, device)
     }
 
-    fn chat_template(&self, prompt: &str, system_prompt: Option<&str>) -> Option<String> {
-        let system =
-            system_prompt.unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
-        Some(format!(
-            "<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
-        ))
+    fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
+        // Code-LLaMA is a base model — no chat template
+        None
     }
 }
 
