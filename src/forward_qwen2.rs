@@ -1327,10 +1327,18 @@ impl PlipQwen2 {
 }
 
 impl PlipBackend for PlipQwen2 {
-    fn n_layers(&self) -> usize { self.n_layers() }
-    fn d_model(&self) -> usize { self.d_model() }
-    fn vocab_size(&self) -> usize { self.vocab_size() }
-    fn n_heads(&self) -> usize { self.n_heads() }
+    fn n_layers(&self) -> usize {
+        self.n_layers()
+    }
+    fn d_model(&self) -> usize {
+        self.d_model()
+    }
+    fn vocab_size(&self) -> usize {
+        self.vocab_size()
+    }
+    fn n_heads(&self) -> usize {
+        self.n_heads()
+    }
 
     fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
         self.forward_with_cache(input_ids)
@@ -1338,34 +1346,70 @@ impl PlipBackend for PlipQwen2 {
     fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_attention(input_ids)
     }
-    fn forward_with_intervention(&self, input_ids: &Tensor, spec: &KnockoutSpec) -> Result<(Tensor, AttentionCache)> {
+    fn forward_with_intervention(
+        &self,
+        input_ids: &Tensor,
+        spec: &KnockoutSpec,
+    ) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_intervention(input_ids, spec)
     }
 
-    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> { self.logit_lens(activation) }
-    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> { self.project_to_vocab(hidden) }
+    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> {
+        self.logit_lens(activation)
+    }
+    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
+        self.project_to_vocab(hidden)
+    }
     fn logit_lens_top_k(&self, activation: &Tensor, k: usize) -> Result<Vec<(u32, f32)>> {
         self.logit_lens_top_k(activation, k)
     }
 
-    fn new_kv_cache(&self) -> KVCache { self.new_kv_cache() }
+    fn new_kv_cache(&self) -> KVCache {
+        self.new_kv_cache()
+    }
     fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
         self.forward_with_kv_cache(input_ids, kv_cache)
     }
-    fn generate(&self, prompt_ids: &[u32], max_tokens: usize, temperature: f32, stop_tokens: &[u32], device: &Device) -> Result<Vec<u32>> {
+    fn generate(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        device: &Device,
+    ) -> Result<Vec<u32>> {
         self.generate(prompt_ids, max_tokens, temperature, stop_tokens, device)
     }
 
-    fn forward_with_steering(&self, input_ids: &Tensor, spec: &SteeringSpec) -> Result<(Tensor, AttentionCache)> {
+    fn forward_with_steering(
+        &self,
+        input_ids: &Tensor,
+        spec: &SteeringSpec,
+    ) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_steering(input_ids, spec)
     }
-    fn generate_with_prompt_steering(&self, prompt_ids: &[u32], max_tokens: usize, temperature: f32, stop_tokens: &[u32], spec: &SteeringSpec, device: &Device) -> Result<Vec<u32>> {
-        self.generate_with_prompt_steering(prompt_ids, max_tokens, temperature, stop_tokens, spec, device)
+    fn generate_with_prompt_steering(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &SteeringSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        self.generate_with_prompt_steering(
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            spec,
+            device,
+        )
     }
 
     fn chat_template(&self, prompt: &str, system_prompt: Option<&str>) -> Option<String> {
-        let system =
-            system_prompt.unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
+        let system = system_prompt
+            .unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
         Some(format!(
             "<|im_start|>system\n{system}<|im_end|>\n<|im_start|>user\n{prompt}<|im_end|>\n<|im_start|>assistant\n"
         ))

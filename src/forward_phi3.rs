@@ -129,11 +129,7 @@ impl Attention {
         let kv_dim = config.num_key_value_heads * head_dim;
 
         // Phi-3 uses a single fused QKV projection (no bias)
-        let qkv_proj = linear_no_bias(
-            config.hidden_size,
-            q_dim + 2 * kv_dim,
-            vb.pp("qkv_proj"),
-        )?;
+        let qkv_proj = linear_no_bias(config.hidden_size, q_dim + 2 * kv_dim, vb.pp("qkv_proj"))?;
         let o_proj = linear_no_bias(
             config.num_attention_heads * head_dim,
             config.hidden_size,
@@ -893,10 +889,18 @@ impl PlipPhi3 {
         Ok((output, attn_cache))
     }
 
-    pub fn n_layers(&self) -> usize { self.n_layers }
-    pub fn d_model(&self) -> usize { self.hidden_size }
-    pub fn vocab_size(&self) -> usize { self.vocab_size }
-    pub fn n_heads(&self) -> usize { self.n_heads }
+    pub fn n_layers(&self) -> usize {
+        self.n_layers
+    }
+    pub fn d_model(&self) -> usize {
+        self.hidden_size
+    }
+    pub fn vocab_size(&self) -> usize {
+        self.vocab_size
+    }
+    pub fn n_heads(&self) -> usize {
+        self.n_heads
+    }
 
     pub fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> {
         let normed = self.norm.forward(activation)?;
@@ -1075,10 +1079,18 @@ impl PlipPhi3 {
 }
 
 impl PlipBackend for PlipPhi3 {
-    fn n_layers(&self) -> usize { self.n_layers() }
-    fn d_model(&self) -> usize { self.d_model() }
-    fn vocab_size(&self) -> usize { self.vocab_size() }
-    fn n_heads(&self) -> usize { self.n_heads() }
+    fn n_layers(&self) -> usize {
+        self.n_layers()
+    }
+    fn d_model(&self) -> usize {
+        self.d_model()
+    }
+    fn vocab_size(&self) -> usize {
+        self.vocab_size()
+    }
+    fn n_heads(&self) -> usize {
+        self.n_heads()
+    }
 
     fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
         self.forward_with_cache(input_ids)
@@ -1086,34 +1098,70 @@ impl PlipBackend for PlipPhi3 {
     fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_attention(input_ids)
     }
-    fn forward_with_intervention(&self, input_ids: &Tensor, spec: &KnockoutSpec) -> Result<(Tensor, AttentionCache)> {
+    fn forward_with_intervention(
+        &self,
+        input_ids: &Tensor,
+        spec: &KnockoutSpec,
+    ) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_intervention(input_ids, spec)
     }
 
-    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> { self.logit_lens(activation) }
-    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> { self.project_to_vocab(hidden) }
+    fn logit_lens(&self, activation: &Tensor) -> Result<Tensor> {
+        self.logit_lens(activation)
+    }
+    fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
+        self.project_to_vocab(hidden)
+    }
     fn logit_lens_top_k(&self, activation: &Tensor, k: usize) -> Result<Vec<(u32, f32)>> {
         self.logit_lens_top_k(activation, k)
     }
 
-    fn new_kv_cache(&self) -> KVCache { self.new_kv_cache() }
+    fn new_kv_cache(&self) -> KVCache {
+        self.new_kv_cache()
+    }
     fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
         self.forward_with_kv_cache(input_ids, kv_cache)
     }
-    fn generate(&self, prompt_ids: &[u32], max_tokens: usize, temperature: f32, stop_tokens: &[u32], device: &Device) -> Result<Vec<u32>> {
+    fn generate(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        device: &Device,
+    ) -> Result<Vec<u32>> {
         self.generate(prompt_ids, max_tokens, temperature, stop_tokens, device)
     }
 
-    fn forward_with_steering(&self, input_ids: &Tensor, spec: &SteeringSpec) -> Result<(Tensor, AttentionCache)> {
+    fn forward_with_steering(
+        &self,
+        input_ids: &Tensor,
+        spec: &SteeringSpec,
+    ) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_steering(input_ids, spec)
     }
-    fn generate_with_prompt_steering(&self, prompt_ids: &[u32], max_tokens: usize, temperature: f32, stop_tokens: &[u32], spec: &SteeringSpec, device: &Device) -> Result<Vec<u32>> {
-        self.generate_with_prompt_steering(prompt_ids, max_tokens, temperature, stop_tokens, spec, device)
+    fn generate_with_prompt_steering(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &SteeringSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        self.generate_with_prompt_steering(
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            spec,
+            device,
+        )
     }
 
     fn chat_template(&self, prompt: &str, system_prompt: Option<&str>) -> Option<String> {
-        let system =
-            system_prompt.unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
+        let system = system_prompt
+            .unwrap_or("You are a helpful coding assistant. Write clean, correct code.");
         Some(format!(
             "<|system|>\n{system}<|end|>\n<|user|>\n{prompt}<|end|>\n<|assistant|>\n"
         ))

@@ -96,11 +96,7 @@ pub trait PlipBackend {
 
     // --- Generation (KV-cache) ---
     fn new_kv_cache(&self) -> KVCache;
-    fn forward_with_kv_cache(
-        &self,
-        input_ids: &Tensor,
-        kv_cache: &mut KVCache,
-    ) -> Result<Tensor>;
+    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor>;
     fn generate(
         &self,
         prompt_ids: &[u32],
@@ -207,18 +203,10 @@ impl PlipModel {
             ModelArchitecture::StarCoder2 => {
                 Box::new(PlipStarCoder2::load(model_id, &device, dtype)?)
             }
-            ModelArchitecture::Qwen2 => {
-                Box::new(PlipQwen2::load(model_id, &device, dtype)?)
-            }
-            ModelArchitecture::Gemma => {
-                Box::new(PlipGemma::load(model_id, &device, dtype)?)
-            }
-            ModelArchitecture::Llama => {
-                Box::new(PlipLlama::load(model_id, &device, dtype)?)
-            }
-            ModelArchitecture::Phi3 => {
-                Box::new(PlipPhi3::load(model_id, &device, dtype)?)
-            }
+            ModelArchitecture::Qwen2 => Box::new(PlipQwen2::load(model_id, &device, dtype)?),
+            ModelArchitecture::Gemma => Box::new(PlipGemma::load(model_id, &device, dtype)?),
+            ModelArchitecture::Llama => Box::new(PlipLlama::load(model_id, &device, dtype)?),
+            ModelArchitecture::Phi3 => Box::new(PlipPhi3::load(model_id, &device, dtype)?),
         };
 
         Ok(Self {
@@ -593,11 +581,7 @@ impl PlipModel {
     /// let result = model.forward_with_steering("...", &spec)?;
     /// println!("KL divergence: {}", result.kl_divergence()?);
     /// ```
-    pub fn forward_with_steering(
-        &self,
-        text: &str,
-        spec: &SteeringSpec,
-    ) -> Result<SteeringResult> {
+    pub fn forward_with_steering(&self, text: &str, spec: &SteeringSpec) -> Result<SteeringResult> {
         let encoding = self
             .tokenizer
             .encode(text, false)
@@ -1124,7 +1108,6 @@ impl PlipModel {
 
         Ok(tokens)
     }
-
 }
 
 /// Sample a token from logits
