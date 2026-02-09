@@ -6,17 +6,21 @@
 
 ## Executive Summary
 
-We successfully implemented and validated attention steering in PLIP-rs, demonstrating that:
+We successfully implemented and validated attention steering in PLIP-rs on the two Qwen code-specialized models, demonstrating that:
 
-1. **Rust test markers receive significantly less attention than Python doctest markers** (2.3-2.6% vs 5.7-9.1%)
+1. **Rust test markers receive significantly less attention than Python doctest markers** (2.3-2.6% vs 5.7-9.1% in Qwen models; 2.8-4.4× ratio across all 4 code-specialized models — see [RIGOR_EXPERIMENT.md](RIGOR_EXPERIMENT.md))
 2. **Steering can boost Rust attention to Python levels** without catastrophically affecting model outputs
 3. **The intervention is "safe"** - KL divergence remains flat across dose levels
+
+**Scope**: Steering dose-response experiments were conducted on Qwen-3B and Qwen-7B only. The attention asymmetry that motivates steering has since been validated across 4 code-specialized models but does **not replicate** on Code-LLaMA-7B (reversed pattern) or Phi-3-mini (no significant difference). See [RIGOR_EXPERIMENT.md](RIGOR_EXPERIMENT.md) Appendix C for full cross-model analysis.
 
 ---
 
 ## 1. Calibration Results
 
 ### 1.1 Baseline Attention Measurements
+
+Calibration was performed on the two Qwen code-specialized models. For cross-model attention analysis across all 6 models (including Code-LLaMA-7B and Phi-3-mini), see [RIGOR_EXPERIMENT.md](RIGOR_EXPERIMENT.md) Appendix C.
 
 | Model | Layer | Python `>>>` → `fn` | Rust `#[test]` → `fn` | Ratio |
 |-------|-------|---------------------|----------------------|-------|
@@ -142,6 +146,8 @@ Both Qwen models exhibit consistent attention asymmetry:
 - **Rust `#[test]` markers**: Receive only 2.3-2.6% attention to function tokens
 - **Gap widens with model size**: 2.46× ratio for 3B → 3.51× ratio for 7B
 
+This asymmetry has been confirmed across all 4 code-specialized models (Qwen-7B/3B, StarCoder2-3B, CodeGemma-7B) with ratios of 2.8-4.4× and p < 0.0002. However, two non-code-specialized models show no such asymmetry: Code-LLaMA-7B exhibits a **reversed** pattern (Rust > Python at all layers), and Phi-3-mini shows no significant difference. See [RIGOR_EXPERIMENT.md](RIGOR_EXPERIMENT.md) for details.
+
 ### 3.2 Steering Successfully Boosts Attention
 
 | Model | Baseline Rust | Target (Python) | Scale Needed | Achieved |
@@ -201,6 +207,8 @@ output = attn_weights @ V
 | `src/forward_qwen2.rs` | Post-softmax steering in Qwen2 attention |
 | `src/forward.rs` | Post-softmax steering in StarCoder2 attention |
 | `src/forward_gemma.rs` | Post-softmax steering in Gemma attention |
+| `src/forward_llama.rs` | Post-softmax steering in LLaMA/Code-LLaMA attention (v1.1.0) |
+| `src/forward_phi3.rs` | Post-softmax steering in Phi-3 attention (v1.1.0) |
 | `src/model.rs` | `forward_with_steering()`, `forward_steered_only()` |
 | `src/steering.rs` | Calibration utilities, `DOSE_LEVELS` |
 | `examples/steering_calibrate.rs` | Measure baseline attention |
@@ -244,10 +252,11 @@ cargo run --release --example steering_experiment -- \
 ## 6. Next Steps
 
 1. **Test on code generation tasks**: Measure if boosted attention improves test preservation in actual code generation
-2. **Compare with StarCoder2**: The paper notes StarCoder2 shows reversed patterns - steering may be counterproductive
-3. **Head-specific steering**: Identify which attention heads are most responsive to steering
-4. **Multi-layer steering**: Test steering across multiple layers simultaneously
-5. **Generation quality metrics**: Beyond KL divergence, measure BLEU/CodeBLEU on test-related tokens
+2. **Extend to other code-specialized models**: Run dose-response experiments on StarCoder2-3B and CodeGemma-7B, which both show the attention asymmetry (RIGOR_EXPERIMENT.md). StarCoder2's ablation results show extreme redundancy (ABLATION_RESULTS.md), so steering may behave differently.
+3. **Test on non-code-specialized models**: Run steering on Code-LLaMA-7B (reversed attention pattern) and Phi-3-mini (no differential). Since these models show no Python > Rust asymmetry, steering Rust attention upward may have fundamentally different effects — or none at all.
+4. **Head-specific steering**: Identify which attention heads are most responsive to steering
+5. **Multi-layer steering**: Test steering across multiple layers simultaneously
+6. **Generation quality metrics**: Beyond KL divergence, measure BLEU/CodeBLEU on test-related tokens
 
 ---
 
@@ -255,3 +264,10 @@ cargo run --release --example steering_experiment -- \
 
 - Calibration output: `cargo run --release --example steering_calibrate -- --verbose > calibration_output.txt`
 - Experiment output: `cargo run --release --example steering_experiment -- --output results.json`
+
+---
+
+*Created: February 1, 2026*
+*Updated: February 9, 2026 (contextual updates for Code-LLaMA and Phi-3 attention findings)*
+*Steering scope: Dose-response experiments on Qwen-3B and Qwen-7B only. Steering infrastructure available for all 6 models via PlipBackend trait (v1.1.0).*
+*For: AIWare 2026 submission*
