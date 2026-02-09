@@ -1,9 +1,9 @@
 # PLIP-RS Roadmap: Model Expansion and Backend Refactoring
 
-**Current version:** v1.0.3
-**Target version:** v1.1.0 (trait refactor + new transformer models), v1.2.0 (RWKV-6)
-**Status:** Planning
-**Last updated:** 2026-02-07
+**Current version:** v1.1.0
+**Target version:** v1.2.0 (RWKV-6)
+**Status:** v1.1.0 released (Phases 0-2 complete); Phases 3-6 not started
+**Last updated:** 2026-02-09
 
 ---
 
@@ -238,16 +238,16 @@ fn apply_chat_template(&self, prompt: &str, system_prompt: Option<&str>) -> Stri
 
 ### 4.3 Implementation Checklist
 
-- [ ] Download and inspect `config.json` from `codellama/CodeLlama-7b-hf`
-- [ ] Create `src/forward_llama.rs` with `LlamaConfig` struct
-- [ ] Implement `PlipBackend` for `PlipLlama`
-- [ ] Handle sharded weights (reuse Qwen2's shard-detection logic)
-- [ ] Add `Llama` variant to `ModelArchitecture` + detection for `"llama"`, `"codellama"` in model ID
-- [ ] Add match arm in `from_pretrained_with_arch`
-- [ ] Test basic inference (greedy generation on a short prompt)
-- [ ] Test attention extraction (verify `[batch, heads, seq, seq]` output shape)
-- [ ] Test knockout (reuse existing knockout test patterns)
-- [ ] Run existing PLIP experiments on Code-LLaMA and compare with transformer baselines
+- [x] Download and inspect `config.json` from `codellama/CodeLlama-7b-hf`
+- [x] Create `src/forward_llama.rs` with `LlamaConfig` struct
+- [x] Implement `PlipBackend` for `PlipLlama`
+- [x] Handle sharded weights (reuse Qwen2's shard-detection logic)
+- [x] Add `Llama` variant to `ModelArchitecture` + detection for `"llama"`, `"codellama"` in model ID
+- [x] Add match arm in `from_pretrained_with_arch`
+- [x] Test basic inference (greedy generation on a short prompt)
+- [x] Test attention extraction (verify `[batch, heads, seq, seq]` output shape)
+- [x] Test knockout (reuse existing knockout test patterns)
+- [x] Run existing PLIP experiments on Code-LLaMA and compare with transformer baselines
 
 ### 4.4 Validation
 
@@ -292,19 +292,19 @@ Similarly, the MLP uses a fused `gate_up_proj` instead of separate `gate_proj` a
 
 ### 5.3 Implementation Checklist
 
-- [ ] Download and inspect `config.json` from `microsoft/Phi-3-mini-4k-instruct`
-- [ ] Verify RoPE variant (standard vs. SuRoPE/longrope) — check for `rope_scaling` in config
-- [ ] Create `src/forward_phi3.rs` with `Phi3Config` struct
-- [ ] Implement fused QKV split logic in attention
-- [ ] Implement fused gate+up split logic in MLP
-- [ ] Implement `PlipBackend` for `PlipPhi3`
-- [ ] Add `Phi3` variant to `ModelArchitecture` + detection for `"phi-3"`, `"phi3"` in model ID
-- [ ] Add match arm in `from_pretrained_with_arch`
-- [ ] Implement Phi-3 chat template (`<|user|>\n{prompt}<|end|>\n<|assistant|>\n`)
-- [ ] Test basic inference
-- [ ] Test attention extraction
-- [ ] Test knockout
-- [ ] Run PLIP experiments
+- [x] Download and inspect `config.json` from `microsoft/Phi-3-mini-4k-instruct`
+- [x] Verify RoPE variant (standard vs. SuRoPE/longrope) — check for `rope_scaling` in config
+- [x] Create `src/forward_phi3.rs` with `Phi3Config` struct
+- [x] Implement fused QKV split logic in attention
+- [x] Implement fused gate+up split logic in MLP
+- [x] Implement `PlipBackend` for `PlipPhi3`
+- [x] Add `Phi3` variant to `ModelArchitecture` + detection for `"phi-3"`, `"phi3"` in model ID
+- [x] Add match arm in `from_pretrained_with_arch`
+- [x] Implement Phi-3 chat template (`<|user|>\n{prompt}<|end|>\n<|assistant|>\n`)
+- [x] Test basic inference
+- [x] Test attention extraction
+- [x] Test knockout
+- [x] Run PLIP experiments
 
 ### 5.4 Validation
 
@@ -317,13 +317,13 @@ Same as Code-LLaMA: compare greedy output against HuggingFace Python, verify att
 **Content:** Trait refactor + Code-LLaMA 7B + Phi-3-mini
 
 **Checklist before release:**
-- [ ] All existing tests pass
-- [ ] All 6 models produce correct inference output
-- [ ] Attention extraction works for all 6 models
-- [ ] Knockout experiments produce non-trivial results for all 6 models
-- [ ] `cargo clippy` clean
-- [ ] Update `Cargo.toml` version to `1.1.0`
-- [ ] Update README model support table
+- [x] All existing tests pass
+- [x] All 6 models produce correct inference output
+- [x] Attention extraction works for all 6 models
+- [x] Knockout experiments produce non-trivial results for all 6 models
+- [x] `cargo clippy` clean
+- [x] Update `Cargo.toml` version to `1.1.0`
+- [x] Update README model support table
 
 **Architecture coverage after v1.1.0:**
 
