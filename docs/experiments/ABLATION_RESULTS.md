@@ -19,7 +19,7 @@
 
 2. **Layer Compensation**: In Qwen-7B, knocking out layer 2 alone causes 0.094% Python KL, but knocking out layers 1-3 together **reduces** the effect to 0.025% - demonstrating that adjacent layers compensate for knocked-out attention.
 
-3. **Correlation ≠ Causation**: Despite Python showing 2.6× stronger attention *correlation* in all models, causal ablation reveals model-specific dependencies. High variance prevents statistical significance (all p > 0.05), but practical effect sizes vary dramatically across architectures.
+3. **Correlation ≠ Causation**: Despite Python showing 2.8-4.4× stronger attention *correlation* in all 4 code-specialized models (see RIGOR_EXPERIMENT.md), causal ablation reveals model-specific dependencies. High variance prevents statistical significance (all p > 0.05), but practical effect sizes vary dramatically across architectures.
 
 ---
 
@@ -29,9 +29,10 @@
 
 | Metric | Python `>>>` | Rust `#[test]` | Ratio | p-value |
 |--------|-------------|----------------|-------|---------|
-| Attention to function tokens | 8.5% | 3.1% | **2.7×** | **<0.0001** |
+| Attention to function tokens (Qwen-7B, layer 16) | 9.08% | 2.59% | **3.51×** | **0.000003** |
+| Range across 4 code-specialized models | 5.2-9.1% | 1.2-3.1% | **2.8-4.4×** | **<0.0002** |
 
-**Interpretation**: Python doctest markers "look at" function tokens much more strongly than Rust test attributes.
+**Interpretation**: Python doctest markers "look at" function tokens much more strongly than Rust test attributes across all 4 code-specialized models. Two non-code-specialized models (Code-LLaMA-7B, Phi-3-mini) do not show this effect (see RIGOR_EXPERIMENT.md Appendix C).
 
 ### What We Asked (Ablation Experiment)
 
@@ -507,7 +508,7 @@ INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDIC
               Workers look back at previous parts (attention)
 ```
 
-**Attention Analysis** (RIGOR_EXPERIMENT): We observed that Worker A (Python `>>>`) spends 2.6× more time looking at Part X (function tokens) than Worker B (Rust `#[test]`).
+**Attention Analysis** (RIGOR_EXPERIMENT): We observed that Worker A (Python `>>>`) spends 2.8-4.4× more time looking at Part X (function tokens) than Worker B (Rust `#[test]`) across 4 code-specialized models.
 
 **Ablation Experiment** (this document): We blindfolded both workers and measured if the assembly line still produces the same output.
 
@@ -531,10 +532,10 @@ INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDIC
 ### Implications for the Paper
 
 **Original claim** (attention analysis):
-> "Python doctests show 2.6× stronger attention to function tokens than Rust tests (p < 0.0001)"
+> "Python doctests show 2.8-4.4× stronger attention to function tokens than Rust tests (p < 0.0002) across 4 code-specialized models"
 
 **Nuanced claim** (after ablation):
-> "Python doctests show 2.6× stronger attention correlation, but causal ablation reveals **both languages rely equally** on this attention pathway (p = 0.91). The attention difference reflects how models *organize* information, not what they *require* to function."
+> "Python doctests show 2.8-4.4× stronger attention correlation in code-specialized models, but causal ablation reveals **both languages rely equally** on this attention pathway (p = 0.91). The attention difference reflects how models *organize* information, not what they *require* to function."
 
 ### What This Means
 
@@ -551,10 +552,10 @@ INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDIC
 
 | Analysis | What It Measures | Python | Rust | Ratio | p-value |
 |----------|------------------|--------|------|-------|---------|
-| **Attention Strength** (layer 14) | How much marker "looks at" function | 8.5% | 3.1% | **2.7×** | **<0.0001** |
-| **Knockout Effect** (layer 1) | How much prediction changes when attention removed | 0.71% | 0.82% | **0.87×** | 0.908 |
+| **Attention Strength** (Qwen-7B, layer 16) | How much marker "looks at" function | 9.08% | 2.59% | **3.51×** | **0.000003** |
+| **Knockout Effect** (Qwen-3B, layer 1) | How much prediction changes when attention removed | 0.71% | 0.82% | **0.87×** | 0.908 |
 
-**Key insight**: Strong attention correlation does NOT imply strong causal dependence.
+**Key insight**: Strong attention correlation does NOT imply strong causal dependence. This holds across all 4 code-specialized models tested with ablation.
 
 ---
 
@@ -568,7 +569,9 @@ INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDIC
 
 4. **Model scale**: Tested on 3B-7B models. Larger models may show different patterns.
 
-5. **Position granularity**: Character-to-token conversion may miss some edges.
+5. **Ablation scope**: Ablation experiments were performed on the 4 code-specialized models only (Qwen-3B, Qwen-7B, StarCoder2-3B, CodeGemma-7B). Code-LLaMA-7B and Phi-3-mini — which show no significant attention effect (RIGOR_EXPERIMENT.md) — have not been tested with ablation. Extending ablation to these models would test whether the causal patterns also differ in non-code-specialized models.
+
+6. **Position granularity**: Character-to-token conversion may miss some edges.
 
 ---
 
@@ -577,9 +580,10 @@ INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDIC
 1. ~~**Multi-layer knockout**: Knock out layers 0-5 simultaneously~~ ✅ **DONE** - Window scan implemented
 2. ~~**All-edge knockout**: Remove ALL attention from marker token (not just to functions)~~ ✅ **DONE** - Shows 1878× Python/Rust ratio at layer 1 on Qwen-7B
 3. **Amplification experiment**: Boost attention (the opposite of knockout) to see if preservation improves
-4. **Larger models**: Test on 30B+ models if hardware permits
-5. **Different test patterns**: pytest, unittest, Go tests, etc.
-6. **Head-specific knockout**: Test which attention heads within a layer are most important
+4. **Non-code-specialized models**: Run ablation on Code-LLaMA-7B and Phi-3-mini to test whether the causal independence (both languages equally affected) also holds in models that show no attention correlation effect
+5. **Larger models**: Test on 30B+ models if hardware permits
+6. **Different test patterns**: pytest, unittest, Go tests, etc.
+7. **Head-specific knockout**: Test which attention heads within a layer are most important
 
 ---
 
@@ -646,6 +650,7 @@ cargo run --release --example ablation_experiment -- \
 
 ---
 
-*Updated: February 1, 2026*
-*Last experiment run: All-edge knockout layer scan on all 4 models (Qwen-3B shows 3380× Python/Rust ratio at L1; StarCoder2 shows reversed 74× Rust/Python ratio at L0)*
+*Updated: February 9, 2026 (contextual updates for Code-LLaMA and Phi-3 attention findings)*
+*Last ablation experiment run: February 1, 2026 — All-edge knockout layer scan on 4 code-specialized models (Qwen-3B shows 3380× Python/Rust ratio at L1; StarCoder2 shows reversed 74× Rust/Python ratio at L0)*
+*Note: Ablation experiments have not been extended to Code-LLaMA-7B or Phi-3-mini (added in v1.1.0). See RIGOR_EXPERIMENT.md for their attention analysis results.*
 *For: AIWare 2026 submission*
