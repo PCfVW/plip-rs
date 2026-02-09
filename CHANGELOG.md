@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] — 2026-02-09
+
+Documentation-only release: updates experiment result documents for consistency
+with the v1.1.0 Code-LLaMA and Phi-3 attention findings.
+
+### Changed
+
+- **RIGOR_EXPERIMENT.md**: Expanded from 4 to 6 models. Key finding: the
+  Python > Rust attention effect is code-specialization-dependent (4/6 models
+  replicate; Code-LLaMA reversed, Phi-3 non-significant). Updated all sections
+  including Phase 3/4 tables, decision point, Section 5.3 draft, Appendix C
+  (layer scan details, hypothesis validation, publishable claims, limitations),
+  and Appendix D.
+- **ABLATION_RESULTS.md**: Updated attention reference numbers to match current
+  RIGOR_EXPERIMENT.md data (2.8–4.4× across code-specialized models). Added
+  code-specialization qualifiers throughout. Noted ablation scope limited to
+  4 models; Code-LLaMA and Phi-3 not yet tested with ablation.
+- **STEERING_RESULTS.md**: Added code-specialization context and scope notes.
+  Referenced cross-model attention analysis. Added LLaMA and Phi-3 backends to
+  files table. Expanded future work with steering on non-code-specialized models.
+- **ROADMAP-v1.1-model-expansion.md**: Marked Phases 1–2 and v1.1.0 release
+  checklists as complete. Updated current version to v1.1.0.
+
 ## [1.1.0] — 2026-02-08
 
 ### Added
@@ -92,6 +115,7 @@ Initial public release of PLIP-rs: **P**robing **L**anguage model
 - GitHub Actions CI (CPU build + clippy + tests).
 - Docker support for containerized GPU experiments.
 
+[1.1.1]: https://github.com/PCfVW/plip-rs/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/PCfVW/plip-rs/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/PCfVW/plip-rs/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/PCfVW/plip-rs/compare/v1.0.1...v1.0.2
