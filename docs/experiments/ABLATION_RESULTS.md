@@ -1,25 +1,29 @@
-# PLIP-rs: Attention Ablation (Knockout) Experiment Results
+# PLIP-rs: Ablation Experiment Results (Attention Knockout & State Knockout)
 
 **Created**: February 1, 2026
-**Purpose**: Test causal importance of test marker → function token attention
+**Updated**: February 9, 2026 (RWKV-6 state knockout added)
+**Purpose**: Test causal importance of test marker information flow for model predictions
 **Hardware**: RTX 5060 Ti (16GB VRAM)
 
 ---
 
 ## Executive Summary
 
-**Research Question**: Is the attention from test markers (`>>>`, `#[test]`) to function tokens *causally necessary* for model predictions, or merely *correlational*?
+**Research Question**: Is the information flow from test markers (`>>>`, `#[test]`) to function tokens *causally necessary* for model predictions, or merely *correlational*?
 
 **Key Findings**:
 
-1. **Model-Specific Causal Pathways**: Different models handle test marker attention very differently:
+1. **Model-Specific Causal Pathways**: Different models handle test marker information very differently:
    - **Qwen-7B**: Layer 2 shows 189× stronger knockout effect for Python vs Rust
    - **StarCoder2**: Near-zero sensitivity (uses redundant pathways)
    - **CodeGemma**: Balanced effects (both languages equally affected)
+   - **RWKV-6**: First statistically significant result (p = 0.018) — Python 4.6× more affected
 
-2. **Layer Compensation**: In Qwen-7B, knocking out layer 2 alone causes 0.094% Python KL, but knocking out layers 1-3 together **reduces** the effect to 0.025% - demonstrating that adjacent layers compensate for knocked-out attention.
+2. **Layer Compensation**: In Qwen-7B, knocking out layer 2 alone causes 0.094% Python KL, but knocking out layers 1-3 together **reduces** the effect to 0.025% — demonstrating that adjacent layers compensate for knocked-out attention. In RWKV-6, the opposite: KL **increases** with window size (0.34% → 1.93%), reflecting the recurrent architecture's cumulative state.
 
-3. **Correlation ≠ Causation**: Despite Python showing 2.8-4.4× stronger attention *correlation* in all 4 code-specialized models (see RIGOR_EXPERIMENT.md), causal ablation reveals model-specific dependencies. High variance prevents statistical significance (all p > 0.05), but practical effect sizes vary dramatically across architectures.
+3. **First Non-Transformer Model (RWKV-6)**: State knockout on the gated-linear RNN produces the **first statistically significant** Python vs Rust difference (p = 0.018, t = 2.84). This is semantically equivalent to transformer all-edge knockout: the marker position becomes invisible to all future tokens.
+
+4. **Correlation ≠ Causation**: Despite Python showing 2.8-4.4× stronger attention *correlation* in all 4 code-specialized transformers (see RIGOR_EXPERIMENT.md), causal ablation reveals model-specific dependencies. High variance prevents statistical significance in transformers (all p > 0.05), but practical effect sizes vary dramatically across architectures.
 
 ---
 
@@ -36,9 +40,9 @@
 
 ### What We Asked (Ablation Experiment)
 
-> If we **remove** this attention (set it to zero), does the model's output change differently for Python vs Rust?
+> If we **remove** the marker's influence on subsequent tokens — by zeroing attention edges (transformers) or suppressing state writes (RWKV-6) — does the model's output change differently for Python vs Rust?
 
-This tests whether the attention difference is:
+This tests whether the observed difference is:
 - **Causally important**: Knockout should affect Python more than Rust
 - **Merely correlational**: Knockout affects both equally (or neither)
 
@@ -46,9 +50,9 @@ This tests whether the attention difference is:
 
 ## Methodology
 
-### Intervention Mechanism
+### Intervention Mechanism: Attention Knockout (Transformers)
 
-Knockout is implemented by adding `-infinity` to attention scores **before softmax**:
+For transformer models, knockout is implemented by adding `-infinity` to attention scores **before softmax**:
 
 ```
 NORMAL FORWARD PASS:
@@ -65,6 +69,20 @@ KNOCKOUT FORWARD PASS:
   output = attn_weights @ V
 ```
 
+### Intervention Mechanism: State Knockout (RWKV-6)
+
+For the RWKV-6 gated-linear RNN, there are no attention matrices. Instead, information flows through recurrent state. State knockout suppresses the state write at targeted positions, following the Mamba Knockout methodology (Endy et al., ACL 2025):
+
+```
+NORMAL WKV RECURRENCE:
+  state = kv + decay * state              ← position contributes to recurrent state
+
+STATE KNOCKOUT RECURRENCE:
+  state = decay * state                   ← position's kv contribution suppressed
+```
+
+State knockout is **semantically equivalent** to transformer all-edge knockout: the marker position becomes invisible to all future tokens while preserving the decay dynamics. This makes results directly comparable across architectures.
+
 ### Measurement: KL Divergence
 
 We measure how much the model's next-token probability distribution changes:
@@ -75,9 +93,9 @@ KL(baseline || ablated) = Σ p_baseline(x) * log(p_baseline(x) / p_ablated(x))
 
 | KL Value | Interpretation |
 |----------|----------------|
-| > 1% | Significant impact - attention is causally important |
-| 0.1% - 1% | Moderate impact - some causal role |
-| < 0.1% | Minimal impact - attention is redundant |
+| > 1% | Significant impact — information flow is causally important |
+| 0.1% - 1% | Moderate impact — some causal role |
+| < 0.1% | Minimal impact — information flow is redundant |
 
 ### Corpus
 
@@ -90,7 +108,7 @@ Using `corpus/attention_samples_universal.json`:
 
 ## Results by Model
 
-### Qwen/Qwen2.5-Coder-3B-Instruct (36 layers, 16 heads)
+### Qwen/Qwen2.5-Coder-3B-Instruct (36 layers, 16 heads) — Transformer
 
 #### Layer Scan: Finding Causally Important Layers
 
@@ -179,7 +197,7 @@ Testing contiguous window knockout centered at layer 1:
 
 ---
 
-### Qwen/Qwen2.5-Coder-7B-Instruct (28 layers, 28 heads)
+### Qwen/Qwen2.5-Coder-7B-Instruct (28 layers, 28 heads) — Transformer
 
 #### Layer Scan: Finding Causally Important Layers
 
@@ -247,7 +265,7 @@ Sliding a fixed-size window across all 28 layers to find where the Python-specif
 
 ---
 
-### bigcode/starcoder2-3b (30 layers, 24 heads)
+### bigcode/starcoder2-3b (30 layers, 24 heads) — Transformer
 
 #### Layer Scan: Finding Causally Important Layers
 
@@ -302,7 +320,7 @@ Testing contiguous window knockout centered at layer 0:
 
 ---
 
-### google/codegemma-7b-it (28 layers, 16 heads)
+### google/codegemma-7b-it (28 layers, 16 heads) — Transformer
 
 #### Layer Scan: Finding Causally Important Layers
 
@@ -358,7 +376,104 @@ Testing contiguous window knockout centered at layer 5:
 
 ---
 
-## All-Edge Knockout: Complete Marker Removal
+### RWKV/v6-Finch-1B6-HF (24 layers, 32 heads) — Gated-linear RNN
+
+**Architecture note**: RWKV-6 is the first non-transformer model tested. It uses a gated-linear RNN with recurrent state instead of attention matrices. State knockout is the equivalent of transformer all-edge knockout (see Methodology).
+
+#### Layer Scan: Finding Causally Important Layers (State Knockout)
+
+| Layer | Python KL | Rust KL | Python/Rust Ratio |
+|-------|-----------|---------|-------------------|
+| **2** | **0.336%** | 0.009% | **37×** |
+| **22** | **0.327%** | 0.003% | **102×** |
+| 9 | 0.275% | 0.008% | 33× |
+| 3 | 0.189% | 0.004% | 44× |
+| 5 | 0.146% | 0.013% | 11× |
+
+Top Rust layers:
+
+| Layer | Rust KL | Python KL |
+|-------|---------|-----------|
+| 12 | 0.095% | 0.013% |
+| 7 | 0.060% | 0.099% |
+| 13 | 0.058% | 0.099% |
+
+**Key insight**: Two distinct Python-sensitive regions — early layers (2-3) and a late peak at layer 22. Rust sensitivity is distributed through the middle layers (7, 12-13). Unlike the transformers, no single layer dominates.
+
+#### Full Experiment at Layer 2 (Highest Python Effect)
+
+| Metric | Python Doctest | Rust Test |
+|--------|---------------|-----------|
+| **N samples** | 10 | 10 |
+| **Mean KL** | 0.111% | 0.024% |
+| **Std Dev** | 0.090% | 0.021% |
+| **Min** | 0.040% | 0.001% |
+| **Max** | 0.336% | 0.063% |
+| **Median** | 0.078% | 0.019% |
+
+**Statistical Test (Welch's t-test)**:
+- t-statistic: **2.841**
+- p-value: **0.018**
+- Significant difference: **YES** (first statistically significant result across all models)
+
+**Notable finding**: RWKV-6 is the **only model** where the Python vs Rust difference reaches statistical significance. The Python/Rust mean KL ratio (4.6×) is moderate, but the low variance in both groups drives significance — unlike the transformers where a few high-KL outliers inflate the standard deviation.
+
+#### Per-Sample Results (Layer 2)
+
+**Python Doctest Samples:**
+
+| Sample ID | KL Divergence | Impact Level |
+|-----------|---------------|--------------|
+| py_simple_add | 0.336% | Moderate |
+| py_long_name | 0.213% | Moderate |
+| py_complex_params | 0.128% | Moderate |
+| py_multiple_doctests | 0.093% | Low |
+| py_multi_param | 0.078% | Low |
+| py_list_operations | 0.078% | Low |
+| py_default_args | 0.054% | Low |
+| py_single_char_param | 0.052% | Low |
+| py_string_manipulation | 0.044% | Low |
+| py_nested_structure | 0.040% | Low |
+
+**Rust Test Samples:**
+
+| Sample ID | KL Divergence | Impact Level |
+|-----------|---------------|--------------|
+| rust_option_return | 0.063% | Low |
+| rust_tuple_return | 0.048% | Low |
+| rust_multiple_assertions | 0.047% | Low |
+| rust_cfg_test_module | 0.031% | Low |
+| rust_reference_params | 0.028% | Low |
+| rust_simple_add | 0.009% | Minimal |
+| rust_vec_operations | 0.007% | Minimal |
+| rust_should_panic | 0.005% | Minimal |
+| rust_result_type | 0.003% | Minimal |
+| rust_generic_complex | 0.001% | Minimal |
+
+**Observation**: Unlike the transformer models (especially Qwen-3B, CodeGemma), RWKV-6 shows **no extreme outliers**. All Python KL values fall within one order of magnitude (0.04-0.34%), and all Rust values within two (0.001-0.063%). This low variance is what enables statistical significance despite moderate effect sizes.
+
+#### Window Scan: Cumulative Recurrent State Effects
+
+Testing expanding window knockout centered at layer 2:
+
+| Window | Layers | Python KL | Rust KL | Ratio |
+|--------|--------|-----------|---------|-------|
+| Single | 2 only | 0.336% | 0.009% | 37× |
+| ±1 | 1-3 | 0.698% | 0.015% | 48× |
+| ±2 | 0-4 | 0.742% | 0.015% | 48× |
+| ±3 | 0-5 | 0.833% | 0.019% | 45× |
+| ±4 | 0-6 | 1.281% | 0.010% | 127× |
+| ±5 | 0-7 | 1.930% | 0.026% | 76× |
+
+**Key insight - Cumulative Effect (No Compensation)**: Unlike transformer models (especially Qwen-7B) where expanding the window can **reduce** the effect through layer compensation, RWKV-6 shows the **opposite**: Python KL **grows monotonically** from 0.34% (single layer) to 1.93% (8 layers). This is a direct consequence of the recurrent architecture — each layer's state carries information from all previous positions, so knocking out more layers compounds the information loss. The Python/Rust ratio also increases, peaking at 127× for layers 0-6.
+
+This contrasts sharply with:
+- **Qwen-7B**: Window expansion from layer 2 alone (0.094%) → layers 1-3 (0.025%) = **compensation** (4× decrease)
+- **RWKV-6**: Window expansion from layer 2 alone (0.336%) → layers 0-7 (1.930%) = **accumulation** (6× increase)
+
+---
+
+## All-Edge Knockout: Complete Marker Removal (Transformers)
 
 ### Motivation
 
@@ -434,12 +549,15 @@ This suggests StarCoder2 processes Rust's `#[test]` attribute through attention 
 
 ### Cross-Model All-Edge Knockout Summary
 
-| Model | Peak Python Layer | Peak Python KL | Peak Rust Layer | Peak Rust KL | Pattern |
-|-------|-------------------|----------------|-----------------|--------------|---------|
-| **Qwen-3B** | 0 | **153.7%** | 0 | 0.19% | Extreme Python bias |
-| **Qwen-7B** | 1 | **6.76%** | 0 | 11.8% | Python bias (L1), shared (L0) |
-| **StarCoder2-3B** | 0 | 0.04% | **0** | **2.81%** | **Rust bias** (unique!) |
-| **CodeGemma-7B** | 4 | 1.46% | 15 | 0.78% | Distributed, mixed biases |
+| Model | Architecture | Peak Python Layer | Peak Python KL | Peak Rust Layer | Peak Rust KL | Pattern |
+|-------|-------------|-------------------|----------------|-----------------|--------------|---------|
+| **Qwen-3B** | Transformer | 0 | **153.7%** | 0 | 0.19% | Extreme Python bias |
+| **Qwen-7B** | Transformer | 1 | **6.76%** | 0 | 11.8% | Python bias (L1), shared (L0) |
+| **StarCoder2-3B** | Transformer | 0 | 0.04% | **0** | **2.81%** | **Rust bias** (unique!) |
+| **CodeGemma-7B** | Transformer | 4 | 1.46% | 15 | 0.78% | Distributed, mixed biases |
+| **RWKV-6** | Gated-linear RNN | 2 | 0.336% | 12 | 0.095% | Python bias, distributed |
+
+**Note on RWKV-6**: State knockout is semantically equivalent to all-edge knockout (marker becomes invisible to all future tokens). The RWKV-6 values are from single-layer state knockout; see the RWKV-6 section above for expanding window results up to 1.93% Python KL.
 
 ### Interpretation: Why All-Edge > Specific-Edge (Qwen-7B)
 
@@ -476,23 +594,27 @@ cargo run --release --example ablation_experiment -- \
 
 ## Cross-Model Summary
 
-| Model | Best Layer | Python KL | Rust KL | Ratio | p-value | Significant? |
-|-------|------------|-----------|---------|-------|---------|--------------|
-| Qwen-3B | 1 | 0.71% | 0.82% | 0.87× | 0.908 | **NO** |
-| Qwen-7B | 2 | 0.95% | 0.005% | **189×** | 0.338 | **NO** |
-| StarCoder2-3B | 0 | 0.0002% | 0.0004% | 0.5× | 0.084 | **NO** |
-| CodeGemma-7B | 5 | 0.23% | 0.30% | 0.78× | 0.686 | **NO** |
+| Model | Architecture | Best Layer | Python KL | Rust KL | Ratio | p-value | Significant? |
+|-------|-------------|------------|-----------|---------|-------|---------|--------------|
+| Qwen-3B | Transformer | 1 | 0.71% | 0.82% | 0.87× | 0.908 | **NO** |
+| Qwen-7B | Transformer | 2 | 0.95% | 0.005% | **189×** | 0.338 | **NO** |
+| StarCoder2-3B | Transformer | 0 | 0.0002% | 0.0004% | 0.5× | 0.084 | **NO** |
+| CodeGemma-7B | Transformer | 5 | 0.23% | 0.30% | 0.78× | 0.686 | **NO** |
+| **RWKV-6** | **Gated-linear RNN** | **2** | **0.111%** | **0.024%** | **4.6×** | **0.018** | **YES** |
 
 ### Model Architecture Comparison
 
-| Model | Sensitivity | Language Bias | Pattern |
-|-------|-------------|---------------|---------|
-| Qwen-3B | Medium | None (equal) | Both languages affected equally |
-| Qwen-7B | High (Python) | **Strong Python** | Layer 2 critical for Python only |
-| StarCoder2-3B | **Minimal** | None | Uses redundant pathways |
-| CodeGemma-7B | Medium | None (equal) | Balanced effects |
+| Model | Architecture | Sensitivity | Language Bias | Pattern |
+|-------|-------------|-------------|---------------|---------|
+| Qwen-3B | Transformer | Medium | None (equal) | Both languages affected equally |
+| Qwen-7B | Transformer | High (Python) | **Strong Python** | Layer 2 critical for Python only |
+| StarCoder2-3B | Transformer | **Minimal** | None | Uses redundant pathways |
+| CodeGemma-7B | Transformer | Medium | None (equal) | Balanced effects |
+| RWKV-6 | Gated-linear RNN | Low-Medium | **Python** (p < 0.05) | Consistent Python bias, low variance |
 
-**Key finding**: Despite all models showing p > 0.05 (no statistically significant difference), Qwen-7B reveals a **large practical difference**: knocking out layer 2 causes 189× more disruption to Python than Rust. High variance prevents statistical significance.
+**Key findings**:
+- Despite all 4 transformer models showing p > 0.05 (no statistically significant difference), Qwen-7B reveals a **large practical difference**: knocking out layer 2 causes 189× more disruption to Python than Rust. High variance prevents statistical significance.
+- **RWKV-6 achieves the only statistically significant result** (p = 0.018). The effect size is moderate (4.6× ratio), but the recurrent architecture produces **consistently low variance** across samples — no extreme outliers like transformer models exhibit. This suggests the recurrent state carries marker information more uniformly than attention heads, which can be highly sample-dependent.
 
 ---
 
@@ -500,94 +622,111 @@ cargo run --release --example ablation_experiment -- \
 
 ### The Assembly Line Analogy
 
-Imagine a transformer as a **factory assembly line**:
+Imagine a neural network as a **factory assembly line**:
 
 ```
+TRANSFORMER:
 INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDICTION
                   ↑           ↑                  ↑
               Workers look back at previous parts (attention)
+
+RWKV-6 (RNN):
+INPUT TOKENS → [Layer 0] → [Layer 1] → ... → [Layer N] → OUTPUT PREDICTION
+                  ↓           ↓                  ↓
+              State passed forward through the line (recurrence)
 ```
 
-**Attention Analysis** (RIGOR_EXPERIMENT): We observed that Worker A (Python `>>>`) spends 2.8-4.4× more time looking at Part X (function tokens) than Worker B (Rust `#[test]`) across 4 code-specialized models.
+**Attention Analysis** (RIGOR_EXPERIMENT): We observed that Worker A (Python `>>>`) spends 2.8-4.4× more time looking at Part X (function tokens) than Worker B (Rust `#[test]`) across 4 code-specialized transformer models.
 
-**Ablation Experiment** (this document): We blindfolded both workers and measured if the assembly line still produces the same output.
+**Ablation Experiment** (this document): We blindfolded workers (transformers) or blocked parts from being passed forward (RWKV-6) and measured if the assembly line still produces the same output.
 
-**Finding**: Both assembly lines produce equally similar outputs when workers are blindfolded. The attention *pattern* differs, but the *dependence* on that attention is the same.
+**Transformer finding**: Both assembly lines produce equally similar outputs when workers are blindfolded. The attention *pattern* differs, but the *dependence* on that attention is statistically the same (p > 0.05 for all 4 transformers).
 
-### Why Might This Happen?
+**RWKV-6 finding**: Blocking the Python marker from being passed forward has a **significantly larger** effect than blocking the Rust marker (p = 0.018). The recurrent state carries marker information more uniformly, allowing the difference to reach statistical significance.
 
-1. **Redundancy**: Multiple workers can compensate for one blindfolded worker
-   - Other attention heads pick up the slack
+### Why Might Transformers and RNNs Differ?
+
+1. **Transformer redundancy**: Multiple attention heads can compensate for knocked-out edges
+   - Other heads pick up the slack → high per-sample variance
    - Residual connections bypass attention entirely
    - Information already embedded in hidden states
 
-2. **Distributed Processing**: No single attention edge is critical
-   - Many small contributions sum to the result
-   - Removing one edge doesn't break the system
+2. **RNN consistency**: State flows through a single recurrent pathway per layer
+   - No head-level redundancy → low per-sample variance
+   - State knockout at a position affects all downstream tokens uniformly
+   - Cumulative effect across layers (no compensation)
 
-3. **Layer Specialization**:
-   - Layer 1 (early): "Raw feature extraction" - more critical
-   - Layer 14 (mid): "Semantic refinement" - more optional, more observable
+3. **Layer specialization**:
+   - Transformers: Effect concentrated in 1-2 layers (bottleneck)
+   - RWKV-6: Effect distributed, accumulates with more layers knocked out
 
 ### Implications for the Paper
 
 **Original claim** (attention analysis):
 > "Python doctests show 2.8-4.4× stronger attention to function tokens than Rust tests (p < 0.0002) across 4 code-specialized models"
 
-**Nuanced claim** (after ablation):
-> "Python doctests show 2.8-4.4× stronger attention correlation in code-specialized models, but causal ablation reveals **both languages rely equally** on this attention pathway (p = 0.91). The attention difference reflects how models *organize* information, not what they *require* to function."
+**Nuanced claim** (after ablation across 5 models):
+> "Python doctests show 2.8-4.4× stronger attention correlation in code-specialized transformers, but causal ablation reveals **both languages rely equally** on transformer attention pathways (p > 0.05). However, RWKV-6 state knockout achieves the first statistically significant result (p = 0.018), suggesting the causal asymmetry is real but masked by transformer redundancy."
 
 ### What This Means
 
 | Finding | Implication |
 |---------|-------------|
-| Correlation ≠ Causation | High attention doesn't mean necessary attention |
-| Both languages equally affected | No language-specific causal mechanism at this layer |
-| Early layers more causal | Layer 1 matters more than layer 14 for predictions |
-| High sample variance | Effect is sample-specific, not language-specific |
+| Correlation ≠ Causation (transformers) | High attention doesn't mean necessary attention |
+| Both languages equally affected (transformers) | Transformer redundancy masks causal differences |
+| RWKV-6 significant (p = 0.018) | Causal asymmetry exists but requires non-redundant architecture to detect |
+| Early layers more causal | Layer 2 matters across architectures (Qwen-7B, RWKV-6) |
+| Recurrence reveals signal | Low variance in RNNs enables statistical power that transformers lack |
 
 ---
 
 ## Comparison: Correlation vs Causation
 
-| Analysis | What It Measures | Python | Rust | Ratio | p-value |
-|----------|------------------|--------|------|-------|---------|
-| **Attention Strength** (Qwen-7B, layer 16) | How much marker "looks at" function | 9.08% | 2.59% | **3.51×** | **0.000003** |
-| **Knockout Effect** (Qwen-3B, layer 1) | How much prediction changes when attention removed | 0.71% | 0.82% | **0.87×** | 0.908 |
+| Analysis | Architecture | What It Measures | Python | Rust | Ratio | p-value |
+|----------|-------------|------------------|--------|------|-------|---------|
+| **Attention Strength** (Qwen-7B, L16) | Transformer | How much marker "looks at" function | 9.08% | 2.59% | **3.51×** | **0.000003** |
+| **Knockout Effect** (Qwen-3B, L1) | Transformer | How much prediction changes when attention removed | 0.71% | 0.82% | **0.87×** | 0.908 |
+| **State Knockout** (RWKV-6, L2) | Gated-linear RNN | How much prediction changes when state removed | 0.111% | 0.024% | **4.6×** | **0.018** |
 
-**Key insight**: Strong attention correlation does NOT imply strong causal dependence. This holds across all 4 code-specialized models tested with ablation.
+**Key insight**: Strong attention correlation does NOT imply strong causal dependence in transformers (all 4 models p > 0.05). However, state knockout in RWKV-6 — which is semantically equivalent to all-edge knockout — **does** show significant causal asymmetry (p = 0.018). This suggests the underlying causal difference between Python and Rust marker processing is real, but transformer redundancy prevents it from reaching significance.
 
 ---
 
 ## Limitations
 
-1. **Single-edge knockout**: We only knock out marker→function edges. The model may use other edges for the same information.
+1. **Single-edge knockout (transformers only)**: Transformer experiments knock out marker→function edges. The model may use other edges for the same information. (RWKV-6 state knockout is inherently all-edge.)
 
-2. **Layer-by-layer**: We knock out one layer at a time. Multi-layer knockout might show different results.
+2. **Layer-by-layer**: Primary experiments knock out one layer at a time. Window scans partially address this.
 
-3. **Sample size**: 10 samples per language. More samples would reduce variance.
+3. **Sample size**: 10 samples per language. More samples would reduce variance and likely reveal significance in more models.
 
-4. **Model scale**: Tested on 3B-7B models. Larger models may show different patterns.
+4. **Model scale**: Tested on 1.6B-7B models. Larger models may show different patterns.
 
-5. **Ablation scope**: Ablation experiments were performed on the 4 code-specialized models only (Qwen-3B, Qwen-7B, StarCoder2-3B, CodeGemma-7B). Code-LLaMA-7B and Phi-3-mini — which show no significant attention effect (RIGOR_EXPERIMENT.md) — have not been tested with ablation. Extending ablation to these models would test whether the causal patterns also differ in non-code-specialized models.
+5. **Ablation scope**: Ablation experiments cover 4 code-specialized transformers (Qwen-3B, Qwen-7B, StarCoder2-3B, CodeGemma-7B) and 1 non-code-specialized RNN (RWKV-6). Code-LLaMA-7B and Phi-3-mini — which show no significant attention effect (RIGOR_EXPERIMENT.md) — have not been tested with ablation. Extending ablation to these models would test whether the causal patterns differ in non-code-specialized transformers.
 
 6. **Position granularity**: Character-to-token conversion may miss some edges.
+
+7. **RWKV-6 is not code-specialized**: Unlike the 4 transformer models (all trained on code), RWKV-6 (World model, multilingual) was not specifically trained on code. The significant result may partly reflect the model's weaker code understanding rather than a fundamental architectural difference. Testing a code-specialized RNN (when available) would disambiguate.
 
 ---
 
 ## Future Work
 
-1. ~~**Multi-layer knockout**: Knock out layers 0-5 simultaneously~~ ✅ **DONE** - Window scan implemented
-2. ~~**All-edge knockout**: Remove ALL attention from marker token (not just to functions)~~ ✅ **DONE** - Shows 1878× Python/Rust ratio at layer 1 on Qwen-7B
-3. **Amplification experiment**: Boost attention (the opposite of knockout) to see if preservation improves
-4. **Non-code-specialized models**: Run ablation on Code-LLaMA-7B and Phi-3-mini to test whether the causal independence (both languages equally affected) also holds in models that show no attention correlation effect
-5. **Larger models**: Test on 30B+ models if hardware permits
-6. **Different test patterns**: pytest, unittest, Go tests, etc.
-7. **Head-specific knockout**: Test which attention heads within a layer are most important
+1. ~~**Multi-layer knockout**: Knock out layers 0-5 simultaneously~~ ✅ **DONE** — Window scan implemented
+2. ~~**All-edge knockout**: Remove ALL attention from marker token (not just to functions)~~ ✅ **DONE** — Shows 1878× Python/Rust ratio at layer 1 on Qwen-7B
+3. ~~**Non-transformer model**: Test equivalent ablation on a non-attention architecture~~ ✅ **DONE** — RWKV-6 state knockout achieves first significant result (p = 0.018)
+4. ~~**Amplification experiment**: Boost attention (the opposite of knockout) to see if preservation improves~~ ✅ **DONE** — RWKV-6 state steering generation tested at scales 1-9× with n=30 samples. **Null result**: amplification has no effect on generation output. The marker write is *necessary* (knockout p=0.018) but *not sufficient* (amplification indistinguishable from baseline). See [STEERING_RESULTS.md](STEERING_RESULTS.md) Section 8.
+5. **Non-code-specialized transformers**: Run ablation on Code-LLaMA-7B and Phi-3-mini to test whether the causal independence also holds in models that show no attention correlation effect
+6. **RWKV-6 effective attention** (Phase 5): Compute effective attention matrices for RWKV-6 to enable direct attention analysis (not just knockout)
+7. **Larger models**: Test on 30B+ models if hardware permits
+8. **Different test patterns**: pytest, unittest, Go tests, etc.
+9. **Head-specific knockout**: Test which attention heads within a layer are most important (transformers only)
 
 ---
 
 ## Commands Reference
+
+### Transformer Attention Knockout (`ablation_experiment`)
 
 ```powershell
 # Layer scan (find most causally important layer)
@@ -639,18 +778,53 @@ cargo run --release --example ablation_experiment -- \
     --all-edges
 ```
 
+### RWKV-6 State Knockout (`state_ablation_experiment`)
+
+```powershell
+# Layer scan (all 24 layers)
+cargo run --release --example state_ablation_experiment -- --scan-layers
+
+# Full experiment at specific layer
+cargo run --release --example state_ablation_experiment -- --layer 2 --verbose
+
+# Save results to JSON
+cargo run --release --example state_ablation_experiment -- \
+    --layer 2 \
+    --output outputs/state_ablation_layer2.json
+
+# Window scan (test cumulative effect around a center layer)
+cargo run --release --example state_ablation_experiment -- \
+    --scan-windows \
+    --window-center 2 \
+    --max-radius 5
+
+# Sliding window scan
+cargo run --release --example state_ablation_experiment -- --slide-window 3
+
+# Contiguous layer window knockout
+cargo run --release --example state_ablation_experiment -- \
+    --layer-start 0 \
+    --layer-end 7
+
+# Include baseline samples
+cargo run --release --example state_ablation_experiment -- --layer 2 --include-baselines
+```
+
 ---
 
 ## Files
 
-- `examples/ablation_experiment.rs` - Main experiment script
-- `src/intervention.rs` - Knockout infrastructure (KnockoutSpec, create_knockout_mask)
-- `corpus/attention_samples_universal.json` - Test corpus with character positions
-- `outputs/ablation_layer1_full.json` - Qwen-3B results at layer 1
+- `examples/ablation_experiment.rs` — Transformer attention knockout experiment
+- `examples/state_ablation_experiment.rs` — RWKV-6 state knockout experiment
+- `src/intervention.rs` — Knockout infrastructure (`KnockoutSpec`, `StateKnockoutSpec`, `create_knockout_mask`)
+- `corpus/attention_samples_universal.json` — Test corpus with character positions (shared by both experiments)
+- `outputs/ablation_layer1_full.json` — Qwen-3B results at layer 1
+- `outputs/state_ablation_layer2.json` — RWKV-6 results at layer 2
 
 ---
 
-*Updated: February 9, 2026 (contextual updates for Code-LLaMA and Phi-3 attention findings)*
-*Last ablation experiment run: February 1, 2026 — All-edge knockout layer scan on 4 code-specialized models (Qwen-3B shows 3380× Python/Rust ratio at L1; StarCoder2 shows reversed 74× Rust/Python ratio at L0)*
+*Updated: February 10, 2026 (amplification experiment marked done — null result, see STEERING_RESULTS.md Section 8)*
+*Last transformer ablation run: February 1, 2026 — All-edge knockout layer scan on 4 code-specialized models*
+*Last state knockout run: February 9, 2026 — RWKV-6 layer scan + full experiment at layer 2 (p = 0.018, first significant result)*
 *Note: Ablation experiments have not been extended to Code-LLaMA-7B or Phi-3-mini (added in v1.1.0). See RIGOR_EXPERIMENT.md for their attention analysis results.*
 *For: AIWare 2026 submission*

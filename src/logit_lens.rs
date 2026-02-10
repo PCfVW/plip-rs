@@ -117,12 +117,24 @@ pub fn decode_predictions(
     predictions: &[(u32, f32)],
     tokenizer: &Tokenizer,
 ) -> Vec<TokenPrediction> {
+    decode_predictions_with(predictions, |id| {
+        tokenizer
+            .decode(&[id], false)
+            .unwrap_or_else(|_| format!("<{id}>"))
+    })
+}
+
+/// Decode token IDs to strings using a decode function.
+///
+/// This is the generic version that works with any tokenizer type.
+pub fn decode_predictions_with(
+    predictions: &[(u32, f32)],
+    decode_fn: impl Fn(u32) -> String,
+) -> Vec<TokenPrediction> {
     predictions
         .iter()
         .map(|(token_id, prob)| {
-            let token = tokenizer
-                .decode(&[*token_id], false)
-                .unwrap_or_else(|_| format!("<{token_id}>"));
+            let token = decode_fn(*token_id);
             TokenPrediction {
                 token_id: *token_id,
                 token,

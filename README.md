@@ -4,17 +4,18 @@
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
 [![Rust](https://img.shields.io/badge/Rust-1.92+-DEA584.svg?logo=rust)](https://www.rust-lang.org/)
 [![CUDA](https://img.shields.io/badge/CUDA-13.1-76B900.svg?logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
-[![Models](https://img.shields.io/badge/Models-6-8b5cf6.svg)](README.md#supported-models)
+[![Models](https://img.shields.io/badge/Models-7-8b5cf6.svg)](README.md#supported-models)
 [![Live Demo](https://img.shields.io/badge/Demo-Deloson-06b6d4.svg)](https://PCfVW.github.io/deloson/)
 
-**PLIP** investigates how transformer models internally process test-related syntax, measuring attention patterns from test markers (Python `>>>`, Rust `#[test]`) to function tokens. Supplementary material for AIware 2026, developed as part of the [d-Heap Priority Queue](https://github.com/PCfVW/d-Heap-priority-queue) research project.
+**PLIP** investigates how language models internally process test-related syntax, measuring attention patterns from test markers (Python `>>>`, Rust `#[test]`) to function tokens. Supplementary material for AIware 2026, developed as part of the [d-Heap Priority Queue](https://github.com/PCfVW/d-Heap-priority-queue) research project.
 
-**Key Finding:** Python doctest markers show **2.8-4.4× stronger attention** to function tokens than Rust test attributes, with **p < 0.0002** in 4 of 6 tested architectures. Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed patterns, revealing architecture-dependent attention behavior.
+**Key Finding:** Python doctest markers show **2.8-4.4× stronger attention** to function tokens than Rust test attributes, with **p < 0.0002** in 4 of 6 tested transformer architectures. Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed patterns, revealing architecture-dependent attention behavior. RWKV-6 (gated-linear RNN) extends the analysis beyond transformers with state knockout and effective attention.
 
 ## Table of Contents
 
 - [Quick Start](#quick-start)
 - [Project Structure](#project-structure)
+- [Built With](#built-with)
 - [Hardware Requirements](#hardware-requirements)
 - [Usage](#usage)
 - [Universal Corpus Format](#universal-corpus-format)
@@ -53,7 +54,7 @@ cargo build --release --no-default-features
 cargo run --release --no-default-features --example layer_scan_universal -- --cpu
 ```
 
-> **Note:** CPU mode is intended for CI and compilation checks, not for running experiments. A full layer scan on a 7B model takes minutes on GPU but can take hours on CPU. All examples default to CUDA and require a GPU with sufficient VRAM (see [Hardware Requirements](#hardware-requirements)). CPU mode also requires enough system RAM to hold the model weights (~6 GB for 3B models, ~14 GB for 7B models).
+> **Note:** CPU mode is intended for CI and compilation checks, not for running experiments. A full layer scan on a 7B model takes minutes on GPU but can take hours on CPU. All examples default to CUDA and require a GPU with sufficient VRAM (see [Hardware Requirements](#hardware-requirements)). CPU mode also requires enough system RAM to hold the model weights (~3 GB for RWKV-6-1.6B, ~6 GB for 3B models, ~14 GB for 7B models).
 
 See [COMMANDS.md](COMMANDS.md) for the full list of examples (ablation, steering, generation, debug tools, and more).
 
@@ -70,6 +71,8 @@ plip-rs/
 │   ├── forward_gemma.rs        # Gemma forward pass with activation capture
 │   ├── forward_llama.rs        # LLaMA forward pass with activation capture
 │   ├── forward_phi3.rs         # Phi-3 forward pass with activation capture
+│   ├── forward_rwkv6.rs        # RWKV-6 forward pass (gated-linear RNN, state knockout, state steering generation, effective attention)
+│   ├── tokenizer_rwkv.rs       # RWKV World tokenizer (Trie-based greedy longest-match)
 │   ├── kv_cache.rs             # KV-cache for efficient autoregressive generation
 │   ├── masks.rs                # Shared attention mask utilities (cached)
 │   ├── positioning.rs          # Character → token position conversion
@@ -105,10 +108,26 @@ plip-rs/
 └── README.md
 ```
 
+### Built With
+
+Rust's zero-cost abstractions, ownership model, and direct CUDA interop via candle make it well-suited for mechanistic interpretability work: tensor-level interventions (knockout masks, state steering, attention extraction) compile to the same tight loops as the forward pass itself, with no Python GIL, no garbage-collector pauses, and deterministic memory management — important when measuring small Kullback–Leibler (KL) divergences across thousands of samples.
+
+| Crate | Role |
+|-------|------|
+| [candle-core](https://github.com/huggingface/candle) / candle-nn | Tensor operations, CUDA backend, neural-network primitives |
+| [tokenizers](https://github.com/huggingface/tokenizers) | HuggingFace BPE/Unigram tokenization (transformer models) |
+| [hf-hub](https://github.com/huggingface/hf-hub) | Model and weight downloading from HuggingFace Hub |
+| [safetensors](https://github.com/huggingface/safetensors) | Zero-copy weight loading |
+| [linfa](https://github.com/rust-ml/linfa) / linfa-logistic | Linear probing (logistic regression) |
+| [statrs](https://github.com/statrs-dev/statrs) | Statistical distributions (t-test, p-values) |
+| [clap](https://github.com/clap-rs/clap) | CLI argument parsing for examples |
+| [serde](https://github.com/serde-rs/serde) / serde_json | Corpus and result serialization |
+
 ## Hardware Requirements
 
 | Model | VRAM Required | Tested On |
 |-------|---------------|-----------|
+| RWKV-6-Finch-1B6 | ~3 GB | RTX 5060 Ti (16GB) |
 | StarCoder2-3B | ~6 GB | RTX 5060 Ti (16GB) |
 | Qwen2.5-Coder-3B | ~6 GB | RTX 5060 Ti (16GB) |
 | Phi-3-mini-4k | ~8 GB | RTX 5060 Ti (16GB) |
@@ -117,6 +136,8 @@ plip-rs/
 | CodeGemma-7B | ~14 GB | RTX 5060 Ti (16GB) |
 
 > **Important:** The RTX 5060 Ti comes in 8GB and 16GB variants. The **16GB model is required** — the 7B-parameter models need ~14 GB VRAM for attention extraction, which exceeds the 8GB variant's capacity.
+
+> **System RAM:** When using GPU mode (default), system RAM requirements are minimal — model weights reside entirely on the GPU and the host process only holds tokenizer data, corpus samples, and result vectors. 8 GB of system RAM is sufficient for all experiments, including repeated-sampling runs (e.g., `state_steering_persistence` with n=30 × 12 conditions). CPU mode requires system RAM proportional to model size (see the note under [Usage](#usage)).
 
 ### Continuous Integration
 
@@ -179,7 +200,8 @@ outputs/
 ├── layer_scan_universal_qwen7b.json
 ├── layer_scan_universal_codegemma.json
 ├── layer_scan_universal_codellama.json
-└── layer_scan_universal_phi3.json
+├── layer_scan_universal_phi3.json
+└── layer_scan_universal_RWKV_v6_Finch_1B6_HF.json
 ```
 
 ## Universal Corpus Format
@@ -210,8 +232,8 @@ PLIP-rs uses a **model-agnostic corpus format** with character positions instead
 
 This tool supports the AIware 2026 submission on attention patterns in code LLMs:
 
-1. **Finding**: Python inline doctests (`>>>`) show 2.8-4.4× stronger attention to function tokens than Rust `#[test]` attributes in 4 of 6 architectures (p < 0.0002). Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed patterns.
-2. **Method**: Attention weight extraction at each layer with Welch's t-test for statistical significance across 6 models (5 architectures)
+1. **Finding**: Python inline doctests (`>>>`) show 2.8-4.4× stronger attention to function tokens than Rust `#[test]` attributes in 4 of 6 transformer architectures (p < 0.0002). Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed patterns. RWKV-6 extends the analysis to gated-linear RNNs via state knockout (p = 0.018) and effective attention.
+2. **Method**: Attention weight extraction at each layer with Welch's t-test for statistical significance across 7 models (6 architectures, including 1 non-transformer)
 3. **Implication**: The Python attention advantage is architecture-dependent, suggesting test syntax processing varies with model design choices
 
 See [RIGOR_EXPERIMENT.md](docs/experiments/RIGOR_EXPERIMENT.md) for full methodology and results.
@@ -243,16 +265,21 @@ cat COMMANDS.md
 
 ## Supported Models
 
-| Model | HuggingFace ID | Architecture |
-|-------|----------------|--------------|
-| StarCoder2 3B | `bigcode/starcoder2-3b` | StarCoder2 |
-| Qwen2.5-Coder 3B | `Qwen/Qwen2.5-Coder-3B-Instruct` | Qwen2 |
-| Phi-3-mini-4k | `microsoft/Phi-3-mini-4k-instruct` | Phi3 |
-| Code-LLaMA 7B | `codellama/CodeLlama-7b-hf` | LLaMA |
-| Qwen2.5-Coder 7B | `Qwen/Qwen2.5-Coder-7B-Instruct` | Qwen2 |
-| CodeGemma 7B | `google/codegemma-7b-it` | Gemma |
+| Model | HuggingFace ID | Architecture | Type |
+|-------|----------------|--------------|------|
+| StarCoder2 3B | `bigcode/starcoder2-3b` | StarCoder2 | Transformer |
+| Qwen2.5-Coder 3B | `Qwen/Qwen2.5-Coder-3B-Instruct` | Qwen2 | Transformer |
+| Phi-3-mini-4k | `microsoft/Phi-3-mini-4k-instruct` | Phi3 | Transformer |
+| Code-LLaMA 7B | `codellama/CodeLlama-7b-hf` | LLaMA | Transformer |
+| Qwen2.5-Coder 7B | `Qwen/Qwen2.5-Coder-7B-Instruct` | Qwen2 | Transformer |
+| CodeGemma 7B | `google/codegemma-7b-it` | Gemma | Transformer |
+| RWKV-6-Finch 1.6B | `RWKV/v6-Finch-1B6-HF` | RWKV-6 | Gated-linear RNN |
 
-**Why these models?** Mechanistic interpretability requires access to model internals (attention weights) that proprietary models (Claude, GPT-4) do not expose. Selection was constrained to open-source code LLMs that: (1) fit within 16GB VRAM, (2) are compatible with [candle](https://github.com/huggingface/candle) (Rust ML framework), and (3) demonstrate both Python and Rust code generation capability.
+**5 transformer families + 1 RNN family, 7 models.**
+
+**Why these models?** Mechanistic interpretability requires access to model internals (attention weights, recurrent state) that proprietary models (Claude, GPT-4) do not expose. Selection was constrained to open-source models that: (1) fit within 16GB VRAM, (2) are compatible with [candle](https://github.com/huggingface/candle) (Rust ML framework), and (3) span diverse architectures. RWKV-6 extends coverage beyond transformers to gated-linear RNNs, enabling cross-paradigm comparisons via state knockout and effective attention.
+
+> **Note:** RWKV-6 requires a one-time weight conversion from `pytorch_model.bin` to `model.safetensors` using `scripts/convert_rwkv_to_safetensors.py`, and uses a custom Trie-based tokenizer (`rwkv_vocab_v20230424.txt`) instead of the standard HuggingFace `tokenizer.json`.
 
 ## MI for the Rest of Us
 
@@ -264,7 +291,7 @@ PLIP-rs demonstrates that meaningful mechanistic interpretability research is po
 - **Rust/candle** instead of Python/PyTorch: no garbage collector means deterministic deallocation of tensors, giving precise control over peak VRAM usage.
 - **Model-agnostic corpus format** to avoid redundant preprocessing per model.
 
-The result: statistically significant findings (p < 0.0002) in 4 of 6 models, plus revealing architecture-dependent variation in the remaining 2, on hardware that costs ~$500, not $50,000.
+The result: statistically significant findings (p < 0.0002) in 4 of 6 transformer models, plus revealing architecture-dependent variation in the remaining 2, and the first state knockout results on RWKV-6 (p = 0.018) — all on hardware that costs ~$500, not $50,000.
 
 **Why this matters:**
 - Democratizes MI research beyond well-funded labs

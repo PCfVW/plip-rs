@@ -6,7 +6,7 @@
 
 ---
 
-**MI for the Rest of Us**: This experiment runs entirely on consumer hardware (16GB VRAM). Getting 7B models to run with full attention extraction on this hardware required significant effort: KV cache optimizations throughout the codebase, Rust/candle for fine-grained memory control (Python/PyTorch was too memory-hungry), and careful layer-by-layer processing. The result: statistically robust findings (p < 0.0002 across 4 code-specialized models; see also negative controls) on hardware costing ~$500, not $50,000. We hope this demonstrates that meaningful mechanistic interpretability research is accessible beyond well-funded labs.
+**MI for the Rest of Us**: This experiment runs entirely on consumer hardware (16GB VRAM). Getting 7B models to run with full attention extraction on this hardware required significant effort: KV cache optimizations throughout the codebase, Rust/candle for fine-grained memory control (Python/PyTorch was too memory-hungry), and careful layer-by-layer processing. The result: statistically robust findings (p < 0.0002 across 5 models spanning transformers and a gated-linear RNN; see also negative controls) on hardware costing ~$500, not $50,000. We hope this demonstrates that meaningful mechanistic interpretability research is accessible beyond well-funded labs.
 
 ---
 
@@ -32,7 +32,7 @@
 8. [Decision Point: Feb 6](#decision-point-feb-6)
 9. [Appendix A: Token Position Methodology](#appendix-a-token-position-methodology)
 10. [Appendix B: Experimental Results (Qwen-7B)](#appendix-b-experimental-results-february-1-2026)
-11. [Appendix C: Cross-Model Validation](#appendix-c-cross-model-validation-february-1-2026-updated-february-8-2026)
+11. [Appendix C: Cross-Model Validation](#appendix-c-cross-model-validation-february-1-2026-updated-february-9-2026)
 12. [Appendix D: Perfect Positioning - Model-Agnostic Corpus Format](#appendix-d-perfect-positioning---model-agnostic-corpus-format)
 
 ---
@@ -361,6 +361,7 @@ println!("Marker pos {}: {:?}", sample.marker_token_pos,
 | CodeGemma-7B | ~14GB | Cross-architecture validation | ✅ Done |
 | Code-LLaMA-7B | ~14GB | Negative control (code base, non-instruct) | ✅ Done (v1.1.0) |
 | Phi-3-mini | ~8GB | Negative control (general-purpose instruct) | ✅ Done (v1.1.0) |
+| RWKV-6-Finch-1B6 | ~3.2GB | Non-transformer architecture (gated-linear RNN) | ✅ Done (v1.2.0) |
 
 **Commands:**
 
@@ -388,8 +389,9 @@ cargo run --release --example statistical_attention -- `
 | CodeGemma-7B | 24 | **5.23%** | 1.52% | **1.20%** | 0.55% | **4.35×** | **6.19** | **0.000114** |
 | Code-LLaMA-7B | — | 9.71% | 2.30% | 12.23% | 5.24% | 0.79× | -1.39 | 0.188 |
 | Phi-3-mini | 14 | 17.30% | 4.58% | 14.03% | 5.03% | 1.23× | 1.52 | 0.146 |
+| RWKV-6-Finch-1B6 | 14 | **6.43%** | 1.07% | **2.17%** | 0.45% | **2.96×** | **11.57** | **6.8×10⁻⁸** |
 
-**Note:** The Python > Rust attention effect is highly significant (p < 0.0002) across all 4 **code-specialized** models but does **not replicate** on Code-LLaMA-7B (base, non-instruct) or Phi-3-mini (general-purpose instruct). Code-LLaMA shows a **reversed** pattern (Rust > Python at every layer). See Appendix C for detailed analysis.
+**Note:** The Python > Rust attention effect is highly significant across 5 models: all 4 **code-specialized** transformers (p < 0.0002) and **RWKV-6** (gated-linear RNN, p < 0.0000001). The effect does **not replicate** on Code-LLaMA-7B (base, non-instruct) or Phi-3-mini (general-purpose instruct). Code-LLaMA shows a **reversed** pattern (Rust > Python at every layer). RWKV-6 uses effective attention derived from its WKV recurrence (not traditional attention matrices). See Appendix C for detailed analysis.
 
 **Visualization:**
 
@@ -439,12 +441,15 @@ plt.savefig('outputs/attention_distribution.png', dpi=300)
 | **Feb 7** | Create visualization | 1h | Pending |
 | **Feb 8** | v1.1.0: Code-LLaMA + Phi-3 validation (6 models total) | 1h | ✅ Done |
 | **Feb 8** | Update RIGOR_EXPERIMENT.md with non-replication findings | 1h | ✅ Done |
-| **Feb 8-9** | Write paper section (5.3) | 3h | Pending |
+| **Feb 9** | v1.2.0: RWKV-6 effective attention probing (7 models total) | 1h | ✅ Done |
+| **Feb 9** | Update RIGOR_EXPERIMENT.md with RWKV-6 results | 1h | ✅ Done |
+| **Feb 9** | Write paper section (5.3) | 3h | Pending |
 | **Feb 9** | Review and finalize | 2h | Pending |
 
 **Actual effort Feb 1**: ~7 hours (corpus + code + analysis + token verification + final results)
 **Actual effort Feb 8**: ~2 hours (Code-LLaMA/Phi-3 layer scans + document update)
-**Remaining effort**: ~6 hours (visualization + writing + review)
+**Actual effort Feb 9**: ~2 hours (RWKV-6 effective attention probing + document update)
+**Remaining effort**: ~4 hours (visualization + writing + review)
 
 ---
 
@@ -458,11 +463,11 @@ plt.savefig('outputs/attention_distribution.png', dpi=300)
 
 ### Ideal (Include as Section 5.3)
 
-- ✅ p < 0.05 (statistically significant) → **Achieved: p < 0.0002 for all 4 code-specialized models**
-- ✅ Effect size > 3× (Python attention >> Rust attention) → **Achieved: 2.8-4.4× with universal positioning**
+- ✅ p < 0.05 (statistically significant) → **Achieved: p < 0.0002 for all 4 code-specialized transformers; p < 10⁻⁷ for RWKV-6**
+- ✅ Effect size > 3× (Python attention >> Rust attention) → **Achieved: 2.8-4.4× with universal positioning (transformers); 2.96× for RWKV-6**
 - ✅ Baseline control shows difference is test-specific (Rust baseline: p < 0.0001)
-- ⚠️ Replicates across models → **Partially: 4/6 models replicate; 2 non-code-specialized models do not (see Appendix C)**
-- ✅ Negative controls identify boundary condition → **Code-LLaMA and Phi-3 non-replication narrows the claim to code-specialized models**
+- ⚠️ Replicates across models → **5/7 models replicate (4 code-specialized transformers + 1 general-purpose RNN); 2 do not (see Appendix C)**
+- ✅ Negative controls identify boundary condition → **Code-LLaMA and Phi-3 non-replication; RWKV-6 replication despite being non-code-specialized complicates the "code-specialization is necessary" claim**
 
 ---
 
@@ -477,38 +482,44 @@ plt.savefig('outputs/attention_distribution.png', dpi=300)
 
 To investigate why models preserve Python doctests (100%) more
 reliably than Rust inline tests (0-100% by tier), we analyzed
-attention patterns across 6 models (5 architectures) using 20
-code samples with model-agnostic character-based positioning.
+attention patterns across 7 models (6 architectures, including
+a non-transformer gated-linear RNN) using 20 code samples with
+model-agnostic character-based positioning.
 
 We measured attention weights from test markers (Python `>>>`,
 Rust `#[`) to function signature tokens at each model's optimal
-layer. Across all 4 code-specialized models (Qwen2.5-Coder-7B/3B,
-StarCoder2-3B, CodeGemma-7B), Python doctest markers showed
-2.8-4.4× stronger attention to function tokens than Rust test
-attributes (p < 0.0002 in all cases, n=10 per language per model).
+layer. For RWKV-6 (gated-linear RNN), we computed effective
+attention from the WKV recurrence, producing comparable
+[batch, heads, seq, seq] matrices. Across 5 models — all 4
+code-specialized transformers (Qwen2.5-Coder-7B/3B,
+StarCoder2-3B, CodeGemma-7B) and RWKV-6 (general-purpose
+RNN) — Python doctest markers showed 2.8-4.4× stronger attention
+to function tokens than Rust test attributes (p < 0.0002 in all
+cases; RWKV-6: 2.96×, p < 10⁻⁷; n=10 per language per model).
 
-Critically, this effect did not replicate on two non-code-specialized
-models: Code-LLaMA-7B (code base, non-instruct) showed a reversed
-pattern with Rust > Python attention at every layer (p = 0.188, n.s.),
-and Phi-3-mini (general-purpose instruct) showed no significant
-difference (p = 0.146, n.s.). This establishes that the differential
-attention pattern emerges from code-specialized training, not from
-general language modeling or code exposure alone.
+The effect did not replicate on two transformer models:
+Code-LLaMA-7B (code base, non-instruct) showed a reversed
+pattern with Rust > Python attention at every layer (p = 0.188,
+n.s.), and Phi-3-mini (general-purpose instruct) showed no
+significant difference (p = 0.146, n.s.).
 
-[Figure: Box plot showing attention distributions across 6 models]
+[Figure: Box plot showing attention distributions across 7 models]
 
 Baseline controls (non-test `#[derive]`, `#[cfg]`) showed near-zero
 attention (μ≈0%), confirming the pattern is test-specific for Rust.
 These findings suggest Python's inline test syntax creates tighter
-semantic coupling in code-specialized model representations,
-potentially explaining higher preservation rates.
+semantic coupling in model representations, potentially explaining
+higher preservation rates. The RWKV-6 result — achieving the
+strongest statistical significance (t = 11.57) despite being a
+non-code-specialized model — demonstrates that the effect extends
+beyond transformer attention to recurrent state dynamics.
 
-Limitations: Analysis used medium-scale models (3-7B parameters);
-patterns may differ in 30B+ models. The non-replication on
-Code-LLaMA could reflect lack of instruction tuning rather than
-code specialization per se. Attention patterns reflect correlation,
-not causation; interventional experiments (attention knockout)
-would strengthen causal claims.
+Limitations: Analysis used medium-scale models (1.6-7B parameters);
+patterns may differ in 30B+ models. The RWKV-6 replication despite
+being non-code-specialized complicates the boundary conditions of
+this finding (see Discussion). Attention patterns reflect
+correlation, not causation; interventional experiments (attention
+knockout, state knockout) provide complementary causal evidence.
 ```
 
 ### If Inconclusive (p > 0.05 or weak effect)
@@ -555,24 +566,25 @@ pip install matplotlib numpy scipy
 
 ## Decision Point: Feb 6
 
-### Assessment (Updated Feb 8 — 6 Models)
+### Assessment (Updated Feb 9 — 7 Models)
 
 ✅ **Include mechanistic section - STRONGLY RECOMMENDED (with nuanced claims):**
-- ✅ p < 0.0002 across all 4 **code-specialized** models (highly significant)
-- ✅ Effect size = 2.8-4.4× with universal positioning (clear difference)
-- ✅ Token positions verified with actual tokenizer output per model
-- ✅ Strong t-statistics (6.19-8.88) confirm robust effect for code-specialized models
-- ✅ Cross-model validation complete (6 models: 4 significant, 2 not significant)
+- ✅ p < 0.0002 across all 4 **code-specialized** transformer models (highly significant)
+- ✅ p < 10⁻⁷ for **RWKV-6** gated-linear RNN (strongest significance of all 7 models)
+- ✅ Effect size = 2.8-4.4× with universal positioning for transformers; 2.96× for RWKV-6
+- ✅ Token positions verified with actual tokenizer output per model (including RWKV-6 custom Trie tokenizer)
+- ✅ Strong t-statistics (6.19-11.57) confirm robust effect across 5 models
+- ✅ Cross-model validation complete (7 models: 5 significant, 2 not significant)
 - ⚠️ Python baseline control inconclusive
 - ❌ Code-LLaMA-7B (base model) shows **reversed** pattern (Rust > Python at all layers)
 - ❌ Phi-3-mini (general-purpose instruct) shows no significant difference at any layer
 
 **Original criteria:**
-- p < 0.05 AND effect size > 3× → **Achieved for code-specialized models: p < 0.0002, ratios 2.8-4.4×**
-- Pattern replicates across models → **Partially: 4/6 models replicate; 2 non-code-specialized models do not**
+- p < 0.05 AND effect size > 3× → **Achieved for 5 models: p < 0.0002 (transformers), p < 10⁻⁷ (RWKV-6); ratios 2.78-4.35×**
+- Pattern replicates across models → **5/7 models replicate; 2 do not (Code-LLaMA, Phi-3)**
 - Baseline controls confirm test-specificity → **Rust baseline: ✅ | Python baseline: ⚠️**
 
-**Recommendation:** Proceed with paper section 5.3, but **revise claims** from "architecture-independent" to "code-specialization-dependent." The non-replication on Code-LLaMA (base) and Phi-3 (general-purpose) is itself a valuable finding: it suggests the Python doctest attention effect emerges from **code-specialized training**, not from general language modeling capabilities. This strengthens the mechanistic argument by identifying a necessary condition.
+**Recommendation:** Proceed with paper section 5.3, with **nuanced claims**. The RWKV-6 result (general-purpose RNN showing the effect) complicates the earlier "code-specialization-dependent" narrative. The effect appears to depend on a combination of factors — architecture, training data composition, and training approach — rather than code-specialized training alone. The non-replication on Code-LLaMA (code fine-tune of general model) and Phi-3 (general-purpose instruct) combined with the replication on RWKV-6 (general-purpose World model) and StarCoder2 (code-from-scratch base model) suggests the key factor may be **training data composition and approach** rather than explicit code specialization.
 
 ---
 
@@ -981,7 +993,7 @@ Based on these results, we can claim:
 
 > Python doctest markers (`>>>`) exhibit **2.6× stronger attention weights** to function signature tokens compared to Rust test attributes (`#[test]`) in Qwen2.5-Coder-7B at layer 12 (**t = 8.65**, **p < 0.0001**, n = 10 per language). This suggests Python's inline test syntax creates tighter semantic coupling between tests and tested functions in code-specialized transformer representations.
 
-**Confidence level:** High for code-specialized models. Results are statistically robust with verified token positions across all 35 corpus samples. See Appendix C for cross-model validation (4/6 models replicate; 2 non-code-specialized models do not).
+**Confidence level:** High for code-specialized models. Results are statistically robust with verified token positions across all 35 corpus samples. See Appendix C for cross-model validation (5/7 models replicate; 2 do not — Code-LLaMA base and Phi-3 general instruct).
 
 ### Files Generated
 
@@ -1012,11 +1024,11 @@ The discrepancy was due to:
 
 ---
 
-## Appendix C: Cross-Model Validation (February 1, 2026; updated February 8, 2026)
+## Appendix C: Cross-Model Validation (February 1, 2026; updated February 9, 2026)
 
 ### Executive Summary
 
-Cross-model validation across 6 models reveals the Python > Rust attention effect is **code-specialization-dependent**, not architecture-independent. All 4 code-specialized models (Qwen2.5-Coder-7B/3B, StarCoder2-3B, CodeGemma-7B) show highly significant differences (p < 0.0001). However, 2 non-code-specialized models — Code-LLaMA-7B (code base, non-instruct) and Phi-3-mini (general-purpose instruct) — show **no significant effect** (p > 0.14). Code-LLaMA shows a reversed pattern (Rust > Python at all layers).
+Cross-model validation across 7 models (6 architectures) reveals the Python > Rust attention effect is robust across 5 models but absent in 2. All 4 code-specialized transformers (Qwen2.5-Coder-7B/3B, StarCoder2-3B, CodeGemma-7B) show highly significant differences (p < 0.0001). **RWKV-6** (general-purpose gated-linear RNN) shows the **strongest significance of all 7 models** (t = 11.57, p < 10⁻⁷) using effective attention derived from its WKV recurrence. However, 2 models — Code-LLaMA-7B (code base, non-instruct) and Phi-3-mini (general-purpose instruct) — show **no significant effect** (p > 0.14). Code-LLaMA shows a reversed pattern (Rust > Python at all layers). The RWKV-6 result complicates the earlier "code-specialization-dependent" interpretation, as it is a general-purpose World model that was not trained specifically on code.
 
 ### Models Tested
 
@@ -1028,6 +1040,7 @@ Cross-model validation across 6 models reveals the Python > Rust attention effec
 | google/codegemma-7b-it | Gemma | 7B | 28 | Gemma | Code-specialized instruct |
 | codellama/CodeLlama-7b-hf | LLaMA | 7B | 32 | LLaMA | Code base (non-instruct) |
 | microsoft/Phi-3-mini-4k-instruct | Phi-3 | 3.8B | 32 | Phi-3 | General-purpose instruct |
+| RWKV/v6-Finch-1B6-HF | RWKV-6 | 1.6B | 24 | RWKV World (Trie) | General-purpose (World) |
 
 ### Model Selection Rationale
 
@@ -1044,7 +1057,9 @@ Within open-source models, selection was further constrained by:
 
 3. **Code generation capability**: Models must demonstrate competence in both Python and Rust code generation—the two languages under study. Code-specialized models (Qwen2.5-Coder, StarCoder2, CodeGemma) were prioritized.
 
-**Result**: The 6 selected models represent 5 distinct architectures (Qwen2, StarCoder2, Gemma, LLaMA, Phi-3) and 3 model sizes (3B, 3.8B, 7B). Four models are code-specialized (Qwen2.5-Coder, StarCoder2, CodeGemma), providing cross-architecture validation of the attention findings. Two additional models — Code-LLaMA (code base, non-instruct) and Phi-3 (general-purpose instruct) — serve as **negative controls** to test whether the effect depends on code-specialized training.
+4. **Architectural diversity**: RWKV-6 (gated-linear RNN) was added to test whether attention-based findings extend to non-transformer architectures. RWKV-6 has no attention matrices; effective attention is derived from the WKV recurrence, producing comparable `[batch, heads, seq, seq]` tensors via the formulation in ROADMAP-v1.1-model-expansion.md §9.1.
+
+**Result**: The 7 selected models represent 6 distinct architectures (Qwen2, StarCoder2, Gemma, LLaMA, Phi-3, RWKV-6) and 4 model sizes (1.6B, 3B, 3.8B, 7B). Four models are code-specialized transformers (Qwen2.5-Coder, StarCoder2, CodeGemma), providing cross-architecture validation. Two transformer models — Code-LLaMA (code base, non-instruct) and Phi-3 (general-purpose instruct) — serve as controls. RWKV-6 (general-purpose gated-linear RNN) tests cross-paradigm generalization.
 
 ### Token Position Methodology
 
@@ -1058,10 +1073,11 @@ Each model family uses a different tokenizer with different BPE vocabularies. To
 | CodeGemma-7B | 16% (5/30) | `attention_samples_google_codegemma_7b_it.json` |
 | Code-LLaMA-7B | N/A (universal only) | Universal corpus: 20/20 conversions successful |
 | Phi-3-mini | N/A (universal only) | Universal corpus: 20/20 conversions successful |
+| RWKV-6-Finch-1B6 | N/A (universal only) | Universal corpus: 20/20 conversions successful (0 fuzzy matches) |
 
 ### Cross-Model Results Summary
 
-Results at each model's optimal layer (determined by layer scan). Original positioning used for the first 4 models; Code-LLaMA and Phi-3 use universal positioning only (added in v1.1.0).
+Results at each model's optimal layer (determined by layer scan). Original positioning used for the first 4 models; Code-LLaMA, Phi-3, and RWKV-6 use universal positioning only.
 
 | Model | Specialization | Best Layer | Python μ | Python σ | Rust μ | Rust σ | Ratio | t-stat | p-value | Sig? |
 |-------|---------------|------------|----------|----------|--------|--------|-------|--------|---------|------|
@@ -1071,20 +1087,21 @@ Results at each model's optimal layer (determined by layer scan). Original posit
 | **CodeGemma-7B** | Code instruct | 9 | 2.52% | 0.52% | 1.04% | 0.32% | 2.41× | 7.63 | <0.0001 | *** |
 | **Code-LLaMA-7B** | Code base | — | 9.71% | 2.30% | 12.23% | 5.24% | 0.79× | -1.39 | 0.188 | n.s. |
 | **Phi-3-mini** | General instruct | 14 | 17.30% | 4.58% | 14.03% | 5.03% | 1.23× | 1.52 | 0.146 | n.s. |
+| **RWKV-6-Finch-1B6** | General (World) | 14 | 6.43% | 1.07% | 2.17% | 0.45% | 2.96× | 11.57 | <0.0001 | *** |
 
-**Key:** *** = p < 0.001; n.s. = not significant (p > 0.05). Code-LLaMA "Best Layer" is marked "—" because no layer shows Python > Rust; the row reports layer 26 (lowest p-value). Phi-3 reports its best layer despite non-significance.
+**Key:** *** = p < 0.001; n.s. = not significant (p > 0.05). Code-LLaMA "Best Layer" is marked "—" because no layer shows Python > Rust; the row reports layer 26 (lowest p-value). Phi-3 reports its best layer despite non-significance. RWKV-6 uses effective attention derived from the WKV recurrence (not traditional attention matrices).
 
 ### Hypothesis Validation Across Models
 
-| Hypothesis | Qwen-7B | Qwen-3B | StarCoder2-3B | CodeGemma-7B | Code-LLaMA-7B | Phi-3-mini |
-|------------|---------|---------|---------------|--------------|---------------|------------|
-| **H1**: Python μ > 15% | ❌ FAIL | ❌ FAIL | ❌ FAIL | ❌ FAIL | ❌ FAIL | ✅ PASS (17.3%) |
-| **H2**: Rust μ < 7% | ✅ PASS | ✅ PASS | ✅ PASS | ✅ PASS | ❌ FAIL (12.2%) | ❌ FAIL (14.0%) |
-| **H3**: p < 0.05 | ✅ PASS | ✅ PASS | ✅ PASS | ✅ PASS | ❌ FAIL | ❌ FAIL |
+| Hypothesis | Qwen-7B | Qwen-3B | StarCoder2-3B | CodeGemma-7B | Code-LLaMA-7B | Phi-3-mini | RWKV-6 |
+|------------|---------|---------|---------------|--------------|---------------|------------|--------|
+| **H1**: Python μ > 15% | ❌ FAIL | ❌ FAIL | ❌ FAIL | ❌ FAIL | ❌ FAIL | ✅ PASS (17.3%) | ❌ FAIL (6.4%) |
+| **H2**: Rust μ < 7% | ✅ PASS | ✅ PASS | ✅ PASS | ✅ PASS | ❌ FAIL (12.2%) | ❌ FAIL (14.0%) | ✅ PASS (2.2%) |
+| **H3**: p < 0.05 | ✅ PASS | ✅ PASS | ✅ PASS | ✅ PASS | ❌ FAIL | ❌ FAIL | ✅ PASS (p<10⁻⁷) |
 
-**Key finding:** H3 (statistical significance) validates across all 4 **code-specialized** models but fails on both non-code-specialized models. The Python > Rust effect is robust within code-specialized architectures but is **not architecture-independent** — it depends on code-specialized training. H1's 15% threshold was overly optimistic for code-specialized models (actual: 2.5-6.8%) but is met by Phi-3 (17.3%), which shows high absolute attention values for both languages without differential effect.
+**Key finding:** H3 (statistical significance) validates across 5 models (4 code-specialized transformers + RWKV-6 general-purpose RNN) but fails on 2 models (Code-LLaMA, Phi-3). The RWKV-6 result is notable: despite being a general-purpose World model (not code-specialized), it shows the **strongest statistical significance** of all 7 models (t = 11.57), with focused attention values (Python 6.4%, Rust 2.2%) similar to code-specialized transformers. This challenges the earlier "code-specialization is necessary" conclusion.
 
-**Critical observation:** Code-LLaMA-7B shows the **opposite** pattern (Rust 12.2% > Python 9.7%), suggesting that code-focused base models without instruction tuning may encode different attention relationships between test markers and function tokens.
+**Critical observation:** Code-LLaMA-7B shows the **opposite** pattern (Rust 12.2% > Python 9.7%), suggesting that code fine-tuning of a general model may encode different attention relationships than code-first pretraining or general-purpose training.
 
 ### Layer Scan Details
 
@@ -1148,7 +1165,7 @@ Results at each model's optimal layer (determined by layer scan). Original posit
 | 30 | 11.34% | 13.41% | 0.85× | 0.274 | |
 | 31 | 21.48% | 23.33% | 0.92× | 0.304 | |
 
-**Notable:** Code-LLaMA is a **base model** (not instruction-tuned) trained on code. Unlike all 4 code-specialized models that show clear Python > Rust effects, Code-LLaMA shows **Rust > Python** at every layer. This suggests the attention differential may require instruction tuning or specific code-specialized training to emerge.
+**Notable:** Code-LLaMA is a **base model** (not instruction-tuned) trained on code. Unlike all 4 code-specialized transformers and RWKV-6 that show clear Python > Rust effects, Code-LLaMA shows **Rust > Python** at every layer. Since StarCoder2 (also a base model) shows the effect while Code-LLaMA does not, the distinguishing factor appears to be training approach (code-from-scratch vs fine-tune of a general model) rather than instruction tuning alone.
 
 #### microsoft/Phi-3-mini-4k-instruct (32 layers)
 - Best layer: **14** (~44% depth) — but **not significant** (p = 0.146)
@@ -1166,30 +1183,56 @@ Results at each model's optimal layer (determined by layer scan). Original posit
 | 26 | 19.21% | 19.51% | 0.98× | 0.899 | |
 | 30 | 17.36% | 16.72% | 1.04× | 0.770 | |
 
-**Notable:** Phi-3 is a **general-purpose** instruct model, not code-specialized. Its high absolute attention values (3-4× higher than code-specialized models) suggest it distributes attention differently but without discriminating between Python and Rust test patterns. The lack of differential attention supports the hypothesis that the effect is code-specialization-dependent.
+**Notable:** Phi-3 is a **general-purpose** instruct model, not code-specialized. Its high absolute attention values (3-4× higher than code-specialized models) suggest it distributes attention differently but without discriminating between Python and Rust test patterns. The lack of differential attention supports the hypothesis that the effect is absent in general-purpose **transformers** — though RWKV-6 (general-purpose RNN) does show the effect, suggesting architecture may play a role.
+
+#### RWKV/v6-Finch-1B6-HF (24 layers, 32 heads — Gated-linear RNN)
+- Best layer: **14** (~58% depth)
+- Scanned: layers 0-23 (all layers)
+- **23 of 24 layers show p < 0.05** (only layer 5, p = 0.68, is not significant)
+- Uses **effective attention** derived from WKV recurrence (not traditional attention matrices)
+- Strongest t-statistic of all 7 models (t = 11.57 at layer 14)
+
+| Layer | Python μ | Rust μ | Ratio | p-value | Sig |
+|-------|----------|--------|-------|---------|-----|
+| 0 | 3.45% | 0.96% | 3.59× | 0.00004 | *** |
+| 2 | 3.52% | 1.06% | 3.32× | 0.0004 | *** |
+| 5 | 2.33% | 2.18% | 1.07× | 0.683 | |
+| 9 | 5.90% | 2.72% | 2.17× | 0.00001 | *** |
+| **14** | **6.43%** | **2.17%** | **2.96×** | **<0.0001** | ***** |
+| 16 | 7.20% | 2.87% | 2.51× | 0.00002 | *** |
+| 17 | 4.51% | 1.42% | 3.17× | 0.000005 | *** |
+| 21 | 7.00% | 3.01% | 2.33× | 0.00004 | *** |
+| 23 | 2.34% | 1.11% | 2.11× | 0.0003 | *** |
+
+**Notable:** RWKV-6 is a **general-purpose** World model (multilingual, not code-specialized), yet it shows the Python > Rust effect at nearly every layer — more consistently than any transformer model tested. The absolute attention values (Python 6.4%, Rust 2.2% at best layer) are similar to code-specialized transformers, not to the diffuse attention patterns of Phi-3 (14-17%). This suggests the RWKV-6 architecture — or its training on diverse multilingual data including code — captures the same syntactic coupling patterns that code-specialized transformers learn. The low variance across samples (Python σ = 1.07%, Rust σ = 0.45%) is characteristic of the recurrent architecture's single-pathway state flow, enabling the strongest t-statistic (11.57) of all 7 models.
 
 ### Key Observations
 
-1. **Code-specialized models: universal significance**: All 4 code-specialized models show p < 0.0001 at their optimal layer
+1. **Five models show significant effect**: All 4 code-specialized transformers (p < 0.0001) and RWKV-6 general-purpose RNN (p < 10⁻⁷) show significant Python > Rust attention differences at their optimal layers.
 
-2. **Non-code-specialized models: no effect**: Neither Code-LLaMA-7B (code base) nor Phi-3-mini (general-purpose instruct) shows a significant Python > Rust difference at any layer. Code-LLaMA shows a consistently **reversed** pattern (Rust > Python).
+2. **Two models show no effect**: Code-LLaMA-7B (code base, non-instruct) and Phi-3-mini (general-purpose instruct) show no significant Python > Rust difference at any layer. Code-LLaMA shows a consistently **reversed** pattern (Rust > Python).
 
-3. **Consistent direction within code-specialized models**: Python > Rust in all 4 cases, with ratios ranging from 2.3× to 2.6×
+3. **Consistent direction across significant models**: Python > Rust in all 5 cases. Original positioning: 2.3-2.6× for the 4 code-specialized transformers. Universal/perfect positioning: 2.78-4.35× for the same 4 transformers; 2.96× for RWKV-6 (universal positioning only).
 
-4. **Model size consistency**: Within the Qwen family, both the 7B model (6.64%) and 3B model (6.80%) show similar absolute attention levels, suggesting the effect is consistent across model sizes within code-specialized architectures
+4. **Model size consistency**: Within the Qwen family, both the 7B model (6.64%) and 3B model (6.80%) show similar absolute attention levels. RWKV-6 (1.6B) shows comparable values (6.43%), suggesting the effect is consistent across model sizes.
 
 5. **Architecture differences**:
    - CodeGemma shows lowest absolute attention values but maintains the relative effect
    - StarCoder2 shows remarkable consistency (all layers p < 0.001)
-   - Optimal layer depth varies: CodeGemma early (~32%), Qwen mid (~39-43%), StarCoder2 late (~67%)
+   - **RWKV-6** shows the most consistent effect: 23/24 layers significant (p < 0.05)
+   - Optimal layer depth varies: CodeGemma early (~32%), Qwen mid (~39-43%), RWKV-6 mid-late (~58%), StarCoder2 late (~67%)
    - Code-LLaMA shows no optimal layer (effect reversed at all layers)
    - Phi-3 shows no consistent directional pattern across layers
 
-6. **Absolute attention values reveal training specialization**: Code-specialized models show focused attention (2-10%), while Phi-3 shows diffuse attention (14-21%). Code-LLaMA falls between (8-12%). This suggests code-specialized training teaches models to concentrate attention on specific syntactic relationships.
+6. **Absolute attention values reveal model type**: Models with the effect (transformers + RWKV-6) show focused attention (2-10%), while Phi-3 shows diffuse attention (14-21%). Code-LLaMA falls between (8-12%). RWKV-6's focused attention values (Python 6.4%, Rust 2.2%) are closer to code-specialized transformers than to the diffuse patterns of Phi-3.
 
-7. **Tokenizer impact**: Different tokenizers produce different token counts for the same code. The universal corpus (character-based positioning) eliminates this issue for Code-LLaMA and Phi-3.
+7. **Tokenizer impact**: Different tokenizers produce different token counts for the same code. The universal corpus (character-based positioning) eliminates this issue for Code-LLaMA, Phi-3, and RWKV-6 (which uses a custom Trie tokenizer, not a HuggingFace BPE tokenizer).
 
-8. **Code-specialization is a necessary condition**: The effect requires code-specialized training — neither code fine-tuning of a general model (Code-LLaMA: LLaMA base → code fine-tune) nor general-purpose instruction tuning (Phi-3) is sufficient. Notably, StarCoder2-3B is also a base model (non-instruct) but shows the effect (p < 0.0001), because it was **trained from scratch on code** (The Stack). This suggests the key factor is code-first pretraining, not instruction tuning.
+8. **RWKV-6 challenges "code-specialization is necessary"**: The earlier conclusion that the effect requires code-specialized training was based on 6 models (4 positive, 2 negative). RWKV-6 — a general-purpose World model trained on multilingual data — shows a strong effect (2.96×, p < 10⁻⁷), complicating this narrative. The distinguishing factor is not code-specialization alone. Possible explanations:
+   - **Architecture effect**: The recurrent architecture may amplify syntactic coupling signals that transformers only capture with code-specialized training
+   - **Training data composition**: RWKV-6's World training data likely includes substantial code, even though the model is not marketed as code-specialized
+   - **Low variance**: The single-pathway recurrent state produces lower per-sample variance, enabling statistical significance at lower effect sizes
+   - The 2 models that do NOT show the effect (Code-LLaMA, Phi-3) are both transformers with specific training characteristics (code fine-tune of a general model; general-purpose instruction tuning). StarCoder2 (code-from-scratch base) does show the effect, suggesting training approach matters more than model label.
 
 ### Files Generated
 
@@ -1200,23 +1243,26 @@ Results at each model's optimal layer (determined by layer scan). Original posit
 - `outputs/layer_scan_universal_microsoft_Phi_3_mini_4k_instruct.json` - Phi-3 layer scan results (universal positioning)
 - `outputs/codellama_experiment/plip_results.json` - Code-LLaMA experiment outputs
 - `outputs/phi3_experiment/plip_results.json` - Phi-3 experiment outputs
+- `outputs/layer_scan_universal_RWKV_v6_Finch_1B6_HF.json` - RWKV-6 layer scan results (effective attention, universal positioning)
 - `corpus/attention_samples_bigcode_starcoder2_3b.json` - StarCoder2 corrected positions
 - `corpus/attention_samples_google_codegemma_7b_it.json` - CodeGemma corrected positions
 
-### Publishable Claims (Updated February 8, 2026)
+### Publishable Claims (Updated February 9, 2026)
 
-Based on cross-model validation across 6 models (4 positive, 2 negative), we revise our claims:
+Based on cross-model validation across 7 models (5 positive, 2 negative), we revise our claims:
 
-> The Python doctest attention effect is **code-specialization-dependent**: Python `>>>` markers show 2.3-2.6× stronger attention to function tokens than Rust `#[test]` attributes across all 4 tested code-specialized architectures (Qwen2.5-Coder, StarCoder2, CodeGemma), with p < 0.0001 in all cases (n=10 per language per model). However, the effect **does not replicate** on Code-LLaMA-7B (code base model, reversed pattern with Rust > Python) or Phi-3-mini (general-purpose instruct model, no significant difference). This suggests the tighter semantic coupling of Python inline tests is a property that emerges from **code-specialized training**, not from general language modeling or code exposure alone.
+> Python `>>>` markers show 2.3-3.0× stronger attention to function tokens than Rust `#[test]` attributes across 5 models spanning two architectural paradigms: 4 code-specialized transformers (Qwen2.5-Coder, StarCoder2, CodeGemma) with p < 0.0001, and RWKV-6 (general-purpose gated-linear RNN) with the strongest significance of all models (t = 11.57, p < 10⁻⁷). For RWKV-6, effective attention was derived from the WKV recurrence, demonstrating that the effect extends beyond traditional attention mechanisms. The effect **does not replicate** on Code-LLaMA-7B (code base model, reversed pattern with Rust > Python) or Phi-3-mini (general-purpose instruct, no significant difference). The RWKV-6 result complicates the earlier "code-specialization is necessary" conclusion: the effect may depend on training data composition and approach rather than explicit code specialization.
 
 ### Limitations
 
-1. **Model scale**: Tested on 3B-7B models; patterns may differ in 30B+ models
+1. **Model scale**: Tested on 1.6B-7B models; patterns may differ in 30B+ models
 2. **Token position heuristic**: The `verify_positions --fix` command auto-corrects marker positions accurately, but target positions (function parameters) are adjusted using the same offset—this may introduce minor errors if tokenizers split parameters differently than markers
 3. **Layer selection**: Each model uses its optimal layer; a fixed layer comparison would show different absolute values
-4. **Training data confound**: Code-specialized models (Qwen2.5-Coder, StarCoder2, CodeGemma) may have been trained on corpora with different Python/Rust doctest distributions. The attention differential could reflect training data frequency rather than architectural understanding.
+4. **Training data confound**: Models may have been trained on corpora with different Python/Rust doctest distributions. The attention differential could reflect training data frequency rather than architectural understanding. RWKV-6's training data composition is not fully documented.
 5. **Code-LLaMA vs StarCoder2 (both base models)**: Code-LLaMA-7B and StarCoder2-3B are both base (non-instruct) models, yet StarCoder2 shows the effect (p < 0.0001) while Code-LLaMA does not (p = 0.188, reversed). The key difference is training approach: StarCoder2 was trained from scratch on code (The Stack), while Code-LLaMA is LLaMA fine-tuned on code. This suggests code-first pretraining creates different attention patterns than code fine-tuning of a general model, but could also reflect differences in training data, model size effects, or architecture.
-6. **Small negative control set**: Only 2 non-code-specialized models tested. Additional general-purpose models would strengthen the "code-specialization is necessary" claim.
+6. **RWKV-6 effective attention is an approximation**: RWKV-6's "attention" is derived from the WKV recurrence via a mathematical formulation (ReLU + L1 normalization of signed r*k products). This is not directly comparable to transformer softmax attention. The strong statistical significance may partly reflect properties of the effective attention derivation rather than the underlying information flow.
+7. **Small negative control set**: Only 2 models show no effect (Code-LLaMA, Phi-3). Additional models — particularly general-purpose RNNs or other RWKV variants — would help determine whether the RWKV-6 result generalizes.
+8. **RWKV-6 is not code-specialized but may contain code in training data**: The RWKV-6 World model was trained on multilingual data that likely includes substantial code, even though the model is not marketed as code-specialized. The amount of code in its training data is unknown.
 
 ---
 
@@ -1412,6 +1458,7 @@ Position conversion stats:
 |-------|---------------|------------|----------|--------|-------|--------|---------|------|
 | **Code-LLaMA-7B** | Code base | — | 9.71% | 12.23% | 0.79× | -1.39 | 0.188 | n.s. |
 | **Phi-3-mini** | General instruct | 14 | 17.30% | 14.03% | 1.23× | 1.52 | 0.146 | n.s. |
+| **RWKV-6-Finch-1B6** | General (World) | 14 | 6.43% | 2.17% | 2.96× | 11.57 | 6.8×10⁻⁸ | *** |
 
 **Key Findings:**
 
@@ -1423,32 +1470,35 @@ Position conversion stats:
 
 4. **CodeGemma dramatically improved**: Perfect positioning revealed that CodeGemma's true optimal layer is 24 (not 9), with a 4.35× ratio - the strongest effect across code-specialized models.
 
-5. **Universal corpus validated**: All results obtained with a single corpus file - no model-specific preprocessing required. Code-LLaMA and Phi-3 achieved 100% position conversion success (20/20 samples each).
+5. **Universal corpus validated**: All results obtained with a single corpus file - no model-specific preprocessing required. Code-LLaMA, Phi-3, and RWKV-6 all achieved 100% position conversion success (20/20 samples each), including RWKV-6's custom Trie tokenizer.
 
-6. **Non-code-specialized models confirm negative result**: Even with perfect positioning, Code-LLaMA-7B shows a reversed pattern (Rust > Python, ratio 0.79×) and Phi-3-mini shows no significant effect (ratio 1.23×, p = 0.146). The lack of effect is not due to positioning errors.
+6. **Two models confirm negative result**: Code-LLaMA-7B shows a reversed pattern (Rust > Python, ratio 0.79×) and Phi-3-mini shows no significant effect (ratio 1.23×, p = 0.146). The lack of effect is not due to positioning errors.
+
+7. **RWKV-6 shows strongest significance of all 7 models**: Despite being a general-purpose World model (not code-specialized), RWKV-6 achieves t = 11.57, p = 6.8×10⁻⁸ at layer 14, with a 2.96× Python/Rust ratio. This is the highest t-statistic and lowest p-value across all models tested. The result uses effective attention derived from the WKV recurrence (not traditional attention matrices), demonstrating that the Python > Rust attention asymmetry extends beyond transformer architectures.
 
 ### Hypothesis Validation with Perfect Positioning
 
-| Hypothesis | Criterion | Qwen-7B | Qwen-3B | StarCoder2-3B | CodeGemma-7B | Code-LLaMA-7B | Phi-3-mini |
-|------------|-----------|---------|---------|---------------|--------------|---------------|------------|
-| **H1**: Python μ > 15% | μ > 15% | 9.08% ❌ | 8.47% ❌ | 7.19% ❌ | 5.23% ❌ | 9.71% ❌ | 17.30% ✅ |
-| **H2**: Rust μ < 7% | μ < 7% | 2.59% ✅ | 3.05% ✅ | 2.41% ✅ | 1.20% ✅ | 12.23% ❌ | 14.03% ❌ |
-| **H3**: p < 0.05 | p < 0.05 | p=3×10⁻⁶ ✅ | p=9×10⁻⁶ ✅ | p=4×10⁻⁶ ✅ | p=1×10⁻⁴ ✅ | p=0.188 ❌ | p=0.146 ❌ |
-| **Ratio > 3×** | ratio > 3× | 3.51× ✅ | 2.78× ❌ | 2.98× ❌ | 4.35× ✅ | 0.79× ❌ | 1.23× ❌ |
+| Hypothesis | Criterion | Qwen-7B | Qwen-3B | StarCoder2-3B | CodeGemma-7B | Code-LLaMA-7B | Phi-3-mini | RWKV-6 |
+|------------|-----------|---------|---------|---------------|--------------|---------------|------------|--------|
+| **H1**: Python μ > 15% | μ > 15% | 9.08% ❌ | 8.47% ❌ | 7.19% ❌ | 5.23% ❌ | 9.71% ❌ | 17.30% ✅ | 6.43% ❌ |
+| **H2**: Rust μ < 7% | μ < 7% | 2.59% ✅ | 3.05% ✅ | 2.41% ✅ | 1.20% ✅ | 12.23% ❌ | 14.03% ❌ | 2.17% ✅ |
+| **H3**: p < 0.05 | p < 0.05 | p=3×10⁻⁶ ✅ | p=9×10⁻⁶ ✅ | p=4×10⁻⁶ ✅ | p=1×10⁻⁴ ✅ | p=0.188 ❌ | p=0.146 ❌ | p=7×10⁻⁸ ✅ |
+| **Ratio > 3×** | ratio > 3× | 3.51× ✅ | 2.78× ❌ | 2.98× ❌ | 4.35× ✅ | 0.79× ❌ | 1.23× ❌ | 2.96× ❌ |
 
-**Summary**: For code-specialized models, H1 still fails but values improved 25-108%. H2 and H3 pass across all 4 code-specialized models. The 3× ratio threshold is now met by 2/4 code-specialized models (vs 0/4 originally). For non-code-specialized models, only Phi-3 passes H1 (17.30%) — but this high absolute value comes with no differential effect (H3 fails), indicating diffuse rather than discriminative attention.
+**Summary**: H2 and H3 pass across all 5 models that show the effect (4 code-specialized transformers + RWKV-6 RNN). The 3× ratio threshold is met by 2/5 significant models with perfect positioning (Qwen-7B: 3.51×, CodeGemma: 4.35×); RWKV-6 approaches it (2.96×). For non-significant models, only Phi-3 passes H1 (17.30%) — but this high absolute value comes with no differential effect (H3 fails), indicating diffuse rather than discriminative attention. RWKV-6's absolute values (Python 6.43%, Rust 2.17%) match code-specialized transformers, suggesting focused, discriminative attention despite not being code-specialized.
 
 **Practical Consequences for AIWare Paper:**
 
-1. **Stronger statistical claims for code-specialized models**: All p-values are now < 0.0002 (CodeGemma's 0.000114 is the highest)
-2. **Better effect sizes**: Mean ratio increased from 2.5× to 3.4× across code-specialized models
-3. **Methodological contribution**: The model-agnostic corpus format is a reusable tool for future research
-4. **Revised H1 threshold**: The 15% Python attention hypothesis should be revised to ~10% based on empirical results
-5. **New mechanistic insight**: The non-replication on Code-LLaMA and Phi-3 narrows the claim — the effect is code-specialization-dependent, not architecture-dependent. This is a **stronger, more precise claim** than the original.
+1. **Stronger statistical claims**: All p-values < 0.0002 for code-specialized transformers; RWKV-6 achieves p < 10⁻⁷
+2. **Better effect sizes**: Mean ratio 2.8-4.4× across code-specialized models; RWKV-6 at 2.96×
+3. **Cross-paradigm generalization**: The effect extends from transformer attention to RNN effective attention
+4. **Methodological contribution**: The model-agnostic corpus format is a reusable tool for future research, including non-standard tokenizers (RWKV Trie)
+5. **Revised H1 threshold**: The 15% Python attention hypothesis should be revised to ~10% based on empirical results
+6. **Nuanced mechanistic insight**: The effect is not strictly "code-specialization-dependent" (RWKV-6 shows it without code specialization) but is absent in specific configurations (Code-LLaMA code fine-tune, Phi-3 general instruct). The boundary conditions are more complex than initially theorized.
 
-**Updated Publishable Claims (February 8, 2026):**
+**Updated Publishable Claims (February 9, 2026):**
 
-> Python doctest markers (`>>>`) show **2.8-4.4× stronger attention** to function tokens than Rust test attributes (`#[test]`) across all 4 tested code-specialized architectures (Qwen2.5-Coder, StarCoder2, CodeGemma), with **p < 0.0002** in all cases. Critically, this effect **does not replicate** on Code-LLaMA-7B (code base model: reversed pattern, Rust > Python, p = 0.188) or Phi-3-mini (general-purpose instruct: no significant difference, p = 0.146). This establishes that the differential attention pattern emerges from **code-specialized training**, not from general language modeling or code exposure alone. Using model-agnostic character-based positioning, we achieve **100% corpus compatibility** across all 6 models' tokenizer architectures without preprocessing.
+> Python doctest markers (`>>>`) show **2.8-4.4× stronger attention** to function tokens than Rust test attributes (`#[test]`) across 5 models spanning two architectural paradigms: 4 code-specialized transformers (Qwen2.5-Coder, StarCoder2, CodeGemma) with **p < 0.0002**, and a general-purpose gated-linear RNN (RWKV-6) with **p < 10⁻⁷** (the strongest significance of all 7 models). For RWKV-6, effective attention was derived from the WKV recurrence, producing comparable `[batch, heads, seq, seq]` matrices. The effect **does not replicate** on Code-LLaMA-7B (code base model: reversed pattern, Rust > Python, p = 0.188) or Phi-3-mini (general-purpose instruct: no significant difference, p = 0.146). The boundary conditions of this effect — present in code-specialized transformers and a general-purpose RNN, absent in a code-fine-tuned transformer and a general-purpose transformer — suggest the key factors are training data composition and approach rather than explicit code specialization alone. Using model-agnostic character-based positioning, we achieve **100% corpus compatibility** across all 7 models' tokenizer architectures (including RWKV-6's custom Trie tokenizer) without preprocessing.
 
 **Important Caveat:** This finding applies specifically to **inline doctests** (`>>>`), not Python testing in general. A 2023 survey reports only ~9% of Python developers use doctest, while >50% use pytest. The attention advantage stems from the **inline, co-located nature** of doctests—not from Python itself. Pytest-style tests (separate functions/files) likely would not show this advantage. This suggests the key factor is **test syntax structure** (inline vs separated), not programming language.
 
@@ -1459,6 +1509,7 @@ Position conversion stats:
 *Updated: February 1, 2026 (perfect positioning implemented)*
 *Updated: February 1, 2026 (perfect positioning experiment complete)*
 *Updated: February 8, 2026 (v1.1.0: Code-LLaMA and Phi-3 results added — non-replication finding)*
+*Updated: February 9, 2026 (v1.2.0: RWKV-6 effective attention probing — strongest significance of all 7 models)*
 *For: AIWare 2026 submission deadline February 12*
 *Hardware: RTX 5060 Ti (16GB VRAM)*
-*Models: Qwen2.5-Coder-7B/3B, StarCoder2-3B, CodeGemma-7B, Code-LLaMA-7B, Phi-3-mini-4k-instruct*
+*Models: Qwen2.5-Coder-7B/3B, StarCoder2-3B, CodeGemma-7B, Code-LLaMA-7B, Phi-3-mini-4k-instruct, RWKV-6-Finch-1B6*

@@ -1,0 +1,1004 @@
+{
+  "model": "RWKV/v6-Finch-1B6-HF",
+  "architecture": "rwkv6",
+  "intervention_type": "state_steering",
+  "layer": 14,
+  "dose_response": [
+    {
+      "scale": 0.0,
+      "python_stats": {
+        "language": "python",
+        "n_samples": 10,
+        "mean_kl": 0.00036247767,
+        "std_kl": 0.00021910181,
+        "min_kl": 0.000054718425,
+        "max_kl": 0.0009176462,
+        "median_kl": 0.0003576692
+      },
+      "rust_stats": {
+        "language": "rust",
+        "n_samples": 10,
+        "mean_kl": 0.00017724928,
+        "std_kl": 0.00016577535,
+        "min_kl": 0.000019245797,
+        "max_kl": 0.0005823297,
+        "median_kl": 0.00015148065
+      },
+      "welch_t_statistic": 2.0225184,
+      "welch_p_value": 0.059833646,
+      "significant_difference": false,
+      "sample_results": [
+        {
+          "id": "py_simple_add",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.00034969038,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "py_long_name",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.00041167575,
+          "marker_token_pos": 13
+        },
+        {
+          "id": "py_multi_param",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.0004179581,
+          "marker_token_pos": 19
+        },
+        {
+          "id": "py_complex_params",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.0002490866,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "py_single_char_param",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.00016712981,
+          "marker_token_pos": 8
+        },
+        {
+          "id": "py_multiple_doctests",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.00044528325,
+          "marker_token_pos": 11
+        },
+        {
+          "id": "py_list_operations",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.0002459403,
+          "marker_token_pos": 12
+        },
+        {
+          "id": "py_string_manipulation",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.0009176462,
+          "marker_token_pos": 14
+        },
+        {
+          "id": "py_default_args",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.000054718425,
+          "marker_token_pos": 16
+        },
+        {
+          "id": "py_nested_structure",
+          "language": "python",
+          "scale": 0.0,
+          "kl_divergence": 0.00036564804,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "rust_simple_add",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.00013851673,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "rust_option_return",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.00019862225,
+          "marker_token_pos": 44
+        },
+        {
+          "id": "rust_should_panic",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.00017846118,
+          "marker_token_pos": 38
+        },
+        {
+          "id": "rust_result_type",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.000021134301,
+          "marker_token_pos": 37
+        },
+        {
+          "id": "rust_multiple_assertions",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.00016444457,
+          "marker_token_pos": 39
+        },
+        {
+          "id": "rust_generic_complex",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.00008192975,
+          "marker_token_pos": 57
+        },
+        {
+          "id": "rust_tuple_return",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.000019245797,
+          "marker_token_pos": 56
+        },
+        {
+          "id": "rust_vec_operations",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.0000363853,
+          "marker_token_pos": 42
+        },
+        {
+          "id": "rust_reference_params",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.00035142334,
+          "marker_token_pos": 35
+        },
+        {
+          "id": "rust_cfg_test_module",
+          "language": "rust",
+          "scale": 0.0,
+          "kl_divergence": 0.0005823297,
+          "marker_token_pos": 69
+        }
+      ]
+    },
+    {
+      "scale": 0.5,
+      "python_stats": {
+        "language": "python",
+        "n_samples": 10,
+        "mean_kl": 0.00027688747,
+        "std_kl": 0.00010533936,
+        "min_kl": 0.00018497881,
+        "max_kl": 0.00050426676,
+        "median_kl": 0.00022115646
+      },
+      "rust_stats": {
+        "language": "rust",
+        "n_samples": 10,
+        "mean_kl": 0.0000715397,
+        "std_kl": 0.00003453163,
+        "min_kl": 0.000009590818,
+        "max_kl": 0.00012806048,
+        "median_kl": 0.000068617155
+      },
+      "welch_t_statistic": 5.5572033,
+      "welch_p_value": 0.00017690659,
+      "significant_difference": true,
+      "sample_results": [
+        {
+          "id": "py_simple_add",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00019044137,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "py_long_name",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.0003184707,
+          "marker_token_pos": 13
+        },
+        {
+          "id": "py_multi_param",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00042152838,
+          "marker_token_pos": 19
+        },
+        {
+          "id": "py_complex_params",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00020811551,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "py_single_char_param",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00031319968,
+          "marker_token_pos": 8
+        },
+        {
+          "id": "py_multiple_doctests",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00018497881,
+          "marker_token_pos": 11
+        },
+        {
+          "id": "py_list_operations",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00050426676,
+          "marker_token_pos": 12
+        },
+        {
+          "id": "py_string_manipulation",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00019514849,
+          "marker_token_pos": 14
+        },
+        {
+          "id": "py_default_args",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.00019852736,
+          "marker_token_pos": 16
+        },
+        {
+          "id": "py_nested_structure",
+          "language": "python",
+          "scale": 0.5,
+          "kl_divergence": 0.0002341974,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "rust_simple_add",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.00008036518,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "rust_option_return",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.00012806048,
+          "marker_token_pos": 44
+        },
+        {
+          "id": "rust_should_panic",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.00006477304,
+          "marker_token_pos": 38
+        },
+        {
+          "id": "rust_result_type",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.00007246128,
+          "marker_token_pos": 37
+        },
+        {
+          "id": "rust_multiple_assertions",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.000009590818,
+          "marker_token_pos": 39
+        },
+        {
+          "id": "rust_generic_complex",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.000035438687,
+          "marker_token_pos": 57
+        },
+        {
+          "id": "rust_tuple_return",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.000046759636,
+          "marker_token_pos": 56
+        },
+        {
+          "id": "rust_vec_operations",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.000060898015,
+          "marker_token_pos": 42
+        },
+        {
+          "id": "rust_reference_params",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.00010928494,
+          "marker_token_pos": 35
+        },
+        {
+          "id": "rust_cfg_test_module",
+          "language": "rust",
+          "scale": 0.5,
+          "kl_divergence": 0.00010776488,
+          "marker_token_pos": 69
+        }
+      ]
+    },
+    {
+      "scale": 1.0,
+      "python_stats": {
+        "language": "python",
+        "n_samples": 10,
+        "mean_kl": 0.0,
+        "std_kl": 0.0,
+        "min_kl": 0.0,
+        "max_kl": 0.0,
+        "median_kl": 0.0
+      },
+      "rust_stats": {
+        "language": "rust",
+        "n_samples": 10,
+        "mean_kl": 0.0,
+        "std_kl": 0.0,
+        "min_kl": 0.0,
+        "max_kl": 0.0,
+        "median_kl": 0.0
+      },
+      "welch_t_statistic": 0.0,
+      "welch_p_value": 1.0,
+      "significant_difference": false,
+      "sample_results": [
+        {
+          "id": "py_simple_add",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "py_long_name",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 13
+        },
+        {
+          "id": "py_multi_param",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 19
+        },
+        {
+          "id": "py_complex_params",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "py_single_char_param",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 8
+        },
+        {
+          "id": "py_multiple_doctests",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 11
+        },
+        {
+          "id": "py_list_operations",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 12
+        },
+        {
+          "id": "py_string_manipulation",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 14
+        },
+        {
+          "id": "py_default_args",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 16
+        },
+        {
+          "id": "py_nested_structure",
+          "language": "python",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "rust_simple_add",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "rust_option_return",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 44
+        },
+        {
+          "id": "rust_should_panic",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 38
+        },
+        {
+          "id": "rust_result_type",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 37
+        },
+        {
+          "id": "rust_multiple_assertions",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 39
+        },
+        {
+          "id": "rust_generic_complex",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 57
+        },
+        {
+          "id": "rust_tuple_return",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 56
+        },
+        {
+          "id": "rust_vec_operations",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 42
+        },
+        {
+          "id": "rust_reference_params",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 35
+        },
+        {
+          "id": "rust_cfg_test_module",
+          "language": "rust",
+          "scale": 1.0,
+          "kl_divergence": 0.0,
+          "marker_token_pos": 69
+        }
+      ]
+    },
+    {
+      "scale": 2.0,
+      "python_stats": {
+        "language": "python",
+        "n_samples": 10,
+        "mean_kl": 0.00052605924,
+        "std_kl": 0.0003989568,
+        "min_kl": 0.00012102547,
+        "max_kl": 0.0011950288,
+        "median_kl": 0.00034482294
+      },
+      "rust_stats": {
+        "language": "rust",
+        "n_samples": 10,
+        "mean_kl": 0.00008978692,
+        "std_kl": 0.00007195359,
+        "min_kl": 0.000023932866,
+        "max_kl": 0.000268582,
+        "median_kl": 0.000066551554
+      },
+      "welch_t_statistic": 3.2285104,
+      "welch_p_value": 0.009595513,
+      "significant_difference": true,
+      "sample_results": [
+        {
+          "id": "py_simple_add",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.00012102547,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "py_long_name",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.0011950288,
+          "marker_token_pos": 13
+        },
+        {
+          "id": "py_multi_param",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.00040926153,
+          "marker_token_pos": 19
+        },
+        {
+          "id": "py_complex_params",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.0009601482,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "py_single_char_param",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.00028038438,
+          "marker_token_pos": 8
+        },
+        {
+          "id": "py_multiple_doctests",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.00024814275,
+          "marker_token_pos": 11
+        },
+        {
+          "id": "py_list_operations",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.0011663147,
+          "marker_token_pos": 12
+        },
+        {
+          "id": "py_string_manipulation",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.00050157955,
+          "marker_token_pos": 14
+        },
+        {
+          "id": "py_default_args",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.00022907821,
+          "marker_token_pos": 16
+        },
+        {
+          "id": "py_nested_structure",
+          "language": "python",
+          "scale": 2.0,
+          "kl_divergence": 0.0001496285,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "rust_simple_add",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.000023932866,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "rust_option_return",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.000268582,
+          "marker_token_pos": 44
+        },
+        {
+          "id": "rust_should_panic",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.00008450643,
+          "marker_token_pos": 38
+        },
+        {
+          "id": "rust_result_type",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.000028568484,
+          "marker_token_pos": 37
+        },
+        {
+          "id": "rust_multiple_assertions",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.00014070551,
+          "marker_token_pos": 39
+        },
+        {
+          "id": "rust_generic_complex",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.000048596678,
+          "marker_token_pos": 57
+        },
+        {
+          "id": "rust_tuple_return",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.00009826284,
+          "marker_token_pos": 56
+        },
+        {
+          "id": "rust_vec_operations",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.000047789676,
+          "marker_token_pos": 42
+        },
+        {
+          "id": "rust_reference_params",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.000026927264,
+          "marker_token_pos": 35
+        },
+        {
+          "id": "rust_cfg_test_module",
+          "language": "rust",
+          "scale": 2.0,
+          "kl_divergence": 0.00012999737,
+          "marker_token_pos": 69
+        }
+      ]
+    },
+    {
+      "scale": 5.0,
+      "python_stats": {
+        "language": "python",
+        "n_samples": 10,
+        "mean_kl": 0.002167627,
+        "std_kl": 0.002548829,
+        "min_kl": 0.0002570504,
+        "max_kl": 0.008313245,
+        "median_kl": 0.0010795773
+      },
+      "rust_stats": {
+        "language": "rust",
+        "n_samples": 10,
+        "mean_kl": 0.00038071792,
+        "std_kl": 0.00033690667,
+        "min_kl": 0.00009156566,
+        "max_kl": 0.0012979739,
+        "median_kl": 0.00028615355
+      },
+      "welch_t_statistic": 2.0850756,
+      "welch_p_value": 0.0661726,
+      "significant_difference": false,
+      "sample_results": [
+        {
+          "id": "py_simple_add",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.00109691,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "py_long_name",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.0058889673,
+          "marker_token_pos": 13
+        },
+        {
+          "id": "py_multi_param",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.0010622444,
+          "marker_token_pos": 19
+        },
+        {
+          "id": "py_complex_params",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.0013146165,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "py_single_char_param",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.0015239648,
+          "marker_token_pos": 8
+        },
+        {
+          "id": "py_multiple_doctests",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.00055742636,
+          "marker_token_pos": 11
+        },
+        {
+          "id": "py_list_operations",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.008313245,
+          "marker_token_pos": 12
+        },
+        {
+          "id": "py_string_manipulation",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.0007273545,
+          "marker_token_pos": 14
+        },
+        {
+          "id": "py_default_args",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.0002570504,
+          "marker_token_pos": 16
+        },
+        {
+          "id": "py_nested_structure",
+          "language": "python",
+          "scale": 5.0,
+          "kl_divergence": 0.00093449024,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "rust_simple_add",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00023845019,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "rust_option_return",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00045373267,
+          "marker_token_pos": 44
+        },
+        {
+          "id": "rust_should_panic",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00009156566,
+          "marker_token_pos": 38
+        },
+        {
+          "id": "rust_result_type",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00009451422,
+          "marker_token_pos": 37
+        },
+        {
+          "id": "rust_multiple_assertions",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00026442728,
+          "marker_token_pos": 39
+        },
+        {
+          "id": "rust_generic_complex",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.0003283444,
+          "marker_token_pos": 57
+        },
+        {
+          "id": "rust_tuple_return",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00016445594,
+          "marker_token_pos": 56
+        },
+        {
+          "id": "rust_vec_operations",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00030787982,
+          "marker_token_pos": 42
+        },
+        {
+          "id": "rust_reference_params",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.0012979739,
+          "marker_token_pos": 35
+        },
+        {
+          "id": "rust_cfg_test_module",
+          "language": "rust",
+          "scale": 5.0,
+          "kl_divergence": 0.00056583533,
+          "marker_token_pos": 69
+        }
+      ]
+    },
+    {
+      "scale": 9.0,
+      "python_stats": {
+        "language": "python",
+        "n_samples": 10,
+        "mean_kl": 0.0048125484,
+        "std_kl": 0.0047318726,
+        "min_kl": 0.0013773061,
+        "max_kl": 0.014821377,
+        "median_kl": 0.002614092
+      },
+      "rust_stats": {
+        "language": "rust",
+        "n_samples": 10,
+        "mean_kl": 0.00071320345,
+        "std_kl": 0.00073037867,
+        "min_kl": 0.00013353048,
+        "max_kl": 0.0024259966,
+        "median_kl": 0.000355018
+      },
+      "welch_t_statistic": 2.5685608,
+      "welch_p_value": 0.029385448,
+      "significant_difference": true,
+      "sample_results": [
+        {
+          "id": "py_simple_add",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.002853509,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "py_long_name",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.013508467,
+          "marker_token_pos": 13
+        },
+        {
+          "id": "py_multi_param",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0028483944,
+          "marker_token_pos": 19
+        },
+        {
+          "id": "py_complex_params",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0021465258,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "py_single_char_param",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0040209587,
+          "marker_token_pos": 8
+        },
+        {
+          "id": "py_multiple_doctests",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0023797895,
+          "marker_token_pos": 11
+        },
+        {
+          "id": "py_list_operations",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.014821377,
+          "marker_token_pos": 12
+        },
+        {
+          "id": "py_string_manipulation",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0018875482,
+          "marker_token_pos": 14
+        },
+        {
+          "id": "py_default_args",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0013773061,
+          "marker_token_pos": 16
+        },
+        {
+          "id": "py_nested_structure",
+          "language": "python",
+          "scale": 9.0,
+          "kl_divergence": 0.0022816055,
+          "marker_token_pos": 10
+        },
+        {
+          "id": "rust_simple_add",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.00035989148,
+          "marker_token_pos": 24
+        },
+        {
+          "id": "rust_option_return",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.00035014452,
+          "marker_token_pos": 44
+        },
+        {
+          "id": "rust_should_panic",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.0002580291,
+          "marker_token_pos": 38
+        },
+        {
+          "id": "rust_result_type",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.00013353048,
+          "marker_token_pos": 37
+        },
+        {
+          "id": "rust_multiple_assertions",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.0008890422,
+          "marker_token_pos": 39
+        },
+        {
+          "id": "rust_generic_complex",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.00032986933,
+          "marker_token_pos": 57
+        },
+        {
+          "id": "rust_tuple_return",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.00039307112,
+          "marker_token_pos": 56
+        },
+        {
+          "id": "rust_vec_operations",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.00023449899,
+          "marker_token_pos": 42
+        },
+        {
+          "id": "rust_reference_params",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.0017579605,
+          "marker_token_pos": 35
+        },
+        {
+          "id": "rust_cfg_test_module",
+          "language": "rust",
+          "scale": 9.0,
+          "kl_divergence": 0.0024259966,
+          "marker_token_pos": 69
+        }
+      ]
+    }
+  ]
+}

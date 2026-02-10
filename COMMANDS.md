@@ -2,7 +2,7 @@
 
 **Programming Language Internal Probing**
 
-A Rust library for probing code model internals using linear probes, logit lens, attention analysis, and **attention intervention experiments** (knockout and steering). Designed for AIware 2026 research on test-awareness in language models.
+A Rust library for probing code model internals using linear probes, logit lens, attention analysis, and **intervention experiments** (attention knockout, attention steering, state knockout, state steering). Supports 7 models across 6 architectures (5 transformer + 1 gated-linear RNN). Designed for AIware 2026 research on test-awareness in language models.
 
 ## Table of Contents
 
@@ -33,6 +33,9 @@ A Rust library for probing code model internals using linear probes, logit lens,
   - [steering_calibrate](#steering_calibrate)
   - [steering_experiment](#steering_experiment)
   - [steering_generate](#steering_generate)
+- [RWKV-6 State Intervention Tools](#rwkv-6-state-intervention-tools)
+  - [state_ablation_experiment](#state_ablation_experiment)
+  - [state_steering_experiment](#state_steering_experiment)
 - [Debug Tools](#debug-tools)
   - [debug_config](#debug_config)
   - [debug_weights](#debug_weights)
@@ -90,7 +93,7 @@ plip-rs \
 
 ## Universal Corpus Format (Perfect Positioning)
 
-**NEW in v2.5:** PLIP-rs now supports a **model-agnostic corpus format** that uses character positions (byte offsets) instead of token indices. This eliminates the need for model-specific corpus files and ensures 100% accuracy across all tokenizer architectures.
+PLIP-rs supports a **model-agnostic corpus format** that uses character positions (byte offsets) instead of token indices. This eliminates the need for model-specific corpus files and ensures 100% accuracy across all tokenizer architectures.
 
 ### The Problem with Token Positions
 
@@ -132,7 +135,7 @@ At runtime, PLIP-rs converts character positions to token positions using the mo
 
 ### Validated Results
 
-With perfect positioning, 4 of 6 tested models achieve p < 0.0002. Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed attention patterns:
+With perfect positioning, 4 of 6 tested transformer models achieve p < 0.0002. Two models (Phi-3-mini, Code-LLaMA) show near-symmetric or reversed attention patterns:
 
 | Model | Best Layer | Python μ | Rust μ | Ratio | p-value |
 |-------|------------|----------|--------|-------|---------|
@@ -519,6 +522,7 @@ Lists all cached models with their detected architecture:
 - **Gemma**: Google Gemma/CodeGemma models
 - **LLaMA**: Meta LLaMA/Code-LLaMA models
 - **Phi3**: Microsoft Phi-3 models
+- **RWKV-6**: RWKV/Finch gated-linear RNN models
 - **Unknown**: Other architectures (may not work)
 
 #### Examples
@@ -540,6 +544,7 @@ cargo run --release --example list_models
 │ ✓ google/codegemma-7b-it                       │      Gemma │
 │ ✓ codellama/CodeLlama-7b-hf                    │      LLaMA │
 │ ✓ microsoft/Phi-3-mini-4k-instruct             │       Phi3 │
+│ ✓ RWKV/v6-Finch-1B6-HF                        │     RWKV-6 │
 └────────────────────────────────────────────────┴────────────┘
 ```
 
@@ -1120,7 +1125,7 @@ The steering experiments demonstrate:
 2. **Flat KL divergence**: Model output distributions remain stable regardless of steering intensity
 3. **Safe intervention**: Steering can be applied without catastrophically disrupting model behavior
 
-See [STEERING_RESULTS.md](STEERING_RESULTS.md) for detailed experiment results.
+See [STEERING_RESULTS.md](docs/experiments/STEERING_RESULTS.md) for detailed experiment results.
 
 ---
 
@@ -1185,6 +1190,178 @@ Baseline preservation: 1/3
 Steered preservation:  2/3
 
 ✓ Steering IMPROVED test preservation!
+```
+
+---
+
+## RWKV-6 State Intervention Tools
+
+These tools implement **state-level interventions** for RWKV-6, the gated-linear RNN backend. Unlike transformer attention knockout (which removes edges in the attention matrix), RWKV-6 interventions operate on the recurrent state:
+
+- **State Knockout**: At a target position, suppress the kv^T state write while preserving decay dynamics — equivalent to making the token invisible to all future positions
+- **State Steering**: Scale the kv^T state write at a target position to amplify or diminish its influence on downstream tokens
+
+> **Note:** These tools require the RWKV-6 model (`RWKV/v6-Finch-1B6-HF`). The model weights must first be converted to safetensors format using `scripts/convert_rwkv_to_safetensors.py`.
+
+### state_ablation_experiment
+
+State knockout experiment for RWKV-6: suppresses the state write at marker positions and measures KL divergence against the baseline. Mirrors the `ablation_experiment` tool for transformers.
+
+```bash
+cargo run --release --example state_ablation_experiment [-- OPTIONS]
+```
+
+#### Options
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--model <MODEL>` | `-m` | HuggingFace model ID | `RWKV/v6-Finch-1B6-HF` |
+| `--cpu` | | Use CPU instead of CUDA | false |
+| `--layer <N>` | | Specific layer to test | Auto-select (~60% depth) |
+| `--layer-start <N>` | | Start layer for contiguous window knockout | - |
+| `--layer-end <N>` | | End layer for contiguous window knockout (inclusive) | - |
+| `--scan-layers` | | Test all layers and report per-layer effects | false |
+| `--scan-windows` | | Scan windows of increasing size around best layer | false |
+| `--window-center <N>` | | Center layer for window scan | Target layer |
+| `--max-radius <N>` | | Maximum window radius for window scan | `5` |
+| `--slide-window <N>` | | Slide a fixed-size window across all layers | - |
+| `--corpus <PATH>` | | Path to corpus file | `corpus/attention_samples_universal.json` |
+| `--output <PATH>` | `-o` | Output JSON file for results | none |
+| `--include-baselines` | | Include baseline samples (non-test code) | false |
+| `--verbose` | `-v` | Verbose output | false |
+
+#### Examples
+
+```bash
+# Scan all 24 layers to find most important ones
+cargo run --release --example state_ablation_experiment -- --scan-layers
+
+# Test specific layer
+cargo run --release --example state_ablation_experiment -- --layer 2
+
+# Slide a 3-layer window across the model
+cargo run --release --example state_ablation_experiment -- --slide-window 3
+
+# Scan windows of increasing size around layer 2
+cargo run --release --example state_ablation_experiment -- \
+    --scan-windows --window-center 2 --max-radius 5
+
+# Save results to JSON
+cargo run --release --example state_ablation_experiment -- \
+    --layer 2 \
+    --output outputs/state_ablation_layer2.json \
+    --verbose
+```
+
+---
+
+### state_steering_experiment
+
+State steering experiment for RWKV-6: scales the kv^T state write at marker positions by various factors and measures the effect on output distributions via KL divergence.
+
+```bash
+cargo run --release --example state_steering_experiment [-- OPTIONS]
+```
+
+#### Options
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--model <MODEL>` | `-m` | HuggingFace model ID | `RWKV/v6-Finch-1B6-HF` |
+| `--cpu` | | Use CPU instead of CUDA | false |
+| `--layer <N>` | | Target layer for steering | Auto-select (~60% depth) |
+| `--scales <LIST>` | | Comma-separated scale factors | `0.0,0.5,1.0,2.0,5.0,9.0` |
+| `--corpus <PATH>` | | Path to corpus file | `corpus/attention_samples_universal.json` |
+| `--output <PATH>` | `-o` | Output JSON file for results | none |
+| `--verbose` | `-v` | Verbose output | false |
+
+#### Examples
+
+```bash
+# Default dose-response experiment
+cargo run --release --example state_steering_experiment
+
+# Custom scale factors at specific layer
+cargo run --release --example state_steering_experiment -- \
+    --layer 14 \
+    --scales "0.0,0.25,0.5,1.0,2.0,4.0,8.0"
+
+# Save results
+cargo run --release --example state_steering_experiment -- \
+    --output outputs/state_steering_rwkv6.json \
+    --verbose
+```
+
+---
+
+### state_steering_generate
+
+State steering + generation for RWKV-6: processes the prompt with state steering applied, then generates tokens from the steered state. Compares baseline (scale=1.0) vs steered output for a set of code prompts containing test markers.
+
+```bash
+cargo run --release --example state_steering_generate [-- OPTIONS]
+```
+
+#### Options
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--model <MODEL>` | `-m` | HuggingFace model ID | `RWKV/v6-Finch-1B6-HF` |
+| `--cpu` | | Use CPU instead of CUDA | false |
+| `--layer <N>` | | Target layer for steering | `2` |
+| `--scale <F>` | | Scale factor for state write amplification | `3.0` |
+| `--max-tokens <N>` | | Maximum tokens to generate | `80` |
+| `--temperature <F>` | | Sampling temperature (0 = greedy) | `0.0` |
+
+#### Examples
+
+```bash
+# Default: greedy generation, 5 prompts, scale=3.0, layer 2
+cargo run --release --example state_steering_generate
+
+# Higher scale with sampling
+cargo run --release --example state_steering_generate -- \
+    --scale 9.0 --temperature 0.8
+
+# Different layer
+cargo run --release --example state_steering_generate -- --layer 14
+```
+
+---
+
+### state_steering_persistence
+
+Persistence experiment for RWKV-6 state steering: tests how the marker's influence on generation decays with distance (close/medium/far prompts), across multiple scale factors and temperatures. Supports repeated sampling for statistical analysis.
+
+```bash
+cargo run --release --example state_steering_persistence [-- OPTIONS]
+```
+
+#### Options
+
+| Option | Short | Description | Default |
+|--------|-------|-------------|---------|
+| `--model <MODEL>` | `-m` | HuggingFace model ID | `RWKV/v6-Finch-1B6-HF` |
+| `--cpu` | | Use CPU instead of CUDA | false |
+| `--layer <N>` | | Target layer for steering | `2` |
+| `--max-tokens <N>` | | Maximum tokens to generate | `80` |
+| `--n-samples <N>` | | Samples per condition (for stochastic experiments) | `3` |
+| `--temperature <F>` | | Sampling temperatures (can be specified multiple times) | `0.0, 0.6` |
+| `--rust-only` | | Filter to Rust prompts only | false |
+
+#### Examples
+
+```bash
+# Default: 3 Python + 3 Rust prompts, scales 1/3/5/9, temp 0.0 + 0.6
+cargo run --release --example state_steering_persistence
+
+# Focused experiment: Rust only, n=30, temp=0.8
+cargo run --release --example state_steering_persistence -- \
+    --n-samples 30 --rust-only --temperature 0.8
+
+# Custom temperature sweep
+cargo run --release --example state_steering_persistence -- \
+    --n-samples 10 --temperature 0.6 --temperature 0.8 --temperature 1.0
 ```
 
 ---
@@ -1321,14 +1498,15 @@ CUDA_VISIBLE_DEVICES=1 cargo run --release -- --corpus corpus/samples.json
 
 ## Supported Models
 
-| Model | HuggingFace ID | Architecture | VRAM |
-|-------|----------------|--------------|------|
-| StarCoder2 3B | `bigcode/starcoder2-3b` | StarCoder2 | ~6 GB |
-| Qwen2.5-Coder 3B | `Qwen/Qwen2.5-Coder-3B-Instruct` | Qwen2 | ~6 GB |
-| Phi-3-mini-4k | `microsoft/Phi-3-mini-4k-instruct` | Phi3 | ~8 GB |
-| Code-LLaMA 7B | `codellama/CodeLlama-7b-hf` | LLaMA | ~13 GB |
-| Qwen2.5-Coder 7B | `Qwen/Qwen2.5-Coder-7B-Instruct` | Qwen2 | ~14 GB |
-| CodeGemma 7B | `google/codegemma-7b-it` | Gemma | ~14 GB |
+| Model | HuggingFace ID | Architecture | Type | VRAM |
+|-------|----------------|--------------|------|------|
+| RWKV-6-Finch 1.6B | `RWKV/v6-Finch-1B6-HF` | RWKV-6 | Gated-linear RNN | ~3 GB |
+| StarCoder2 3B | `bigcode/starcoder2-3b` | StarCoder2 | Transformer | ~6 GB |
+| Qwen2.5-Coder 3B | `Qwen/Qwen2.5-Coder-3B-Instruct` | Qwen2 | Transformer | ~6 GB |
+| Phi-3-mini-4k | `microsoft/Phi-3-mini-4k-instruct` | Phi3 | Transformer | ~8 GB |
+| Code-LLaMA 7B | `codellama/CodeLlama-7b-hf` | LLaMA | Transformer | ~13 GB |
+| Qwen2.5-Coder 7B | `Qwen/Qwen2.5-Coder-7B-Instruct` | Qwen2 | Transformer | ~14 GB |
+| CodeGemma 7B | `google/codegemma-7b-it` | Gemma | Transformer | ~14 GB |
 
 ---
 
@@ -1346,6 +1524,6 @@ CUDA_VISIBLE_DEVICES=1 cargo run --release -- --corpus corpus/samples.json
 
 - [README.md](README.md) - Project overview and quick start
 - [corpus/README.md](corpus/README.md) - Corpus format documentation
-- [STEERING_RESULTS.md](STEERING_RESULTS.md) - Detailed steering experiment results
-- [ABLATION_RESULTS.md](ABLATION_RESULTS.md) - Attention knockout experiment results
+- [STEERING_RESULTS.md](docs/experiments/STEERING_RESULTS.md) - Detailed steering experiment results
+- [ABLATION_RESULTS.md](docs/experiments/ABLATION_RESULTS.md) - Attention knockout experiment results
 - [SEGA experiment-runner](https://github.com/PCfVW/d-Heap-priority-queue/tree/master/experiment/experiment-runner) - Related experiment runner (in parent repository)

@@ -5,6 +5,7 @@
 use anyhow::{Context, Result};
 use candle_core::{DType, Device, IndexOp, Tensor};
 use hf_hub::{api::sync::Api, Repo, RepoType};
+use std::collections::HashMap;
 use tokenizers::Tokenizer;
 use tracing::info;
 
@@ -15,12 +16,15 @@ use crate::forward_gemma::PlipGemma;
 use crate::forward_llama::PlipLlama;
 use crate::forward_phi3::PlipPhi3;
 use crate::forward_qwen2::PlipQwen2;
+use crate::forward_rwkv6::PlipRwkv6;
 use crate::intervention::{
-    measure_attention_to_targets, AblationResult, KnockoutSpec, SteeringResult, SteeringSpec,
+    measure_attention_to_targets, AblationResult, KnockoutSpec, StateAblationResult,
+    StateKnockoutSpec, StateSteeringResult, StateSteeringSpec, SteeringResult, SteeringSpec,
 };
 use crate::kv_cache::KVCache;
-use crate::logit_lens::{decode_predictions, LogitLensAnalysis, LogitLensResult};
+use crate::logit_lens::{decode_predictions_with, LogitLensAnalysis, LogitLensResult};
 use crate::positioning::EncodingWithOffsets;
+use crate::tokenizer_rwkv::RwkvTokenizer;
 
 /// Supported model architectures
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -35,6 +39,8 @@ pub enum ModelArchitecture {
     Llama,
     /// Phi-3 (Microsoft)
     Phi3,
+    /// RWKV-6 / Finch (gated-linear RNN)
+    Rwkv6,
 }
 
 impl ModelArchitecture {
@@ -51,6 +57,8 @@ impl ModelArchitecture {
             ModelArchitecture::Llama
         } else if model_lower.contains("phi") {
             ModelArchitecture::Phi3
+        } else if model_lower.contains("rwkv") || model_lower.contains("finch") {
+            ModelArchitecture::Rwkv6
         } else {
             // Default to Qwen2 for unknown models (more likely to work)
             info!(
@@ -128,8 +136,108 @@ pub trait PlipBackend {
         anyhow::bail!("Prompt steering not supported for this architecture")
     }
 
+    fn forward_with_state_knockout(
+        &self,
+        _input_ids: &Tensor,
+        _spec: &StateKnockoutSpec,
+    ) -> Result<Tensor> {
+        anyhow::bail!("State knockout not supported for this architecture")
+    }
+
+    fn forward_with_state_steering(
+        &self,
+        _input_ids: &Tensor,
+        _spec: &StateSteeringSpec,
+    ) -> Result<Tensor> {
+        anyhow::bail!("State steering not supported for this architecture")
+    }
+
+    fn generate_with_state_steering(
+        &self,
+        _prompt_ids: &[u32],
+        _max_tokens: usize,
+        _temperature: f32,
+        _stop_tokens: &[u32],
+        _spec: &StateSteeringSpec,
+        _device: &Device,
+    ) -> Result<Vec<u32>> {
+        anyhow::bail!("State steering generation not supported for this architecture")
+    }
+
     fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
         None
+    }
+}
+
+/// Tokenizer abstraction supporting both HuggingFace tokenizers and RWKV's trie tokenizer.
+pub enum PlipTokenizer {
+    /// Standard HuggingFace tokenizer (BPE, Unigram, etc.)
+    HuggingFace(Box<Tokenizer>),
+    /// RWKV World tokenizer (trie-based greedy longest-match)
+    Rwkv(RwkvTokenizer),
+}
+
+impl PlipTokenizer {
+    /// Encode text into token IDs.
+    pub fn encode(&self, text: &str) -> Result<Vec<u32>> {
+        match self {
+            Self::HuggingFace(t) => {
+                let encoding = t
+                    .encode(text, false)
+                    .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
+                Ok(encoding.get_ids().to_vec())
+            }
+            Self::Rwkv(t) => t.encode(text),
+        }
+    }
+
+    /// Encode text and return token IDs with character offsets.
+    ///
+    /// For HuggingFace tokenizers, offsets are character-based.
+    /// For RWKV tokenizers, offsets are byte-based (characters = bytes for ASCII).
+    #[allow(clippy::type_complexity)]
+    pub fn encode_with_offsets(&self, text: &str) -> Result<(Vec<u32>, Vec<(usize, usize)>)> {
+        match self {
+            Self::HuggingFace(t) => {
+                let encoding = t
+                    .encode(text, false)
+                    .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
+                let ids = encoding.get_ids().to_vec();
+                let offsets = encoding.get_offsets().to_vec();
+                Ok((ids, offsets))
+            }
+            Self::Rwkv(t) => t.encode_with_offsets(text),
+        }
+    }
+
+    /// Decode token IDs back to text.
+    pub fn decode(&self, ids: &[u32], skip_special_tokens: bool) -> Result<String> {
+        match self {
+            Self::HuggingFace(t) => t
+                .decode(ids, skip_special_tokens)
+                .map_err(|e| anyhow::anyhow!("Decode error: {e}")),
+            Self::Rwkv(t) => t.decode(ids),
+        }
+    }
+
+    /// Decode a single token ID to its string representation.
+    pub fn decode_token(&self, token_id: u32) -> String {
+        match self {
+            Self::HuggingFace(t) => t
+                .decode(&[token_id], false)
+                .unwrap_or_else(|_| format!("<{token_id}>")),
+            Self::Rwkv(t) => t
+                .decode(&[token_id])
+                .unwrap_or_else(|_| format!("<{token_id}>")),
+        }
+    }
+
+    /// Get vocabulary mapping for special token lookups.
+    pub fn get_vocab(&self) -> HashMap<String, u32> {
+        match self {
+            Self::HuggingFace(t) => t.get_vocab(true),
+            Self::Rwkv(t) => t.get_vocab(),
+        }
     }
 }
 
@@ -138,7 +246,7 @@ pub trait PlipBackend {
 /// Supports multiple model architectures with a unified interface.
 pub struct PlipModel {
     model: Box<dyn PlipBackend>,
-    tokenizer: Tokenizer,
+    tokenizer: PlipTokenizer,
     device: Device,
     architecture: ModelArchitecture,
     model_id: String,
@@ -189,14 +297,24 @@ impl PlipModel {
         info!("Device: {:?}", device);
         info!("Dtype: {:?}", dtype);
 
-        // Load tokenizer from HuggingFace
         let api = Api::new()?;
         let repo = api.repo(Repo::new(model_id.to_string(), RepoType::Model));
-        let tokenizer_path = repo
-            .get("tokenizer.json")
-            .context("Failed to download tokenizer.json")?;
-        let tokenizer = Tokenizer::from_file(&tokenizer_path)
-            .map_err(|e| anyhow::anyhow!("Tokenizer error: {e}"))?;
+
+        // Load tokenizer — RWKV uses a custom trie tokenizer, others use HuggingFace tokenizer.json
+        let tokenizer = if architecture == ModelArchitecture::Rwkv6 {
+            let vocab_path = repo
+                .get("rwkv_vocab_v20230424.txt")
+                .context("Failed to download RWKV vocabulary file")?;
+            let rwkv_tok = RwkvTokenizer::from_file(&vocab_path)?;
+            PlipTokenizer::Rwkv(rwkv_tok)
+        } else {
+            let tokenizer_path = repo
+                .get("tokenizer.json")
+                .context("Failed to download tokenizer.json")?;
+            let hf_tok = Tokenizer::from_file(&tokenizer_path)
+                .map_err(|e| anyhow::anyhow!("Tokenizer error: {e}"))?;
+            PlipTokenizer::HuggingFace(Box::new(hf_tok))
+        };
 
         // Load model based on architecture
         let model: Box<dyn PlipBackend> = match architecture {
@@ -207,6 +325,7 @@ impl PlipModel {
             ModelArchitecture::Gemma => Box::new(PlipGemma::load(model_id, &device, dtype)?),
             ModelArchitecture::Llama => Box::new(PlipLlama::load(model_id, &device, dtype)?),
             ModelArchitecture::Phi3 => Box::new(PlipPhi3::load(model_id, &device, dtype)?),
+            ModelArchitecture::Rwkv6 => Box::new(PlipRwkv6::load(model_id, &device, dtype)?),
         };
 
         Ok(Self {
@@ -263,25 +382,25 @@ impl PlipModel {
     ///
     /// Returns the appropriate end-of-sequence token for generation stopping.
     pub fn eos_token_id(&self) -> Option<u32> {
+        // RWKV uses token 0 as EOS (from config: eos_token_id = 0)
+        if self.architecture == ModelArchitecture::Rwkv6 {
+            return Some(0);
+        }
+
         // Try to get from tokenizer's special tokens
-        self.tokenizer
-            .get_vocab(true)
+        let vocab = self.tokenizer.get_vocab();
+        vocab
             .get("<|im_end|>")
             .copied()
-            .or_else(|| self.tokenizer.get_vocab(true).get("<|endoftext|>").copied())
-            .or_else(|| self.tokenizer.get_vocab(true).get("</s>").copied())
-            .or_else(|| self.tokenizer.get_vocab(true).get("<end_of_turn>").copied())
+            .or_else(|| vocab.get("<|endoftext|>").copied())
+            .or_else(|| vocab.get("</s>").copied())
+            .or_else(|| vocab.get("<end_of_turn>").copied())
     }
 
     /// Get activations for a text input
     pub fn get_activations(&self, text: &str) -> Result<ActivationCache> {
         // Tokenize
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
         // Forward pass with cache
@@ -324,7 +443,8 @@ impl PlipModel {
         for layer in 0..cache.n_layers() {
             if let Some(activation) = cache.get_layer(layer) {
                 let predictions = self.model.logit_lens_top_k(activation, top_k)?;
-                let decoded = decode_predictions(&predictions, &self.tokenizer);
+                let decoded =
+                    decode_predictions_with(&predictions, |id| self.tokenizer.decode_token(id));
 
                 analysis.push(LogitLensResult {
                     layer,
@@ -343,7 +463,7 @@ impl PlipModel {
         top_k: usize,
     ) -> Result<Vec<(String, f32)>> {
         let predictions = self.model.logit_lens_top_k(activation, top_k)?;
-        let decoded = decode_predictions(&predictions, &self.tokenizer);
+        let decoded = decode_predictions_with(&predictions, |id| self.tokenizer.decode_token(id));
         Ok(decoded
             .into_iter()
             .map(|p| (p.token, p.probability))
@@ -352,23 +472,13 @@ impl PlipModel {
 
     /// Decode a token ID to string
     pub fn decode_token(&self, token_id: u32) -> String {
-        self.tokenizer
-            .decode(&[token_id], false)
-            .unwrap_or_else(|_| format!("<{token_id}>"))
+        self.tokenizer.decode_token(token_id)
     }
 
     /// Tokenize text and return token strings
     pub fn tokenize(&self, text: &str) -> Result<Vec<String>> {
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        Ok(encoding
-            .get_ids()
-            .iter()
-            .map(|&id| self.decode_token(id))
-            .collect())
+        let ids = self.tokenizer.encode(text)?;
+        Ok(ids.iter().map(|&id| self.decode_token(id)).collect())
     }
 
     /// Tokenize text and return tokens with character offsets
@@ -385,15 +495,8 @@ impl PlipModel {
     /// let token_idx = encoding.char_to_token(8);
     /// ```
     pub fn tokenize_with_offsets(&self, text: &str) -> Result<EncodingWithOffsets> {
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let ids = encoding.get_ids().to_vec();
+        let (ids, offsets) = self.tokenizer.encode_with_offsets(text)?;
         let tokens: Vec<String> = ids.iter().map(|&id| self.decode_token(id)).collect();
-        let offsets = encoding.get_offsets().to_vec();
-
         Ok(EncodingWithOffsets::new(ids, tokens, offsets))
     }
 
@@ -425,12 +528,7 @@ impl PlipModel {
     /// Get attention patterns for a text input
     pub fn get_attention(&self, text: &str) -> Result<AttentionCache> {
         // Tokenize
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
         // Forward pass with attention capture
@@ -445,12 +543,7 @@ impl PlipModel {
     /// the output logits and the attention patterns.
     pub fn forward(&self, text: &str) -> Result<(Tensor, AttentionCache)> {
         // Tokenize
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
         // Forward pass with attention capture
@@ -501,12 +594,7 @@ impl PlipModel {
         spec: &KnockoutSpec,
     ) -> Result<AblationResult> {
         // Tokenize
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let seq_len = input_ids.len();
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
@@ -538,12 +626,7 @@ impl PlipModel {
         text: &str,
         spec: &KnockoutSpec,
     ) -> Result<(Tensor, AttentionCache)> {
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let seq_len = input_ids.len();
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
@@ -553,6 +636,153 @@ impl PlipModel {
         let logits = self.compute_logits(&output)?;
 
         Ok((logits, attn_cache))
+    }
+
+    /// Forward pass with RWKV-6 state knockout intervention
+    ///
+    /// Runs both baseline and knocked-out forward passes, returning
+    /// a `StateAblationResult` for comparison.
+    ///
+    /// State knockout suppresses the recurrent state write at specified
+    /// token positions, making those positions invisible to future tokens
+    /// while preserving the decay dynamics.
+    pub fn forward_with_state_knockout(
+        &self,
+        text: &str,
+        spec: &StateKnockoutSpec,
+    ) -> Result<StateAblationResult> {
+        let input_ids = self.tokenizer.encode(text)?;
+        let seq_len = input_ids.len();
+        let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
+
+        // Validate spec
+        spec.validate(self.n_layers(), seq_len)?;
+
+        // Run baseline (no intervention)
+        // Use forward_with_cache (returns 3D hidden states) rather than
+        // forward_with_kv_cache (which returns 2D logits for RWKV-6)
+        let (baseline_output, _) = self.model.forward_with_cache(&input_tensor)?;
+        let baseline_logits = self.compute_logits(&baseline_output)?;
+
+        // Run with state knockout
+        let ablated_output = self
+            .model
+            .forward_with_state_knockout(&input_tensor, spec)?;
+        let ablated_logits = self.compute_logits(&ablated_output)?;
+
+        Ok(StateAblationResult::new(
+            baseline_logits,
+            ablated_logits,
+            spec.clone(),
+        ))
+    }
+
+    /// Forward pass with RWKV-6 state steering intervention
+    ///
+    /// Runs both baseline and steered forward passes, returning
+    /// a `StateSteeringResult` for comparison. State steering scales
+    /// the kv write at specified positions instead of suppressing it.
+    pub fn forward_with_state_steering(
+        &self,
+        text: &str,
+        spec: &StateSteeringSpec,
+    ) -> Result<StateSteeringResult> {
+        let input_ids = self.tokenizer.encode(text)?;
+        let seq_len = input_ids.len();
+        let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
+
+        // Validate spec
+        spec.validate(self.n_layers(), seq_len)?;
+
+        // Run baseline (no intervention)
+        // Use forward_with_cache (returns 3D hidden states) rather than
+        // forward_with_kv_cache (which returns 2D logits for RWKV-6)
+        let (baseline_output, _) = self.model.forward_with_cache(&input_tensor)?;
+        let baseline_logits = self.compute_logits(&baseline_output)?;
+
+        // Run with state steering
+        let steered_output = self
+            .model
+            .forward_with_state_steering(&input_tensor, spec)?;
+        let steered_logits = self.compute_logits(&steered_output)?;
+
+        Ok(StateSteeringResult::new(
+            baseline_logits,
+            steered_logits,
+            spec.clone(),
+        ))
+    }
+
+    /// Generate text with RWKV-6 state steering during prompt prefill
+    ///
+    /// The prompt is processed with state steering applied (scaling the kv^T
+    /// state write at specified positions). The steered recurrent state then
+    /// propagates naturally to all generated tokens — no re-steering needed
+    /// during generation.
+    pub fn generate_with_state_steering(
+        &self,
+        prompt: &str,
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &StateSteeringSpec,
+    ) -> Result<String> {
+        let prompt_ids = self.tokenizer.encode(prompt)?;
+
+        // Validate spec against model and prompt
+        spec.validate(self.n_layers(), prompt_ids.len())?;
+
+        let tokens = self.model.generate_with_state_steering(
+            &prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            spec,
+            &self.device,
+        )?;
+
+        self.tokenizer.decode(&tokens, true)
+    }
+
+    /// Generate with state steering, returning detailed token information
+    ///
+    /// Like `generate_with_state_steering` but returns a `GenerationResult`
+    /// with prompt tokens, generated tokens, and decoded text.
+    pub fn generate_with_state_steering_details(
+        &self,
+        prompt: &str,
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &StateSteeringSpec,
+    ) -> Result<GenerationResult> {
+        let prompt_ids = self.tokenizer.encode(prompt)?;
+        let prompt_len = prompt_ids.len();
+
+        // Validate spec against model and prompt
+        spec.validate(self.n_layers(), prompt_len)?;
+
+        let tokens = self.model.generate_with_state_steering(
+            &prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            spec,
+            &self.device,
+        )?;
+
+        let generated_tokens = tokens[prompt_len..].to_vec();
+        let full_text = self.tokenizer.decode(&tokens, true)?;
+        let generated_text = self.tokenizer.decode(&generated_tokens, true)?;
+
+        Ok(GenerationResult {
+            prompt: prompt.to_string(),
+            full_text,
+            generated_text,
+            prompt_tokens: tokens[..prompt_len].to_vec(),
+            generated_tokens,
+            total_tokens: tokens.len(),
+        })
     }
 
     /// Forward pass with attention steering intervention
@@ -582,12 +812,7 @@ impl PlipModel {
     /// println!("KL divergence: {}", result.kl_divergence()?);
     /// ```
     pub fn forward_with_steering(&self, text: &str, spec: &SteeringSpec) -> Result<SteeringResult> {
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let seq_len = input_ids.len();
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
@@ -619,12 +844,7 @@ impl PlipModel {
         text: &str,
         spec: &SteeringSpec,
     ) -> Result<(Tensor, AttentionCache)> {
-        let encoding = self
-            .tokenizer
-            .encode(text, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let input_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let input_ids = self.tokenizer.encode(text)?;
         let seq_len = input_ids.len();
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
 
@@ -817,12 +1037,7 @@ impl PlipModel {
         steering: Option<&SteeringSpec>,
     ) -> Result<String> {
         // Tokenize prompt
-        let encoding = self
-            .tokenizer
-            .encode(prompt, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let prompt_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let prompt_ids = self.tokenizer.encode(prompt)?;
 
         // Use backend-specific KV-cache generation when no steering is applied
         // (Steering requires full context processing at each step for proper attention modification)
@@ -836,10 +1051,7 @@ impl PlipModel {
                 &self.device,
             )?;
 
-            let output = self
-                .tokenizer
-                .decode(&tokens, true)
-                .map_err(|e| anyhow::anyhow!("Decode error: {e}"))?;
+            let output = self.tokenizer.decode(&tokens, true)?;
 
             return Ok(output);
         }
@@ -871,10 +1083,7 @@ impl PlipModel {
             )?
         };
 
-        let output = self
-            .tokenizer
-            .decode(&tokens, true)
-            .map_err(|e| anyhow::anyhow!("Decode error: {e}"))?;
+        let output = self.tokenizer.decode(&tokens, true)?;
 
         Ok(output)
     }
@@ -930,12 +1139,7 @@ impl PlipModel {
         stop_tokens: &[u32],
         steering: Option<&SteeringSpec>,
     ) -> Result<GenerationResult> {
-        let encoding = self
-            .tokenizer
-            .encode(prompt, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let prompt_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let prompt_ids = self.tokenizer.encode(prompt)?;
         let prompt_len = prompt_ids.len();
 
         // Generate tokens
@@ -959,15 +1163,9 @@ impl PlipModel {
 
         let generated_tokens = tokens[prompt_len..].to_vec();
 
-        let full_text = self
-            .tokenizer
-            .decode(&tokens, true)
-            .map_err(|e| anyhow::anyhow!("Decode error: {e}"))?;
+        let full_text = self.tokenizer.decode(&tokens, true)?;
 
-        let generated_text = self
-            .tokenizer
-            .decode(&generated_tokens, true)
-            .map_err(|e| anyhow::anyhow!("Decode error: {e}"))?;
+        let generated_text = self.tokenizer.decode(&generated_tokens, true)?;
 
         Ok(GenerationResult {
             prompt: prompt.to_string(),
@@ -1021,12 +1219,7 @@ impl PlipModel {
         let max_bytes = max_kv_cache_mb * 1024 * 1024;
 
         // Tokenize prompt
-        let encoding = self
-            .tokenizer
-            .encode(prompt, false)
-            .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
-
-        let prompt_ids: Vec<u32> = encoding.get_ids().to_vec();
+        let prompt_ids = self.tokenizer.encode(prompt)?;
 
         // Use KV-cache generation with memory enforcement via trait
         let tokens = self.generate_with_memory_limit_impl(
@@ -1038,10 +1231,7 @@ impl PlipModel {
             max_bytes,
         )?;
 
-        let output = self
-            .tokenizer
-            .decode(&tokens, true)
-            .map_err(|e| anyhow::anyhow!("Decode error: {e}"))?;
+        let output = self.tokenizer.decode(&tokens, true)?;
 
         Ok(output)
     }
@@ -1111,7 +1301,7 @@ impl PlipModel {
 }
 
 /// Sample a token from logits
-fn sample_token(logits: &Tensor, temperature: f32) -> Result<u32> {
+pub fn sample_token(logits: &Tensor, temperature: f32) -> Result<u32> {
     if temperature <= 0.0 {
         argmax(logits)
     } else {

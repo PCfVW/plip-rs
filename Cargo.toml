@@ -1,6 +1,6 @@
 [package]
 name = "plip-rs"
-version = "1.0.0"
+version = "1.2.0"
 edition = "2021"
 authors = ["Eric Jacopin"]
 description = "Programming Language Internal Probing - Mechanistic interpretability for code models"
@@ -48,6 +48,7 @@ tracing-subscriber = "0.3"
 
 [dev-dependencies]
 tempfile = "3.10"
+serial_test = "3"
 
 [features]
 default = ["cuda"]
@@ -156,6 +157,22 @@ path = "examples/layer_scan_universal.rs"
 [[example]]
 name = "verify_positions_universal"
 path = "examples/verify_positions_universal.rs"
+
+[[example]]
+name = "state_ablation_experiment"
+path = "examples/state_ablation_experiment.rs"
+
+[[example]]
+name = "state_steering_experiment"
+path = "examples/state_steering_experiment.rs"
+
+[[example]]
+name = "state_steering_generate"
+path = "examples/state_steering_generate.rs"
+
+[[example]]
+name = "state_steering_persistence"
+path = "examples/state_steering_persistence.rs"
 
 [profile.release]
 lto = true

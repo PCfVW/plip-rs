@@ -1082,6 +1082,376 @@ impl From<KnockoutSpec> for SteeringSpec {
     }
 }
 
+// ============================================================================
+// Part 3: State Knockout (RWKV-6)
+// ============================================================================
+
+/// Specification for RWKV-6 state knockout intervention.
+///
+/// State knockout makes specific token positions invisible to all future
+/// tokens by skipping the recurrent state update at those positions.
+/// This is the RNN analogue of all-edge attention knockout in transformers.
+///
+/// # Example
+/// ```ignore
+/// use plip_rs::{PlipModel, StateKnockoutSpec};
+///
+/// let model = PlipModel::from_pretrained("RWKV/v6-Finch-1B6-HF")?;
+///
+/// // Knock out position 5 across all layers
+/// let spec = StateKnockoutSpec::new()
+///     .position(5);
+///
+/// let result = model.forward_with_state_knockout("def add(a, b):", &spec)?;
+/// println!("KL divergence: {}", result.kl_divergence()?);
+/// ```
+#[derive(Debug, Clone)]
+pub struct StateKnockoutSpec {
+    /// Token positions where state update is skipped
+    pub positions: Vec<usize>,
+    /// Which layers to apply knockout
+    pub layers: LayerSpec,
+}
+
+impl StateKnockoutSpec {
+    /// Create a new empty spec (all layers, no positions yet).
+    pub fn new() -> Self {
+        Self {
+            positions: Vec::new(),
+            layers: LayerSpec::All,
+        }
+    }
+
+    /// Add a single position to knock out.
+    pub fn position(mut self, pos: usize) -> Self {
+        self.positions.push(pos);
+        self
+    }
+
+    /// Add multiple positions to knock out.
+    pub fn positions(mut self, positions: &[usize]) -> Self {
+        self.positions.extend_from_slice(positions);
+        self
+    }
+
+    /// Target a single layer.
+    pub fn layer(mut self, layer: usize) -> Self {
+        self.layers = LayerSpec::Specific(vec![layer]);
+        self
+    }
+
+    /// Target multiple specific layers.
+    pub fn layers(mut self, layers: &[usize]) -> Self {
+        self.layers = LayerSpec::Specific(layers.to_vec());
+        self
+    }
+
+    /// Target a range of layers (inclusive).
+    pub fn layer_range(mut self, start: usize, end: usize) -> Self {
+        self.layers = LayerSpec::Range { start, end };
+        self
+    }
+
+    /// Check if knockout applies to this layer.
+    pub fn applies_to_layer(&self, layer: usize) -> bool {
+        match &self.layers {
+            LayerSpec::All => true,
+            LayerSpec::Specific(layers) => layers.contains(&layer),
+            LayerSpec::Range { start, end } => layer >= *start && layer <= *end,
+        }
+    }
+
+    /// Get knockout positions as a HashSet for O(1) lookup in the WKV loop.
+    pub fn position_set(&self) -> std::collections::HashSet<usize> {
+        self.positions.iter().copied().collect()
+    }
+
+    /// Validate the spec against model dimensions.
+    pub fn validate(&self, n_layers: usize, seq_len: usize) -> Result<()> {
+        // Check layers
+        match &self.layers {
+            LayerSpec::Specific(layers) => {
+                for &l in layers {
+                    if l >= n_layers {
+                        anyhow::bail!("Layer {l} out of range (model has {n_layers} layers)");
+                    }
+                }
+            }
+            LayerSpec::Range { start, end } => {
+                if *end >= n_layers {
+                    anyhow::bail!(
+                        "Layer range end {end} out of range (model has {n_layers} layers)"
+                    );
+                }
+                if start > end {
+                    anyhow::bail!("Invalid layer range: start {start} > end {end}");
+                }
+            }
+            LayerSpec::All => {}
+        }
+
+        // Check positions
+        for &pos in &self.positions {
+            if pos >= seq_len {
+                anyhow::bail!("Position {pos} out of range (seq_len is {seq_len})");
+            }
+        }
+
+        if self.positions.is_empty() {
+            anyhow::bail!("StateKnockoutSpec has no positions specified");
+        }
+
+        Ok(())
+    }
+}
+
+impl Default for StateKnockoutSpec {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// Result of a state knockout ablation experiment (RWKV-6).
+///
+/// Similar to `AblationResult` but without attention cache, since
+/// RWKV-6 has no attention matrices.
+#[derive(Debug)]
+pub struct StateAblationResult {
+    /// Logits from baseline forward pass (no intervention)
+    pub baseline_logits: Tensor,
+    /// Logits from state-knocked-out forward pass
+    pub ablated_logits: Tensor,
+    /// The state knockout specification used
+    pub spec: StateKnockoutSpec,
+}
+
+impl StateAblationResult {
+    pub fn new(
+        baseline_logits: Tensor,
+        ablated_logits: Tensor,
+        spec: StateKnockoutSpec,
+    ) -> Self {
+        Self {
+            baseline_logits,
+            ablated_logits,
+            spec,
+        }
+    }
+
+    /// Compute KL divergence between baseline and ablated distributions.
+    pub fn kl_divergence(&self) -> Result<f32> {
+        kl_divergence(&self.baseline_logits, &self.ablated_logits)
+    }
+
+    /// Compute logit difference for a specific token (baseline - ablated).
+    pub fn logit_diff(&self, token_id: u32) -> Result<f32> {
+        let baseline_f32 = self.baseline_logits.to_dtype(DType::F32)?;
+        let ablated_f32 = self.ablated_logits.to_dtype(DType::F32)?;
+        let baseline_vec: Vec<f32> = baseline_f32.flatten_all()?.to_vec1()?;
+        let ablated_vec: Vec<f32> = ablated_f32.flatten_all()?.to_vec1()?;
+        let idx = token_id as usize;
+        if idx >= baseline_vec.len() {
+            anyhow::bail!("Token ID {token_id} out of range");
+        }
+        Ok(baseline_vec[idx] - ablated_vec[idx])
+    }
+
+    /// Get top-k tokens that changed most due to state knockout.
+    ///
+    /// Returns Vec of (token_id, baseline_prob, ablated_prob, abs_diff).
+    pub fn top_changed_tokens(&self, k: usize) -> Result<Vec<(u32, f32, f32, f32)>> {
+        let baseline_probs = softmax_to_vec(&self.baseline_logits)?;
+        let ablated_probs = softmax_to_vec(&self.ablated_logits)?;
+        let mut changes: Vec<(u32, f32, f32, f32)> = baseline_probs
+            .iter()
+            .zip(ablated_probs.iter())
+            .enumerate()
+            .map(|(idx, (&base, &abl))| (idx as u32, base, abl, (base - abl).abs()))
+            .collect();
+        changes.sort_by(|a, b| b.3.partial_cmp(&a.3).unwrap_or(std::cmp::Ordering::Equal));
+        Ok(changes.into_iter().take(k).collect())
+    }
+}
+
+// ============================================================================
+// Part 4: State Steering (RWKV-6)
+// ============================================================================
+
+/// Specification for RWKV-6 state steering intervention.
+///
+/// State steering scales the kv write at specified positions, amplifying
+/// or dampening the token's contribution to recurrent state. This is the
+/// RNN analogue of post-softmax attention scaling in transformers.
+///
+/// - `scale = 0.0` → knockout (equivalent to `StateKnockoutSpec`)
+/// - `scale = 1.0` → no-op (normal forward pass)
+/// - `scale > 1.0` → amplify the token's state write
+/// - `scale < 1.0` → dampen the token's state write
+///
+/// # Example
+/// ```ignore
+/// use plip_rs::{PlipModel, StateSteeringSpec};
+///
+/// let model = PlipModel::from_pretrained("RWKV/v6-Finch-1B6-HF")?;
+///
+/// // Amplify marker position's state write by 2× at layer 14
+/// let spec = StateSteeringSpec::new(2.0)
+///     .position(5)
+///     .layer(14);
+///
+/// let result = model.forward_with_state_steering("def add(a, b):", &spec)?;
+/// println!("KL divergence: {}", result.kl_divergence()?);
+/// ```
+#[derive(Debug, Clone)]
+pub struct StateSteeringSpec {
+    /// Token positions where state write is scaled
+    pub positions: Vec<usize>,
+    /// Which layers to apply steering
+    pub layers: LayerSpec,
+    /// Scale factor for kv write (0.0 = knockout, 1.0 = normal, >1.0 = amplify)
+    pub scale: f32,
+}
+
+impl StateSteeringSpec {
+    /// Create a new spec with the given scale factor (all layers, no positions yet).
+    pub fn new(scale: f32) -> Self {
+        Self {
+            positions: Vec::new(),
+            layers: LayerSpec::All,
+            scale,
+        }
+    }
+
+    /// Add a single position to steer.
+    pub fn position(mut self, pos: usize) -> Self {
+        self.positions.push(pos);
+        self
+    }
+
+    /// Add multiple positions to steer.
+    pub fn positions(mut self, positions: &[usize]) -> Self {
+        self.positions.extend_from_slice(positions);
+        self
+    }
+
+    /// Target a single layer.
+    pub fn layer(mut self, layer: usize) -> Self {
+        self.layers = LayerSpec::Specific(vec![layer]);
+        self
+    }
+
+    /// Target multiple specific layers.
+    pub fn layers(mut self, layers: &[usize]) -> Self {
+        self.layers = LayerSpec::Specific(layers.to_vec());
+        self
+    }
+
+    /// Target a range of layers (inclusive).
+    pub fn layer_range(mut self, start: usize, end: usize) -> Self {
+        self.layers = LayerSpec::Range { start, end };
+        self
+    }
+
+    /// Check if steering applies to this layer.
+    pub fn applies_to_layer(&self, layer: usize) -> bool {
+        match &self.layers {
+            LayerSpec::All => true,
+            LayerSpec::Specific(layers) => layers.contains(&layer),
+            LayerSpec::Range { start, end } => layer >= *start && layer <= *end,
+        }
+    }
+
+    /// Get steering positions as a HashSet for O(1) lookup in the WKV loop.
+    pub fn position_set(&self) -> std::collections::HashSet<usize> {
+        self.positions.iter().copied().collect()
+    }
+
+    /// Validate the spec against model dimensions.
+    pub fn validate(&self, n_layers: usize, seq_len: usize) -> Result<()> {
+        match &self.layers {
+            LayerSpec::Specific(layers) => {
+                for &l in layers {
+                    if l >= n_layers {
+                        anyhow::bail!("Layer {l} out of range (model has {n_layers} layers)");
+                    }
+                }
+            }
+            LayerSpec::Range { start, end } => {
+                if *end >= n_layers {
+                    anyhow::bail!(
+                        "Layer range end {end} out of range (model has {n_layers} layers)"
+                    );
+                }
+                if start > end {
+                    anyhow::bail!("Invalid layer range: start {start} > end {end}");
+                }
+            }
+            LayerSpec::All => {}
+        }
+
+        for &pos in &self.positions {
+            if pos >= seq_len {
+                anyhow::bail!("Position {pos} out of range (seq_len is {seq_len})");
+            }
+        }
+
+        if self.positions.is_empty() {
+            anyhow::bail!("StateSteeringSpec has no positions specified");
+        }
+
+        Ok(())
+    }
+}
+
+/// Result of a state steering experiment (RWKV-6).
+///
+/// Similar to `StateAblationResult` but for continuous-scale interventions
+/// rather than binary knockout.
+#[derive(Debug)]
+pub struct StateSteeringResult {
+    /// Logits from baseline forward pass (no intervention)
+    pub baseline_logits: Tensor,
+    /// Logits from steered forward pass
+    pub steered_logits: Tensor,
+    /// The state steering specification used
+    pub spec: StateSteeringSpec,
+}
+
+impl StateSteeringResult {
+    pub fn new(
+        baseline_logits: Tensor,
+        steered_logits: Tensor,
+        spec: StateSteeringSpec,
+    ) -> Self {
+        Self {
+            baseline_logits,
+            steered_logits,
+            spec,
+        }
+    }
+
+    /// Compute KL divergence between baseline and steered distributions.
+    pub fn kl_divergence(&self) -> Result<f32> {
+        kl_divergence(&self.baseline_logits, &self.steered_logits)
+    }
+
+    /// Get top-k tokens that changed most due to state steering.
+    ///
+    /// Returns Vec of (token_id, baseline_prob, steered_prob, abs_diff).
+    pub fn top_changed_tokens(&self, k: usize) -> Result<Vec<(u32, f32, f32, f32)>> {
+        let baseline_probs = softmax_to_vec(&self.baseline_logits)?;
+        let steered_probs = softmax_to_vec(&self.steered_logits)?;
+        let mut changes: Vec<(u32, f32, f32, f32)> = baseline_probs
+            .iter()
+            .zip(steered_probs.iter())
+            .enumerate()
+            .map(|(idx, (&base, &steered))| (idx as u32, base, steered, (base - steered).abs()))
+            .collect();
+        changes.sort_by(|a, b| b.3.partial_cmp(&a.3).unwrap_or(std::cmp::Ordering::Equal));
+        Ok(changes.into_iter().take(k).collect())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1335,5 +1705,54 @@ mod tests {
 
         assert_eq!(spec.max_from_pos(), None);
         assert_eq!(spec.max_to_pos(), None);
+    }
+
+    // --- State Knockout tests ---
+
+    #[test]
+    fn test_state_knockout_spec_builder() {
+        let spec = StateKnockoutSpec::new().position(3).position(5).layer(10);
+        assert_eq!(spec.positions, vec![3, 5]);
+        assert!(matches!(spec.layers, LayerSpec::Specific(ref v) if v == &[10]));
+    }
+
+    #[test]
+    fn test_state_knockout_spec_validation() {
+        // Valid spec
+        let spec = StateKnockoutSpec::new().position(5).layer(10);
+        assert!(spec.validate(24, 20).is_ok());
+
+        // Position out of range
+        let spec = StateKnockoutSpec::new().position(25);
+        assert!(spec.validate(24, 20).is_err());
+
+        // Layer out of range
+        let spec = StateKnockoutSpec::new().position(5).layer(30);
+        assert!(spec.validate(24, 20).is_err());
+
+        // Empty positions
+        let spec = StateKnockoutSpec::new();
+        assert!(spec.validate(24, 20).is_err());
+    }
+
+    #[test]
+    fn test_state_knockout_position_set() {
+        let spec = StateKnockoutSpec::new()
+            .position(3)
+            .position(5)
+            .position(3);
+        let set = spec.position_set();
+        assert_eq!(set.len(), 2); // deduplication
+        assert!(set.contains(&3));
+        assert!(set.contains(&5));
+    }
+
+    #[test]
+    fn test_state_knockout_applies_to_layer() {
+        let spec = StateKnockoutSpec::new().position(0).layer_range(5, 10);
+        assert!(!spec.applies_to_layer(4));
+        assert!(spec.applies_to_layer(5));
+        assert!(spec.applies_to_layer(10));
+        assert!(!spec.applies_to_layer(11));
     }
 }

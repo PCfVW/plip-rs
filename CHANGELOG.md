@@ -5,6 +5,73 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] — 2026-02-10
+
+### Added
+
+- **RWKV-6 backend** (`src/forward_rwkv6.rs`): first non-transformer architecture — a
+  gated-linear RNN with data-dependent decay, fixed-size recurrent state `[b,h,d,d]`
+  per layer, and squared-ReLU channel-mix MLP. Model: `RWKV/v6-Finch-1B6-HF`
+  (hidden=2048, 24 layers, head_size=64, 32 heads, vocab=65536).
+  `PlipBackend` implementation with `forward_with_cache`, `forward_with_kv_cache`,
+  `forward_with_attention` (effective attention), `forward_with_state_knockout`,
+  and `generate`.
+- **RWKV World tokenizer** (`src/tokenizer_rwkv.rs`): custom Trie-based greedy
+  longest-match tokenizer (~350 lines) for RWKV's `rwkv_vocab_v20230424.txt` vocab
+  file. Supports Python literal parsing with `\xHH`, `\uHHHH`, `\UHHHHHHHH` escapes
+  and `is_bytes` distinction for string vs. bytes literals.
+- **`PlipTokenizer` enum** (`src/model.rs`): unified tokenizer abstraction over
+  `HuggingFace(Box<Tokenizer>)` and `Rwkv(RwkvTokenizer)` — all call sites updated
+  transparently.
+- **State knockout** (`StateKnockoutSpec`, `StateAblationResult` in
+  `src/intervention.rs`): at a target position, suppress the kv^T state write
+  while preserving decay dynamics. Equivalent to all-edge knockout for transformers.
+  First statistically significant result: p=0.018 (Welch's t-test, layer 2).
+- **State steering** (`StateSteeringSpec`, `StateSteeringResult` in
+  `src/intervention.rs`): scale the kv^T state write at target positions by
+  configurable factors for dose-response experiments.
+- **Effective attention** for RWKV-6: computes `[batch, heads, seq, seq]` effective
+  attention matrices from the WKV recurrence, producing lower-triangular distributions
+  compatible with `AttentionCache`. Uses log-space prefix sums for numerically stable
+  cumulative decay and ReLU+L1 normalisation for signed r*k products.
+- **`state_ablation_experiment`** example (~780 lines): state knockout experiment
+  runner with layer scanning, window scanning, sliding windows, and statistical
+  analysis (Welch's t-test with self-contained t-distribution CDF).
+- **`state_steering_experiment`** example: dose-response experiment for RWKV-6
+  state steering with configurable scale factors.
+- **State steering generation** (`PlipRwkv6::generate_with_state_steering`): steered
+  prefill + normal autoregressive generation. Exposed via `PlipModel::generate_with_state_steering`
+  and `PlipModel::generate_with_state_steering_details` wrappers.
+- **`state_steering_generate`** example: greedy generation comparison (baseline vs
+  steered) across 5 code prompts. Result: identical output at scale=3.0 (greedy).
+- **`state_steering_persistence`** example (~380 lines): distance × scale × temperature
+  sweep with repeated sampling. Supports `--rust-only`, `--temperature` (multi-value),
+  and `--n-samples` CLI args. Key finding: distance effect confirmed (close=74%,
+  medium=44%, far=36% at n=30), scale effect null (all ~50-53%).
+- **Weight conversion script** (`scripts/convert_rwkv_to_safetensors.py`): one-time
+  conversion from `pytorch_model.bin` to `model.safetensors` for RWKV-6 (678 tensors,
+  1.60B params, 3.20 GB).
+- **Python validation script** (`scripts/rwkv6_validation.py`): standalone RWKV-6
+  forward pass for generating reference data (token IDs, top-10 logits, 20 greedy
+  tokens) since HF's `modeling_rwkv6.py` was incompatible with `transformers` 5.1.
+
+### Changed
+
+- `ModelArchitecture` enum extended with `Rwkv6` variant; detection for `"rwkv"`,
+  `"finch"` in model ID.
+- `PlipBackend` trait extended with `forward_with_state_knockout` (default: returns
+  error for non-RWKV backends).
+- README updated: 7 models across 6 architectures (5 transformer + 1 RNN), RWKV-6
+  in hardware requirements and supported models tables, RWKV-specific notes.
+- COMMANDS.md updated: new RWKV-6 State Intervention Tools section with
+  `state_ablation_experiment`, `state_steering_experiment`, `state_steering_generate`,
+  and `state_steering_persistence` documentation.
+- STEERING_RESULTS.md updated: new Section 8 (RWKV-6 state steering generation).
+- ABLATION_RESULTS.md updated: amplification experiment (Future Work #4) marked done.
+- GPU integration tests (`tests/integration.rs`): all 8 GPU-dependent tests now use
+  `#[serial]` from the `serial_test` crate to prevent concurrent execution and VRAM
+  exhaustion. No more need for `--test-threads=1`.
+
 ## [1.1.1] — 2026-02-09
 
 Documentation-only release: updates experiment result documents for consistency
@@ -115,6 +182,7 @@ Initial public release of PLIP-rs: **P**robing **L**anguage model
 - GitHub Actions CI (CPU build + clippy + tests).
 - Docker support for containerized GPU experiments.
 
+[1.2.0]: https://github.com/PCfVW/plip-rs/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/PCfVW/plip-rs/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/PCfVW/plip-rs/compare/v1.0.3...v1.1.0
 [1.0.3]: https://github.com/PCfVW/plip-rs/compare/v1.0.2...v1.0.3

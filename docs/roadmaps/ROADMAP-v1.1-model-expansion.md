@@ -1,9 +1,9 @@
 # PLIP-RS Roadmap: Model Expansion and Backend Refactoring
 
-**Current version:** v1.1.0
-**Target version:** v1.2.0 (RWKV-6)
-**Status:** v1.1.0 released (Phases 0-2 complete); Phases 3-6 not started
-**Last updated:** 2026-02-09
+**Current version:** v1.2.0
+**Target version:** v1.3.0 (tentative — RWKV-6 state delta analysis)
+**Status:** v1.2.0 released (Phases 0-5 complete + state steering generation); Phase 6 not started
+**Last updated:** 2026-02-10
 
 ---
 
@@ -351,7 +351,7 @@ Same as Code-LLaMA: compare greedy output against HuggingFace Python, verify att
 | Parameters | 1.6B (~3.2GB fp16) |
 | Candle support | Implemented but buggy (see below) |
 | Code-specialised | No (World model, multilingual) |
-| Safetensors | Yes (HuggingFace format) |
+| Safetensors | **No** — only `pytorch_model.bin` shipped; requires one-time conversion via `scripts/convert_rwkv_to_safetensors.py` |
 | Config | `hidden_size=2048`, `num_hidden_layers=24`, `head_size=64` (32 heads), `vocab_size=65536` |
 
 ### 7.2 Candle Issue #3044
@@ -394,42 +394,71 @@ For each timestep t:
 
 This is a sequential loop over sequence length. For PLIP-RS experiments (typically < 1024 tokens), this is acceptable.
 
-**Estimated size:** 600–800 lines for `forward_rwkv6.rs`, compared to ~1,200–1,400 for transformer backends.
+**Estimated size:** 600–800 lines for `forward_rwkv6.rs`, compared to ~1,200–1,400 for transformer backends. **Actual:** ~1,005 lines (Phase 3), ~1,110 lines with Phase 4 state knockout additions.
 
-### 7.5 Tokenizer Verification
+### 7.5 Tokenizer Verification — Resolved
 
-**Must verify before implementation:** Does `RWKV/v6-Finch-1B6-HF` ship a `tokenizer.json` compatible with the HuggingFace `tokenizers` crate?
+**Finding:** `RWKV/v6-Finch-1B6-HF` does **not** ship a `tokenizer.json`. It uses a custom Trie-based greedy longest-match tokenizer (`rwkv_vocab_v20230424.txt`) incompatible with the HuggingFace `tokenizers` crate (BPE/Unigram/WordPiece only).
 
-- If yes: no changes needed; PLIP-RS's existing tokenizer loading works.
-- If no (only RWKV-native World tokenizer): need to either convert the tokenizer to HF format or add a tokenizer loading path. This would be a meaningful additional task.
+**Solution implemented:**
+1. Custom Rust Trie tokenizer in `src/tokenizer_rwkv.rs` (~350 lines including Python literal parser with `\xHH`, `\uHHHH`, `\UHHHHHHHH` escapes and `is_bytes` distinction for string vs. bytes literals)
+2. `PlipTokenizer` enum in `src/model.rs` abstracting over `HuggingFace(Box<Tokenizer>)` and `Rwkv(RwkvTokenizer)` — all 18+ call sites updated transparently
 
 ### 7.6 Implementation Checklist
 
-- [ ] Verify tokenizer compatibility (see 7.5)
-- [ ] Download and inspect `config.json` from `RWKV/v6-Finch-1B6-HF`
-- [ ] Inspect weight names in safetensors file (expected: `rwkv.blocks.N.attention.{key,receptance,value,gate,output}.weight`, etc.)
-- [ ] Create `src/forward_rwkv6.rs` with `Rwkv6Config` struct
-- [ ] Implement token-shift (data-dependent mixing via `time_mix_w1`/`w2`)
-- [ ] Implement data-dependent time decay via `time_decay_w1`/`w2`
-- [ ] Implement WKV state update loop (core recurrence)
-- [ ] Implement GroupNorm in attention output
-- [ ] Implement channel-mix (MLP equivalent with squared ReLU)
-- [ ] Implement `PlipBackend` for `PlipRwkv6` — note: `forward_with_steering` and `generate_with_prompt_steering` use default (unsupported) implementations
-- [ ] Handle fixed-size state in `generate()` (no KV-cache growth)
-- [ ] Add `Rwkv6` variant to `ModelArchitecture` + detection for `"rwkv"`, `"finch"` in model ID
-- [ ] Add match arm in `from_pretrained_with_arch`
-- [ ] Test basic inference
+**Pre-work (Python, one-time):**
+- [x] Write weight conversion script `scripts/convert_rwkv_to_safetensors.py` (1B6 only ships `pytorch_model.bin`, no safetensors)
+- [x] Run conversion: 678 tensors, 1.60B params, 3.20 GB safetensors
+- [x] Write standalone Python validation script `scripts/rwkv6_validation.py` (HF's custom `modeling_rwkv6.py` was incompatible with `transformers` 5.1; standalone forward pass used instead)
+- [x] Capture reference data in `scripts/rwkv6_reference.json` (token IDs, top-10 logits, 20 greedy-generated tokens)
 
-### 7.7 Validation
+**Tokenizer (`src/tokenizer_rwkv.rs`):**
+- [x] Verify tokenizer compatibility → **incompatible** (no `tokenizer.json`, see 7.5)
+- [x] Implement RWKV Trie tokenizer in Rust: `RwkvTokenizer` with `from_file`, `encode`, `decode`, `encode_with_offsets`, `get_vocab`
+- [x] Implement Python literal parser (`parse_python_literal`) with `is_bytes` flag for string vs. bytes literal distinction (`'\x80'` = U+0080 = 2 UTF-8 bytes vs. `b'\x80'` = 1 raw byte)
+- [x] Add `\uHHHH` (4-digit) and `\UHHHHHHHH` (8-digit) Unicode escape support
+- [x] Create `PlipTokenizer` enum in `src/model.rs` unifying HuggingFace and RWKV tokenizers; update all call sites
 
-**Critical: validate against Python reference.**
+**Model backend (`src/forward_rwkv6.rs`):**
+- [x] Download and inspect `config.json` from `RWKV/v6-Finch-1B6-HF`
+- [x] Inspect weight names: `rwkv.` prefix for backbone, `head.` for LM head (678 tensors confirmed)
+- [x] Create `src/forward_rwkv6.rs` with `Rwkv6Config` struct (hardcoded `TIME_MIX_EXTRA_DIM=32`, `TIME_DECAY_EXTRA_DIM=64`)
+- [x] Implement token-shift (data-dependent mixing via `time_maa_w1`/`w2`) — required `.contiguous()` after `transpose(0,1)` for CUDA matmul
+- [x] Implement data-dependent time decay via `time_decay_w1`/`w2`
+- [x] Implement WKV state update loop (core recurrence, state in F32 for numerical stability)
+- [x] Implement GroupNorm manually in attention output (~15 lines; eps = `layer_norm_epsilon * head_size_divisor^2`)
+- [x] Implement channel-mix (MLP equivalent with squared ReLU)
+- [x] Implement `PlipBackend` for `PlipRwkv6` — `forward_with_attention` returns error (Phase 5); `forward_with_intervention` returns error (state knockout replaces it per Phase 4)
+- [x] Handle fixed-size state encoded in KVCache: `keys[i]` = concat(attn_x, ffn_x), `values[i]` = attn_kv
 
-1. Run `RWKV/v6-Finch-1B6-HF` in Python with `transformers` library on a test prompt.
-2. Capture logits for the first forward pass (no generation).
-3. Compare with PLIP-RS logits on the same tokenised input.
-4. Tolerance: logits should match within BF16 precision (~1e-2 relative error).
+**Registration (`src/model.rs`, `src/lib.rs`):**
+- [x] Add `Rwkv6` variant to `ModelArchitecture` + detection for `"rwkv"`, `"finch"` in model ID
+- [x] Add match arm in `from_pretrained_with_arch` (loads vocab file for RWKV, `tokenizer.json` for all others)
+- [x] Add `pub mod forward_rwkv6` / `pub mod tokenizer_rwkv` and re-exports in `src/lib.rs`
 
-If logits diverge significantly, debug by comparing intermediate tensors (layer outputs, state matrices) between Python and Rust.
+**Validation:**
+- [x] Tokenizer test: token IDs match Python reference exactly (7 tokens for `"def fibonacci(n):\n    "`)
+- [x] Forward logits test (GPU, F32): top-10 logits match Python within abs < 1.3e-5
+- [x] Generation test (GPU, F32): 20/20 greedy tokens match Python exactly
+- [x] Regression: all 48 unit tests + 4 integration tests pass
+- [x] `cargo clippy` clean (zero warnings)
+
+### 7.7 Validation — Complete
+
+**Validated against standalone Python reference** (not HF `AutoModel`, which was incompatible with `transformers` 5.1).
+
+| Test | Method | Result |
+|------|--------|--------|
+| Tokenizer | Compare token IDs for `"def fibonacci(n):\n    "` | 7/7 tokens match exactly |
+| Forward logits | Compare top-10 logit values (GPU, F32) | All within abs < 1.3e-5 |
+| Generation | Compare 20 greedy tokens (GPU, F32, temperature=0) | 20/20 match exactly |
+
+**Reference data:** `scripts/rwkv6_reference.json` (generated by `scripts/rwkv6_validation.py`)
+
+**Lessons learned:**
+- HF's custom `modeling_rwkv6.py` required `bitsandbytes` and had a `RuntimeError` (tensor size mismatch in `extract_key_value`). Standalone Python forward pass was written instead (~250 lines).
+- Data-dependent mixing requires `.contiguous()` after `transpose(0,1)` before batched matmul on CUDA (candle rejects non-contiguous tensors).
+- Python literal parser needed `is_bytes` flag: string literal `'\x80'` encodes as UTF-8 (2 bytes), bytes literal `b'\x80'` is 1 raw byte. Also needed `\uHHHH` and `\UHHHHHHHH` Unicode escape support.
 
 ---
 
@@ -443,9 +472,9 @@ State knockout is the lowest-risk RWKV interpretability approach, with direct me
 
 At the marker position $m$, replace the normal state update:
 
-$$S_m = f(S_{m-1}, x_m) \quad\longrightarrow\quad S_m = S_{m-1}$$
+$$S_m = k_m v_m^T + D_m \cdot S_{m-1} \quad\longrightarrow\quad S_m = D_m \cdot S_{m-1}$$
 
-All subsequent tokens process a state that never saw the marker. The metric is KL divergence between baseline and knocked-out output distributions — identical to the transformer knockout metric in Table 6 of the PLIP paper.
+where $D_m = \text{diag}(\exp(-\exp(w_m)))$ is the data-dependent decay. The $k_m v_m^T$ write is suppressed while preserving the forgetting dynamics — matching the Mamba Knockout semantics (Endy et al., ACL 2025). All subsequent tokens process a state that never saw the marker. The metric is KL divergence between baseline and knocked-out output distributions — identical to the transformer knockout metric in Table 6 of the PLIP paper.
 
 **Semantics:** This is equivalent to the **all-edge knockout** (type 2) from the PLIP paper — making the marker invisible to all future positions. There is no RWKV equivalent of specific-edge knockout (type 1).
 
@@ -471,25 +500,72 @@ fn forward_with_state_knockout(
 }
 ```
 
-Note: the return type is `Result<Tensor>` (logits only), not `Result<(Tensor, AttentionCache)>`. State knockout only needs output logits for KL divergence comparison — it does not require attention patterns. Effective attention computation (Phase 5) is a separate capability added later. Only `PlipRwkv6` overrides this. Transformer backends use the default (unsupported).
+Note: the return type is `Result<Tensor>` (ln_out-normalized hidden states), not `Result<(Tensor, AttentionCache)>`. The hidden states are fed through `PlipModel::compute_logits()` for last-token extraction and vocab projection. State knockout does not require attention patterns. Effective attention computation (Phase 5) is a separate capability added later. Only `PlipRwkv6` overrides this. Transformer backends use the default (unsupported).
 
 **PlipModel integration.** Add a `forward_with_state_knockout` method that handles tokenisation and calls the backend. This method runs both baseline and knocked-out forward passes and computes KL divergence, following the existing `forward_with_intervention` pattern but returning logits-only results.
 
 ### 8.3 Implementation Checklist
 
-- [ ] Define `StateKnockoutSpec` in `intervention.rs`
-- [ ] Add `forward_with_state_knockout` to `PlipBackend` trait (default: unsupported)
-- [ ] Implement `forward_with_state_knockout` in `PlipRwkv6` — skip state update at specified positions, return logits
-- [ ] Add `PlipModel::forward_with_state_knockout` wrapper method
-- [ ] Test: knockout at a known marker position produces non-zero KL divergence
-- [ ] Test: knockout at a random non-marker position produces different (typically smaller) KL divergence
-- [ ] Run PLIP knockout experiments (Python vs. Rust test markers) on RWKV-6
+**Intervention types (`src/intervention.rs`):**
+- [x] Define `StateKnockoutSpec` — builder pattern with `positions: Vec<usize>`, `layers: LayerSpec`; methods: `position()`, `positions()`, `layer()`, `layers()`, `layer_range()`, `applies_to_layer()`, `position_set() -> HashSet<usize>`, `validate(n_layers, seq_len)`
+- [x] Define `StateAblationResult` — fields: `baseline_logits`, `ablated_logits`, `spec`; methods: `kl_divergence()`, `logit_diff()`, `top_changed_tokens()`
+- [x] Add 4 unit tests: `test_state_knockout_spec_builder`, `test_state_knockout_spec_validation`, `test_state_knockout_position_set`, `test_state_knockout_applies_to_layer`
+
+**PlipBackend trait (`src/model.rs`):**
+- [x] Add `forward_with_state_knockout` default method (returns error for non-RWKV backends)
+- [x] Add `StateKnockoutSpec`, `StateAblationResult` to intervention imports
+
+**RWKV-6 backend (`src/forward_rwkv6.rs`):**
+- [x] Refactor `Rwkv6Attention::forward` → shared `forward_inner` with `Option<&HashSet<usize>>` parameter
+- [x] Add `Rwkv6Attention::forward_with_knockout` (delegates to `forward_inner` with knockout set)
+- [x] Core knockout logic: at knocked-out positions, `state = decay * state` (suppress kv write, preserve forgetting)
+- [x] Add `Rwkv6Block::forward_with_knockout` (delegates attention knockout; FFN not knocked out — stateless)
+- [x] Add `PlipRwkv6::forward_with_state_knockout` inherent method (per-layer conditional dispatch)
+- [x] Wire into `impl PlipBackend for PlipRwkv6`
+
+**PlipModel wrapper (`src/model.rs`):**
+- [x] Add `PlipModel::forward_with_state_knockout` — dual forward pass (baseline via `forward_with_cache` + knockout), returns `StateAblationResult`
+  - **Bugfix:** Initial implementation used `forward_with_kv_cache` for the baseline, which returns 2D logits for RWKV-6 (already projected to vocab) — incompatible with `compute_logits()` which expects 3D hidden states. Fixed to use `forward_with_cache`.
+
+**Re-exports (`src/lib.rs`):**
+- [x] Re-export `StateKnockoutSpec`, `StateAblationResult`
+
+**Integration tests (`tests/integration.rs`):**
+- [x] `test_state_knockout_spec_validation` — no GPU, validates builder and error cases
+- [x] `test_rwkv6_state_knockout_kl` — GPU, knocks out position 0 on `"def add(a, b):\n    return a + b"`, asserts KL > 0
+
+**Clippy compliance:**
+- [x] Fixed `map_or` → `is_some_and` (clippy suggestion)
+- [x] Added `#[allow(clippy::too_many_lines)]` on `forward_inner` (104 lines, cohesive WKV loop)
+- [x] Fixed pre-existing `too_many_lines` warning on `parse_python_literal` in `tokenizer_rwkv.rs`
+- [x] Zero warnings with `cargo clippy -- -W clippy::pedantic`
+
+**Experiment script (`examples/state_ablation_experiment.rs`):**
+- [x] Create `state_ablation_experiment.rs` (~780 lines) mirroring `ablation_experiment.rs` for transformers
+- [x] CLI args: `--model`, `--layer`, `--scan-layers`, `--scan-windows`, `--slide-window`, `--layer-start/--layer-end`, `--output`, `--verbose`, `--include-baselines`
+- [x] Structs: `SampleResult` (with `layers_knocked_out` instead of `edges_knocked_out`), `ExperimentResults` (with `architecture` and `intervention_type` instead of `n_heads`)
+- [x] Statistics: `compute_stats`, `welch_t_test`, self-contained t-distribution CDF
+- [x] Add `[[example]]` entry in `Cargo.toml`
+- [x] Zero clippy pedantic warnings
+- [x] GPU-validated: layer scan (24 layers), full experiment at layer 2 (p=0.018), window scan (KL grows 0.34% → 1.93%)
+
+**Not planned but required:**
+- [x] Design decision: `state = decay * state` (not `state = state`) — preserves forgetting dynamics, matches Mamba Knockout (Endy et al., ACL 2025) semantics
+- [x] `forward_with_state_knockout` returns `ln_out`-normalized hidden states (not projected logits), compatible with `PlipModel::compute_logits` for last-token extraction
+- [x] `LayerSpec::Range` uses inclusive end — test must use `layer_range(0, n_layers - 1)`, not `layer_range(0, n_layers)`
 
 ### 8.4 Validation
 
-- KL divergence must be > 0 for knocked-out marker positions (otherwise the marker has no effect, which is implausible).
-- Compare Python vs. Rust knockout KL divergences — expect asymmetry consistent with co-location hypothesis.
-- Cross-reference with transformer knockout results in Table 6.
+- [x] KL divergence = **4.96** when knocking out position 0 across all 24 layers on `"def add(a, b):\n    return a + b"` (GPU, F32)
+- [x] Compare Python vs. Rust knockout KL divergences — **confirmed**: Python mean KL = 0.111%, Rust mean KL = 0.024% (4.6× ratio), p = 0.018 (Welch's t-test, **first statistically significant result** across all 5 models)
+- [x] Cross-reference with transformer all-edge knockout results in ABLATION_RESULTS.md — **done**: RWKV-6 state knockout added to all cross-model tables and interpretation sections
+
+**Post-Phase 4 Extension — State Steering Generation (v1.2.0):**
+- [x] `forward_with_state_steering_kv_cache` — steered prefill with KVCache persistence
+- [x] `generate_with_state_steering` — steered prefill + normal generation loop
+- [x] `PlipModel::generate_with_state_steering` / `generate_with_state_steering_details` wrappers
+- [x] `state_steering_generate` example — greedy baseline vs steered comparison (5 prompts, identical output at scale=3.0)
+- [x] `state_steering_persistence` example — distance × scale × temperature sweep (n=30). Key finding: distance effect confirmed (close=74%, medium=44%, far=36%), scale effect null (amplification has no generation effect)
 
 ---
 
@@ -501,47 +577,69 @@ Compute the effective attention matrix for RWKV-6, producing `[batch, heads, seq
 
 ### 9.1 Mathematical Foundation
 
-For RWKV-6 with data-dependent decay $w_t$, the effective weight from position $t$ to position $i < t$ is:
+The effective attention is derived from the WKV recurrence. The output at position $t$ uses the accumulated state $S_{t-1}$:
 
-$$\alpha_{t,i} \propto \exp\Bigl(\sum_{j=i+1}^{t} (-w_j) + k_i\Bigr)$$
+$$o_t = r_t^\top \cdot \bigl[\text{diag}(u) \cdot k_t v_t^\top + S_{t-1}\bigr]$$
 
-Current position bonus: $\alpha_{t,t} \propto \exp(u + k_t)$ where $u$ is the learned bonus.
+Unrolling $S_{t-1} = \sum_{i=0}^{t-1} \bigl(\prod_{j=i+1}^{t-1} \text{diag}(d_j)\bigr) \cdot k_i v_i^\top$ where $d_j = \exp(-\exp(w_j))$:
 
-Normalisation: $\alpha_{t,i} = \alpha_{t,i}^{\text{raw}} / \sum_{j \leq t} \alpha_{t,j}^{\text{raw}}$
+$$o_t = \sum_{i=0}^{t} \alpha_{\text{raw}}(t,i,h) \cdot v_i$$
+
+where the **effective attention weight** per head $h$ is:
+
+$$\alpha_{\text{raw}}(t,i,h) = \sum_d r_t[h,d] \cdot k_i[h,d] \cdot \prod_{j=i+1}^{t-1} d_j[h,d] \quad \text{for } i < t$$
+
+$$\alpha_{\text{raw}}(t,t,h) = \sum_d r_t[h,d] \cdot k_t[h,d] \cdot u[h,d] \quad \text{(diagonal)}$$
+
+**Key difference from RWKV-4:** Both $w_t$ and $k_t$ are **vectors** of dimension `head_size=64` per head, not scalars. The effective attention aggregates per-channel contributions via a dot product over the head-channel dimension $d$. The decay product runs from $i+1$ to $t-1$ (not $t$) because the output uses $S_{t-1}$.
+
+**Normalisation:** Since $\alpha_{\text{raw}}$ can be negative (signed $r$ and $k$ components), we apply ReLU followed by L1 normalisation:
+
+$$\alpha(t,i,h) = \frac{\max(0, \alpha_{\text{raw}}(t,i,h))}{\sum_{j \leq t} \max(0, \alpha_{\text{raw}}(t,j,h))}$$
 
 This produces a lower-triangular $T \times T$ matrix per head per layer.
 
 ### 9.2 Prior Art
 
-Zimerman, Ali & Wolf (ICLR 2025, arXiv:2405.16504) derived the effective attention matrix for RWKV, but only for the **RWKV-4 scalar-decay case** ($w$ fixed, position-independent). The RWKV-6 data-dependent extension ($w_t$ varying per timestep) has no published derivation and is a genuine contribution of this work.
+Zimerman, Ali & Wolf (ICLR 2025, arXiv:2405.16504) derived the effective attention matrix for RWKV, but only for the **RWKV-4 scalar-decay case** ($w$ fixed, position-independent). The RWKV-6 data-dependent extension ($w_t$ varying per timestep, vector-valued per head channel) has no published derivation and is a genuine contribution of this work.
 
 ### 9.3 Numerical Stability
 
-The log-space computation avoids overflow:
+The cumulative decay products can underflow for large distances since $d_j \in (0,1)$. The implementation uses log-space prefix sums:
 
 ```
-log_alpha_raw[t, i] = cumsum(-w[i+1..t]) + k[i]    for i < t
-log_alpha_raw[t, t] = u + k[t]                      for current position
-log_alpha[t, :] = log_alpha_raw[t, :] - logsumexp(log_alpha_raw[t, :])
-alpha[t, :] = exp(log_alpha[t, :])
+log_decay[t,h,d] = -exp(w[t,h,d])    (= ln(decay[t,h,d]))
+prefix[0] = 0
+prefix[k] = prefix[k-1] + log_decay[k-1]   (cumulative sum of log-decays)
 ```
 
-The `cumsum` over log-decay values replaces the product of per-step decays, keeping everything in log-space until the final exponentiation.
+For source $i < t$, the cumulative decay product from $i+1$ to $t-1$ is:
+```
+cum_decay[t,i,h,d] = exp(prefix[t] - prefix[i+1])
+```
+
+Per-channel contributions `r_t[d] * k_i[d] * cum_decay[d]` are computed in linear F32 space after exponentiating the log-space prefix difference. The sum across channels yields a scalar per $(t,i,h)$ triplet. This avoids overflow while handling the signed `r * k` products correctly.
 
 ### 9.4 Implementation Checklist
 
-- [ ] Implement effective attention computation in `forward_rwkv6.rs` (~30–50 lines per layer)
-- [ ] Use log-space cumulative sums for numerical stability
-- [ ] Handle the current-position bonus term $u$
-- [ ] Return effective attention as `AttentionCache` from `forward_with_attention`
-- [ ] Verify: effective attention rows sum to 1.0 (within numerical tolerance)
-- [ ] Verify: effective attention is lower-triangular (causal)
-- [ ] Verify: nearby positions have higher effective attention than distant positions (sanity check for decay)
+- [x] Implement `Rwkv6Attention::forward_with_effective_attention` (~170 lines, duplicates preamble from `forward_inner` with added effective attention computation)
+- [x] Pre-compute log-decay prefix sums for numerically stable cumulative decay
+- [x] Handle the current-position bonus term $u$ (`time_faaaa`) for diagonal entries
+- [x] Apply ReLU + L1 normalisation to handle signed `r * k` products
+- [x] Implement `Rwkv6Block::forward_with_attention` delegating to attention module
+- [x] Implement `PlipRwkv6::forward_with_attention` inherent method collecting per-layer effective attention into `AttentionCache`
+- [x] Wire into `PlipBackend::forward_with_attention` (replace error stub with delegation)
+- [x] Integration test `test_rwkv6_effective_attention`: shape `[1, 32, seq, seq]`, lower-triangular, rows sum to ~1.0
+- [x] Integration test `test_rwkv6_effective_attention_output_unchanged`: hidden output matches `forward_with_cache`
+- [x] `cargo clippy -- -W clippy::pedantic` zero warnings
+- [x] All 52 unit tests + 5 non-GPU integration tests pass (no regression)
+- [x] GPU validation: `test_rwkv6_effective_attention` — shape [1,32,seq,seq] ✓, causal ✓, row sums = 1.0 exactly ✓ (layer 0: 337/384 valid rows, layer 11: 253/384, layer 23: 235/384); `test_rwkv6_effective_attention_output_unchanged` — hidden output bit-exact match (diff = 0.0)
 - [ ] Run PLIP attention probing experiments on RWKV-6
 
 ### 9.5 Validation
 
 - Effective attention matrix should be lower-triangular with rows summing to ~1.0.
+- Hidden state output from `forward_with_attention` must be identical to `forward_with_cache`.
 - Nearby tokens should receive more attention weight than distant tokens (decay property).
 - Attention to function tokens from test markers should show the expected Python > Rust asymmetry.
 - Compare effective attention patterns qualitatively with transformer attention patterns.
@@ -553,14 +651,14 @@ The `cumsum` over log-decay values replaces the product of per-step decays, keep
 **Content:** RWKV-6 basic inference + state knockout + effective attention
 
 **Checklist before release:**
-- [ ] RWKV-6 inference validated against Python reference
-- [ ] State knockout produces meaningful results
-- [ ] Effective attention is numerically stable and produces valid distributions
-- [ ] All 7 models pass existing tests
-- [ ] `cargo clippy` clean
-- [ ] Update `Cargo.toml` version to `1.2.0`
-- [ ] Update README model support table
-- [ ] Document RWKV-specific methods and limitations
+- [x] RWKV-6 inference validated against Python reference
+- [x] State knockout produces meaningful results
+- [x] Effective attention is numerically stable and produces valid distributions
+- [x] All 7 models pass existing tests
+- [x] `cargo clippy` clean
+- [x] Update `Cargo.toml` version to `1.2.0`
+- [x] Update README model support table
+- [x] Document RWKV-specific methods and limitations
 
 **Architecture coverage after v1.2.0:**
 

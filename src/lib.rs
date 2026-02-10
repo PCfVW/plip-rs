@@ -54,6 +54,7 @@ pub mod forward_gemma;
 pub mod forward_llama;
 pub mod forward_phi3;
 pub mod forward_qwen2;
+pub mod forward_rwkv6;
 pub mod intervention;
 pub mod kv_cache;
 pub mod logit_lens;
@@ -62,6 +63,7 @@ pub mod model;
 pub mod positioning;
 pub mod probe;
 pub mod steering;
+pub mod tokenizer_rwkv;
 
 pub use attention::{AttentionAnalysis, AttentionCache};
 pub use cache::ActivationCache;
@@ -72,6 +74,7 @@ pub use forward_gemma::PlipGemma;
 pub use forward_llama::PlipLlama;
 pub use forward_phi3::PlipPhi3;
 pub use forward_qwen2::PlipQwen2;
+pub use forward_rwkv6::PlipRwkv6;
 pub use intervention::{
     // Part 2: Amplification (Attention Steering)
     apply_scale_steering,
@@ -86,13 +89,18 @@ pub use intervention::{
     InterventionType,
     KnockoutSpec,
     LayerSpec,
+    StateAblationResult,
+    StateKnockoutSpec,
+    StateSteeringResult,
+    StateSteeringSpec,
     SteeringResult,
     SteeringSpec,
 };
 pub use kv_cache::KVCache;
 pub use logit_lens::{LogitLensAnalysis, LogitLensResult, TokenPrediction};
 pub use masks::{clear_mask_caches, create_causal_mask, create_generation_mask};
-pub use model::{GenerationResult, ModelArchitecture, PlipBackend, PlipModel};
+pub use model::{GenerationResult, ModelArchitecture, PlipBackend, PlipModel, PlipTokenizer};
+pub use tokenizer_rwkv::RwkvTokenizer;
 pub use positioning::{EncodingWithOffsets, PositionConversion, TokenWithOffset};
 pub use probe::{ProbeResults, ProbeTrainer};
 pub use steering::{
