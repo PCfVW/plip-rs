@@ -553,7 +553,7 @@ experiments to validate initial observations.
 ```toml
 [dependencies]
 # ... existing ...
-statrs = "0.16"  # For t-distribution CDF
+statrs = "0.17"  # For t-distribution CDF
 ```
 
 **Python (for visualization):**
