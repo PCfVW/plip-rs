@@ -309,11 +309,7 @@ fn print_summary(results: &[ConditionResult]) {
 
     // One table per temperature
     for &temp in &temps {
-        let temp_label = if temp == 0.0 {
-            "greedy"
-        } else {
-            "sampling"
-        };
+        let temp_label = if temp == 0.0 { "greedy" } else { "sampling" };
         println!("Temperature = {:.1} ({}):", temp, temp_label);
         println!();
 
@@ -351,10 +347,7 @@ fn print_summary(results: &[ConditionResult]) {
                 if let Some(r) = row.iter().find(|r| (r.scale - scale).abs() < 0.01) {
                     if r.n_runs == 1 {
                         // Greedy: show Yes/No
-                        print!(
-                            " | {:>7}",
-                            if r.test_hits > 0 { "Yes" } else { "No" }
-                        );
+                        print!(" | {:>7}", if r.test_hits > 0 { "Yes" } else { "No" });
                     } else {
                         // Sampling: show percentage
                         print!(" | {:>5.0}% ", r.rate * 100.0);
@@ -374,11 +367,7 @@ fn print_summary(results: &[ConditionResult]) {
     println!("============================================================\n");
 
     for &temp in &temps {
-        let temp_label = if temp == 0.0 {
-            "greedy"
-        } else {
-            "sampling"
-        };
+        let temp_label = if temp == 0.0 { "greedy" } else { "sampling" };
         println!("Temperature = {:.1} ({}):", temp, temp_label);
 
         for dist in &["close", "medium", "far"] {
@@ -391,10 +380,9 @@ fn print_summary(results: &[ConditionResult]) {
                 continue;
             }
 
-            let avg_rate: f32 =
-                steered.iter().map(|r| r.rate).sum::<f32>() / steered.len() as f32;
-            let avg_delta: f32 = steered.iter().map(|r| r.token_distance as f32).sum::<f32>()
-                / steered.len() as f32;
+            let avg_rate: f32 = steered.iter().map(|r| r.rate).sum::<f32>() / steered.len() as f32;
+            let avg_delta: f32 =
+                steered.iter().map(|r| r.token_distance as f32).sum::<f32>() / steered.len() as f32;
 
             println!(
                 "  {:8} (avg delta={:.0} tokens): test rate = {:.0}% (across {} conditions)",
@@ -413,11 +401,7 @@ fn print_summary(results: &[ConditionResult]) {
     println!("============================================================\n");
 
     for &temp in &temps {
-        let temp_label = if temp == 0.0 {
-            "greedy"
-        } else {
-            "sampling"
-        };
+        let temp_label = if temp == 0.0 { "greedy" } else { "sampling" };
         println!("Temperature = {:.1} ({}):", temp, temp_label);
 
         for &scale in SCALES {
@@ -430,8 +414,7 @@ fn print_summary(results: &[ConditionResult]) {
                 continue;
             }
 
-            let avg_rate: f32 =
-                matched.iter().map(|r| r.rate).sum::<f32>() / matched.len() as f32;
+            let avg_rate: f32 = matched.iter().map(|r| r.rate).sum::<f32>() / matched.len() as f32;
             println!(
                 "  x{:.1}: avg test rate = {:.0}% (across {} prompts)",
                 scale,
@@ -480,11 +463,7 @@ fn print_json(results: &[ConditionResult]) -> Result<()> {
 }
 
 /// Find the test marker position in token space.
-fn find_marker_position(
-    model: &PlipModel,
-    text: &str,
-    marker: &str,
-) -> Result<Option<usize>> {
+fn find_marker_position(model: &PlipModel, text: &str, marker: &str) -> Result<Option<usize>> {
     if let Some(char_pos) = text.find(marker) {
         return model.char_to_token(text, char_pos);
     }

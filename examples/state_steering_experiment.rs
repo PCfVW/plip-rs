@@ -462,7 +462,9 @@ fn print_sanity_checks(dose_response: &[DosePoint]) {
 
     println!("\n=== Interpretation ===\n");
     println!("If dose-response shows graded KL: state steering produces controllable effects.");
-    println!("If Python/Rust differ: language-specific state flow, consistent with knockout findings.");
+    println!(
+        "If Python/Rust differ: language-specific state flow, consistent with knockout findings."
+    );
     println!("If scale=0.0 matches knockout results: steering generalizes knockout correctly.");
 }
 

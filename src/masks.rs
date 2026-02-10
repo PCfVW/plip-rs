@@ -151,8 +151,10 @@ pub fn mask_cache_size() -> usize {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use serial_test::serial;
 
     #[test]
+    #[serial]
     fn test_causal_mask_shape() {
         let device = Device::Cpu;
         let dtype = DType::F32;
@@ -161,6 +163,7 @@ mod tests {
     }
 
     #[test]
+    #[serial]
     fn test_causal_mask_values() {
         let device = Device::Cpu;
         let dtype = DType::F32;
@@ -184,6 +187,7 @@ mod tests {
     }
 
     #[test]
+    #[serial]
     fn test_causal_mask_caching() {
         let device = Device::Cpu;
         let dtype = DType::F32;

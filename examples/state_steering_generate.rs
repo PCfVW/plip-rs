@@ -141,7 +141,9 @@ fn main() -> Result<()> {
             args.temperature,
             &[],
             // scale=1.0 is identity (no intervention)
-            &StateSteeringSpec::new(1.0).position(marker_pos).layer(layer),
+            &StateSteeringSpec::new(1.0)
+                .position(marker_pos)
+                .layer(layer),
         )?;
 
         let baseline_has_test = output_contains_test_syntax(&baseline_result.generated_text);
@@ -267,11 +269,7 @@ struct SampleResult {
 }
 
 /// Find the test marker position in the prompt (character position → token position).
-fn find_marker_position(
-    model: &PlipModel,
-    text: &str,
-    category: &str,
-) -> Result<Option<usize>> {
+fn find_marker_position(model: &PlipModel, text: &str, category: &str) -> Result<Option<usize>> {
     let marker = if category.contains("python") {
         ">>>"
     } else {

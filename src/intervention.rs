@@ -1226,11 +1226,7 @@ pub struct StateAblationResult {
 }
 
 impl StateAblationResult {
-    pub fn new(
-        baseline_logits: Tensor,
-        ablated_logits: Tensor,
-        spec: StateKnockoutSpec,
-    ) -> Self {
+    pub fn new(baseline_logits: Tensor, ablated_logits: Tensor, spec: StateKnockoutSpec) -> Self {
         Self {
             baseline_logits,
             ablated_logits,
@@ -1418,11 +1414,7 @@ pub struct StateSteeringResult {
 }
 
 impl StateSteeringResult {
-    pub fn new(
-        baseline_logits: Tensor,
-        steered_logits: Tensor,
-        spec: StateSteeringSpec,
-    ) -> Self {
+    pub fn new(baseline_logits: Tensor, steered_logits: Tensor, spec: StateSteeringSpec) -> Self {
         Self {
             baseline_logits,
             steered_logits,
@@ -1737,10 +1729,7 @@ mod tests {
 
     #[test]
     fn test_state_knockout_position_set() {
-        let spec = StateKnockoutSpec::new()
-            .position(3)
-            .position(5)
-            .position(3);
+        let spec = StateKnockoutSpec::new().position(3).position(5).position(3);
         let set = spec.position_set();
         assert_eq!(set.len(), 2); // deduplication
         assert!(set.contains(&3));

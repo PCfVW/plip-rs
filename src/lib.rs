@@ -100,10 +100,10 @@ pub use kv_cache::KVCache;
 pub use logit_lens::{LogitLensAnalysis, LogitLensResult, TokenPrediction};
 pub use masks::{clear_mask_caches, create_causal_mask, create_generation_mask};
 pub use model::{GenerationResult, ModelArchitecture, PlipBackend, PlipModel, PlipTokenizer};
-pub use tokenizer_rwkv::RwkvTokenizer;
 pub use positioning::{EncodingWithOffsets, PositionConversion, TokenWithOffset};
 pub use probe::{ProbeResults, ProbeTrainer};
 pub use steering::{
     calibrate_from_samples, CalibrationSample, DoseResponseCurve, DoseResponsePoint,
     SteeringCalibration, DOSE_LEVELS,
 };
+pub use tokenizer_rwkv::RwkvTokenizer;

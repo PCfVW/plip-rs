@@ -187,7 +187,13 @@ fn test_rwkv6_forward_logits() {
         .expect("Forward pass failed");
 
     // Get logits as Vec<f32> (squeeze batch dimension)
-    let logits_vec: Vec<f32> = logits.squeeze(0).unwrap().to_dtype(DType::F32).unwrap().to_vec1().unwrap();
+    let logits_vec: Vec<f32> = logits
+        .squeeze(0)
+        .unwrap()
+        .to_dtype(DType::F32)
+        .unwrap()
+        .to_vec1()
+        .unwrap();
 
     // Compare top prediction
     let expected_top = &reference["top_predictions"][0];
@@ -276,8 +282,8 @@ fn test_rwkv6_generation() {
         .collect();
 
     let device = Device::new_cuda(0).expect("CUDA device required");
-    let model = PlipRwkv6::load("RWKV/v6-Finch-1B6-HF", &device, DType::F32)
-        .expect("Model loading failed");
+    let model =
+        PlipRwkv6::load("RWKV/v6-Finch-1B6-HF", &device, DType::F32).expect("Model loading failed");
 
     // Generate with temperature=0 (greedy), EOS=0
     let stop_tokens = vec![0u32];
@@ -306,7 +312,8 @@ fn test_rwkv6_generation() {
 
     // All generated tokens should match for greedy decoding with F32
     assert_eq!(
-        generated, &expected_generated[..],
+        generated,
+        &expected_generated[..],
         "Generated sequence mismatch after {matching} matching tokens"
     );
 }
@@ -375,7 +382,10 @@ fn test_state_knockout_spec_validation() {
     assert!(spec_empty.validate(24, 10).is_err());
 
     // position_set should deduplicate
-    let spec_dup = StateKnockoutSpec::new().position(2).position(2).positions(&[3, 2]);
+    let spec_dup = StateKnockoutSpec::new()
+        .position(2)
+        .position(2)
+        .positions(&[3, 2]);
     let pos_set = spec_dup.position_set();
     assert_eq!(pos_set.len(), 2); // {2, 3}
     assert!(pos_set.contains(&2));
@@ -529,9 +539,7 @@ fn test_rwkv6_effective_attention() {
             .unwrap();
 
         // Index helper: flat[(h * seq_len + q) * seq_len + s] (batch=0)
-        let idx = |h: usize, q: usize, s: usize| -> f32 {
-            flat[(h * seq_len + q) * seq_len + s]
-        };
+        let idx = |h: usize, q: usize, s: usize| -> f32 { flat[(h * seq_len + q) * seq_len + s] };
 
         // Check causality: entries where source > query should be zero
         for head in 0..n_heads {
@@ -586,8 +594,8 @@ fn test_rwkv6_effective_attention_output_unchanged() {
     use plip_rs::PlipRwkv6;
 
     let device = Device::new_cuda(0).expect("CUDA device required");
-    let model = PlipRwkv6::load("RWKV/v6-Finch-1B6-HF", &device, DType::F32)
-        .expect("Model loading failed");
+    let model =
+        PlipRwkv6::load("RWKV/v6-Finch-1B6-HF", &device, DType::F32).expect("Model loading failed");
 
     let tokenizer = {
         let vocab_path_str = hf_hub::api::sync::Api::new()
@@ -600,7 +608,9 @@ fn test_rwkv6_effective_attention_output_unchanged() {
             .unwrap();
         plip_rs::RwkvTokenizer::from_file(std::path::Path::new(&vocab_path_str)).unwrap()
     };
-    let token_ids = tokenizer.encode("def add(a, b):\n    return a + b").unwrap();
+    let token_ids = tokenizer
+        .encode("def add(a, b):\n    return a + b")
+        .unwrap();
     let input_tensor = Tensor::new(&token_ids[..], &device)
         .unwrap()
         .unsqueeze(0)
@@ -625,7 +635,9 @@ fn test_rwkv6_effective_attention_output_unchanged() {
         .to_vec0::<f32>()
         .unwrap();
 
-    println!("Max absolute difference between forward_with_cache and forward_with_attention: {diff:.2e}");
+    println!(
+        "Max absolute difference between forward_with_cache and forward_with_attention: {diff:.2e}"
+    );
 
     assert!(
         diff < 1e-5,

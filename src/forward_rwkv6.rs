@@ -162,7 +162,7 @@ struct Rwkv6Attention {
     time_maa_w2: Tensor, // [5, TIME_MIX_EXTRA_DIM, hidden_size]
 
     // Time decay
-    time_decay: Tensor,   // [1, 1, attention_hidden_size]
+    time_decay: Tensor,    // [1, 1, attention_hidden_size]
     time_decay_w1: Tensor, // [hidden_size, TIME_DECAY_EXTRA_DIM]
     time_decay_w2: Tensor, // [TIME_DECAY_EXTRA_DIM, attention_hidden_size]
 
@@ -218,8 +218,7 @@ impl Rwkv6Attention {
         let ln_x_bias = vb.get(ah, "ln_x.bias")?;
 
         // GroupNorm eps = layer_norm_epsilon * head_size_divisor^2
-        let group_norm_eps =
-            config.layer_norm_epsilon * (config.head_size_divisor as f64).powi(2);
+        let group_norm_eps = config.layer_norm_epsilon * (config.head_size_divisor as f64).powi(2);
 
         Ok(Self {
             time_maa_x,
@@ -273,7 +272,13 @@ impl Rwkv6Attention {
         attn_kv_state: Option<&Tensor>,
         knockout_positions: &HashSet<usize>,
     ) -> Result<(Tensor, Tensor, Tensor)> {
-        self.forward_inner(hidden, attn_x_state, attn_kv_state, Some(knockout_positions), None)
+        self.forward_inner(
+            hidden,
+            attn_x_state,
+            attn_kv_state,
+            Some(knockout_positions),
+            None,
+        )
     }
 
     /// Forward with state steering: scale the kv write at specified positions.
@@ -436,8 +441,7 @@ impl Rwkv6Attention {
             // State update: state = kv + decay * state
             // Intervention: scale or suppress the kv write at specified positions
             let decay_expanded = decay_t.unsqueeze(D::Minus1)?; // [b, h, s, 1]
-            let should_intervene =
-                intervention_positions.is_some_and(|kp| kp.contains(&ti));
+            let should_intervene = intervention_positions.is_some_and(|kp| kp.contains(&ti));
             if should_intervene {
                 let scale = kv_scale.unwrap_or(0.0); // Default: knockout
                 let decayed = state.broadcast_mul(&decay_expanded)?;
@@ -690,8 +694,8 @@ struct Rwkv6FeedForward {
     time_maa_r: Tensor,
 
     key: Linear,        // hidden → intermediate (no bias)
-    receptance: Linear,  // hidden → hidden (no bias)
-    value: Linear,       // intermediate → hidden (no bias)
+    receptance: Linear, // hidden → hidden (no bias)
+    value: Linear,      // intermediate → hidden (no bias)
 }
 
 impl Rwkv6FeedForward {
@@ -723,11 +727,7 @@ impl Rwkv6FeedForward {
     ///
     /// # Returns
     /// (output, new_ffn_x_state)
-    fn forward(
-        &self,
-        hidden: &Tensor,
-        ffn_x_state: Option<&Tensor>,
-    ) -> Result<(Tensor, Tensor)> {
+    fn forward(&self, hidden: &Tensor, ffn_x_state: Option<&Tensor>) -> Result<(Tensor, Tensor)> {
         let (b, t, c) = hidden.dims3()?;
 
         // --- Token shift ---
@@ -938,9 +938,8 @@ impl Rwkv6Block {
             hidden.clone()
         };
 
-        let (attn_out, new_attn_x, new_attn_kv, eff_attn) = self
-            .attention
-            .forward_with_effective_attention(
+        let (attn_out, new_attn_x, new_attn_kv, eff_attn) =
+            self.attention.forward_with_effective_attention(
                 &self.ln1.forward(&hidden)?,
                 attn_x_state,
                 attn_kv_state,
@@ -1055,27 +1054,26 @@ impl PlipRwkv6 {
         );
 
         // Load weights (safetensors — requires prior conversion from pytorch_model.bin)
-        let weights_path = repo
-            .get("model.safetensors")
-            .context(
-                "Failed to download model.safetensors. \
+        let weights_path = repo.get("model.safetensors").context(
+            "Failed to download model.safetensors. \
                  RWKV-6 1B6 only ships pytorch_model.bin — run \
                  scripts/convert_rwkv_to_safetensors.py first.",
-            )?;
+        )?;
 
-        let vb =
-            unsafe { VarBuilder::from_mmaped_safetensors(&[weights_path], dtype, device)? };
+        let vb = unsafe { VarBuilder::from_mmaped_safetensors(&[weights_path], dtype, device)? };
 
         // Build model
         let vb_rwkv = vb.pp("rwkv");
 
-        let embeddings =
-            embedding(config.vocab_size, config.hidden_size, vb_rwkv.pp("embeddings"))?;
+        let embeddings = embedding(
+            config.vocab_size,
+            config.hidden_size,
+            vb_rwkv.pp("embeddings"),
+        )?;
 
         let mut blocks = Vec::with_capacity(config.num_hidden_layers);
         for i in 0..config.num_hidden_layers {
-            let block =
-                Rwkv6Block::load(vb_rwkv.pp(format!("blocks.{i}")), &config, i)?;
+            let block = Rwkv6Block::load(vb_rwkv.pp(format!("blocks.{i}")), &config, i)?;
             blocks.push(block);
         }
 
@@ -1134,10 +1132,7 @@ impl PlipRwkv6 {
     // --- Forward passes ---
 
     /// Full-sequence forward pass with activation capture.
-    pub fn forward_with_cache(
-        &self,
-        input_ids: &Tensor,
-    ) -> Result<(Tensor, ActivationCache)> {
+    pub fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
         let mut cache = ActivationCache::with_capacity(self.n_layers());
         let mut hidden = self.embeddings.forward(input_ids)?;
         let mut state = Rwkv6State::new(self.n_layers());
@@ -1168,17 +1163,14 @@ impl PlipRwkv6 {
     ///
     /// Returns (ln_out_normalized_hidden, attention_cache) where the cache
     /// contains one `[batch, heads, seq, seq]` tensor per layer.
-    pub fn forward_with_attention(
-        &self,
-        input_ids: &Tensor,
-    ) -> Result<(Tensor, AttentionCache)> {
+    pub fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         let mut attn_cache = AttentionCache::with_capacity(self.n_layers());
         let mut hidden = self.embeddings.forward(input_ids)?;
         let mut state = Rwkv6State::new(self.n_layers());
 
         for (i, block) in self.blocks.iter().enumerate() {
-            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x, eff_attn) =
-                block.forward_with_attention(
+            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x, eff_attn) = block
+                .forward_with_attention(
                     &hidden,
                     state.attn_x[i].as_ref(),
                     state.attn_kv[i].as_ref(),
@@ -1191,7 +1183,11 @@ impl PlipRwkv6 {
 
             attn_cache.push(eff_attn); // [b, h, t, t]
 
-            info!("Layer {}/{}: effective attention captured", i + 1, self.n_layers());
+            info!(
+                "Layer {}/{}: effective attention captured",
+                i + 1,
+                self.n_layers()
+            );
         }
 
         let output = self.ln_out.forward(&hidden)?;
@@ -1257,23 +1253,22 @@ impl PlipRwkv6 {
         let mut state = Rwkv6State::new(self.n_layers());
 
         for (i, block) in self.blocks.iter().enumerate() {
-            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x) =
-                if spec.applies_to_layer(i) {
-                    block.forward_with_knockout(
-                        &hidden,
-                        state.attn_x[i].as_ref(),
-                        state.attn_kv[i].as_ref(),
-                        state.ffn_x[i].as_ref(),
-                        &knockout_positions,
-                    )?
-                } else {
-                    block.forward(
-                        &hidden,
-                        state.attn_x[i].as_ref(),
-                        state.attn_kv[i].as_ref(),
-                        state.ffn_x[i].as_ref(),
-                    )?
-                };
+            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x) = if spec.applies_to_layer(i) {
+                block.forward_with_knockout(
+                    &hidden,
+                    state.attn_x[i].as_ref(),
+                    state.attn_kv[i].as_ref(),
+                    state.ffn_x[i].as_ref(),
+                    &knockout_positions,
+                )?
+            } else {
+                block.forward(
+                    &hidden,
+                    state.attn_x[i].as_ref(),
+                    state.attn_kv[i].as_ref(),
+                    state.ffn_x[i].as_ref(),
+                )?
+            };
             hidden = new_hidden;
             state.attn_x[i] = Some(new_attn_x);
             state.attn_kv[i] = Some(new_attn_kv);
@@ -1301,24 +1296,23 @@ impl PlipRwkv6 {
         let mut state = Rwkv6State::new(self.n_layers());
 
         for (i, block) in self.blocks.iter().enumerate() {
-            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x) =
-                if spec.applies_to_layer(i) {
-                    block.forward_with_steering(
-                        &hidden,
-                        state.attn_x[i].as_ref(),
-                        state.attn_kv[i].as_ref(),
-                        state.ffn_x[i].as_ref(),
-                        &steering_positions,
-                        spec.scale,
-                    )?
-                } else {
-                    block.forward(
-                        &hidden,
-                        state.attn_x[i].as_ref(),
-                        state.attn_kv[i].as_ref(),
-                        state.ffn_x[i].as_ref(),
-                    )?
-                };
+            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x) = if spec.applies_to_layer(i) {
+                block.forward_with_steering(
+                    &hidden,
+                    state.attn_x[i].as_ref(),
+                    state.attn_kv[i].as_ref(),
+                    state.ffn_x[i].as_ref(),
+                    &steering_positions,
+                    spec.scale,
+                )?
+            } else {
+                block.forward(
+                    &hidden,
+                    state.attn_x[i].as_ref(),
+                    state.attn_kv[i].as_ref(),
+                    state.ffn_x[i].as_ref(),
+                )?
+            };
             hidden = new_hidden;
             state.attn_x[i] = Some(new_attn_x);
             state.attn_kv[i] = Some(new_attn_kv);
@@ -1352,24 +1346,23 @@ impl PlipRwkv6 {
         let mut hidden = self.embeddings.forward(input_ids)?;
 
         for (i, block) in self.blocks.iter().enumerate() {
-            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x) =
-                if spec.applies_to_layer(i) {
-                    block.forward_with_steering(
-                        &hidden,
-                        state.attn_x[i].as_ref(),
-                        state.attn_kv[i].as_ref(),
-                        state.ffn_x[i].as_ref(),
-                        &steering_positions,
-                        spec.scale,
-                    )?
-                } else {
-                    block.forward(
-                        &hidden,
-                        state.attn_x[i].as_ref(),
-                        state.attn_kv[i].as_ref(),
-                        state.ffn_x[i].as_ref(),
-                    )?
-                };
+            let (new_hidden, new_attn_x, new_attn_kv, new_ffn_x) = if spec.applies_to_layer(i) {
+                block.forward_with_steering(
+                    &hidden,
+                    state.attn_x[i].as_ref(),
+                    state.attn_kv[i].as_ref(),
+                    state.ffn_x[i].as_ref(),
+                    &steering_positions,
+                    spec.scale,
+                )?
+            } else {
+                block.forward(
+                    &hidden,
+                    state.attn_x[i].as_ref(),
+                    state.attn_kv[i].as_ref(),
+                    state.ffn_x[i].as_ref(),
+                )?
+            };
             hidden = new_hidden;
             state.attn_x[i] = Some(new_attn_x);
             state.attn_kv[i] = Some(new_attn_kv);
@@ -1486,11 +1479,7 @@ impl PlipRwkv6 {
         self.head.forward(hidden).map_err(Into::into)
     }
 
-    pub fn logit_lens_top_k(
-        &self,
-        activation: &Tensor,
-        k: usize,
-    ) -> Result<Vec<(u32, f32)>> {
+    pub fn logit_lens_top_k(&self, activation: &Tensor, k: usize) -> Result<Vec<(u32, f32)>> {
         let logits = self.logit_lens(activation)?;
         let logits_f32 = logits.to_dtype(DType::F32)?;
         let logits_vec: Vec<f32> = logits_f32.flatten_all()?.to_vec1()?;
@@ -1535,10 +1524,7 @@ impl PlipBackend for PlipRwkv6 {
         self.forward_with_cache(input_ids)
     }
 
-    fn forward_with_attention(
-        &self,
-        input_ids: &Tensor,
-    ) -> Result<(Tensor, AttentionCache)> {
+    fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_attention(input_ids)
     }
 
@@ -1601,11 +1587,7 @@ impl PlipBackend for PlipRwkv6 {
     fn new_kv_cache(&self) -> KVCache {
         self.new_kv_cache()
     }
-    fn forward_with_kv_cache(
-        &self,
-        input_ids: &Tensor,
-        kv_cache: &mut KVCache,
-    ) -> Result<Tensor> {
+    fn forward_with_kv_cache(&self, input_ids: &Tensor, kv_cache: &mut KVCache) -> Result<Tensor> {
         self.forward_with_kv_cache(input_ids, kv_cache)
     }
     fn generate(

@@ -208,7 +208,9 @@ fn main() -> Result<()> {
     tracing_subscriber::fmt::init();
     let args = Args::parse();
 
-    println!("=== State Ablation Experiment: Does State Knockout Break Preservation? (RWKV-6) ===\n");
+    println!(
+        "=== State Ablation Experiment: Does State Knockout Break Preservation? (RWKV-6) ===\n"
+    );
 
     // Find corpus file
     let corpus_path = args
@@ -551,9 +553,7 @@ fn run_layer_scan(model: &PlipModel, corpus: &Corpus, args: &Args) -> Result<()>
 
     println!("Top layers for Python doctest:");
     for (layer, py_kl, rust_kl) in by_python.iter().take(5) {
-        println!(
-            "  Layer {layer:2}: KL = {py_kl:.6} (Rust: {rust_kl:.6})"
-        );
+        println!("  Layer {layer:2}: KL = {py_kl:.6} (Rust: {rust_kl:.6})");
     }
 
     let mut by_rust: Vec<_> = layer_effects.iter().collect();
@@ -561,9 +561,7 @@ fn run_layer_scan(model: &PlipModel, corpus: &Corpus, args: &Args) -> Result<()>
 
     println!("\nTop layers for Rust test:");
     for (layer, py_kl, rust_kl) in by_rust.iter().take(5) {
-        println!(
-            "  Layer {layer:2}: KL = {rust_kl:.6} (Python: {py_kl:.6})"
-        );
+        println!("  Layer {layer:2}: KL = {rust_kl:.6} (Python: {py_kl:.6})");
     }
 
     Ok(())
@@ -695,8 +693,7 @@ fn run_window_scan(
         let start = center.saturating_sub(radius);
         let end = (center + radius).min(n_layers - 1);
 
-        let py_result =
-            process_sample_layers(model, py_sample, "python", false, start, end, args)?;
+        let py_result = process_sample_layers(model, py_sample, "python", false, start, end, args)?;
         let rust_result =
             process_sample_layers(model, rust_sample, "rust", false, start, end, args)?;
 
@@ -730,18 +727,11 @@ fn run_sliding_window_scan(
     let n_layers = model.n_layers();
 
     if window_size > n_layers {
-        anyhow::bail!(
-            "Window size {window_size} exceeds number of layers {n_layers}"
-        );
+        anyhow::bail!("Window size {window_size} exceeds number of layers {n_layers}");
     }
 
-    println!(
-        "=== Sliding Window Scan: Window Size {window_size} (State Knockout) ===\n"
-    );
-    println!(
-        "Model: {} ({} layers, RWKV-6)",
-        args.model, n_layers
-    );
+    println!("=== Sliding Window Scan: Window Size {window_size} (State Knockout) ===\n");
+    println!("Model: {} ({} layers, RWKV-6)", args.model, n_layers);
     println!();
 
     let py_sample = &corpus.python_doctest[0];
@@ -758,8 +748,7 @@ fn run_sliding_window_scan(
     for start in 0..=(n_layers - window_size) {
         let end = start + window_size - 1;
 
-        let py_result =
-            process_sample_layers(model, py_sample, "python", false, start, end, args)?;
+        let py_result = process_sample_layers(model, py_sample, "python", false, start, end, args)?;
         let rust_result =
             process_sample_layers(model, rust_sample, "rust", false, start, end, args)?;
 
@@ -898,10 +887,14 @@ fn print_results(results: &ExperimentResults) {
 
     if results.significant_difference {
         if py_mean > rust_mean {
-            println!("\nFINDING: Python doctests are MORE affected by state knockout than Rust tests.");
+            println!(
+                "\nFINDING: Python doctests are MORE affected by state knockout than Rust tests."
+            );
             println!("         This suggests different preservation mechanisms per language.");
         } else {
-            println!("\nFINDING: Rust tests are MORE affected by state knockout than Python doctests.");
+            println!(
+                "\nFINDING: Rust tests are MORE affected by state knockout than Python doctests."
+            );
             println!("         This suggests different preservation mechanisms per language.");
         }
     } else {

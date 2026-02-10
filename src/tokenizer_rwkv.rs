@@ -154,12 +154,14 @@ impl RwkvTokenizer {
         for &id in ids {
             let id_usize = id as usize;
             if id_usize >= self.idx2token.len() {
-                anyhow::bail!("Token ID {id} out of range (vocab size {})", self.idx2token.len());
+                anyhow::bail!(
+                    "Token ID {id} out of range (vocab size {})",
+                    self.idx2token.len()
+                );
             }
             bytes.extend_from_slice(&self.idx2token[id_usize]);
         }
-        String::from_utf8(bytes)
-            .map_err(|e| anyhow::anyhow!("UTF-8 decode error: {e}"))
+        String::from_utf8(bytes).map_err(|e| anyhow::anyhow!("UTF-8 decode error: {e}"))
     }
 
     /// Get vocabulary mapping (string → token ID) for special token lookups.
@@ -371,10 +373,7 @@ mod tests {
         // String literal '\\x80' → U+0080 → two UTF-8 bytes [0xC2, 0x80]
         assert_eq!(parse_python_literal("'\\x80'").unwrap(), vec![0xC2, 0x80]);
         // String literal '\\xff' → U+00FF → two UTF-8 bytes [0xC3, 0xBF]
-        assert_eq!(
-            parse_python_literal("'\\xff'").unwrap(),
-            vec![0xC3, 0xBF]
-        );
+        assert_eq!(parse_python_literal("'\\xff'").unwrap(), vec![0xC3, 0xBF]);
         assert_eq!(parse_python_literal("'\\t\\t'").unwrap(), b"\t\t");
     }
 
