@@ -1,0 +1,1069 @@
+{
+  "explore_json": "outputs/explore_vocab_all_layers.json",
+  "cmu_dict": "corpus/cmudict.dict",
+  "min_cosine": 0.3,
+  "n_features_loaded": 425984,
+  "n_clean_english": 287,
+  "n_in_cmu_dict": 279,
+  "n_rhyme_groups": 35,
+  "n_rhyming_words": 98,
+  "rhyme_groups": [
+    {
+      "rhyme_ending": "IY1",
+      "words": [
+        {
+          "word": "we",
+          "feature": {
+            "layer": 25,
+            "index": 9391
+          },
+          "cosine": 0.6126827,
+          "phonemes": "W IY1"
+        },
+        {
+          "word": "be",
+          "feature": {
+            "layer": 25,
+            "index": 12680
+          },
+          "cosine": 0.57758415,
+          "phonemes": "B IY1"
+        },
+        {
+          "word": "free",
+          "feature": {
+            "layer": 20,
+            "index": 12510
+          },
+          "cosine": 0.54057205,
+          "phonemes": "F R IY1"
+        },
+        {
+          "word": "de",
+          "feature": {
+            "layer": 25,
+            "index": 14100
+          },
+          "cosine": 0.51547337,
+          "phonemes": "D IY1"
+        },
+        {
+          "word": "he",
+          "feature": {
+            "layer": 22,
+            "index": 3693
+          },
+          "cosine": 0.46809214,
+          "phonemes": "HH IY1"
+        },
+        {
+          "word": "she",
+          "feature": {
+            "layer": 24,
+            "index": 714
+          },
+          "cosine": 0.46373138,
+          "phonemes": "SH IY1"
+        },
+        {
+          "word": "me",
+          "feature": {
+            "layer": 21,
+            "index": 11371
+          },
+          "cosine": 0.3581997,
+          "phonemes": "M IY1"
+        },
+        {
+          "word": "three",
+          "feature": {
+            "layer": 25,
+            "index": 11713
+          },
+          "cosine": 0.32570383,
+          "phonemes": "TH R IY1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "OW1",
+      "words": [
+        {
+          "word": "so",
+          "feature": {
+            "layer": 25,
+            "index": 6778
+          },
+          "cosine": 0.627549,
+          "phonemes": "S OW1"
+        },
+        {
+          "word": "grow",
+          "feature": {
+            "layer": 25,
+            "index": 4985
+          },
+          "cosine": 0.51491606,
+          "phonemes": "G R OW1"
+        },
+        {
+          "word": "go",
+          "feature": {
+            "layer": 25,
+            "index": 4505
+          },
+          "cosine": 0.40554914,
+          "phonemes": "G OW1"
+        },
+        {
+          "word": "know",
+          "feature": {
+            "layer": 22,
+            "index": 10362
+          },
+          "cosine": 0.3709924,
+          "phonemes": "N OW1"
+        },
+        {
+          "word": "slow",
+          "feature": {
+            "layer": 25,
+            "index": 5776
+          },
+          "cosine": 0.34961444,
+          "phonemes": "S L OW1"
+        },
+        {
+          "word": "though",
+          "feature": {
+            "layer": 20,
+            "index": 12770
+          },
+          "cosine": 0.3495655,
+          "phonemes": "DH OW1"
+        },
+        {
+          "word": "snow",
+          "feature": {
+            "layer": 19,
+            "index": 3248
+          },
+          "cosine": 0.33774078,
+          "phonemes": "S N OW1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "UW1",
+      "words": [
+        {
+          "word": "to",
+          "feature": {
+            "layer": 25,
+            "index": 10073
+          },
+          "cosine": 0.53434205,
+          "phonemes": "T UW1"
+        },
+        {
+          "word": "who",
+          "feature": {
+            "layer": 23,
+            "index": 1548
+          },
+          "cosine": 0.51317906,
+          "phonemes": "HH UW1"
+        },
+        {
+          "word": "do",
+          "feature": {
+            "layer": 25,
+            "index": 14014
+          },
+          "cosine": 0.44279763,
+          "phonemes": "D UW1"
+        },
+        {
+          "word": "too",
+          "feature": {
+            "layer": 18,
+            "index": 7484
+          },
+          "cosine": 0.4188498,
+          "phonemes": "T UW1"
+        },
+        {
+          "word": "two",
+          "feature": {
+            "layer": 19,
+            "index": 5076
+          },
+          "cosine": 0.40349606,
+          "phonemes": "T UW1"
+        },
+        {
+          "word": "new",
+          "feature": {
+            "layer": 23,
+            "index": 3304
+          },
+          "cosine": 0.3855815,
+          "phonemes": "N UW1"
+        },
+        {
+          "word": "ou",
+          "feature": {
+            "layer": 25,
+            "index": 5927
+          },
+          "cosine": 0.31145766,
+          "phonemes": "UW1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AW1 N D",
+      "words": [
+        {
+          "word": "found",
+          "feature": {
+            "layer": 25,
+            "index": 6000
+          },
+          "cosine": 0.57110107,
+          "phonemes": "F AW1 N D"
+        },
+        {
+          "word": "round",
+          "feature": {
+            "layer": 24,
+            "index": 15683
+          },
+          "cosine": 0.5317584,
+          "phonemes": "R AW1 N D"
+        },
+        {
+          "word": "around",
+          "feature": {
+            "layer": 22,
+            "index": 10243
+          },
+          "cosine": 0.47081587,
+          "phonemes": "ER0 AW1 N D"
+        },
+        {
+          "word": "ground",
+          "feature": {
+            "layer": 25,
+            "index": 14915
+          },
+          "cosine": 0.44596604,
+          "phonemes": "G R AW1 N D"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AA1 N",
+      "words": [
+        {
+          "word": "don",
+          "feature": {
+            "layer": 25,
+            "index": 12569
+          },
+          "cosine": 0.5360542,
+          "phonemes": "D AA1 N"
+        },
+        {
+          "word": "upon",
+          "feature": {
+            "layer": 24,
+            "index": 10328
+          },
+          "cosine": 0.51313955,
+          "phonemes": "AH0 P AA1 N"
+        },
+        {
+          "word": "on",
+          "feature": {
+            "layer": 25,
+            "index": 6476
+          },
+          "cosine": 0.45053753,
+          "phonemes": "AA1 N"
+        },
+        {
+          "word": "con",
+          "feature": {
+            "layer": 25,
+            "index": 5978
+          },
+          "cosine": 0.36957118,
+          "phonemes": "K AA1 N"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AE1 N",
+      "words": [
+        {
+          "word": "can",
+          "feature": {
+            "layer": 25,
+            "index": 691
+          },
+          "cosine": 0.60290855,
+          "phonemes": "K AE1 N"
+        },
+        {
+          "word": "an",
+          "feature": {
+            "layer": 25,
+            "index": 7363
+          },
+          "cosine": 0.54515874,
+          "phonemes": "AE1 N"
+        },
+        {
+          "word": "than",
+          "feature": {
+            "layer": 19,
+            "index": 12532
+          },
+          "cosine": 0.3409412,
+          "phonemes": "DH AE1 N"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IY1 Z",
+      "words": [
+        {
+          "word": "please",
+          "feature": {
+            "layer": 25,
+            "index": 1665
+          },
+          "cosine": 0.5330272,
+          "phonemes": "P L IY1 Z"
+        },
+        {
+          "word": "these",
+          "feature": {
+            "layer": 19,
+            "index": 7913
+          },
+          "cosine": 0.40339142,
+          "phonemes": "DH IY1 Z"
+        },
+        {
+          "word": "chinese",
+          "feature": {
+            "layer": 24,
+            "index": 1672
+          },
+          "cosine": 0.3121818,
+          "phonemes": "CH AY0 N IY1 Z"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AH1 M",
+      "words": [
+        {
+          "word": "come",
+          "feature": {
+            "layer": 25,
+            "index": 15291
+          },
+          "cosine": 0.51929224,
+          "phonemes": "K AH1 M"
+        },
+        {
+          "word": "from",
+          "feature": {
+            "layer": 24,
+            "index": 11252
+          },
+          "cosine": 0.4257747,
+          "phonemes": "F R AH1 M"
+        },
+        {
+          "word": "become",
+          "feature": {
+            "layer": 22,
+            "index": 13319
+          },
+          "cosine": 0.313825,
+          "phonemes": "B IH0 K AH1 M"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EY1 SH AH0 N",
+      "words": [
+        {
+          "word": "information",
+          "feature": {
+            "layer": 25,
+            "index": 6358
+          },
+          "cosine": 0.50059104,
+          "phonemes": "IH2 N F ER0 M EY1 SH AH0 N"
+        },
+        {
+          "word": "organization",
+          "feature": {
+            "layer": 25,
+            "index": 10425
+          },
+          "cosine": 0.41137978,
+          "phonemes": "AO2 R G AH0 N AH0 Z EY1 SH AH0 N"
+        },
+        {
+          "word": "location",
+          "feature": {
+            "layer": 19,
+            "index": 13534
+          },
+          "cosine": 0.31111956,
+          "phonemes": "L OW0 K EY1 SH AH0 N"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AO1 R",
+      "words": [
+        {
+          "word": "your",
+          "feature": {
+            "layer": 21,
+            "index": 4934
+          },
+          "cosine": 0.45719284,
+          "phonemes": "Y AO1 R"
+        },
+        {
+          "word": "or",
+          "feature": {
+            "layer": 23,
+            "index": 7122
+          },
+          "cosine": 0.4521554,
+          "phonemes": "AO1 R"
+        },
+        {
+          "word": "for",
+          "feature": {
+            "layer": 24,
+            "index": 5705
+          },
+          "cosine": 0.445916,
+          "phonemes": "F AO1 R"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EY1 T",
+      "words": [
+        {
+          "word": "straight",
+          "feature": {
+            "layer": 24,
+            "index": 15959
+          },
+          "cosine": 0.44436643,
+          "phonemes": "S T R EY1 T"
+        },
+        {
+          "word": "great",
+          "feature": {
+            "layer": 24,
+            "index": 2883
+          },
+          "cosine": 0.38314486,
+          "phonemes": "G R EY1 T"
+        },
+        {
+          "word": "weight",
+          "feature": {
+            "layer": 18,
+            "index": 6003
+          },
+          "cosine": 0.34166193,
+          "phonemes": "W EY1 T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 L",
+      "words": [
+        {
+          "word": "will",
+          "feature": {
+            "layer": 22,
+            "index": 9599
+          },
+          "cosine": 0.4206406,
+          "phonemes": "W IH1 L"
+        },
+        {
+          "word": "still",
+          "feature": {
+            "layer": 19,
+            "index": 11977
+          },
+          "cosine": 0.38245767,
+          "phonemes": "S T IH1 L"
+        },
+        {
+          "word": "until",
+          "feature": {
+            "layer": 21,
+            "index": 15310
+          },
+          "cosine": 0.31101406,
+          "phonemes": "AH0 N T IH1 L"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AY1 ER0",
+      "words": [
+        {
+          "word": "require",
+          "feature": {
+            "layer": 24,
+            "index": 7275
+          },
+          "cosine": 0.41843382,
+          "phonemes": "R IY2 K W AY1 ER0"
+        },
+        {
+          "word": "fire",
+          "feature": {
+            "layer": 22,
+            "index": 4814
+          },
+          "cosine": 0.37370333,
+          "phonemes": "F AY1 ER0"
+        },
+        {
+          "word": "entire",
+          "feature": {
+            "layer": 20,
+            "index": 11687
+          },
+          "cosine": 0.301731,
+          "phonemes": "IH0 N T AY1 ER0"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AH1 T",
+      "words": [
+        {
+          "word": "but",
+          "feature": {
+            "layer": 25,
+            "index": 12938
+          },
+          "cosine": 0.63979036,
+          "phonemes": "B AH1 T"
+        },
+        {
+          "word": "cut",
+          "feature": {
+            "layer": 25,
+            "index": 11236
+          },
+          "cosine": 0.46071142,
+          "phonemes": "K AH1 T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AY1 N D",
+      "words": [
+        {
+          "word": "kind",
+          "feature": {
+            "layer": 24,
+            "index": 3369
+          },
+          "cosine": 0.63941497,
+          "phonemes": "K AY1 N D"
+        },
+        {
+          "word": "find",
+          "feature": {
+            "layer": 17,
+            "index": 12368
+          },
+          "cosine": 0.33677992,
+          "phonemes": "F AY1 N D"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AE1 K",
+      "words": [
+        {
+          "word": "black",
+          "feature": {
+            "layer": 25,
+            "index": 3685
+          },
+          "cosine": 0.6018487,
+          "phonemes": "B L AE1 K"
+        },
+        {
+          "word": "back",
+          "feature": {
+            "layer": 20,
+            "index": 12386
+          },
+          "cosine": 0.3708843,
+          "phonemes": "B AE1 K"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 R",
+      "words": [
+        {
+          "word": "year",
+          "feature": {
+            "layer": 25,
+            "index": 4086
+          },
+          "cosine": 0.58737904,
+          "phonemes": "Y IH1 R"
+        },
+        {
+          "word": "clear",
+          "feature": {
+            "layer": 22,
+            "index": 11775
+          },
+          "cosine": 0.37967148,
+          "phonemes": "K L IH1 R"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 T IY0",
+      "words": [
+        {
+          "word": "pretty",
+          "feature": {
+            "layer": 25,
+            "index": 14138
+          },
+          "cosine": 0.5769388,
+          "phonemes": "P R IH1 T IY0"
+        },
+        {
+          "word": "city",
+          "feature": {
+            "layer": 18,
+            "index": 14783
+          },
+          "cosine": 0.32089323,
+          "phonemes": "S IH1 T IY0"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AE1 T",
+      "words": [
+        {
+          "word": "at",
+          "feature": {
+            "layer": 25,
+            "index": 1720
+          },
+          "cosine": 0.53707516,
+          "phonemes": "AE1 T"
+        },
+        {
+          "word": "that",
+          "feature": {
+            "layer": 25,
+            "index": 15487
+          },
+          "cosine": 0.34149376,
+          "phonemes": "DH AE1 T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AW1 T",
+      "words": [
+        {
+          "word": "about",
+          "feature": {
+            "layer": 16,
+            "index": 13725
+          },
+          "cosine": 0.5203035,
+          "phonemes": "AH0 B AW1 T"
+        },
+        {
+          "word": "out",
+          "feature": {
+            "layer": 25,
+            "index": 9385
+          },
+          "cosine": 0.41213536,
+          "phonemes": "AW1 T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EH1 L",
+      "words": [
+        {
+          "word": "tell",
+          "feature": {
+            "layer": 25,
+            "index": 7317
+          },
+          "cosine": 0.48933247,
+          "phonemes": "T EH1 L"
+        },
+        {
+          "word": "well",
+          "feature": {
+            "layer": 23,
+            "index": 12852
+          },
+          "cosine": 0.36272857,
+          "phonemes": "W EH1 L"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 NG",
+      "words": [
+        {
+          "word": "ing",
+          "feature": {
+            "layer": 24,
+            "index": 5818
+          },
+          "cosine": 0.47873908,
+          "phonemes": "IH1 NG"
+        },
+        {
+          "word": "bring",
+          "feature": {
+            "layer": 24,
+            "index": 8835
+          },
+          "cosine": 0.37695983,
+          "phonemes": "B R IH1 NG"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AA1 R",
+      "words": [
+        {
+          "word": "far",
+          "feature": {
+            "layer": 25,
+            "index": 16107
+          },
+          "cosine": 0.47419232,
+          "phonemes": "F AA1 R"
+        },
+        {
+          "word": "are",
+          "feature": {
+            "layer": 25,
+            "index": 10682
+          },
+          "cosine": 0.47274423,
+          "phonemes": "AA1 R"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EY1 K S",
+      "words": [
+        {
+          "word": "makes",
+          "feature": {
+            "layer": 25,
+            "index": 9630
+          },
+          "cosine": 0.45097807,
+          "phonemes": "M EY1 K S"
+        },
+        {
+          "word": "takes",
+          "feature": {
+            "layer": 22,
+            "index": 8873
+          },
+          "cosine": 0.38368732,
+          "phonemes": "T EY1 K S"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EY1",
+      "words": [
+        {
+          "word": "they",
+          "feature": {
+            "layer": 23,
+            "index": 12891
+          },
+          "cosine": 0.4454371,
+          "phonemes": "DH EY1"
+        },
+        {
+          "word": "way",
+          "feature": {
+            "layer": 22,
+            "index": 1881
+          },
+          "cosine": 0.36239943,
+          "phonemes": "W EY1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 T",
+      "words": [
+        {
+          "word": "it",
+          "feature": {
+            "layer": 25,
+            "index": 8516
+          },
+          "cosine": 0.41542366,
+          "phonemes": "IH1 T"
+        },
+        {
+          "word": "kit",
+          "feature": {
+            "layer": 24,
+            "index": 13855
+          },
+          "cosine": 0.38245422,
+          "phonemes": "K IH1 T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AE1 S T",
+      "words": [
+        {
+          "word": "past",
+          "feature": {
+            "layer": 21,
+            "index": 7082
+          },
+          "cosine": 0.41535935,
+          "phonemes": "P AE1 S T"
+        },
+        {
+          "word": "fast",
+          "feature": {
+            "layer": 23,
+            "index": 10609
+          },
+          "cosine": 0.3669656,
+          "phonemes": "F AE1 S T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AH1 L T",
+      "words": [
+        {
+          "word": "result",
+          "feature": {
+            "layer": 25,
+            "index": 15228
+          },
+          "cosine": 0.4021301,
+          "phonemes": "R IH0 Z AH1 L T"
+        },
+        {
+          "word": "adult",
+          "feature": {
+            "layer": 20,
+            "index": 15672
+          },
+          "cosine": 0.33946186,
+          "phonemes": "AH0 D AH1 L T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AY1 V",
+      "words": [
+        {
+          "word": "five",
+          "feature": {
+            "layer": 25,
+            "index": 12798
+          },
+          "cosine": 0.39863473,
+          "phonemes": "F AY1 V"
+        },
+        {
+          "word": "dr",
+          "feature": {
+            "layer": 18,
+            "index": 1117
+          },
+          "cosine": 0.35104263,
+          "phonemes": "D R AY1 V"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AY1",
+      "words": [
+        {
+          "word": "by",
+          "feature": {
+            "layer": 18,
+            "index": 11113
+          },
+          "cosine": 0.38458744,
+          "phonemes": "B AY1"
+        },
+        {
+          "word": "supply",
+          "feature": {
+            "layer": 24,
+            "index": 12243
+          },
+          "cosine": 0.37190205,
+          "phonemes": "S AH0 P L AY1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 S",
+      "words": [
+        {
+          "word": "dis",
+          "feature": {
+            "layer": 25,
+            "index": 13445
+          },
+          "cosine": 0.38140795,
+          "phonemes": "D IH1 S"
+        },
+        {
+          "word": "this",
+          "feature": {
+            "layer": 6,
+            "index": 4120
+          },
+          "cosine": 0.3087131,
+          "phonemes": "DH IH1 S"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AY1 N",
+      "words": [
+        {
+          "word": "nine",
+          "feature": {
+            "layer": 25,
+            "index": 10479
+          },
+          "cosine": 0.37889716,
+          "phonemes": "N AY1 N"
+        },
+        {
+          "word": "design",
+          "feature": {
+            "layer": 21,
+            "index": 8520
+          },
+          "cosine": 0.3143376,
+          "phonemes": "D IH0 Z AY1 N"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EH1 N D",
+      "words": [
+        {
+          "word": "tend",
+          "feature": {
+            "layer": 24,
+            "index": 2127
+          },
+          "cosine": 0.37595987,
+          "phonemes": "T EH1 N D"
+        },
+        {
+          "word": "end",
+          "feature": {
+            "layer": 24,
+            "index": 8639
+          },
+          "cosine": 0.30623406,
+          "phonemes": "EH1 N D"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AH1 N",
+      "words": [
+        {
+          "word": "ton",
+          "feature": {
+            "layer": 24,
+            "index": 6829
+          },
+          "cosine": 0.36290935,
+          "phonemes": "T AH1 N"
+        },
+        {
+          "word": "run",
+          "feature": {
+            "layer": 24,
+            "index": 14568
+          },
+          "cosine": 0.30721354,
+          "phonemes": "R AH1 N"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AA1 T",
+      "words": [
+        {
+          "word": "hot",
+          "feature": {
+            "layer": 25,
+            "index": 1487
+          },
+          "cosine": 0.32870105,
+          "phonemes": "HH AA1 T"
+        },
+        {
+          "word": "not",
+          "feature": {
+            "layer": 18,
+            "index": 8215
+          },
+          "cosine": 0.31781897,
+          "phonemes": "N AA1 T"
+        }
+      ]
+    }
+  ]
+}

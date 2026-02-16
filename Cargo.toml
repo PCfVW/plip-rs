@@ -214,6 +214,18 @@ path = "examples/evaluate_steering.rs"
 name = "poetry_category_steering"
 path = "examples/poetry_category_steering.rs"
 
+[[example]]
+name = "steering_sweep"
+path = "examples/steering_sweep.rs"
+
+[[example]]
+name = "suppress_inject_sweep"
+path = "examples/suppress_inject_sweep.rs"
+
+[[example]]
+name = "analyze_suppress_inject"
+path = "examples/analyze_suppress_inject.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1
