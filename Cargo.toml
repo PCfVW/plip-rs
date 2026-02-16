@@ -194,6 +194,10 @@ path = "examples/clt_logit_shift.rs"
 name = "verify_poetry_corpus"
 path = "examples/verify_poetry_corpus.rs"
 
+[[example]]
+name = "poetry_layer_scan"
+path = "examples/poetry_layer_scan.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1
