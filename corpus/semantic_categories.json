@@ -1,0 +1,36 @@
+{
+  "_format_version": "1.0",
+  "_description": "Semantic category word lists for Method 7 (category-level CLT steering). Words chosen to be single-token in Gemma 2 tokenizer, common in poetry, and spanning multiple rhyme families per category.",
+  "categories": {
+    "nature": [
+      "tree", "river", "mountain", "sky", "ocean", "forest", "flower", "rain",
+      "wind", "stone", "lake", "field", "sea", "hill", "snow", "leaf", "brook",
+      "garden", "earth", "shore", "meadow", "stream", "wood", "cloud", "dawn",
+      "frost", "sand", "cliff", "vale", "pond", "vine", "moss", "root", "storm",
+      "tide", "spring", "marsh", "dust", "grove", "bloom"
+    ],
+    "emotion": [
+      "love", "fear", "joy", "grief", "hope", "rage", "peace", "pride",
+      "shame", "bliss", "dread", "glee", "woe", "awe", "scorn", "grace",
+      "hate", "trust", "doubt", "zeal", "calm", "pain", "glow", "gloom",
+      "sorrow", "delight", "despair", "longing", "desire", "anger", "pity",
+      "envy", "guilt", "mirth", "wonder", "regret", "charm", "warmth", "dismay",
+      "content"
+    ],
+    "light": [
+      "sun", "moon", "star", "flame", "shadow", "dawn", "night", "fire",
+      "spark", "gleam", "shine", "ray", "blaze", "dusk", "beam", "light",
+      "dark", "torch", "lamp", "flash", "burn", "glare", "bright", "fade",
+      "glow", "flare", "ember", "haze", "shade", "noon", "dim", "gold",
+      "silver", "pale", "candle", "lantern", "radiance", "twilight", "bronze",
+      "shimmer"
+    ],
+    "motion": [
+      "run", "fly", "dance", "fall", "climb", "leap", "swim", "drift",
+      "soar", "spin", "glide", "rush", "crawl", "march", "roam", "chase",
+      "flow", "sweep", "race", "stride", "sail", "ride", "plunge", "spring",
+      "turn", "slide", "dash", "sway", "tread", "wander", "flee", "sink",
+      "rise", "roll", "pull", "push", "drop", "walk", "creep", "bound"
+    ]
+  }
+}

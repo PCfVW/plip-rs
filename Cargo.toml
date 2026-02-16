@@ -190,6 +190,10 @@ path = "examples/validate_clt.rs"
 name = "clt_logit_shift"
 path = "examples/clt_logit_shift.rs"
 
+[[example]]
+name = "verify_poetry_corpus"
+path = "examples/verify_poetry_corpus.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1
