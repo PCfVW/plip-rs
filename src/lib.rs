@@ -31,6 +31,7 @@
 //! - `forward`: StarCoder2 forward pass with activation capture hooks
 //! - `forward_qwen2`: Qwen2 forward pass with activation capture hooks
 //! - `forward_gemma`: Gemma/CodeGemma forward pass with activation capture hooks
+//! - `forward_gemma2`: Gemma 2 forward pass with per-layer activation capture
 //! - `forward_llama`: LLaMA/Code-LLaMA forward pass with activation capture hooks
 //! - `forward_phi3`: Phi-3 forward pass with activation capture hooks
 //! - `cache`: ActivationCache for storing layer activations
@@ -51,6 +52,7 @@ pub mod corpus;
 pub mod experiment;
 pub mod forward;
 pub mod forward_gemma;
+pub mod forward_gemma2;
 pub mod forward_llama;
 pub mod forward_phi3;
 pub mod forward_qwen2;
@@ -71,6 +73,7 @@ pub use corpus::{CodeSample, Corpus};
 pub use experiment::{Experiment, ExperimentConfig, ExperimentResults};
 pub use forward::PlipStarCoder2;
 pub use forward_gemma::PlipGemma;
+pub use forward_gemma2::PlipGemma2;
 pub use forward_llama::PlipLlama;
 pub use forward_phi3::PlipPhi3;
 pub use forward_qwen2::PlipQwen2;

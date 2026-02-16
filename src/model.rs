@@ -13,6 +13,7 @@ use crate::attention::{AttentionAnalysis, AttentionCache};
 use crate::cache::ActivationCache;
 use crate::forward::PlipStarCoder2;
 use crate::forward_gemma::PlipGemma;
+use crate::forward_gemma2::PlipGemma2;
 use crate::forward_llama::PlipLlama;
 use crate::forward_phi3::PlipPhi3;
 use crate::forward_qwen2::PlipQwen2;
@@ -33,8 +34,10 @@ pub enum ModelArchitecture {
     StarCoder2,
     /// Qwen2 / Qwen2.5 (Alibaba)
     Qwen2,
-    /// Gemma / CodeGemma (Google)
+    /// Gemma / CodeGemma (Google, Gemma 1)
     Gemma,
+    /// Gemma 2 (Google)
+    Gemma2,
     /// LLaMA / Code-LLaMA (Meta)
     Llama,
     /// Phi-3 (Microsoft)
@@ -51,6 +54,8 @@ impl ModelArchitecture {
             ModelArchitecture::Qwen2
         } else if model_lower.contains("starcoder") || model_lower.contains("bigcode") {
             ModelArchitecture::StarCoder2
+        } else if model_lower.contains("gemma-2") || model_lower.contains("gemma2") {
+            ModelArchitecture::Gemma2
         } else if model_lower.contains("gemma") || model_lower.contains("codegemma") {
             ModelArchitecture::Gemma
         } else if model_lower.contains("llama") || model_lower.contains("codellama") {
@@ -179,11 +184,13 @@ pub enum PlipTokenizer {
 
 impl PlipTokenizer {
     /// Encode text into token IDs.
+    ///
+    /// Adds special tokens (e.g. BOS for Gemma) as configured in tokenizer.json.
     pub fn encode(&self, text: &str) -> Result<Vec<u32>> {
         match self {
             Self::HuggingFace(t) => {
                 let encoding = t
-                    .encode(text, false)
+                    .encode(text, true)
                     .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
                 Ok(encoding.get_ids().to_vec())
             }
@@ -200,7 +207,7 @@ impl PlipTokenizer {
         match self {
             Self::HuggingFace(t) => {
                 let encoding = t
-                    .encode(text, false)
+                    .encode(text, true)
                     .map_err(|e| anyhow::anyhow!("Tokenization error: {e}"))?;
                 let ids = encoding.get_ids().to_vec();
                 let offsets = encoding.get_offsets().to_vec();
@@ -323,6 +330,7 @@ impl PlipModel {
             }
             ModelArchitecture::Qwen2 => Box::new(PlipQwen2::load(model_id, &device, dtype)?),
             ModelArchitecture::Gemma => Box::new(PlipGemma::load(model_id, &device, dtype)?),
+            ModelArchitecture::Gemma2 => Box::new(PlipGemma2::load(model_id, &device, dtype)?),
             ModelArchitecture::Llama => Box::new(PlipLlama::load(model_id, &device, dtype)?),
             ModelArchitecture::Phi3 => Box::new(PlipPhi3::load(model_id, &device, dtype)?),
             ModelArchitecture::Rwkv6 => Box::new(PlipRwkv6::load(model_id, &device, dtype)?),
