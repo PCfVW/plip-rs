@@ -1,0 +1,544 @@
+{
+  "model": "google/gemma-2-2b",
+  "clt_repo": "mntss/clt-gemma-2-2b-426k",
+  "mechanism": "clt",
+  "n_pairs": 11,
+  "strengths": [
+    0.0,
+    4.0
+  ],
+  "n_samples": 1,
+  "results": [
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_065",
+      "prompt_text": "The thunder rumbled, then did roar\nAnd rain came falling more and more\nA whisper echoed through the snake\n",
+      "ending_word": "snake",
+      "rhyme_group": "ake",
+      "target_word": "admire",
+      "condition": "incongruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "A snake",
+      "generated_ending": "snake",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L24:8861",
+        "L25:12909",
+        "L0:7081",
+        "L10:7774"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_065",
+      "prompt_text": "The thunder rumbled, then did roar\nAnd rain came falling more and more\nA whisper echoed through the snake\n",
+      "ending_word": "snake",
+      "rhyme_group": "ake",
+      "target_word": "admire",
+      "condition": "incongruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "A whisper echoed through the snake",
+      "generated_ending": "snake",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L24:8861",
+        "L25:12909",
+        "L0:7081",
+        "L10:7774"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_066",
+      "prompt_text": "The river flows without a sound\nThrough meadows green and fertile ground\nA bird took shelter in the lake\n",
+      "ending_word": "lake",
+      "rhyme_group": "ake",
+      "target_word": "admire",
+      "condition": "incongruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "A bird took shelter in the lake\n\nA bird took shelter in the lake",
+      "generated_ending": "lake",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L24:8861",
+        "L25:12909",
+        "L14:9117"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_066",
+      "prompt_text": "The river flows without a sound\nThrough meadows green and fertile ground\nA bird took shelter in the lake\n",
+      "ending_word": "lake",
+      "rhyme_group": "ake",
+      "target_word": "admire",
+      "condition": "incongruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "A bird took a bird",
+      "generated_ending": "bird",
+      "target_hit": false,
+      "rhyme_hit": false,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L24:8861",
+        "L25:12909",
+        "L14:9117"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_067",
+      "prompt_text": "The hunter tracked his faithful hound\nAcross the hills and mossy ground\nThe traveler stopped beside the cake\n",
+      "ending_word": "cake",
+      "rhyme_group": "ake",
+      "target_word": "admire",
+      "condition": "incongruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "The traveler stopped beside",
+      "generated_ending": "beside",
+      "target_hit": false,
+      "rhyme_hit": false,
+      "features_used": [
+        "L24:8861",
+        "L1:3148",
+        "L25:6465",
+        "L25:12909",
+        "L14:9117"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_067",
+      "prompt_text": "The hunter tracked his faithful hound\nAcross the hills and mossy ground\nThe traveler stopped beside the cake\n",
+      "ending_word": "cake",
+      "rhyme_group": "ake",
+      "target_word": "admire",
+      "condition": "incongruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "The traveler stopped beside the cake",
+      "generated_ending": "cake",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L24:8861",
+        "L1:3148",
+        "L25:6465",
+        "L25:12909",
+        "L14:9117"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_130",
+      "prompt_text": "The castle stood upon the land\nA fortress built by careful hand\nThe farmer worked beneath the nest\n",
+      "ending_word": "nest",
+      "rhyme_group": "est",
+      "target_word": "above",
+      "condition": "incongruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "The farmer worked beneath the nest",
+      "generated_ending": "nest",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L22:6235",
+        "L14:9117",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_130",
+      "prompt_text": "The castle stood upon the land\nA fortress built by careful hand\nThe farmer worked beneath the nest\n",
+      "ending_word": "nest",
+      "rhyme_group": "est",
+      "target_word": "above",
+      "condition": "incongruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "The farmer worked beneath the nest",
+      "generated_ending": "nest",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L22:6235",
+        "L14:9117",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_131",
+      "prompt_text": "The desert stretched like golden sand\nAs far as anyone could stand\nThe children played beside the request\n",
+      "ending_word": "request",
+      "rhyme_group": "est",
+      "target_word": "above",
+      "condition": "incongruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "The children played beside the request",
+      "generated_ending": "request",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L0:7081",
+        "L1:3148",
+        "L1:3872",
+        "L25:12909",
+        "L14:9117"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_131",
+      "prompt_text": "The desert stretched like golden sand\nAs far as anyone could stand\nThe children played beside the request\n",
+      "ending_word": "request",
+      "rhyme_group": "est",
+      "target_word": "above",
+      "condition": "incongruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "The children played beside the request",
+      "generated_ending": "request",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L0:7081",
+        "L1:3148",
+        "L1:3872",
+        "L25:12909",
+        "L14:9117"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_132",
+      "prompt_text": "The owl was hooting at the moon\nIts cry a melancholy tune\nHe found his answer in the west\n",
+      "ending_word": "west",
+      "rhyme_group": "est",
+      "target_word": "above",
+      "condition": "incongruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "In the west",
+      "generated_ending": "west",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L25:12909",
+        "L22:14183"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_132",
+      "prompt_text": "The owl was hooting at the moon\nIts cry a melancholy tune\nHe found his answer in the west\n",
+      "ending_word": "west",
+      "rhyme_group": "est",
+      "target_word": "above",
+      "condition": "incongruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "<h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3>",
+      "generated_ending": "h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h3><h",
+      "target_hit": false,
+      "rhyme_hit": false,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L25:12909",
+        "L22:14183"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_234",
+      "prompt_text": "The garden sparkled in the snow\nAnd lanterns gave a gentle glow\nThe children played beside the wire\n",
+      "ending_word": "wire",
+      "rhyme_group": "ire",
+      "target_word": "admire",
+      "condition": "congruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "The children played beside the wire",
+      "generated_ending": "wire",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L24:8861",
+        "L25:10750",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_234",
+      "prompt_text": "The garden sparkled in the snow\nAnd lanterns gave a gentle glow\nThe children played beside the wire\n",
+      "ending_word": "wire",
+      "rhyme_group": "ire",
+      "target_word": "admire",
+      "condition": "congruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "And lanterns gave a gentle glow",
+      "generated_ending": "glow",
+      "target_hit": false,
+      "rhyme_hit": false,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L24:8861",
+        "L25:10750",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_235",
+      "prompt_text": "The river wound its way below\nWith currents steady, smooth, and slow\nA single candle lit the spire\n",
+      "ending_word": "spire",
+      "rhyme_group": "ire",
+      "target_word": "admire",
+      "condition": "congruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "The spire",
+      "generated_ending": "spire",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L24:8861",
+        "L1:3148",
+        "L0:7081",
+        "L12:6717",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_235",
+      "prompt_text": "The river wound its way below\nWith currents steady, smooth, and slow\nA single candle lit the spire\n",
+      "ending_word": "spire",
+      "rhyme_group": "ire",
+      "target_word": "admire",
+      "condition": "congruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "A double candle lit the spire",
+      "generated_ending": "spire",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L24:8861",
+        "L1:3148",
+        "L0:7081",
+        "L12:6717",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_236",
+      "prompt_text": "The rooster crowed to greet the morn\nHis cry rang out across the corn\nHe built a cabin near the spire\n",
+      "ending_word": "spire",
+      "rhyme_group": "ire",
+      "target_word": "admire",
+      "condition": "congruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "He set a spire in the middle of the spire",
+      "generated_ending": "spire",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L0:7081",
+        "L1:3148",
+        "L24:8861",
+        "L25:12909",
+        "L17:12954"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_236",
+      "prompt_text": "The rooster crowed to greet the morn\nHis cry rang out across the corn\nHe built a cabin near the spire\n",
+      "ending_word": "spire",
+      "rhyme_group": "ire",
+      "target_word": "admire",
+      "condition": "congruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "He built a cabin near the spire",
+      "generated_ending": "spire",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L0:7081",
+        "L1:3148",
+        "L24:8861",
+        "L25:12909",
+        "L17:12954"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_247",
+      "prompt_text": "A falcon soared at breathless height\nThen vanished quickly out of sight\nThe old man rested by the dove\n",
+      "ending_word": "dove",
+      "rhyme_group": "ove",
+      "target_word": "above",
+      "condition": "congruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "The old man rested by the doveThe old man rested by the dove",
+      "generated_ending": "dove",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L0:7081",
+        "L1:3148",
+        "L1:3872",
+        "L22:2502",
+        "L21:14054"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_247",
+      "prompt_text": "A falcon soared at breathless height\nThen vanished quickly out of sight\nThe old man rested by the dove\n",
+      "ending_word": "dove",
+      "rhyme_group": "ove",
+      "target_word": "above",
+      "condition": "congruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "The old man",
+      "generated_ending": "man",
+      "target_hit": false,
+      "rhyme_hit": false,
+      "features_used": [
+        "L0:7081",
+        "L1:3148",
+        "L1:3872",
+        "L22:2502",
+        "L21:14054"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_248",
+      "prompt_text": "The candle flickered warm and bright\nAnd cast its glow into the night\nShe taught the little ones to shove\n",
+      "ending_word": "shove",
+      "rhyme_group": "ove",
+      "target_word": "above",
+      "condition": "congruent",
+      "strength": 0.0,
+      "sample_idx": 0,
+      "generated_line": "She taught the little ones to shoveShe taught the little ones to shove",
+      "generated_ending": "shove",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L1:3872",
+        "L3:13990",
+        "L25:12909"
+      ]
+    },
+    {
+      "mechanism": "clt",
+      "prompt_id": "gen_248",
+      "prompt_text": "The candle flickered warm and bright\nAnd cast its glow into the night\nShe taught the little ones to shove\n",
+      "ending_word": "shove",
+      "rhyme_group": "ove",
+      "target_word": "above",
+      "condition": "congruent",
+      "strength": 4.0,
+      "sample_idx": 0,
+      "generated_line": "She taught the little ones to shove",
+      "generated_ending": "shove",
+      "target_hit": false,
+      "rhyme_hit": true,
+      "features_used": [
+        "L1:3148",
+        "L0:7081",
+        "L1:3872",
+        "L3:13990",
+        "L25:12909"
+      ]
+    }
+  ],
+  "summary": {
+    "by_strength": [
+      {
+        "strength": 0.0,
+        "target_hit_rate": 0.0,
+        "rhyme_hit_rate": 0.90909094,
+        "n": 11
+      },
+      {
+        "strength": 4.0,
+        "target_hit_rate": 0.0,
+        "rhyme_hit_rate": 0.6363636,
+        "n": 11
+      }
+    ],
+    "by_condition": {
+      "congruent_target_hit_rate": 0.0,
+      "congruent_rhyme_hit_rate": 0.8,
+      "congruent_n": 10,
+      "incongruent_target_hit_rate": 0.0,
+      "incongruent_rhyme_hit_rate": 0.75,
+      "incongruent_n": 12
+    },
+    "by_rhyme_group": [
+      {
+        "rhyme_group": "ake",
+        "target_hit_rate": 0.0,
+        "rhyme_hit_rate": 0.6666667,
+        "n": 6
+      },
+      {
+        "rhyme_group": "est",
+        "target_hit_rate": 0.0,
+        "rhyme_hit_rate": 0.8333333,
+        "n": 6
+      },
+      {
+        "rhyme_group": "ire",
+        "target_hit_rate": 0.0,
+        "rhyme_hit_rate": 0.8333333,
+        "n": 6
+      },
+      {
+        "rhyme_group": "ove",
+        "target_hit_rate": 0.0,
+        "rhyme_hit_rate": 0.75,
+        "n": 4
+      }
+    ],
+    "go_no_go": "FAIL: best target_hit_rate = 0.0% (< 10% — CLT steering insufficient)"
+  }
+}

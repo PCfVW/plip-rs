@@ -198,6 +198,22 @@ path = "examples/verify_poetry_corpus.rs"
 name = "poetry_layer_scan"
 path = "examples/poetry_layer_scan.rs"
 
+[[example]]
+name = "poetry_clt_steering"
+path = "examples/poetry_clt_steering.rs"
+
+[[example]]
+name = "poetry_attention_steering"
+path = "examples/poetry_attention_steering.rs"
+
+[[example]]
+name = "evaluate_steering"
+path = "examples/evaluate_steering.rs"
+
+[[example]]
+name = "poetry_category_steering"
+path = "examples/poetry_category_steering.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1

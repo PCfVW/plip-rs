@@ -1,0 +1,3879 @@
+{
+  "model": "google/gemma-2-2b",
+  "clt_repo": "mntss/clt-gemma-2-2b-426k",
+  "n_layers": 26,
+  "n_features_per_layer": 16384,
+  "sample_step": 1,
+  "categories": {
+    "emotion": {
+      "words": [
+        "love",
+        "fear",
+        "joy",
+        "grief",
+        "hope",
+        "rage",
+        "peace",
+        "pride",
+        "shame",
+        "bliss",
+        "dread",
+        "glee",
+        "woe",
+        "awe",
+        "scorn",
+        "grace",
+        "hate",
+        "trust",
+        "doubt",
+        "zeal",
+        "calm",
+        "pain",
+        "glow",
+        "gloom",
+        "sorrow",
+        "delight",
+        "despair",
+        "longing",
+        "desire",
+        "anger",
+        "pity",
+        "envy",
+        "guilt",
+        "mirth",
+        "wonder",
+        "regret",
+        "charm",
+        "warmth",
+        "dismay",
+        "content"
+      ],
+      "token_ids": [
+        2182,
+        7440,
+        10300,
+        29636,
+        4077,
+        34973,
+        7124,
+        18565,
+        21353,
+        50999,
+        32580,
+        140227,
+        82647,
+        55377,
+        70860,
+        15434,
+        10874,
+        7930,
+        8192,
+        57412,
+        15142,
+        4380,
+        19312,
+        73940,
+        34204,
+        20341,
+        40813,
+        72509,
+        12005,
+        23790,
+        37850,
+        57574,
+        36528,
+        130000,
+        5144,
+        22018,
+        24643,
+        40482,
+        95284,
+        3381
+      ],
+      "single_token_words": [
+        "love",
+        "fear",
+        "joy",
+        "grief",
+        "hope",
+        "rage",
+        "peace",
+        "pride",
+        "shame",
+        "bliss",
+        "dread",
+        "glee",
+        "woe",
+        "awe",
+        "scorn",
+        "grace",
+        "hate",
+        "trust",
+        "doubt",
+        "zeal",
+        "calm",
+        "pain",
+        "glow",
+        "gloom",
+        "sorrow",
+        "delight",
+        "despair",
+        "longing",
+        "desire",
+        "anger",
+        "pity",
+        "envy",
+        "guilt",
+        "mirth",
+        "wonder",
+        "regret",
+        "charm",
+        "warmth",
+        "dismay",
+        "content"
+      ],
+      "multi_token_words": []
+    },
+    "light": {
+      "words": [
+        "sun",
+        "moon",
+        "star",
+        "flame",
+        "shadow",
+        "dawn",
+        "night",
+        "fire",
+        "spark",
+        "gleam",
+        "shine",
+        "ray",
+        "blaze",
+        "dusk",
+        "beam",
+        "light",
+        "dark",
+        "torch",
+        "lamp",
+        "flash",
+        "burn",
+        "glare",
+        "bright",
+        "fade",
+        "glow",
+        "flare",
+        "ember",
+        "haze",
+        "shade",
+        "noon",
+        "dim",
+        "gold",
+        "silver",
+        "pale",
+        "candle",
+        "lantern",
+        "radiance",
+        "twilight",
+        "bronze",
+        "shimmer"
+      ],
+      "token_ids": [
+        4389,
+        11883,
+        2343,
+        24502,
+        12425,
+        29819,
+        3354,
+        3967,
+        16161,
+        125486,
+        26623,
+        13120,
+        69616,
+        68171,
+        18096,
+        2611,
+        4868,
+        13222,
+        11861,
+        12995,
+        8466,
+        78263,
+        8660,
+        30158,
+        19312,
+        53567,
+        71011,
+        92478,
+        22556,
+        30532,
+        7675,
+        4394,
+        8343,
+        19119,
+        28162,
+        58921,
+        102776,
+        70259,
+        19634,
+        84177
+      ],
+      "single_token_words": [
+        "sun",
+        "moon",
+        "star",
+        "flame",
+        "shadow",
+        "dawn",
+        "night",
+        "fire",
+        "spark",
+        "gleam",
+        "shine",
+        "ray",
+        "blaze",
+        "dusk",
+        "beam",
+        "light",
+        "dark",
+        "torch",
+        "lamp",
+        "flash",
+        "burn",
+        "glare",
+        "bright",
+        "fade",
+        "glow",
+        "flare",
+        "ember",
+        "haze",
+        "shade",
+        "noon",
+        "dim",
+        "gold",
+        "silver",
+        "pale",
+        "candle",
+        "lantern",
+        "radiance",
+        "twilight",
+        "bronze",
+        "shimmer"
+      ],
+      "multi_token_words": []
+    },
+    "motion": {
+      "words": [
+        "run",
+        "fly",
+        "dance",
+        "fall",
+        "climb",
+        "leap",
+        "swim",
+        "drift",
+        "soar",
+        "spin",
+        "glide",
+        "rush",
+        "crawl",
+        "march",
+        "roam",
+        "chase",
+        "flow",
+        "sweep",
+        "race",
+        "stride",
+        "sail",
+        "ride",
+        "plunge",
+        "spring",
+        "turn",
+        "slide",
+        "dash",
+        "sway",
+        "tread",
+        "wander",
+        "flee",
+        "sink",
+        "rise",
+        "roll",
+        "pull",
+        "push",
+        "drop",
+        "walk",
+        "creep",
+        "bound"
+      ],
+      "token_ids": [
+        2060,
+        8960,
+        11877,
+        3881,
+        14252,
+        34613,
+        11243,
+        27877,
+        113083,
+        11974,
+        81520,
+        23506,
+        66714,
+        12312,
+        85771,
+        36696,
+        3781,
+        40879,
+        7925,
+        51779,
+        26477,
+        11316,
+        77299,
+        7921,
+        2894,
+        9499,
+        27942,
+        46507,
+        42478,
+        35767,
+        27149,
+        22340,
+        9407,
+        9993,
+        7825,
+        8607,
+        7605,
+        5376,
+        32809,
+        6406
+      ],
+      "single_token_words": [
+        "run",
+        "fly",
+        "dance",
+        "fall",
+        "climb",
+        "leap",
+        "swim",
+        "drift",
+        "soar",
+        "spin",
+        "glide",
+        "rush",
+        "crawl",
+        "march",
+        "roam",
+        "chase",
+        "flow",
+        "sweep",
+        "race",
+        "stride",
+        "sail",
+        "ride",
+        "plunge",
+        "spring",
+        "turn",
+        "slide",
+        "dash",
+        "sway",
+        "tread",
+        "wander",
+        "flee",
+        "sink",
+        "rise",
+        "roll",
+        "pull",
+        "push",
+        "drop",
+        "walk",
+        "creep",
+        "bound"
+      ],
+      "multi_token_words": []
+    },
+    "nature": {
+      "words": [
+        "tree",
+        "river",
+        "mountain",
+        "sky",
+        "ocean",
+        "forest",
+        "flower",
+        "rain",
+        "wind",
+        "stone",
+        "lake",
+        "field",
+        "sea",
+        "hill",
+        "snow",
+        "leaf",
+        "brook",
+        "garden",
+        "earth",
+        "shore",
+        "meadow",
+        "stream",
+        "wood",
+        "cloud",
+        "dawn",
+        "frost",
+        "sand",
+        "cliff",
+        "vale",
+        "pond",
+        "vine",
+        "moss",
+        "root",
+        "storm",
+        "tide",
+        "spring",
+        "marsh",
+        "dust",
+        "grove",
+        "bloom"
+      ],
+      "token_ids": [
+        5421,
+        8540,
+        8180,
+        8203,
+        13940,
+        9309,
+        10377,
+        8980,
+        6785,
+        9566,
+        13492,
+        2725,
+        4176,
+        16090,
+        8529,
+        12325,
+        66650,
+        8717,
+        6683,
+        19997,
+        53556,
+        6249,
+        4656,
+        12238,
+        29819,
+        37250,
+        6154,
+        45071,
+        19621,
+        25178,
+        21696,
+        48834,
+        6880,
+        14381,
+        33162,
+        7921,
+        40677,
+        12891,
+        72198,
+        35934
+      ],
+      "single_token_words": [
+        "tree",
+        "river",
+        "mountain",
+        "sky",
+        "ocean",
+        "forest",
+        "flower",
+        "rain",
+        "wind",
+        "stone",
+        "lake",
+        "field",
+        "sea",
+        "hill",
+        "snow",
+        "leaf",
+        "brook",
+        "garden",
+        "earth",
+        "shore",
+        "meadow",
+        "stream",
+        "wood",
+        "cloud",
+        "dawn",
+        "frost",
+        "sand",
+        "cliff",
+        "vale",
+        "pond",
+        "vine",
+        "moss",
+        "root",
+        "storm",
+        "tide",
+        "spring",
+        "marsh",
+        "dust",
+        "grove",
+        "bloom"
+      ],
+      "multi_token_words": []
+    }
+  },
+  "layer_category_dominance": [
+    {
+      "layer": 0,
+      "counts": {
+        "emotion": 0,
+        "light": 4,
+        "motion": 4,
+        "nature": 2
+      },
+      "neutral_count": 16374
+    },
+    {
+      "layer": 1,
+      "counts": {
+        "emotion": 2,
+        "light": 8,
+        "motion": 4,
+        "nature": 1
+      },
+      "neutral_count": 16369
+    },
+    {
+      "layer": 2,
+      "counts": {
+        "emotion": 6,
+        "light": 9,
+        "motion": 10,
+        "nature": 10
+      },
+      "neutral_count": 16349
+    },
+    {
+      "layer": 3,
+      "counts": {
+        "emotion": 11,
+        "light": 12,
+        "motion": 8,
+        "nature": 6
+      },
+      "neutral_count": 16347
+    },
+    {
+      "layer": 4,
+      "counts": {
+        "emotion": 7,
+        "light": 18,
+        "motion": 9,
+        "nature": 12
+      },
+      "neutral_count": 16338
+    },
+    {
+      "layer": 5,
+      "counts": {
+        "emotion": 13,
+        "light": 19,
+        "motion": 11,
+        "nature": 7
+      },
+      "neutral_count": 16334
+    },
+    {
+      "layer": 6,
+      "counts": {
+        "emotion": 19,
+        "light": 28,
+        "motion": 14,
+        "nature": 16
+      },
+      "neutral_count": 16307
+    },
+    {
+      "layer": 7,
+      "counts": {
+        "emotion": 12,
+        "light": 21,
+        "motion": 9,
+        "nature": 5
+      },
+      "neutral_count": 16337
+    },
+    {
+      "layer": 8,
+      "counts": {
+        "emotion": 11,
+        "light": 16,
+        "motion": 3,
+        "nature": 9
+      },
+      "neutral_count": 16345
+    },
+    {
+      "layer": 9,
+      "counts": {
+        "emotion": 11,
+        "light": 9,
+        "motion": 6,
+        "nature": 7
+      },
+      "neutral_count": 16351
+    },
+    {
+      "layer": 10,
+      "counts": {
+        "emotion": 25,
+        "light": 30,
+        "motion": 19,
+        "nature": 15
+      },
+      "neutral_count": 16295
+    },
+    {
+      "layer": 11,
+      "counts": {
+        "emotion": 28,
+        "light": 43,
+        "motion": 14,
+        "nature": 12
+      },
+      "neutral_count": 16287
+    },
+    {
+      "layer": 12,
+      "counts": {
+        "emotion": 30,
+        "light": 36,
+        "motion": 20,
+        "nature": 15
+      },
+      "neutral_count": 16283
+    },
+    {
+      "layer": 13,
+      "counts": {
+        "emotion": 30,
+        "light": 35,
+        "motion": 22,
+        "nature": 15
+      },
+      "neutral_count": 16282
+    },
+    {
+      "layer": 14,
+      "counts": {
+        "emotion": 28,
+        "light": 32,
+        "motion": 18,
+        "nature": 22
+      },
+      "neutral_count": 16284
+    },
+    {
+      "layer": 15,
+      "counts": {
+        "emotion": 19,
+        "light": 32,
+        "motion": 19,
+        "nature": 11
+      },
+      "neutral_count": 16303
+    },
+    {
+      "layer": 16,
+      "counts": {
+        "emotion": 9,
+        "light": 12,
+        "motion": 6,
+        "nature": 9
+      },
+      "neutral_count": 16348
+    },
+    {
+      "layer": 17,
+      "counts": {
+        "emotion": 6,
+        "light": 17,
+        "motion": 14,
+        "nature": 6
+      },
+      "neutral_count": 16341
+    },
+    {
+      "layer": 18,
+      "counts": {
+        "emotion": 6,
+        "light": 11,
+        "motion": 7,
+        "nature": 7
+      },
+      "neutral_count": 16353
+    },
+    {
+      "layer": 19,
+      "counts": {
+        "emotion": 14,
+        "light": 10,
+        "motion": 5,
+        "nature": 6
+      },
+      "neutral_count": 16349
+    },
+    {
+      "layer": 20,
+      "counts": {
+        "emotion": 8,
+        "light": 10,
+        "motion": 8,
+        "nature": 5
+      },
+      "neutral_count": 16353
+    },
+    {
+      "layer": 21,
+      "counts": {
+        "emotion": 15,
+        "light": 15,
+        "motion": 4,
+        "nature": 3
+      },
+      "neutral_count": 16347
+    },
+    {
+      "layer": 22,
+      "counts": {
+        "emotion": 14,
+        "light": 34,
+        "motion": 8,
+        "nature": 6
+      },
+      "neutral_count": 16322
+    },
+    {
+      "layer": 23,
+      "counts": {
+        "emotion": 15,
+        "light": 54,
+        "motion": 19,
+        "nature": 9
+      },
+      "neutral_count": 16287
+    },
+    {
+      "layer": 24,
+      "counts": {
+        "emotion": 33,
+        "light": 70,
+        "motion": 34,
+        "nature": 21
+      },
+      "neutral_count": 16226
+    },
+    {
+      "layer": 25,
+      "counts": {
+        "emotion": 24,
+        "light": 180,
+        "motion": 10,
+        "nature": 8
+      },
+      "neutral_count": 16162
+    }
+  ],
+  "top_features_per_category": {
+    "emotion": [
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12079
+        },
+        "mean_cosine": 0.14156602,
+        "max_cosine": 0.21685907,
+        "n_aligned_words": 33,
+        "top_words": [
+          [
+            "woe",
+            0.21685907
+          ],
+          [
+            "mirth",
+            0.20629752
+          ],
+          [
+            "glee",
+            0.19971156
+          ],
+          [
+            "scorn",
+            0.18221271
+          ],
+          [
+            "zeal",
+            0.18001623
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 6820
+        },
+        "mean_cosine": 0.14029637,
+        "max_cosine": 0.2293636,
+        "n_aligned_words": 32,
+        "top_words": [
+          [
+            "woe",
+            0.2293636
+          ],
+          [
+            "mirth",
+            0.22214627
+          ],
+          [
+            "glee",
+            0.21996751
+          ],
+          [
+            "gloom",
+            0.192865
+          ],
+          [
+            "zeal",
+            0.19221404
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12159
+        },
+        "mean_cosine": 0.13201424,
+        "max_cosine": 0.23027618,
+        "n_aligned_words": 32,
+        "top_words": [
+          [
+            "woe",
+            0.23027618
+          ],
+          [
+            "mirth",
+            0.22367172
+          ],
+          [
+            "glee",
+            0.21360897
+          ],
+          [
+            "gloom",
+            0.18458319
+          ],
+          [
+            "zeal",
+            0.17930086
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10358
+        },
+        "mean_cosine": 0.12869912,
+        "max_cosine": 0.2405649,
+        "n_aligned_words": 29,
+        "top_words": [
+          [
+            "woe",
+            0.2405649
+          ],
+          [
+            "mirth",
+            0.22711757
+          ],
+          [
+            "glee",
+            0.21498637
+          ],
+          [
+            "zeal",
+            0.1843644
+          ],
+          [
+            "gloom",
+            0.18270677
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10130
+        },
+        "mean_cosine": 0.12317526,
+        "max_cosine": 0.21541394,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.21541394
+          ],
+          [
+            "mirth",
+            0.21056962
+          ],
+          [
+            "glee",
+            0.2018298
+          ],
+          [
+            "gloom",
+            0.1876324
+          ],
+          [
+            "zeal",
+            0.17897615
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8880
+        },
+        "mean_cosine": 0.121816695,
+        "max_cosine": 0.23514415,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.23514415
+          ],
+          [
+            "mirth",
+            0.22610188
+          ],
+          [
+            "glee",
+            0.21334778
+          ],
+          [
+            "zeal",
+            0.17802164
+          ],
+          [
+            "gloom",
+            0.17797676
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2145
+        },
+        "mean_cosine": 0.12163895,
+        "max_cosine": 0.21031378,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "woe",
+            0.21031378
+          ],
+          [
+            "mirth",
+            0.19579002
+          ],
+          [
+            "glee",
+            0.1838367
+          ],
+          [
+            "scorn",
+            0.17199527
+          ],
+          [
+            "zeal",
+            0.16521336
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 698
+        },
+        "mean_cosine": 0.12119007,
+        "max_cosine": 0.23531356,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.23531356
+          ],
+          [
+            "mirth",
+            0.2297816
+          ],
+          [
+            "glee",
+            0.2164191
+          ],
+          [
+            "scorn",
+            0.18372607
+          ],
+          [
+            "gloom",
+            0.18315202
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8567
+        },
+        "mean_cosine": 0.12036306,
+        "max_cosine": 0.20732698,
+        "n_aligned_words": 28,
+        "top_words": [
+          [
+            "woe",
+            0.20732698
+          ],
+          [
+            "mirth",
+            0.18783662
+          ],
+          [
+            "glee",
+            0.17675044
+          ],
+          [
+            "scorn",
+            0.16501512
+          ],
+          [
+            "dread",
+            0.16150102
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 947
+        },
+        "mean_cosine": 0.11983355,
+        "max_cosine": 0.1755143,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "woe",
+            0.1755143
+          ],
+          [
+            "mirth",
+            0.17493308
+          ],
+          [
+            "glee",
+            0.17095798
+          ],
+          [
+            "dread",
+            0.155936
+          ],
+          [
+            "dismay",
+            0.15514112
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 15775
+        },
+        "mean_cosine": 0.1195668,
+        "max_cosine": 0.23440659,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.23440659
+          ],
+          [
+            "mirth",
+            0.21994935
+          ],
+          [
+            "glee",
+            0.20199625
+          ],
+          [
+            "bliss",
+            0.18217485
+          ],
+          [
+            "zeal",
+            0.17883383
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2219
+        },
+        "mean_cosine": 0.11855,
+        "max_cosine": 0.18213537,
+        "n_aligned_words": 29,
+        "top_words": [
+          [
+            "woe",
+            0.18213537
+          ],
+          [
+            "mirth",
+            0.17432992
+          ],
+          [
+            "glee",
+            0.16776279
+          ],
+          [
+            "bliss",
+            0.16026732
+          ],
+          [
+            "zeal",
+            0.15038405
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10750
+        },
+        "mean_cosine": 0.117271975,
+        "max_cosine": 0.19872046,
+        "n_aligned_words": 28,
+        "top_words": [
+          [
+            "woe",
+            0.19872046
+          ],
+          [
+            "mirth",
+            0.19563954
+          ],
+          [
+            "glee",
+            0.18257962
+          ],
+          [
+            "envy",
+            0.16154319
+          ],
+          [
+            "zeal",
+            0.15564409
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 7417
+        },
+        "mean_cosine": 0.11724124,
+        "max_cosine": 0.23564743,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.23564743
+          ],
+          [
+            "mirth",
+            0.22267498
+          ],
+          [
+            "glee",
+            0.21487774
+          ],
+          [
+            "bliss",
+            0.18026997
+          ],
+          [
+            "zeal",
+            0.17966746
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9120
+        },
+        "mean_cosine": 0.11624213,
+        "max_cosine": 0.13531782,
+        "n_aligned_words": 36,
+        "top_words": [
+          [
+            "mirth",
+            0.13531782
+          ],
+          [
+            "glow",
+            0.13448314
+          ],
+          [
+            "dismay",
+            0.13381912
+          ],
+          [
+            "woe",
+            0.13132735
+          ],
+          [
+            "glee",
+            0.12825981
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9328
+        },
+        "mean_cosine": 0.11603024,
+        "max_cosine": 0.18881074,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.18881074
+          ],
+          [
+            "mirth",
+            0.17261487
+          ],
+          [
+            "glee",
+            0.15402971
+          ],
+          [
+            "glow",
+            0.14894551
+          ],
+          [
+            "scorn",
+            0.14684203
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 6990
+        },
+        "mean_cosine": 0.11374678,
+        "max_cosine": 0.19685833,
+        "n_aligned_words": 27,
+        "top_words": [
+          [
+            "woe",
+            0.19685833
+          ],
+          [
+            "mirth",
+            0.18645206
+          ],
+          [
+            "glee",
+            0.18068363
+          ],
+          [
+            "gloom",
+            0.1668803
+          ],
+          [
+            "bliss",
+            0.15980223
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 8547
+        },
+        "mean_cosine": 0.11374547,
+        "max_cosine": 0.15428655,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "mirth",
+            0.15428655
+          ],
+          [
+            "woe",
+            0.14650446
+          ],
+          [
+            "zeal",
+            0.14278299
+          ],
+          [
+            "glee",
+            0.13882637
+          ],
+          [
+            "dread",
+            0.13680139
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 15817
+        },
+        "mean_cosine": 0.11348782,
+        "max_cosine": 0.23878315,
+        "n_aligned_words": 26,
+        "top_words": [
+          [
+            "woe",
+            0.23878315
+          ],
+          [
+            "mirth",
+            0.22126934
+          ],
+          [
+            "glee",
+            0.21469787
+          ],
+          [
+            "zeal",
+            0.17580616
+          ],
+          [
+            "bliss",
+            0.17397201
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8606
+        },
+        "mean_cosine": 0.11267018,
+        "max_cosine": 0.23869538,
+        "n_aligned_words": 26,
+        "top_words": [
+          [
+            "woe",
+            0.23869538
+          ],
+          [
+            "mirth",
+            0.22448604
+          ],
+          [
+            "glee",
+            0.2119118
+          ],
+          [
+            "bliss",
+            0.17758922
+          ],
+          [
+            "gloom",
+            0.17593648
+          ]
+        ]
+      }
+    ],
+    "light": [
+      {
+        "feature": {
+          "layer": 23,
+          "index": 6820
+        },
+        "mean_cosine": 0.15207706,
+        "max_cosine": 0.2466509,
+        "n_aligned_words": 33,
+        "top_words": [
+          [
+            "ember",
+            0.2466509
+          ],
+          [
+            "lantern",
+            0.22005923
+          ],
+          [
+            "haze",
+            0.21834657
+          ],
+          [
+            "shimmer",
+            0.21388546
+          ],
+          [
+            "radiance",
+            0.20367122
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12079
+        },
+        "mean_cosine": 0.14653917,
+        "max_cosine": 0.22075203,
+        "n_aligned_words": 34,
+        "top_words": [
+          [
+            "ember",
+            0.22075203
+          ],
+          [
+            "haze",
+            0.20890953
+          ],
+          [
+            "gleam",
+            0.19798693
+          ],
+          [
+            "lantern",
+            0.19761086
+          ],
+          [
+            "shimmer",
+            0.19577405
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12159
+        },
+        "mean_cosine": 0.14340337,
+        "max_cosine": 0.2499697,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "ember",
+            0.2499697
+          ],
+          [
+            "lantern",
+            0.2159743
+          ],
+          [
+            "haze",
+            0.20946485
+          ],
+          [
+            "gleam",
+            0.2063283
+          ],
+          [
+            "shimmer",
+            0.2042448
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10358
+        },
+        "mean_cosine": 0.14230286,
+        "max_cosine": 0.2532656,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.2532656
+          ],
+          [
+            "lantern",
+            0.23107882
+          ],
+          [
+            "haze",
+            0.2208654
+          ],
+          [
+            "shimmer",
+            0.21262667
+          ],
+          [
+            "gleam",
+            0.20940919
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10130
+        },
+        "mean_cosine": 0.13841745,
+        "max_cosine": 0.24486864,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.24486864
+          ],
+          [
+            "haze",
+            0.20700595
+          ],
+          [
+            "shimmer",
+            0.20609652
+          ],
+          [
+            "lantern",
+            0.20548809
+          ],
+          [
+            "dusk",
+            0.19627085
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8880
+        },
+        "mean_cosine": 0.13544197,
+        "max_cosine": 0.25134352,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.25134352
+          ],
+          [
+            "lantern",
+            0.22427106
+          ],
+          [
+            "haze",
+            0.2119105
+          ],
+          [
+            "shimmer",
+            0.20705174
+          ],
+          [
+            "gleam",
+            0.20586273
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 15775
+        },
+        "mean_cosine": 0.13526204,
+        "max_cosine": 0.24659386,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.24659386
+          ],
+          [
+            "lantern",
+            0.23525606
+          ],
+          [
+            "haze",
+            0.21283442
+          ],
+          [
+            "shimmer",
+            0.20525762
+          ],
+          [
+            "gleam",
+            0.20068969
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 698
+        },
+        "mean_cosine": 0.13340984,
+        "max_cosine": 0.25404713,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.25404713
+          ],
+          [
+            "lantern",
+            0.22278094
+          ],
+          [
+            "haze",
+            0.21786411
+          ],
+          [
+            "shimmer",
+            0.20933641
+          ],
+          [
+            "gleam",
+            0.2075097
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8567
+        },
+        "mean_cosine": 0.12845445,
+        "max_cosine": 0.19975536,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.19975536
+          ],
+          [
+            "shimmer",
+            0.19050431
+          ],
+          [
+            "gleam",
+            0.18704966
+          ],
+          [
+            "lantern",
+            0.18561882
+          ],
+          [
+            "haze",
+            0.17905596
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 7417
+        },
+        "mean_cosine": 0.12832838,
+        "max_cosine": 0.24246877,
+        "n_aligned_words": 29,
+        "top_words": [
+          [
+            "ember",
+            0.24246877
+          ],
+          [
+            "lantern",
+            0.22557396
+          ],
+          [
+            "haze",
+            0.20857738
+          ],
+          [
+            "radiance",
+            0.20065022
+          ],
+          [
+            "gleam",
+            0.19264552
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9328
+        },
+        "mean_cosine": 0.12788503,
+        "max_cosine": 0.19251695,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "ember",
+            0.19251695
+          ],
+          [
+            "gleam",
+            0.18276331
+          ],
+          [
+            "haze",
+            0.17878318
+          ],
+          [
+            "lantern",
+            0.17601678
+          ],
+          [
+            "shimmer",
+            0.16620855
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8606
+        },
+        "mean_cosine": 0.12783669,
+        "max_cosine": 0.24623747,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.24623747
+          ],
+          [
+            "lantern",
+            0.23214085
+          ],
+          [
+            "haze",
+            0.2130142
+          ],
+          [
+            "gleam",
+            0.20537432
+          ],
+          [
+            "shimmer",
+            0.20537151
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10750
+        },
+        "mean_cosine": 0.12723842,
+        "max_cosine": 0.20742066,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.20742066
+          ],
+          [
+            "lantern",
+            0.19335076
+          ],
+          [
+            "haze",
+            0.19254965
+          ],
+          [
+            "gleam",
+            0.17606309
+          ],
+          [
+            "radiance",
+            0.17538925
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2219
+        },
+        "mean_cosine": 0.1269704,
+        "max_cosine": 0.20549306,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "ember",
+            0.20549306
+          ],
+          [
+            "ray",
+            0.17452817
+          ],
+          [
+            "shimmer",
+            0.16963439
+          ],
+          [
+            "pale",
+            0.16493334
+          ],
+          [
+            "gleam",
+            0.16226222
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 6990
+        },
+        "mean_cosine": 0.12610628,
+        "max_cosine": 0.20039387,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.20039387
+          ],
+          [
+            "lantern",
+            0.19317874
+          ],
+          [
+            "twilight",
+            0.19067456
+          ],
+          [
+            "haze",
+            0.18235314
+          ],
+          [
+            "radiance",
+            0.17797495
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2145
+        },
+        "mean_cosine": 0.1259872,
+        "max_cosine": 0.21451429,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.21451429
+          ],
+          [
+            "shimmer",
+            0.18570858
+          ],
+          [
+            "gleam",
+            0.1856524
+          ],
+          [
+            "lantern",
+            0.18376434
+          ],
+          [
+            "haze",
+            0.18146653
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 4514
+        },
+        "mean_cosine": 0.12555377,
+        "max_cosine": 0.24990761,
+        "n_aligned_words": 29,
+        "top_words": [
+          [
+            "ember",
+            0.24990761
+          ],
+          [
+            "lantern",
+            0.22839926
+          ],
+          [
+            "haze",
+            0.21185753
+          ],
+          [
+            "shimmer",
+            0.20266467
+          ],
+          [
+            "gleam",
+            0.20141916
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 4307
+        },
+        "mean_cosine": 0.12463304,
+        "max_cosine": 0.20189103,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.20189103
+          ],
+          [
+            "lantern",
+            0.2007019
+          ],
+          [
+            "haze",
+            0.17990361
+          ],
+          [
+            "shimmer",
+            0.17987268
+          ],
+          [
+            "radiance",
+            0.17585574
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 947
+        },
+        "mean_cosine": 0.12373761,
+        "max_cosine": 0.18224266,
+        "n_aligned_words": 30,
+        "top_words": [
+          [
+            "ember",
+            0.18224266
+          ],
+          [
+            "shimmer",
+            0.17707759
+          ],
+          [
+            "gleam",
+            0.1718088
+          ],
+          [
+            "lantern",
+            0.1649515
+          ],
+          [
+            "dusk",
+            0.15935294
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 4093
+        },
+        "mean_cosine": 0.12330989,
+        "max_cosine": 0.243879,
+        "n_aligned_words": 28,
+        "top_words": [
+          [
+            "ember",
+            0.243879
+          ],
+          [
+            "lantern",
+            0.210076
+          ],
+          [
+            "haze",
+            0.19319421
+          ],
+          [
+            "shimmer",
+            0.18927263
+          ],
+          [
+            "radiance",
+            0.18046029
+          ]
+        ]
+      }
+    ],
+    "motion": [
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12079
+        },
+        "mean_cosine": 0.13433237,
+        "max_cosine": 0.19344646,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "creep",
+            0.19344646
+          ],
+          [
+            "stride",
+            0.18792278
+          ],
+          [
+            "crawl",
+            0.18526521
+          ],
+          [
+            "roam",
+            0.18388227
+          ],
+          [
+            "sway",
+            0.17818066
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 6820
+        },
+        "mean_cosine": 0.13139614,
+        "max_cosine": 0.20463388,
+        "n_aligned_words": 29,
+        "top_words": [
+          [
+            "stride",
+            0.20463388
+          ],
+          [
+            "crawl",
+            0.1996789
+          ],
+          [
+            "creep",
+            0.1963743
+          ],
+          [
+            "glide",
+            0.19572535
+          ],
+          [
+            "soar",
+            0.18613873
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12159
+        },
+        "mean_cosine": 0.122989096,
+        "max_cosine": 0.194399,
+        "n_aligned_words": 24,
+        "top_words": [
+          [
+            "stride",
+            0.194399
+          ],
+          [
+            "creep",
+            0.1883785
+          ],
+          [
+            "crawl",
+            0.18525687
+          ],
+          [
+            "glide",
+            0.18213134
+          ],
+          [
+            "roam",
+            0.17958
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9120
+        },
+        "mean_cosine": 0.12042391,
+        "max_cosine": 0.14815225,
+        "n_aligned_words": 39,
+        "top_words": [
+          [
+            "creep",
+            0.14815225
+          ],
+          [
+            "roam",
+            0.14747894
+          ],
+          [
+            "spin",
+            0.13929911
+          ],
+          [
+            "sweep",
+            0.13441941
+          ],
+          [
+            "crawl",
+            0.13315602
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10358
+        },
+        "mean_cosine": 0.11861136,
+        "max_cosine": 0.19738176,
+        "n_aligned_words": 23,
+        "top_words": [
+          [
+            "stride",
+            0.19738176
+          ],
+          [
+            "creep",
+            0.19180165
+          ],
+          [
+            "crawl",
+            0.18782362
+          ],
+          [
+            "glide",
+            0.18582757
+          ],
+          [
+            "sway",
+            0.18116587
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10130
+        },
+        "mean_cosine": 0.11549449,
+        "max_cosine": 0.19052371,
+        "n_aligned_words": 22,
+        "top_words": [
+          [
+            "stride",
+            0.19052371
+          ],
+          [
+            "creep",
+            0.18496166
+          ],
+          [
+            "crawl",
+            0.18089068
+          ],
+          [
+            "roam",
+            0.17718236
+          ],
+          [
+            "sway",
+            0.17289789
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 947
+        },
+        "mean_cosine": 0.11503063,
+        "max_cosine": 0.17170498,
+        "n_aligned_words": 26,
+        "top_words": [
+          [
+            "soar",
+            0.17170498
+          ],
+          [
+            "creep",
+            0.16107811
+          ],
+          [
+            "roam",
+            0.15670429
+          ],
+          [
+            "crawl",
+            0.1549103
+          ],
+          [
+            "wander",
+            0.15436412
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 8547
+        },
+        "mean_cosine": 0.11424782,
+        "max_cosine": 0.15027067,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "wander",
+            0.15027067
+          ],
+          [
+            "tread",
+            0.14756651
+          ],
+          [
+            "creep",
+            0.14533608
+          ],
+          [
+            "crawl",
+            0.1444557
+          ],
+          [
+            "roam",
+            0.14423952
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8567
+        },
+        "mean_cosine": 0.113313355,
+        "max_cosine": 0.18000214,
+        "n_aligned_words": 24,
+        "top_words": [
+          [
+            "creep",
+            0.18000214
+          ],
+          [
+            "glide",
+            0.17458351
+          ],
+          [
+            "crawl",
+            0.17330174
+          ],
+          [
+            "roam",
+            0.1704765
+          ],
+          [
+            "soar",
+            0.16746905
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2219
+        },
+        "mean_cosine": 0.11319965,
+        "max_cosine": 0.16075878,
+        "n_aligned_words": 24,
+        "top_words": [
+          [
+            "soar",
+            0.16075878
+          ],
+          [
+            "wander",
+            0.16052912
+          ],
+          [
+            "roam",
+            0.15558064
+          ],
+          [
+            "glide",
+            0.15115136
+          ],
+          [
+            "creep",
+            0.15073101
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9328
+        },
+        "mean_cosine": 0.1129624,
+        "max_cosine": 0.16586334,
+        "n_aligned_words": 24,
+        "top_words": [
+          [
+            "stride",
+            0.16586334
+          ],
+          [
+            "wander",
+            0.16035305
+          ],
+          [
+            "roam",
+            0.15880421
+          ],
+          [
+            "creep",
+            0.15596938
+          ],
+          [
+            "crawl",
+            0.15574946
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 15775
+        },
+        "mean_cosine": 0.112141624,
+        "max_cosine": 0.19104159,
+        "n_aligned_words": 22,
+        "top_words": [
+          [
+            "creep",
+            0.19104159
+          ],
+          [
+            "crawl",
+            0.1865966
+          ],
+          [
+            "glide",
+            0.18652806
+          ],
+          [
+            "stride",
+            0.18339746
+          ],
+          [
+            "roam",
+            0.17463206
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10750
+        },
+        "mean_cosine": 0.111000255,
+        "max_cosine": 0.17743729,
+        "n_aligned_words": 22,
+        "top_words": [
+          [
+            "creep",
+            0.17743729
+          ],
+          [
+            "tread",
+            0.16408288
+          ],
+          [
+            "sway",
+            0.1632367
+          ],
+          [
+            "stride",
+            0.16289611
+          ],
+          [
+            "crawl",
+            0.16241117
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8880
+        },
+        "mean_cosine": 0.110565186,
+        "max_cosine": 0.19570056,
+        "n_aligned_words": 22,
+        "top_words": [
+          [
+            "stride",
+            0.19570056
+          ],
+          [
+            "creep",
+            0.18298918
+          ],
+          [
+            "glide",
+            0.1810469
+          ],
+          [
+            "crawl",
+            0.18020219
+          ],
+          [
+            "wander",
+            0.1747225
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 514
+        },
+        "mean_cosine": 0.10818146,
+        "max_cosine": 0.15806249,
+        "n_aligned_words": 25,
+        "top_words": [
+          [
+            "wander",
+            0.15806249
+          ],
+          [
+            "soar",
+            0.14492902
+          ],
+          [
+            "creep",
+            0.14288007
+          ],
+          [
+            "roam",
+            0.13918436
+          ],
+          [
+            "crawl",
+            0.13765474
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2145
+        },
+        "mean_cosine": 0.10759916,
+        "max_cosine": 0.17417198,
+        "n_aligned_words": 22,
+        "top_words": [
+          [
+            "stride",
+            0.17417198
+          ],
+          [
+            "creep",
+            0.1728159
+          ],
+          [
+            "wander",
+            0.17086782
+          ],
+          [
+            "crawl",
+            0.16553135
+          ],
+          [
+            "roam",
+            0.16391855
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 698
+        },
+        "mean_cosine": 0.10702042,
+        "max_cosine": 0.20193614,
+        "n_aligned_words": 22,
+        "top_words": [
+          [
+            "stride",
+            0.20193614
+          ],
+          [
+            "crawl",
+            0.18446718
+          ],
+          [
+            "creep",
+            0.18387495
+          ],
+          [
+            "glide",
+            0.1773059
+          ],
+          [
+            "roam",
+            0.16884409
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 6990
+        },
+        "mean_cosine": 0.10669354,
+        "max_cosine": 0.16296902,
+        "n_aligned_words": 21,
+        "top_words": [
+          [
+            "stride",
+            0.16296902
+          ],
+          [
+            "crawl",
+            0.1570427
+          ],
+          [
+            "roam",
+            0.15214181
+          ],
+          [
+            "creep",
+            0.15072235
+          ],
+          [
+            "tread",
+            0.14973651
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 11698
+        },
+        "mean_cosine": 0.10668899,
+        "max_cosine": 0.13761586,
+        "n_aligned_words": 26,
+        "top_words": [
+          [
+            "creep",
+            0.13761586
+          ],
+          [
+            "spin",
+            0.12807558
+          ],
+          [
+            "sway",
+            0.12779902
+          ],
+          [
+            "sweep",
+            0.12771478
+          ],
+          [
+            "crawl",
+            0.12079626
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 4106
+        },
+        "mean_cosine": 0.1051216,
+        "max_cosine": 0.17117971,
+        "n_aligned_words": 25,
+        "top_words": [
+          [
+            "creep",
+            0.17117971
+          ],
+          [
+            "crawl",
+            0.16041753
+          ],
+          [
+            "glide",
+            0.15460329
+          ],
+          [
+            "sail",
+            0.14243956
+          ],
+          [
+            "stride",
+            0.1424381
+          ]
+        ]
+      }
+    ],
+    "nature": [
+      {
+        "feature": {
+          "layer": 23,
+          "index": 6820
+        },
+        "mean_cosine": 0.13627087,
+        "max_cosine": 0.23856309,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "brook",
+            0.23856309
+          ],
+          [
+            "moss",
+            0.23261578
+          ],
+          [
+            "meadow",
+            0.21367204
+          ],
+          [
+            "frost",
+            0.20789811
+          ],
+          [
+            "vale",
+            0.20722067
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12079
+        },
+        "mean_cosine": 0.13547546,
+        "max_cosine": 0.22059996,
+        "n_aligned_words": 33,
+        "top_words": [
+          [
+            "brook",
+            0.22059996
+          ],
+          [
+            "moss",
+            0.21816327
+          ],
+          [
+            "vale",
+            0.20185536
+          ],
+          [
+            "meadow",
+            0.1981573
+          ],
+          [
+            "grove",
+            0.19297095
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 12159
+        },
+        "mean_cosine": 0.12886707,
+        "max_cosine": 0.24087705,
+        "n_aligned_words": 25,
+        "top_words": [
+          [
+            "brook",
+            0.24087705
+          ],
+          [
+            "moss",
+            0.23073746
+          ],
+          [
+            "vale",
+            0.21589471
+          ],
+          [
+            "meadow",
+            0.21341844
+          ],
+          [
+            "grove",
+            0.20494266
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10358
+        },
+        "mean_cosine": 0.124572895,
+        "max_cosine": 0.25874233,
+        "n_aligned_words": 21,
+        "top_words": [
+          [
+            "brook",
+            0.25874233
+          ],
+          [
+            "moss",
+            0.23973912
+          ],
+          [
+            "vale",
+            0.22625504
+          ],
+          [
+            "meadow",
+            0.21939114
+          ],
+          [
+            "grove",
+            0.21446352
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10130
+        },
+        "mean_cosine": 0.123934805,
+        "max_cosine": 0.2417744,
+        "n_aligned_words": 23,
+        "top_words": [
+          [
+            "brook",
+            0.2417744
+          ],
+          [
+            "moss",
+            0.23009366
+          ],
+          [
+            "grove",
+            0.20986383
+          ],
+          [
+            "meadow",
+            0.20962258
+          ],
+          [
+            "vale",
+            0.20177083
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2219
+        },
+        "mean_cosine": 0.12091563,
+        "max_cosine": 0.19931535,
+        "n_aligned_words": 26,
+        "top_words": [
+          [
+            "brook",
+            0.19931535
+          ],
+          [
+            "moss",
+            0.176425
+          ],
+          [
+            "vale",
+            0.16793402
+          ],
+          [
+            "vine",
+            0.16787244
+          ],
+          [
+            "grove",
+            0.1639179
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 15775
+        },
+        "mean_cosine": 0.11950703,
+        "max_cosine": 0.25298938,
+        "n_aligned_words": 20,
+        "top_words": [
+          [
+            "brook",
+            0.25298938
+          ],
+          [
+            "moss",
+            0.22962779
+          ],
+          [
+            "meadow",
+            0.21267615
+          ],
+          [
+            "vale",
+            0.21148255
+          ],
+          [
+            "grove",
+            0.20971131
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9328
+        },
+        "mean_cosine": 0.1178543,
+        "max_cosine": 0.18013765,
+        "n_aligned_words": 29,
+        "top_words": [
+          [
+            "moss",
+            0.18013765
+          ],
+          [
+            "meadow",
+            0.17843589
+          ],
+          [
+            "brook",
+            0.17736113
+          ],
+          [
+            "vine",
+            0.17283396
+          ],
+          [
+            "grove",
+            0.1653175
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 9120
+        },
+        "mean_cosine": 0.11776082,
+        "max_cosine": 0.14783418,
+        "n_aligned_words": 37,
+        "top_words": [
+          [
+            "vale",
+            0.14783418
+          ],
+          [
+            "moss",
+            0.14302754
+          ],
+          [
+            "vine",
+            0.14137667
+          ],
+          [
+            "pond",
+            0.14060958
+          ],
+          [
+            "grove",
+            0.13888767
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8880
+        },
+        "mean_cosine": 0.11724086,
+        "max_cosine": 0.24725442,
+        "n_aligned_words": 18,
+        "top_words": [
+          [
+            "brook",
+            0.24725442
+          ],
+          [
+            "moss",
+            0.23281312
+          ],
+          [
+            "vale",
+            0.21587227
+          ],
+          [
+            "meadow",
+            0.21243617
+          ],
+          [
+            "grove",
+            0.20920174
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 10750
+        },
+        "mean_cosine": 0.11560126,
+        "max_cosine": 0.22221097,
+        "n_aligned_words": 20,
+        "top_words": [
+          [
+            "brook",
+            0.22221097
+          ],
+          [
+            "moss",
+            0.20768656
+          ],
+          [
+            "vale",
+            0.2032159
+          ],
+          [
+            "meadow",
+            0.18381844
+          ],
+          [
+            "marsh",
+            0.17541747
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8567
+        },
+        "mean_cosine": 0.1149837,
+        "max_cosine": 0.2060976,
+        "n_aligned_words": 21,
+        "top_words": [
+          [
+            "brook",
+            0.2060976
+          ],
+          [
+            "moss",
+            0.20019929
+          ],
+          [
+            "vale",
+            0.19760014
+          ],
+          [
+            "grove",
+            0.18892173
+          ],
+          [
+            "vine",
+            0.18633927
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 8547
+        },
+        "mean_cosine": 0.11417478,
+        "max_cosine": 0.16248618,
+        "n_aligned_words": 31,
+        "top_words": [
+          [
+            "vale",
+            0.16248618
+          ],
+          [
+            "brook",
+            0.16061355
+          ],
+          [
+            "frost",
+            0.15654078
+          ],
+          [
+            "grove",
+            0.15072437
+          ],
+          [
+            "moss",
+            0.15069892
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 698
+        },
+        "mean_cosine": 0.11382954,
+        "max_cosine": 0.251094,
+        "n_aligned_words": 19,
+        "top_words": [
+          [
+            "brook",
+            0.251094
+          ],
+          [
+            "moss",
+            0.23626946
+          ],
+          [
+            "meadow",
+            0.22025906
+          ],
+          [
+            "grove",
+            0.20584564
+          ],
+          [
+            "vale",
+            0.20295034
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 947
+        },
+        "mean_cosine": 0.11150098,
+        "max_cosine": 0.17402965,
+        "n_aligned_words": 26,
+        "top_words": [
+          [
+            "brook",
+            0.17402965
+          ],
+          [
+            "frost",
+            0.16359264
+          ],
+          [
+            "grove",
+            0.16314666
+          ],
+          [
+            "vine",
+            0.16037087
+          ],
+          [
+            "vale",
+            0.15757105
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 514
+        },
+        "mean_cosine": 0.11090491,
+        "max_cosine": 0.191016,
+        "n_aligned_words": 20,
+        "top_words": [
+          [
+            "vale",
+            0.191016
+          ],
+          [
+            "brook",
+            0.16669527
+          ],
+          [
+            "vine",
+            0.16127713
+          ],
+          [
+            "grove",
+            0.15397792
+          ],
+          [
+            "dawn",
+            0.15026532
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 23,
+          "index": 2145
+        },
+        "mean_cosine": 0.10972251,
+        "max_cosine": 0.20685908,
+        "n_aligned_words": 19,
+        "top_words": [
+          [
+            "brook",
+            0.20685908
+          ],
+          [
+            "moss",
+            0.19753721
+          ],
+          [
+            "meadow",
+            0.18130785
+          ],
+          [
+            "grove",
+            0.17484696
+          ],
+          [
+            "vale",
+            0.1719497
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 25,
+          "index": 8606
+        },
+        "mean_cosine": 0.109072685,
+        "max_cosine": 0.2598531,
+        "n_aligned_words": 18,
+        "top_words": [
+          [
+            "brook",
+            0.2598531
+          ],
+          [
+            "moss",
+            0.23605926
+          ],
+          [
+            "vale",
+            0.21718632
+          ],
+          [
+            "meadow",
+            0.21500428
+          ],
+          [
+            "grove",
+            0.21248193
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 7417
+        },
+        "mean_cosine": 0.10893619,
+        "max_cosine": 0.24432057,
+        "n_aligned_words": 18,
+        "top_words": [
+          [
+            "brook",
+            0.24432057
+          ],
+          [
+            "moss",
+            0.23287141
+          ],
+          [
+            "meadow",
+            0.21441968
+          ],
+          [
+            "vale",
+            0.20373854
+          ],
+          [
+            "grove",
+            0.20302494
+          ]
+        ]
+      },
+      {
+        "feature": {
+          "layer": 24,
+          "index": 21
+        },
+        "mean_cosine": 0.10768584,
+        "max_cosine": 0.2316202,
+        "n_aligned_words": 17,
+        "top_words": [
+          [
+            "brook",
+            0.2316202
+          ],
+          [
+            "moss",
+            0.2170278
+          ],
+          [
+            "vale",
+            0.20658344
+          ],
+          [
+            "meadow",
+            0.1818748
+          ],
+          [
+            "frost",
+            0.17597476
+          ]
+        ]
+      }
+    ]
+  },
+  "cross_category_features": [
+    {
+      "feature": {
+        "layer": 23,
+        "index": 6820
+      },
+      "affinities": {
+        "emotion": 0.14029637,
+        "light": 0.15207706,
+        "motion": 0.13139614,
+        "nature": 0.13627087
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 12079
+      },
+      "affinities": {
+        "emotion": 0.14156602,
+        "light": 0.14653917,
+        "motion": 0.13433237,
+        "nature": 0.13547546
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 12159
+      },
+      "affinities": {
+        "emotion": 0.13201424,
+        "light": 0.14340337,
+        "motion": 0.122989096,
+        "nature": 0.12886707
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 10358
+      },
+      "affinities": {
+        "emotion": 0.12869912,
+        "light": 0.14230286,
+        "motion": 0.11861136,
+        "nature": 0.124572895
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 10130
+      },
+      "affinities": {
+        "emotion": 0.12317526,
+        "light": 0.13841745,
+        "motion": 0.11549449,
+        "nature": 0.123934805
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 8880
+      },
+      "affinities": {
+        "emotion": 0.121816695,
+        "light": 0.13544197,
+        "motion": 0.110565186,
+        "nature": 0.11724086
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 15775
+      },
+      "affinities": {
+        "emotion": 0.1195668,
+        "light": 0.13526204,
+        "motion": 0.112141624,
+        "nature": 0.11950703
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 698
+      },
+      "affinities": {
+        "emotion": 0.12119007,
+        "light": 0.13340984,
+        "motion": 0.10702042,
+        "nature": 0.11382954
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 8567
+      },
+      "affinities": {
+        "emotion": 0.12036306,
+        "light": 0.12845445,
+        "motion": 0.113313355,
+        "nature": 0.1149837
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 7417
+      },
+      "affinities": {
+        "emotion": 0.11724124,
+        "light": 0.12832838,
+        "motion": 0.09685441,
+        "nature": 0.10893619
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 9328
+      },
+      "affinities": {
+        "emotion": 0.11603024,
+        "light": 0.12788503,
+        "motion": 0.1129624,
+        "nature": 0.1178543
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 8606
+      },
+      "affinities": {
+        "emotion": 0.11267018,
+        "light": 0.12783669,
+        "motion": 0.10167869,
+        "nature": 0.109072685
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 10750
+      },
+      "affinities": {
+        "emotion": 0.117271975,
+        "light": 0.12723842,
+        "motion": 0.111000255,
+        "nature": 0.11560126
+      }
+    },
+    {
+      "feature": {
+        "layer": 23,
+        "index": 2219
+      },
+      "affinities": {
+        "emotion": 0.11855,
+        "light": 0.1269704,
+        "motion": 0.11319965,
+        "nature": 0.12091563
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 6990
+      },
+      "affinities": {
+        "emotion": 0.11374678,
+        "light": 0.12610628,
+        "motion": 0.10669354,
+        "nature": 0.1060894
+      }
+    },
+    {
+      "feature": {
+        "layer": 23,
+        "index": 2145
+      },
+      "affinities": {
+        "emotion": 0.12163895,
+        "light": 0.1259872,
+        "motion": 0.10759916,
+        "nature": 0.10972251
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 4514
+      },
+      "affinities": {
+        "emotion": 0.11183254,
+        "light": 0.12555377,
+        "motion": 0.09702232,
+        "nature": 0.10470788
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 4307
+      },
+      "affinities": {
+        "emotion": 0.11069097,
+        "light": 0.12463304,
+        "motion": 0.10048674,
+        "nature": 0.10711225
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 947
+      },
+      "affinities": {
+        "emotion": 0.11983355,
+        "light": 0.12373761,
+        "motion": 0.11503063,
+        "nature": 0.11150098
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 4093
+      },
+      "affinities": {
+        "emotion": 0.108155325,
+        "light": 0.12330989,
+        "motion": 0.10035081,
+        "nature": 0.10706173
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 15817
+      },
+      "affinities": {
+        "emotion": 0.11348782,
+        "light": 0.12289901,
+        "motion": 0.0966238,
+        "nature": 0.10271138
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 16170
+      },
+      "affinities": {
+        "emotion": 0.111231074,
+        "light": 0.12286148,
+        "motion": 0.09632998,
+        "nature": 0.10421894
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 16030
+      },
+      "affinities": {
+        "emotion": 0.10828547,
+        "light": 0.12282455,
+        "motion": 0.09322102,
+        "nature": 0.10089587
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 13382
+      },
+      "affinities": {
+        "emotion": 0.108547725,
+        "light": 0.12257304,
+        "motion": 0.09355346,
+        "nature": 0.10068699
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 10049
+      },
+      "affinities": {
+        "emotion": 0.10800402,
+        "light": 0.122531615,
+        "motion": 0.093931,
+        "nature": 0.10053222
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 21
+      },
+      "affinities": {
+        "emotion": 0.111177586,
+        "light": 0.12248607,
+        "motion": 0.103851855,
+        "nature": 0.10768584
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 11352
+      },
+      "affinities": {
+        "emotion": 0.1080666,
+        "light": 0.12238294,
+        "motion": 0.09244583,
+        "nature": 0.09950055
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 14547
+      },
+      "affinities": {
+        "emotion": 0.10680296,
+        "light": 0.12168841,
+        "motion": 0.09407297,
+        "nature": 0.10437878
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 2669
+      },
+      "affinities": {
+        "emotion": 0.10820006,
+        "light": 0.12148752,
+        "motion": 0.09398791,
+        "nature": 0.100661114
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 5961
+      },
+      "affinities": {
+        "emotion": 0.10814617,
+        "light": 0.12121775,
+        "motion": 0.09282878,
+        "nature": 0.09902014
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 3454
+      },
+      "affinities": {
+        "emotion": 0.108428754,
+        "light": 0.12065413,
+        "motion": 0.098533556,
+        "nature": 0.10237092
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 7240
+      },
+      "affinities": {
+        "emotion": 0.10559763,
+        "light": 0.120622456,
+        "motion": 0.09209502,
+        "nature": 0.09946601
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 9120
+      },
+      "affinities": {
+        "emotion": 0.11624213,
+        "light": 0.11798006,
+        "motion": 0.12042391,
+        "nature": 0.11776082
+      }
+    },
+    {
+      "feature": {
+        "layer": 23,
+        "index": 4106
+      },
+      "affinities": {
+        "emotion": 0.10332376,
+        "light": 0.119782254,
+        "motion": 0.1051216,
+        "nature": 0.10336484
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 16193
+      },
+      "affinities": {
+        "emotion": 0.10341927,
+        "light": 0.11975479,
+        "motion": 0.09131124,
+        "nature": 0.096888945
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 7038
+      },
+      "affinities": {
+        "emotion": 0.103716336,
+        "light": 0.11965569,
+        "motion": 0.088135526,
+        "nature": 0.096396044
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 15282
+      },
+      "affinities": {
+        "emotion": 0.10508318,
+        "light": 0.11945762,
+        "motion": 0.09023082,
+        "nature": 0.09790324
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 13454
+      },
+      "affinities": {
+        "emotion": 0.10399717,
+        "light": 0.11917047,
+        "motion": 0.090936705,
+        "nature": 0.09892347
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 3861
+      },
+      "affinities": {
+        "emotion": 0.102654815,
+        "light": 0.11854078,
+        "motion": 0.08963071,
+        "nature": 0.095651835
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 8694
+      },
+      "affinities": {
+        "emotion": 0.104863726,
+        "light": 0.11836547,
+        "motion": 0.09175644,
+        "nature": 0.09939469
+      }
+    },
+    {
+      "feature": {
+        "layer": 11,
+        "index": 6126
+      },
+      "affinities": {
+        "emotion": 0.102391556,
+        "light": 0.11741588,
+        "motion": 0.0886291,
+        "nature": 0.094839826
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 14383
+      },
+      "affinities": {
+        "emotion": 0.103786446,
+        "light": 0.11683128,
+        "motion": 0.085067056,
+        "nature": 0.090562806
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 15684
+      },
+      "affinities": {
+        "emotion": 0.10383819,
+        "light": 0.116825745,
+        "motion": 0.10098734,
+        "nature": 0.100380324
+      }
+    },
+    {
+      "feature": {
+        "layer": 24,
+        "index": 8547
+      },
+      "affinities": {
+        "emotion": 0.11374547,
+        "light": 0.11653161,
+        "motion": 0.11424782,
+        "nature": 0.11417478
+      }
+    },
+    {
+      "feature": {
+        "layer": 13,
+        "index": 1584
+      },
+      "affinities": {
+        "emotion": 0.10066243,
+        "light": 0.11619954,
+        "motion": 0.09038314,
+        "nature": 0.09514251
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 11723
+      },
+      "affinities": {
+        "emotion": 0.10176603,
+        "light": 0.116100214,
+        "motion": 0.08934267,
+        "nature": 0.09468095
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 8096
+      },
+      "affinities": {
+        "emotion": 0.09968215,
+        "light": 0.115561984,
+        "motion": 0.085701786,
+        "nature": 0.093151234
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 514
+      },
+      "affinities": {
+        "emotion": 0.10888891,
+        "light": 0.11394589,
+        "motion": 0.10818146,
+        "nature": 0.11090491
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 9671
+      },
+      "affinities": {
+        "emotion": 0.099151075,
+        "light": 0.113776624,
+        "motion": 0.08812591,
+        "nature": 0.09466491
+      }
+    },
+    {
+      "feature": {
+        "layer": 25,
+        "index": 11460
+      },
+      "affinities": {
+        "emotion": 0.09978859,
+        "light": 0.113215685,
+        "motion": 0.08673092,
+        "nature": 0.09274
+      }
+    }
+  ]
+}

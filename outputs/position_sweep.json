@@ -1,0 +1,752 @@
+{
+  "model": "google/gemma-2-2b",
+  "clt_repo": "mntss/clt-gemma-2-2b-426k",
+  "n_candidates": 4,
+  "results": [
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "go",
+      "target_feature": {
+        "layer": 25,
+        "index": 4505
+      },
+      "last_token_activation": 0.98264766,
+      "max_activation": 0.98264766,
+      "max_activation_position": 33,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "activation": 0.0
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "activation": 0.0
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "activation": 0.0
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "activation": 0.0
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "activation": 0.0
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "activation": 0.0
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "activation": 0.0
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "activation": 0.0
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "activation": 0.0
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "activation": 0.0
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "activation": 0.0
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "activation": 0.0
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "activation": 0.0
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "activation": 0.0
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "activation": 0.0
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "activation": 0.0
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "activation": 0.0
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "activation": 0.0
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "activation": 0.0
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "activation": 0.0
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "activation": 0.0
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "activation": 0.0
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "activation": 0.0
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "activation": 0.0
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "activation": 0.0
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "activation": 0.0
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "activation": 0.98264766
+        }
+      ]
+    },
+    {
+      "prompt_text": "The stars were twinkling in the night,\nThe lanterns cast a golden light.\nShe wandered in the dark about,\nAnd found a hidden passage ",
+      "group": "-out",
+      "target_word": "about",
+      "feature_word": "out",
+      "target_feature": {
+        "layer": 25,
+        "index": 9385
+      },
+      "last_token_activation": 0.24727023,
+      "max_activation": 0.24727023,
+      "max_activation_position": 31,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "activation": 0.0
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "activation": 0.0
+        },
+        {
+          "position": 2,
+          "token": " stars",
+          "activation": 0.0
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "activation": 0.0
+        },
+        {
+          "position": 4,
+          "token": " twinkling",
+          "activation": 0.0
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "activation": 0.0
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 7,
+          "token": " night",
+          "activation": 0.0
+        },
+        {
+          "position": 8,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 9,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 10,
+          "token": "The",
+          "activation": 0.0
+        },
+        {
+          "position": 11,
+          "token": " lanterns",
+          "activation": 0.0
+        },
+        {
+          "position": 12,
+          "token": " cast",
+          "activation": 0.0
+        },
+        {
+          "position": 13,
+          "token": " a",
+          "activation": 0.0
+        },
+        {
+          "position": 14,
+          "token": " golden",
+          "activation": 0.0
+        },
+        {
+          "position": 15,
+          "token": " light",
+          "activation": 0.0
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "activation": 0.0
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "activation": 0.0
+        },
+        {
+          "position": 19,
+          "token": " wandered",
+          "activation": 0.0
+        },
+        {
+          "position": 20,
+          "token": " in",
+          "activation": 0.0
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 22,
+          "token": " dark",
+          "activation": 0.0
+        },
+        {
+          "position": 23,
+          "token": " about",
+          "activation": 0.0
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "activation": 0.0
+        },
+        {
+          "position": 27,
+          "token": " found",
+          "activation": 0.0
+        },
+        {
+          "position": 28,
+          "token": " a",
+          "activation": 0.0
+        },
+        {
+          "position": 29,
+          "token": " hidden",
+          "activation": 0.0
+        },
+        {
+          "position": 30,
+          "token": " passage",
+          "activation": 0.0
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "activation": 0.24727023
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nHe raised his voice and gave a shout,\nThe truth was struggling to come ",
+      "group": "-out",
+      "target_word": "shout",
+      "feature_word": "out",
+      "target_feature": {
+        "layer": 25,
+        "index": 9385
+      },
+      "last_token_activation": 0.19179487,
+      "max_activation": 0.19179487,
+      "max_activation_position": 34,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "activation": 0.0
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "activation": 0.0
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "activation": 0.0
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "activation": 0.0
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "activation": 0.0
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "activation": 0.0
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "activation": 0.0
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "activation": 0.0
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "activation": 0.0
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "activation": 0.0
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "activation": 0.0
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "activation": 0.0
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "activation": 0.0
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 18,
+          "token": "He",
+          "activation": 0.0
+        },
+        {
+          "position": 19,
+          "token": " raised",
+          "activation": 0.0
+        },
+        {
+          "position": 20,
+          "token": " his",
+          "activation": 0.0
+        },
+        {
+          "position": 21,
+          "token": " voice",
+          "activation": 0.0
+        },
+        {
+          "position": 22,
+          "token": " and",
+          "activation": 0.0
+        },
+        {
+          "position": 23,
+          "token": " gave",
+          "activation": 0.0
+        },
+        {
+          "position": 24,
+          "token": " a",
+          "activation": 0.0
+        },
+        {
+          "position": 25,
+          "token": " shout",
+          "activation": 0.0
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 28,
+          "token": "The",
+          "activation": 0.0
+        },
+        {
+          "position": 29,
+          "token": " truth",
+          "activation": 0.0
+        },
+        {
+          "position": 30,
+          "token": " was",
+          "activation": 0.0
+        },
+        {
+          "position": 31,
+          "token": " struggling",
+          "activation": 0.0
+        },
+        {
+          "position": 32,
+          "token": " to",
+          "activation": 0.0
+        },
+        {
+          "position": 33,
+          "token": " come",
+          "activation": 0.0
+        },
+        {
+          "position": 34,
+          "token": " ",
+          "activation": 0.19179487
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "ou",
+      "target_feature": {
+        "layer": 25,
+        "index": 5927
+      },
+      "last_token_activation": 0.35879666,
+      "max_activation": 0.35879666,
+      "max_activation_position": 35,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "activation": 0.0
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "activation": 0.0
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "activation": 0.0
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "activation": 0.0
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "activation": 0.0
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "activation": 0.0
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "activation": 0.0
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "activation": 0.0
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "activation": 0.0
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "activation": 0.0
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "activation": 0.0
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "activation": 0.0
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "activation": 0.0
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "activation": 0.0
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "activation": 0.0
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "activation": 0.0
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "activation": 0.0
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "activation": 0.0
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "activation": 0.0
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "activation": 0.0
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "activation": 0.0
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "activation": 0.0
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "activation": 0.0
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "activation": 0.0
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "activation": 0.0
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "activation": 0.0
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "activation": 0.0
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "activation": 0.0
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "activation": 0.0
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "activation": 0.0
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "activation": 0.35879666
+        }
+      ]
+    }
+  ]
+}
