@@ -149,6 +149,7 @@ pub fn mask_cache_size() -> usize {
 }
 
 #[cfg(test)]
+#[allow(clippy::float_cmp)]
 mod tests {
     use super::*;
     use serial_test::serial;

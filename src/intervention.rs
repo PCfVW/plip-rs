@@ -1444,6 +1444,134 @@ impl StateSteeringResult {
     }
 }
 
+// ===========================================================================
+// CLT Injection Types
+// ===========================================================================
+
+/// Pre-accumulated CLT injection vectors for per-layer residual stream injection.
+///
+/// Created by calling [`CrossLayerTranscoder::prepare_injection()`][crate::clt::CrossLayerTranscoder::prepare_injection],
+/// this holds strength-scaled decoder vectors grouped by target layer.
+/// The forward pass adds each vector to the residual at the specified position
+/// after the target layer completes.
+///
+/// This type is intentionally decoupled from `CrossLayerTranscoder` so it can be
+/// passed to `&self` forward methods without needing `&mut` on the CLT.
+#[derive(Debug, Clone)]
+pub struct CltInjectionSpec {
+    /// Per-layer injection entries.
+    pub injections: Vec<CltLayerInjection>,
+}
+
+/// A single CLT injection at one layer and position.
+#[derive(Debug, Clone)]
+pub struct CltLayerInjection {
+    /// Target layer index (injection happens after this layer completes).
+    pub target_layer: usize,
+    /// Token position in the sequence to inject at.
+    pub position: usize,
+    /// Pre-accumulated and strength-scaled decoder vector, shape `[d_model]`.
+    pub vector: Tensor,
+}
+
+impl CltInjectionSpec {
+    /// Create an empty injection spec.
+    pub fn new() -> Self {
+        Self {
+            injections: Vec::new(),
+        }
+    }
+
+    /// Add a single injection entry.
+    pub fn add(&mut self, target_layer: usize, position: usize, vector: Tensor) {
+        self.injections.push(CltLayerInjection {
+            target_layer,
+            position,
+            vector,
+        });
+    }
+
+    /// Check if any injection targets this layer.
+    pub fn applies_to_layer(&self, layer: usize) -> bool {
+        self.injections.iter().any(|inj| inj.target_layer == layer)
+    }
+
+    /// Get all injections targeting a specific layer.
+    pub fn injections_for_layer(&self, layer: usize) -> Vec<&CltLayerInjection> {
+        self.injections
+            .iter()
+            .filter(|inj| inj.target_layer == layer)
+            .collect()
+    }
+
+    /// Validate the spec against model dimensions.
+    pub fn validate(&self, n_layers: usize, seq_len: usize, d_model: usize) -> Result<()> {
+        for inj in &self.injections {
+            let target = inj.target_layer;
+            anyhow::ensure!(
+                target < n_layers,
+                "CLT injection target layer {target} out of range (model has {n_layers} layers)"
+            );
+            let pos = inj.position;
+            anyhow::ensure!(
+                pos < seq_len,
+                "CLT injection position {pos} out of range (seq_len={seq_len})"
+            );
+            let vec_dim = inj.vector.dim(0)?;
+            anyhow::ensure!(
+                vec_dim == d_model,
+                "CLT injection vector dim {vec_dim} doesn't match model d_model={d_model}"
+            );
+        }
+        Ok(())
+    }
+}
+
+impl Default for CltInjectionSpec {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
+/// Result of a CLT logit shift test (baseline vs. injected comparison).
+#[derive(Debug)]
+pub struct CltLogitShiftResult {
+    /// Logits from baseline forward pass (no injection).
+    pub baseline_logits: Tensor,
+    /// Logits from CLT-injected forward pass.
+    pub injected_logits: Tensor,
+}
+
+impl CltLogitShiftResult {
+    pub fn new(baseline_logits: Tensor, injected_logits: Tensor) -> Self {
+        Self {
+            baseline_logits,
+            injected_logits,
+        }
+    }
+
+    /// Compute KL divergence between baseline and injected distributions.
+    pub fn kl_divergence(&self) -> Result<f32> {
+        kl_divergence(&self.baseline_logits, &self.injected_logits)
+    }
+
+    /// Get top-k tokens that changed most due to CLT injection.
+    ///
+    /// Returns Vec of (token_id, baseline_prob, injected_prob, abs_diff).
+    pub fn top_changed_tokens(&self, k: usize) -> Result<Vec<(u32, f32, f32, f32)>> {
+        let baseline_probs = softmax_to_vec(&self.baseline_logits)?;
+        let injected_probs = softmax_to_vec(&self.injected_logits)?;
+        let mut changes: Vec<(u32, f32, f32, f32)> = baseline_probs
+            .iter()
+            .zip(injected_probs.iter())
+            .enumerate()
+            .map(|(idx, (&base, &inj))| (idx as u32, base, inj, (base - inj).abs()))
+            .collect();
+        changes.sort_by(|a, b| b.3.partial_cmp(&a.3).unwrap_or(std::cmp::Ordering::Equal));
+        Ok(changes.into_iter().take(k).collect())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1486,6 +1614,7 @@ mod tests {
     }
 
     #[test]
+    #[allow(clippy::float_cmp)]
     fn test_create_knockout_mask() {
         let spec = KnockoutSpec::new().head(0).edge(2, 1);
 
@@ -1632,8 +1761,7 @@ mod tests {
         let row_sum: f32 = row2.iter().sum();
         assert!(
             (row_sum - 1.0).abs() < 1e-5,
-            "Row sum should be 1.0, got {}",
-            row_sum
+            "Row sum should be 1.0, got {row_sum}"
         );
 
         // Edge (2,1) should be the largest value in the row

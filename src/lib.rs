@@ -31,7 +31,7 @@
 //! - `forward`: StarCoder2 forward pass with activation capture hooks
 //! - `forward_qwen2`: Qwen2 forward pass with activation capture hooks
 //! - `forward_gemma`: Gemma/CodeGemma forward pass with activation capture hooks
-//! - `forward_gemma2`: Gemma 2 forward pass with per-layer activation capture
+//! - `forward_gemma2`: Gemma 2 forward pass with CLT injection support
 //! - `forward_llama`: LLaMA/Code-LLaMA forward pass with activation capture hooks
 //! - `forward_phi3`: Phi-3 forward pass with activation capture hooks
 //! - `cache`: ActivationCache for storing layer activations
@@ -45,9 +45,11 @@
 //! - `positioning`: Model-agnostic character-based position handling
 //! - `intervention`: Attention intervention (knockout and steering) for causal experiments
 //! - `steering`: Attention steering calibration and dose-response utilities
+//! - `clt`: Cross-Layer Transcoder support (mmap, encode, inject, micro-cache)
 
 pub mod attention;
 pub mod cache;
+pub mod clt;
 pub mod corpus;
 pub mod experiment;
 pub mod forward;
@@ -68,7 +70,8 @@ pub mod steering;
 pub mod tokenizer_rwkv;
 
 pub use attention::{AttentionAnalysis, AttentionCache};
-pub use cache::ActivationCache;
+pub use cache::{ActivationCache, FullActivationCache};
+pub use clt::{CltConfig, CltFeatureId, CrossLayerTranscoder, SparseActivations};
 pub use corpus::{CodeSample, Corpus};
 pub use experiment::{Experiment, ExperimentConfig, ExperimentResults};
 pub use forward::PlipStarCoder2;
@@ -88,6 +91,9 @@ pub use intervention::{
     measure_attention_to_targets,
     AblationResult,
     AttentionEdge,
+    CltInjectionSpec,
+    CltLayerInjection,
+    CltLogitShiftResult,
     HeadSpec,
     InterventionType,
     KnockoutSpec,

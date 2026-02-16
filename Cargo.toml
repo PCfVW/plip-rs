@@ -174,6 +174,22 @@ path = "examples/state_steering_generate.rs"
 name = "state_steering_persistence"
 path = "examples/state_steering_persistence.rs"
 
+[[example]]
+name = "inspect_clt"
+path = "examples/inspect_clt.rs"
+
+[[example]]
+name = "clt_encode"
+path = "examples/clt_encode.rs"
+
+[[example]]
+name = "validate_clt"
+path = "examples/validate_clt.rs"
+
+[[example]]
+name = "clt_logit_shift"
+path = "examples/clt_logit_shift.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1

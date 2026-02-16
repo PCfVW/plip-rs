@@ -5,7 +5,7 @@
 //! - Attention logit soft-capping (50.0) and final logit soft-capping (30.0)
 //! - Four-norm decoder layers (pre/post attention + pre/post MLP)
 //! - GQA with explicit head_dim=256 (not derived from hidden_size/num_heads)
-//! - Per-layer activation capture and logit lens
+//! - CLT injection into the residual stream during forward passes
 
 use anyhow::{Context, Result};
 use candle_core::{DType, Device, IndexOp, Module, Tensor, D};
@@ -15,8 +15,8 @@ use rand::Rng;
 use tracing::info;
 
 use crate::attention::AttentionCache;
-use crate::cache::ActivationCache;
-use crate::intervention::{apply_steering, KnockoutSpec, SteeringSpec};
+use crate::cache::{ActivationCache, FullActivationCache};
+use crate::intervention::{apply_steering, CltInjectionSpec, KnockoutSpec, SteeringSpec};
 use crate::kv_cache::KVCache;
 use crate::masks::create_causal_mask;
 use crate::model::PlipBackend;
@@ -1019,6 +1019,40 @@ impl PlipGemma2 {
         Ok((output, cache))
     }
 
+    /// Forward pass with all-position activation capture.
+    ///
+    /// Same as [`forward_with_cache`](Self::forward_with_cache) but stores the
+    /// full residual stream at every token position per layer, not just the last token.
+    /// Each cached tensor has shape `(seq_len, d_model)`.
+    pub fn forward_with_full_cache(
+        &self,
+        input_ids: &Tensor,
+    ) -> Result<(Tensor, FullActivationCache)> {
+        let seq_len = input_ids.dim(1)?;
+        let device = input_ids.device();
+        let dtype = self.embed_tokens.embeddings().dtype();
+
+        // Embedding with sqrt(hidden_size) scaling
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+        let normalizer = (self.config.hidden_size as f64).sqrt();
+        hidden = (hidden * normalizer)?;
+
+        let mut cache = FullActivationCache::with_capacity(self.config.num_hidden_layers);
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            let mask = self.mask_for_layer(i, seq_len, device, dtype)?;
+            hidden = layer.forward(&hidden, &self.rotary, &mask, 0)?;
+
+            // Store all positions: squeeze batch dim [1, seq_len, d_model] → [seq_len, d_model]
+            let all_positions = hidden.squeeze(0)?;
+            cache.push(all_positions);
+        }
+
+        // Final norm
+        let output = self.norm.forward(&hidden)?;
+        Ok((output, cache))
+    }
+
     /// Forward pass with attention weight capture.
     pub fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         let seq_len = input_ids.dim(1)?;
@@ -1230,6 +1264,41 @@ impl PlipGemma2 {
         Ok(tokens)
     }
 
+    /// Forward pass with CLT injection at specified layers, filling KV-cache.
+    pub fn forward_with_clt_injection(
+        &self,
+        input_ids: &Tensor,
+        clt_spec: &CltInjectionSpec,
+        kv_cache: &mut KVCache,
+    ) -> Result<Tensor> {
+        let seq_len = input_ids.dim(1)?;
+        let start_pos = kv_cache.seq_len();
+
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+        let normalizer = (self.config.hidden_size as f64).sqrt();
+        hidden = (hidden * normalizer)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+
+            // CLT INJECTION: add steering vectors at this layer
+            for inj in clt_spec.injections_for_layer(i) {
+                hidden = inject_at_position(&hidden, &inj.vector, inj.position)?;
+            }
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        let logits = last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?;
+        self.apply_final_softcap(&logits)
+    }
+
     /// Autoregressive generation.
     pub fn generate(
         &self,
@@ -1253,6 +1322,43 @@ impl PlipGemma2 {
         tokens.push(next_token);
 
         // Autoregressive: one token at a time
+        for _ in 1..max_tokens {
+            let input = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
+            let logits = self.forward_with_kv_cache(&input, &mut kv_cache)?;
+            next_token = sample_token(&logits, temperature)?;
+            if stop_tokens.contains(&next_token) {
+                break;
+            }
+            tokens.push(next_token);
+        }
+
+        Ok(tokens)
+    }
+
+    /// Generate with CLT injection during prompt processing.
+    pub fn generate_with_clt_injection(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        clt_spec: &CltInjectionSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        let mut kv_cache = KVCache::new(self.config.num_hidden_layers);
+        let mut tokens = prompt_ids.to_vec();
+
+        // Prefill with CLT injection
+        let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
+        let logits = self.forward_with_clt_injection(&prompt_tensor, clt_spec, &mut kv_cache)?;
+
+        let mut next_token = sample_token(&logits, temperature)?;
+        if stop_tokens.contains(&next_token) {
+            return Ok(tokens);
+        }
+        tokens.push(next_token);
+
+        // Continue generation without injection (standard KV-cache)
         for _ in 1..max_tokens {
             let input = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
             let logits = self.forward_with_kv_cache(&input, &mut kv_cache)?;
@@ -1363,6 +1469,44 @@ impl PlipBackend for PlipGemma2 {
         self.generate(prompt_ids, max_tokens, temperature, stop_tokens, device)
     }
 
+    fn forward_with_clt_injection(
+        &self,
+        input_ids: &Tensor,
+        clt_spec: &CltInjectionSpec,
+        kv_cache: &mut KVCache,
+    ) -> Result<Tensor> {
+        PlipGemma2::forward_with_clt_injection(self, input_ids, clt_spec, kv_cache)
+    }
+
+    fn generate_with_clt_injection(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        clt_spec: &CltInjectionSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        PlipGemma2::generate_with_clt_injection(
+            self,
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            clt_spec,
+            device,
+        )
+    }
+
+    fn forward_with_full_cache(&self, input_ids: &Tensor) -> Result<(Tensor, FullActivationCache)> {
+        self.forward_with_full_cache(input_ids)
+    }
+
+    fn embedding_vector(&self, token_id: u32) -> Result<Tensor> {
+        let emb = self.embed_tokens.embeddings(); // [vocab_size, d_model]
+        Ok(emb.i(token_id as usize)?)
+    }
+
     fn forward_with_steering(
         &self,
         input_ids: &Tensor,
@@ -1394,6 +1538,32 @@ impl PlipBackend for PlipGemma2 {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+/// Inject a vector into the residual stream at a specific position.
+///
+/// hidden: `[batch, seq_len, d_model]`
+/// vector: `[d_model]` (F32)
+fn inject_at_position(hidden: &Tensor, vector: &Tensor, position: usize) -> Result<Tensor> {
+    let (batch, seq_len, d_model) = hidden.dims3()?;
+    let pos_slice = hidden.narrow(1, position, 1)?; // [batch, 1, d_model]
+    let vec_expanded = vector
+        .to_dtype(hidden.dtype())?
+        .unsqueeze(0)?
+        .unsqueeze(0)?
+        .expand((batch, 1, d_model))?;
+    let pos_updated = (&pos_slice + &vec_expanded)?;
+
+    // Reassemble: before + updated_position + after
+    let mut parts: Vec<Tensor> = Vec::with_capacity(3);
+    if position > 0 {
+        parts.push(hidden.narrow(1, 0, position)?);
+    }
+    parts.push(pos_updated);
+    if position + 1 < seq_len {
+        parts.push(hidden.narrow(1, position + 1, seq_len - position - 1)?);
+    }
+    Ok(Tensor::cat(&parts, 1)?)
+}
 
 /// Sample a token from logits with temperature.
 fn sample_token(logits: &Tensor, temperature: f32) -> Result<u32> {

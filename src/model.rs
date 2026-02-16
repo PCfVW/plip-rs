@@ -10,7 +10,7 @@ use tokenizers::Tokenizer;
 use tracing::info;
 
 use crate::attention::{AttentionAnalysis, AttentionCache};
-use crate::cache::ActivationCache;
+use crate::cache::{ActivationCache, FullActivationCache};
 use crate::forward::PlipStarCoder2;
 use crate::forward_gemma::PlipGemma;
 use crate::forward_gemma2::PlipGemma2;
@@ -19,8 +19,9 @@ use crate::forward_phi3::PlipPhi3;
 use crate::forward_qwen2::PlipQwen2;
 use crate::forward_rwkv6::PlipRwkv6;
 use crate::intervention::{
-    measure_attention_to_targets, AblationResult, KnockoutSpec, StateAblationResult,
-    StateKnockoutSpec, StateSteeringResult, StateSteeringSpec, SteeringResult, SteeringSpec,
+    measure_attention_to_targets, AblationResult, CltInjectionSpec, CltLogitShiftResult,
+    KnockoutSpec, StateAblationResult, StateKnockoutSpec, StateSteeringResult, StateSteeringSpec,
+    SteeringResult, SteeringSpec,
 };
 use crate::kv_cache::KVCache;
 use crate::logit_lens::{decode_predictions_with, LogitLensAnalysis, LogitLensResult};
@@ -169,8 +170,48 @@ pub trait PlipBackend {
         anyhow::bail!("State steering generation not supported for this architecture")
     }
 
+    fn forward_with_clt_injection(
+        &self,
+        _input_ids: &Tensor,
+        _clt_spec: &CltInjectionSpec,
+        _kv_cache: &mut KVCache,
+    ) -> Result<Tensor> {
+        anyhow::bail!("CLT injection not supported for this architecture")
+    }
+
+    fn generate_with_clt_injection(
+        &self,
+        _prompt_ids: &[u32],
+        _max_tokens: usize,
+        _temperature: f32,
+        _stop_tokens: &[u32],
+        _clt_spec: &CltInjectionSpec,
+        _device: &Device,
+    ) -> Result<Vec<u32>> {
+        anyhow::bail!("CLT injection generation not supported for this architecture")
+    }
+
+    /// Forward pass that stores all-position activations per layer.
+    ///
+    /// Returns `(output, FullActivationCache)` where each cached tensor has
+    /// shape `(seq_len, d_model)` — one per layer.
+    fn forward_with_full_cache(
+        &self,
+        _input_ids: &Tensor,
+    ) -> Result<(Tensor, FullActivationCache)> {
+        anyhow::bail!("forward_with_full_cache not supported for this architecture")
+    }
+
     fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
         None
+    }
+
+    /// Get the raw embedding vector for a single token.
+    ///
+    /// Returns the row of the embedding matrix for `token_id`, shape `[d_model]`.
+    /// For models with tied embeddings, this is also the unembedding direction.
+    fn embedding_vector(&self, _token_id: u32) -> Result<Tensor> {
+        anyhow::bail!("embedding_vector not supported for this architecture")
     }
 }
 
@@ -417,6 +458,20 @@ impl PlipModel {
         Ok(cache)
     }
 
+    /// Get all-position activations for a text input.
+    ///
+    /// Unlike [`get_activations`](Self::get_activations) which returns only the
+    /// last-token activation per layer, this returns the residual stream at every
+    /// token position. Each layer's tensor has shape `(seq_len, d_model)`.
+    ///
+    /// Currently only supported by the Gemma 2 backend.
+    pub fn get_all_position_activations(&self, text: &str) -> Result<FullActivationCache> {
+        let input_ids = self.tokenizer.encode(text)?;
+        let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
+        let (_, cache) = self.model.forward_with_full_cache(&input_tensor)?;
+        Ok(cache)
+    }
+
     /// Number of layers in the model
     pub fn n_layers(&self) -> usize {
         self.model.n_layers()
@@ -481,6 +536,19 @@ impl PlipModel {
     /// Decode a token ID to string
     pub fn decode_token(&self, token_id: u32) -> String {
         self.tokenizer.decode_token(token_id)
+    }
+
+    /// Get the raw embedding vector for a single token.
+    ///
+    /// Returns shape `[d_model]`. For models with tied embeddings (e.g., Gemma 2),
+    /// this is also the unembedding direction — useful for CLT decoder projection scoring.
+    pub fn token_embedding(&self, token_id: u32) -> Result<Tensor> {
+        self.model.embedding_vector(token_id)
+    }
+
+    /// Encode text into token IDs.
+    pub fn encode(&self, text: &str) -> Result<Vec<u32>> {
+        self.tokenizer.encode(text)
     }
 
     /// Tokenize text and return token strings
@@ -1305,6 +1373,73 @@ impl PlipModel {
         }
 
         Ok(tokens)
+    }
+
+    // ========================================================================
+    // CLT Injection Methods (Cross-Layer Transcoder steering)
+    // ========================================================================
+
+    /// Compare logits with and without CLT injection.
+    ///
+    /// Runs both a baseline and a CLT-injected forward pass on the same input,
+    /// returning a `CltLogitShiftResult` that supports KL divergence computation
+    /// and top changed token analysis.
+    ///
+    /// # Arguments
+    /// * `text` - Input text to process
+    /// * `clt_spec` - Pre-accumulated CLT injection specification
+    pub fn clt_logit_shift(
+        &self,
+        text: &str,
+        clt_spec: &CltInjectionSpec,
+    ) -> Result<CltLogitShiftResult> {
+        let input_ids = self.tokenizer.encode(text)?;
+        let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
+
+        // Baseline: standard forward pass (no injection)
+        let (baseline_output, _cache) = self.model.forward_with_cache(&input_tensor)?;
+        let baseline_logits = self.compute_logits(&baseline_output)?;
+
+        // Injected: forward with CLT injection (using a fresh KV-cache)
+        let mut kv_cache = self.model.new_kv_cache();
+        let injected_logits =
+            self.model
+                .forward_with_clt_injection(&input_tensor, clt_spec, &mut kv_cache)?;
+
+        Ok(CltLogitShiftResult::new(baseline_logits, injected_logits))
+    }
+
+    /// Generate text with CLT injection applied during the prompt phase.
+    ///
+    /// CLT injection vectors are applied during prompt prefill; subsequent
+    /// autoregressive tokens use standard KV-cache generation.
+    ///
+    /// # Arguments
+    /// * `prompt` - Input text to continue from
+    /// * `max_tokens` - Maximum number of tokens to generate
+    /// * `temperature` - Sampling temperature (0.0 = greedy)
+    /// * `stop_tokens` - Token IDs that stop generation
+    /// * `clt_spec` - Pre-accumulated CLT injection specification
+    pub fn generate_with_clt_injection(
+        &self,
+        prompt: &str,
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        clt_spec: &CltInjectionSpec,
+    ) -> Result<String> {
+        let prompt_ids = self.tokenizer.encode(prompt)?;
+
+        let tokens = self.model.generate_with_clt_injection(
+            &prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            clt_spec,
+            &self.device,
+        )?;
+
+        self.tokenizer.decode(&tokens, true)
     }
 }
 

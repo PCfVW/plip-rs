@@ -3,6 +3,10 @@
 //! Note: Tests marked with #[ignore] require GPU and model download.
 //! Run them explicitly with: cargo test --ignored
 
+#![allow(clippy::doc_markdown)]
+#![allow(clippy::cast_precision_loss)]
+#![allow(clippy::cast_possible_truncation)]
+
 use plip_rs::{Corpus, ExperimentConfig};
 use serial_test::serial;
 use std::io::Write;
@@ -95,7 +99,7 @@ fn test_split_deterministic() {
 #[test]
 fn test_experiment_config_defaults() {
     let config = ExperimentConfig::default();
-    assert_eq!(config.train_ratio, 0.8);
+    assert!((config.train_ratio - 0.8).abs() < f64::EPSILON);
     assert_eq!(config.seed, 42);
     assert!(config.layers.is_empty());
 }
@@ -235,7 +239,7 @@ fn test_rwkv6_forward_logits() {
         .zip(expected_logit_values.iter())
         .enumerate()
     {
-        let rust_logit = logits_vec[tid] as f64;
+        let rust_logit = f64::from(logits_vec[tid]);
         let abs_diff = (rust_logit - expected_logit).abs();
         let rel_diff = abs_diff / expected_logit.abs().max(1e-6);
         println!(
@@ -356,7 +360,7 @@ fn test_activation_extraction() {
 // Phase 4: State Knockout — spec validation (no GPU)
 // ============================================================================
 
-/// Validate StateKnockoutSpec builder and validation logic.
+/// Validate `StateKnockoutSpec` builder and validation logic.
 #[test]
 fn test_state_knockout_spec_validation() {
     use plip_rs::StateKnockoutSpec;
@@ -585,7 +589,120 @@ fn test_rwkv6_effective_attention() {
     }
 }
 
-/// Validate that forward_with_attention produces the same hidden output as forward_with_cache.
+// ============================================================================
+// Phase 2b: Gemma 2 Attention Steering
+// ============================================================================
+
+/// Verify that steering with scale(1.0) produces identical logits to no steering.
+///
+/// This is a correctness test for the new `forward_with_steering` code path
+/// in `forward_gemma2.rs`: identity steering must not change the output.
+#[test]
+#[ignore = "requires GPU and model download (~5 GB)"]
+#[serial]
+fn test_gemma2_steering_identity() {
+    use candle_core::DType;
+    use plip_rs::{PlipModel, SteeringSpec};
+
+    let model = PlipModel::from_pretrained("google/gemma-2-2b").expect("Gemma 2 2B loading failed");
+
+    let prompt = "The autumn leaves begin to fall,\n";
+    let token_ids = model.encode(prompt).expect("Encoding failed");
+    let seq_len = token_ids.len();
+
+    // Identity steering: scale(1.0) on layer 21, heads 1,6,7
+    // PlipModel::forward_with_steering runs both baseline and steered passes
+    let spec = SteeringSpec::scale(1.0)
+        .layer(21)
+        .heads(&[1, 6, 7])
+        .from_to_positions(seq_len - 1, &[0, 1, 2]);
+    let result = model
+        .forward_with_steering(prompt, &spec)
+        .expect("Steering forward failed");
+
+    // Compare logits — they should be identical for scale(1.0)
+    // Cast to F32 first (model may produce BF16 logits on GPU)
+    let baseline_f32 = result.baseline_logits.to_dtype(DType::F32).unwrap();
+    let steered_f32 = result.steered_logits.to_dtype(DType::F32).unwrap();
+    let diff = (&baseline_f32 - &steered_f32)
+        .unwrap()
+        .abs()
+        .unwrap()
+        .max(0)
+        .unwrap()
+        .to_vec1::<f32>()
+        .unwrap();
+    let max_diff: f32 = diff.iter().copied().fold(0.0f32, f32::max);
+
+    let kl = result.kl_divergence().unwrap();
+    println!("Gemma 2 steering identity: max logit diff = {max_diff:.2e}, KL = {kl:.6}");
+
+    assert!(
+        max_diff < 1e-4,
+        "scale(1.0) steering should not change logits, but max diff = {max_diff:.2e}"
+    );
+}
+
+/// Verify that steering with scale(4.0) produces different logits than baseline.
+///
+/// This confirms that the steering code path actually has an effect on the output.
+#[test]
+#[ignore = "requires GPU and model download (~5 GB)"]
+#[serial]
+fn test_gemma2_steering_has_effect() {
+    use candle_core::DType;
+    use plip_rs::{PlipModel, SteeringSpec};
+
+    let model = PlipModel::from_pretrained("google/gemma-2-2b").expect("Gemma 2 2B loading failed");
+
+    let prompt = "The autumn leaves begin to fall,\n";
+    let token_ids = model.encode(prompt).expect("Encoding failed");
+    let seq_len = token_ids.len();
+
+    // Strong steering: scale(4.0) on layer 21, heads 1,6,7
+    // Steer from newline (last token) to first few tokens
+    let spec = SteeringSpec::scale(4.0)
+        .layer(21)
+        .heads(&[1, 6, 7])
+        .from_to_positions(seq_len - 1, &[0, 1, 2]);
+    let result = model
+        .forward_with_steering(prompt, &spec)
+        .expect("Steering forward failed");
+
+    let kl = result.kl_divergence().unwrap();
+
+    // Compare logits — they should be different
+    // Cast to F32 first (model may produce BF16 logits on GPU)
+    let baseline_f32 = result.baseline_logits.to_dtype(DType::F32).unwrap();
+    let steered_f32 = result.steered_logits.to_dtype(DType::F32).unwrap();
+    let diff = (&baseline_f32 - &steered_f32)
+        .unwrap()
+        .abs()
+        .unwrap()
+        .max(0)
+        .unwrap()
+        .to_vec1::<f32>()
+        .unwrap();
+    let max_diff: f32 = diff.iter().copied().fold(0.0f32, f32::max);
+
+    println!("Gemma 2 steering effect: max logit diff = {max_diff:.4}, KL = {kl:.6}");
+
+    assert!(
+        max_diff > 0.01,
+        "scale(4.0) steering should change logits, but max diff = {max_diff:.2e}"
+    );
+    assert!(
+        kl > 0.0,
+        "KL divergence should be positive with scale(4.0) steering, got {kl}"
+    );
+    assert!(kl.is_finite(), "KL divergence should be finite, got {kl}");
+}
+
+// ============================================================================
+// Phase 5: RWKV-6 Effective Attention (continued)
+// ============================================================================
+
+/// Validate that `forward_with_attention` produces the same hidden output as `forward_with_cache`.
 #[test]
 #[ignore = "requires GPU and model download (~3.2 GB)"]
 #[serial]
