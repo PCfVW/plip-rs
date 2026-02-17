@@ -112,7 +112,7 @@ English words (ASCII alphabetic, length >= 2). Of 425,984 features scanned,
 287 produce a clean English top-1 token.
 
 **Step 3: Phoneme cross-reference.** Look up each word in the
-[CMU Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict), which
+[CMU Pronouncing Dictionary](https://github.com/cmusphinx/cmudict), which
 encodes pronunciations in
 [ARPAbet](https://en.wikipedia.org/wiki/ARPABET) notation. In ARPAbet, each
 phoneme is a short uppercase code: vowels carry a stress digit (1 = primary,
@@ -331,7 +331,7 @@ Anthropic's report for Claude 3.5 Haiku:
   [github.com/safety-research/circuit-tracer](https://github.com/safety-research/circuit-tracer)
 - **CMU Pronouncing Dictionary:** Carnegie Mellon University, ~134K English words
   with ARPAbet transcriptions.
-  [speech.cs.cmu.edu](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
+  [github.com/cmusphinx/cmudict](https://github.com/cmusphinx/cmudict)
 - **ARPAbet:** Phonetic transcription system using ASCII symbols for American
   English phonemes. Vowels carry stress marks (0/1/2); consonants are unmarked.
   [Wikipedia](https://en.wikipedia.org/wiki/ARPABET)
