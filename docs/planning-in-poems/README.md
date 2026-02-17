@@ -1,7 +1,34 @@
 # Replicating "Planning in Poems" with Open Tools
 
+*Melomētis (μέλος + μῆτις) — "song's cunning intelligence"*
+
+**Author:** Eric Jacopin
+
+My background is AI Planning — hierarchical task networks, goal decomposition,
+the classical tradition. When Anthropic reported that Claude 3.5 Haiku performs
+internal "planning" during poem generation, the natural question from that field
+is: how far does the analogy go? Can we relate what an LLM does at the newline
+token to anything recognizable as planning in the classical sense? Answering
+that question requires having something reproducible to test. This project
+builds that test bench.
+
+---
+
+**Contents:**
+[1. The result](#1-the-result) |
+[2. Setup](#2-setup) |
+[3. The journey](#3-the-journey) |
+[4. How to reproduce](#4-how-to-reproduce) |
+[5. What we did not replicate](#5-what-we-did-not-replicate) |
+[6. File inventory](#6-file-inventory) |
+[7. Acknowledgments](#7-acknowledgments)
+
+---
+
 Anthropic reported that Claude 3.5 Haiku plans ahead when writing rhyming
-poetry: at the newline token between lines, CLT features for candidate rhyme
+poetry: at the newline token between lines,
+[Cross-Layer Transcoder](https://transformer-circuits.pub/2025/attribution-graphs/biology.html)
+(CLT) features for candidate rhyme
 words pre-activate before any token of the next line is generated. Suppressing
 the natural plan and injecting an alternative redirects the line ending.
 The strongest evidence is Figure 13 of
@@ -75,8 +102,20 @@ This is the same shape Anthropic showed for "green" injection in Claude 3.5
 Haiku. The model, the CLT, and the rhyme group are all different. The
 phenomenon is the same.
 
+The implication goes beyond replication. Anthropic's finding was demonstrated
+on a single proprietary model; one could reasonably attribute the planning
+behavior to their specific training pipeline. This work reproduces it in
+Gemma 2 2B — a model from a different organization, trained on different data,
+with a different alignment procedure, at a different scale, probed with a
+different (and 70x coarser) CLT. The two models share essentially one thing:
+the transformer architecture. This suggests that planning-site localization
+is not a training artifact but an **architectural property of
+attention-based models**.
+
 **Output:** `outputs/suppress_inject_sweep.json`
+
 **Script:** `cargo run --release --example suppress_inject_sweep`
+
 **Analysis:** `cargo run --release --example analyze_suppress_inject -- --input outputs/suppress_inject_sweep.json`
 
 ---
@@ -182,8 +221,8 @@ designed at this granularity.
 ### Version A: planning features are position-specific
 
 Measured feature activation at every token position (not just the last).
-All four candidates (the features `go`, `out`, `ou` tested across four
-prompts) show activation exclusively at the planning site, with exactly 0.000
+Four feature-prompt pairs (so→`go`, about→`out`, shout→`out`, who→`ou`)
+show activation exclusively at the planning site, with exactly 0.000
 at all other positions.
 
 **Output:** `outputs/position_sweep.json`
@@ -393,5 +432,5 @@ the phenomenon.
   ([Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html#dives-poems),
   Lindsey et al., 2025)
 - **mntss** -- the [426K open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-426k) for Gemma 2 2B
-- **HuggingFace candle** -- the Rust ML framework
+- **HuggingFace [candle](https://github.com/huggingface/candle)** -- the Rust ML framework
 - **Google DeepMind** -- the [Gemma 2 2B](https://huggingface.co/google/gemma-2-2b) model

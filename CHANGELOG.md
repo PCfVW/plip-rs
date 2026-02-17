@@ -5,6 +5,49 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] — 2026-02-17
+
+### Added
+
+- **Gemma 2 2B backend** (`src/forward_gemma2.rs`, 1,570 lines): Gemma 2
+  architecture with softcapped attention, GQA, alternating local/global sliding
+  window, and per-layer activation capture. `PlipBackend` implementation with
+  all forward pass variants plus CLT injection hooks.
+- **Cross-Layer Transcoder infrastructure** (`src/clt.rs`, 1,640 lines): lazy
+  HuggingFace download, stream-and-free encoder loading, sparse activation
+  encoding with ReLU threshold, decoder vector extraction with micro-cache, and
+  `CltInjectionSpec` for steered generation. Validated against Python Circuit
+  Tracer reference: 90/90 top-10 features match (max relative error 1.2e-6).
+- **Poetry corpus** (`corpus/`): 780 samples (260 rhyming, 260 non-rhyming,
+  260 generation prompts) across 20 rhyme groups, generated from the CMU
+  Pronouncing Dictionary.
+- **13 new examples** covering the full replication pipeline: CLT inspection,
+  encoding, validation, logit-shift acceptance test, poetry corpus verification,
+  planning detection (layer scan), CLT steering (Methods 1--6), attention
+  steering, semantic category steering (6 modes), cross-mechanism evaluation,
+  multi-layer position sweep, suppress + inject (Figure 13), and offline
+  analysis.
+- **`docs/planning-in-poems/`**: four-part write-up replicating Anthropic's
+  Figure 13 from "On the Biology of a Large Language Model" (Lindsey et al.,
+  2025) using entirely open tools: Gemma 2 2B, mntss/clt-gemma-2-2b-426k
+  (426K features), Rust + candle, RTX 5060 Ti 16 GB. Core result: 48.3%
+  cross-group probability redirect at the planning site, ten-million-fold spike.
+
+### Changed
+
+- `ModelArchitecture` enum extended with `Gemma2` variant; detection for
+  `"gemma-2"`, `"gemma2"` (before generic `"gemma"` match).
+- `PlipBackend` trait extended with CLT-related methods: `clt_logit_shift`,
+  `generate_with_clt_injection`, `get_all_position_activations`,
+  `token_embedding` (all with default error implementations).
+- `PlipTokenizer::encode` changed from `encode(text, false)` to
+  `encode(text, true)` — adds special tokens (BOS for Gemma 2) as configured
+  in `tokenizer.json`.
+- `FullActivationCache` added to `src/cache.rs` for all-position activation
+  storage.
+- `CltInjectionSpec`, `CltLayerInjection`, `CltLogitShiftResult` added to
+  `src/intervention.rs`.
+
 ## [1.2.0] — 2026-02-10
 
 ### Added
@@ -182,6 +225,7 @@ Initial public release of PLIP-rs: **P**robing **L**anguage model
 - GitHub Actions CI (CPU build + clippy + tests).
 - Docker support for containerized GPU experiments.
 
+[1.3.0]: https://github.com/PCfVW/plip-rs/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/PCfVW/plip-rs/compare/v1.1.1...v1.2.0
 [1.1.1]: https://github.com/PCfVW/plip-rs/compare/v1.1.0...v1.1.1
 [1.1.0]: https://github.com/PCfVW/plip-rs/compare/v1.0.3...v1.1.0

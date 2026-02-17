@@ -1,7 +1,9 @@
 # 1. Detecting the Planning Signal
 
 **Model:** google/gemma-2-2b (2.6B parameters, base, BF16)
+
 **CLT:** mntss/clt-gemma-2-2b-426k (16,384 features x 26 layers)
+
 **Hardware:** RTX 5060 Ti 16 GB, CUDA 13.1
 
 This document covers the detection phase: establishing that Gemma 2 2B

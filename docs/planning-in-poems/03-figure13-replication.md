@@ -10,7 +10,7 @@ suppress + inject replication (Version D).
 
 Figure 13 of
 [On the Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html#dives-poems)
-is a line plot: the x-axis sweeps across every token position in a line of
+is a bar chart: the x-axis sweeps across every token position in a line of
 poetry; the y-axis plots the probability of the injected target word. The
 result is a sharp spike at the newline token (the planning site) and
 near-zero probability everywhere else.
