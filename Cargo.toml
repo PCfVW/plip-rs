@@ -226,6 +226,10 @@ path = "examples/suppress_inject_sweep.rs"
 name = "analyze_suppress_inject"
 path = "examples/analyze_suppress_inject.rs"
 
+[[example]]
+name = "reproduce_pipeline"
+path = "examples/reproduce_pipeline.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1

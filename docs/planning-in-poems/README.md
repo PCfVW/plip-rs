@@ -44,7 +44,7 @@ This branch replicates that core finding using entirely open components:
 | CLT | 30M features (internal) | 426K features ([mntss/clt-gemma-2-2b-426k](https://huggingface.co/mntss/clt-gemma-2-2b-426k)) |
 | Toolkit | Internal infrastructure | Rust + [candle](https://github.com/huggingface/candle) (PLIP-rs) |
 | Hardware | (unspecified) | RTX 5060 Ti 16 GB (single consumer GPU) |
-| New code | -- | ~3,200 lines (`src/clt.rs` + `src/forward_gemma2.rs`) |
+| New code | -- | ~3,300 lines (`src/clt.rs` + `src/forward_gemma2.rs`) |
 
 ---
 
@@ -290,53 +290,52 @@ sweep the injection position. 136 pairs (4 prompts x 34 alternative groups).
 
 ## 4. How to reproduce
 
-All commands assume a CUDA 13.1-capable GPU. Models and CLT weights download
-automatically from HuggingFace on first run.
+A single command runs the entire pipeline — from corpus verification through
+the Figure 13 suppress + inject sweep — with per-step timing and progress
+reporting:
 
 ```bash
-# 1. Verify the poetry corpus (no GPU needed)
-cargo run --release --example verify_poetry_corpus
-
-# 2. Validate CLT encoding against Python reference
-#    (requires: python scripts/clt_reference.py  -- run once to generate reference data)
-cargo run --release --example validate_clt
-
-# 3. CLT logit-shift acceptance test (GPU, ~2 min)
-cargo run --release --example clt_logit_shift
-
-# 4. Phase 1: Detect planning signal via attention (GPU, ~10 min)
-cargo run --release --example poetry_layer_scan -- \
-    --model google/gemma-2-2b \
-    --output outputs/poetry_layer_scan_google_gemma_2_2b.json
-
-# 5. Phase 2a: CLT steering experiments, Methods 1-6 (GPU, ~30 min)
-cargo run --release --example poetry_clt_steering -- \
-    --model google/gemma-2-2b
-
-# 6. Phase 2b: Attention steering comparison (GPU, ~15 min)
-cargo run --release --example poetry_attention_steering -- \
-    --model google/gemma-2-2b
-
-# 7. Method 7: Semantic category steering (GPU, ~20 min)
-cargo run --release --example poetry_category_steering -- \
-    --mode probe-categories \
-    --model google/gemma-2-2b
-
-# 8. Phase 2c: Cross-mechanism evaluation (GPU, ~5 min)
-cargo run --release --example evaluate_steering
-
-# 9. Version C: Multi-layer causal position sweep (GPU, ~20 min)
-cargo run --release --example steering_sweep -- \
-    --model google/gemma-2-2b
-
-# 10. Version D: Suppress + inject (the Figure 13 experiment) (GPU, ~45 min)
-cargo run --release --example suppress_inject_sweep -- \
-    --model google/gemma-2-2b
-
-# 11. Analyze Version D results
-cargo run --release --example analyze_suppress_inject -- \
-    --input outputs/suppress_inject_sweep.json
+cargo run --release --example reproduce_pipeline
 ```
+
+**Total runtime: ~3 hours** on an RTX 5060 Ti 16 GB (PCIe 4.0). Model and
+CLT weights (~37 GB on disk: ~10 GB for Gemma 2 2B, ~27 GB for the 426K CLT)
+download automatically from HuggingFace on first run; timings assume both are
+already cached locally.
+
+To reproduce into a separate directory (without overwriting existing results):
+
+```bash
+cargo run --release --example reproduce_pipeline -- --output-dir outputs/_repro
+```
+
+To resume after a failure or re-run a subset of steps:
+
+```bash
+cargo run --release --example reproduce_pipeline -- --start-step 8
+cargo run --release --example reproduce_pipeline -- --start-step 8 --end-step 9
+```
+
+### Pipeline steps
+
+| Step | Description | GPU |
+|:----:|-------------|:---:|
+| 1 | Verify poetry corpus (780 samples, schema + position checks) | -- |
+| 2 | Validate CLT encoding against Python reference | yes |
+| 3 | CLT logit-shift acceptance test (KL divergence) | yes |
+| 4 | Phase 1: Detect planning signal via attention layer scan | yes |
+| 5 | Phase 2a: CLT steering experiments, Methods 3--6 + decoder projection | yes |
+| 6 | Phase 2b: Attention steering comparison (Layer 21, Heads 1/6/7) | yes |
+| 7 | Phase 2c: Cross-mechanism evaluation (CLT vs. attention, Fisher's exact) | -- |
+| 8 | Bottom-up: Scan 425,984 CLT features against 256K vocabulary | yes |
+| 9 | Find rhyme pairs via CMU Pronouncing Dictionary | -- |
+| 10 | Planning detection V2: completion-style probes (6.45x ratio) | yes |
+| 11 | Version C: Multi-layer causal position sweep | yes |
+| 12 | Version D: Suppress + inject sweep (the Figure 13 experiment) | yes |
+| 13 | Analyze Version D results (48.3% cross-group redirect) | -- |
+
+Step 2 requires a one-time Python run to generate the CLT reference file
+(`python scripts/clt_reference.py`). Use `--skip-clt-validation` to skip it.
 
 ---
 
@@ -434,4 +433,5 @@ the phenomenon.
 - **mntss** -- the [426K open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-426k) for Gemma 2 2B
 - **HuggingFace [candle](https://github.com/huggingface/candle)** -- the Rust ML framework
   ([discussion #3368](https://github.com/huggingface/candle/discussions/3368))
+- **Wolfram [Mathematica](https://www.wolfram.com/mathematica/) 14.3** for figures.
 - **Google DeepMind** -- the [Gemma 2 2B](https://huggingface.co/google/gemma-2-2b) model
