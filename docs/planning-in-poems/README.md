@@ -433,4 +433,5 @@ the phenomenon.
   Lindsey et al., 2025)
 - **mntss** -- the [426K open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-426k) for Gemma 2 2B
 - **HuggingFace [candle](https://github.com/huggingface/candle)** -- the Rust ML framework
+  ([discussion #3368](https://github.com/huggingface/candle/discussions/3368))
 - **Google DeepMind** -- the [Gemma 2 2B](https://huggingface.co/google/gemma-2-2b) model

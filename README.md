@@ -301,6 +301,18 @@ The result: statistically significant findings (p < 0.0002) in 4 of 6 transforme
 
 If you're doing MI research on limited hardware, we hope PLIP-rs helps. PRs welcome for further memory optimizations.
 
+### Planning in Poems (melometis branch)
+
+The [`melometis`](https://github.com/PCfVW/plip-rs/tree/melometis) branch
+replicates Anthropic's Figure 13 from
+[On the Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html#dives-poems)
+(Lindsey et al., 2025) using Gemma 2 2B and a
+[426K open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-426k) —
+entirely on a single RTX 5060 Ti 16 GB. Core result: 48.3% cross-group
+probability redirect at the planning site, ten-million-fold spike. See
+[`docs/planning-in-poems/`](https://github.com/PCfVW/plip-rs/tree/melometis/docs/planning-in-poems)
+for the full narrative.
+
 ## License
 
 Apache 2.0
