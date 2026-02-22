@@ -337,6 +337,20 @@ cargo run --release --example reproduce_pipeline -- --start-step 8 --end-step 9
 Step 2 requires a one-time Python run to generate the CLT reference file
 (`python scripts/clt_reference.py`). Use `--skip-clt-validation` to skip it.
 
+**To replicate only the Figure 13 data** (skipping the detection phase and the six
+failed steering methods documented in Section 3):
+
+```bash
+cargo run --release --example reproduce_pipeline -- --start-step 8
+```
+
+This runs steps 8--13: bottom-up feature discovery, rhyme-pair matching via the
+CMU dictionary, completion-style planning detection, the Version C multi-layer
+sweep, the Version D suppress + inject sweep (the Figure 13 experiment itself),
+and the final analysis. Steps 1--7 are skipped — they cover corpus verification,
+CLT validation, and the six top-down steering methods whose failures motivated
+the bottom-up pivot (see Section 3).
+
 ---
 
 ## 5. What we did not replicate
