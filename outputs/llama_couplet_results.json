@@ -1,0 +1,167 @@
+[
+  {
+    "id": 1,
+    "rhyme_family_size": "large",
+    "scheme": "couplet",
+    "target_word": "light",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe moon casts silver light,",
+    "response": "And fills my heart with peaceful night.",
+    "response_trimmed": "And fills my heart with peaceful night.",
+    "duration_ms": 3554
+  },
+  {
+    "id": 2,
+    "rhyme_family_size": "large",
+    "scheme": "couplet",
+    "target_word": "play",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe children laugh and play,",
+    "response": "Their joyful spirits sway.",
+    "response_trimmed": "Their joyful spirits sway.",
+    "duration_ms": 2194
+  },
+  {
+    "id": 3,
+    "rhyme_family_size": "large",
+    "scheme": "couplet",
+    "target_word": "sound",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe thunder makes a sound,",
+    "response": "That echoes all around.",
+    "response_trimmed": "That echoes all around.",
+    "duration_ms": 2195
+  },
+  {
+    "id": 4,
+    "rhyme_family_size": "large",
+    "scheme": "couplet",
+    "target_word": "rain",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe clouds bring heavy rain,",
+    "response": "And darkness falls in vain.",
+    "response_trimmed": "And darkness falls in vain.",
+    "duration_ms": 2216
+  },
+  {
+    "id": 5,
+    "rhyme_family_size": "large",
+    "scheme": "couplet",
+    "target_word": "time",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe old clock measures time,",
+    "response": "And its tick-tock echoes through the night.",
+    "response_trimmed": "And its tick-tock echoes through the night.",
+    "duration_ms": 2250
+  },
+  {
+    "id": 6,
+    "rhyme_family_size": "medium",
+    "scheme": "couplet",
+    "target_word": "air",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe geese fly through the air,",
+    "response": "Their honking echoes fill the fair.",
+    "response_trimmed": "Their honking echoes fill the fair.",
+    "duration_ms": 2243
+  },
+  {
+    "id": 7,
+    "rhyme_family_size": "medium",
+    "scheme": "couplet",
+    "target_word": "gold",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe sunset gleams like gold,",
+    "response": "And paints the evening with a gentle hold.",
+    "response_trimmed": "And paints the evening with a gentle hold.",
+    "duration_ms": 2242
+  },
+  {
+    "id": 8,
+    "rhyme_family_size": "medium",
+    "scheme": "couplet",
+    "target_word": "fire",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe embers feed the fire,",
+    "response": "And in the flames, a warmth will acquire.",
+    "response_trimmed": "And in the flames, a warmth will acquire.",
+    "duration_ms": 2258
+  },
+  {
+    "id": 9,
+    "rhyme_family_size": "medium",
+    "scheme": "couplet",
+    "target_word": "stone",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe castle walls of stone,",
+    "response": "Stand tall and strong.",
+    "response_trimmed": "Stand tall and strong.",
+    "duration_ms": 2232
+  },
+  {
+    "id": 10,
+    "rhyme_family_size": "medium",
+    "scheme": "couplet",
+    "target_word": "dream",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nI wandered through a dream,",
+    "response": "And found my heart was already serene.",
+    "response_trimmed": "And found my heart was already serene.",
+    "duration_ms": 2245
+  },
+  {
+    "id": 11,
+    "rhyme_family_size": "small",
+    "scheme": "couplet",
+    "target_word": "strange",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe silence felt so strange,",
+    "response": "And echoed through the empty space.",
+    "response_trimmed": "And echoed through the empty space.",
+    "duration_ms": 2250
+  },
+  {
+    "id": 12,
+    "rhyme_family_size": "small",
+    "scheme": "couplet",
+    "target_word": "love",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nI never knew such love,",
+    "response": "Until I met you, my heart was full and free.",
+    "response_trimmed": "Until I met you, my heart was full and free.",
+    "duration_ms": 2289
+  },
+  {
+    "id": 13,
+    "rhyme_family_size": "small",
+    "scheme": "couplet",
+    "target_word": "truth",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nShe spoke the honest truth,",
+    "response": "And found solace in a gentle youth.",
+    "response_trimmed": "And found solace in a gentle youth.",
+    "duration_ms": 2264
+  },
+  {
+    "id": 14,
+    "rhyme_family_size": "small",
+    "scheme": "couplet",
+    "target_word": "world",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nHe traveled all the world,",
+    "response": "And brought back tales to unfurl.",
+    "response_trimmed": "And brought back tales to unfurl.",
+    "duration_ms": 2257
+  },
+  {
+    "id": 15,
+    "rhyme_family_size": "small",
+    "scheme": "couplet",
+    "target_word": "earth",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe seeds lay in the earth,",
+    "response": "And sprouted forth to give birth.",
+    "response_trimmed": "And sprouted forth to give birth.",
+    "duration_ms": 2256
+  }
+]

@@ -1,0 +1,200 @@
+[
+  {
+    "id": 1,
+    "rhyme_family_size": "large",
+    "scheme": "couplet",
+    "target_word": "light",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe moon casts silver light,",
+    "response": "And fills my heart with peaceful night.",
+    "response_trimmed": "And fills my heart with peaceful night.",
+    "duration_ms": 3575
+  },
+  {
+    "id": 2,
+    "rhyme_family_size": "medium",
+    "scheme": "couplet",
+    "target_word": "air",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe geese fly through the air,",
+    "response": "And leave a trail of beauty there.",
+    "response_trimmed": "And leave a trail of beauty there.",
+    "duration_ms": 2227
+  },
+  {
+    "id": 3,
+    "rhyme_family_size": "small",
+    "scheme": "couplet",
+    "target_word": "strange",
+    "strategy": "couplet",
+    "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe silence felt so strange,",
+    "response": "And the stillness echoed through my brain.",
+    "response_trimmed": "And the stillness echoed through my brain.",
+    "duration_ms": 2225
+  },
+  {
+    "id": 4,
+    "rhyme_family_size": "large",
+    "scheme": "ABAB",
+    "target_word": "light",
+    "strategy": "few-shot",
+    "prompt": "Complete each quatrain with a fourth line that rhymes with the second line.\n\nExample 1:\nThe river runs beside the lane,\nThe children laugh and play,\nThe flowers bloom despite the rain,\nAnd brighten up the day.\n\nExample 2:\nThe mountains rise above the plain,\nThe eagle soars on high,\nThe shepherd walks the path again,\nBeneath the open sky.\n\nExample 3:\nThe candle flickers in the room,\nThe fire starts to fade,\nThe roses wither past their bloom,\nAnd cast a darker shade.\n\nNow complete this one (fourth line must rhyme with \"light\"):\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,",
+    "response": "Here are the completed quatrains:\n\nThe forest glows in morning light,\nThe trees stand tall and strong,\nTheir leaves rustle all day long,\nAnd sing a gentle delight.\n\nThe ocean waves crash on the shore,\nThe seagulls soar up high,\nThe tide rises to explore,\nAnd meets the sun's bright eye.",
+    "response_trimmed": "Here are the completed quatrains:\n\nThe forest glows in morning light,\nThe trees stand tall and strong,\nTheir leaves rustle all day long,\nAnd sing a gentle delight.\n\nThe ocean waves crash on the shore,\nThe seagulls soar up high,\nThe tide rises to explore,\nAnd meets the sun's bright eye.",
+    "duration_ms": 2533
+  },
+  {
+    "id": 5,
+    "rhyme_family_size": "medium",
+    "scheme": "ABAB",
+    "target_word": "air",
+    "strategy": "few-shot",
+    "prompt": "Complete each quatrain with a fourth line that rhymes with the second line.\n\nExample 1:\nThe river runs beside the lane,\nThe children laugh and play,\nThe flowers bloom despite the rain,\nAnd brighten up the day.\n\nExample 2:\nThe mountains rise above the plain,\nThe eagle soars on high,\nThe shepherd walks the path again,\nBeneath the open sky.\n\nExample 3:\nThe candle flickers in the room,\nThe fire starts to fade,\nThe roses wither past their bloom,\nAnd cast a darker shade.\n\nNow complete this one (fourth line must rhyme with \"air\"):\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,",
+    "response": "Here's the completed quatrain:\n\n The autumn leaves are turning gold,\nThe geese fly through the morning air,\nTheir gentle honking echoes old,\nAnd fill the heart with love.",
+    "response_trimmed": "Here's the completed quatrain:\n\n The autumn leaves are turning gold,\nThe geese fly through the morning air,\nTheir gentle honking echoes old,\nAnd fill the heart with love.",
+    "duration_ms": 2423
+  },
+  {
+    "id": 6,
+    "rhyme_family_size": "small",
+    "scheme": "ABAB",
+    "target_word": "strange",
+    "strategy": "few-shot",
+    "prompt": "Complete each quatrain with a fourth line that rhymes with the second line.\n\nExample 1:\nThe river runs beside the lane,\nThe children laugh and play,\nThe flowers bloom despite the rain,\nAnd brighten up the day.\n\nExample 2:\nThe mountains rise above the plain,\nThe eagle soars on high,\nThe shepherd walks the path again,\nBeneath the open sky.\n\nExample 3:\nThe candle flickers in the room,\nThe fire starts to fade,\nThe roses wither past their bloom,\nAnd cast a darker shade.\n\nNow complete this one (fourth line must rhyme with \"strange\"):\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,",
+    "response": "Here are the completed quatrains:\n\nThe stars shine bright in the night's strange,\nThe world is hushed and full of sound,\nThe moon casts shadows that dance and range,\nAnd fill my heart with peace and calm.\n\nThe waves crash strong against the shore,\nThe ocean's roar is loud and free,\nI feel a sense of calm, I ask for more,\nAnd let my worries drift away from me.",
+    "response_trimmed": "Here are the completed quatrains:\n\nThe stars shine bright in the night's strange,\nThe world is hushed and full of sound,\nThe moon casts shadows that dance and range,\nAnd fill my heart with peace and calm.\n\nThe waves crash strong against the shore,\nThe ocean's roar is loud and free,\nI feel a sense of calm, I ask for more,\nAnd let my worries drift away from me.",
+    "duration_ms": 2620
+  },
+  {
+    "id": 7,
+    "rhyme_family_size": "large",
+    "scheme": "ABAB",
+    "target_word": "light",
+    "strategy": "chain-of-thought",
+    "prompt": "I need to complete a quatrain. The fourth line must rhyme with \"light\".\n\nStep 1 — Words that rhyme with \"light\": bright, night, sight, might, flight, right, tight, white\n\nStep 2 — The first three lines are:\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,\n\nStep 3 — Write ONLY the fourth line, ending with one of the rhyming words from Step 1:",
+    "response": "Here's a possible completion of the quatrain:\n\nThe world is hushed in silent flight.",
+    "response_trimmed": "Here's a possible completion of the quatrain:\n\nThe world is hushed in silent flight.",
+    "duration_ms": 2261
+  },
+  {
+    "id": 8,
+    "rhyme_family_size": "medium",
+    "scheme": "ABAB",
+    "target_word": "air",
+    "strategy": "chain-of-thought",
+    "prompt": "I need to complete a quatrain. The fourth line must rhyme with \"air\".\n\nStep 1 — Words that rhyme with \"air\": bare, care, dare, fair, glare, pair, rare, share, stare, there, wear\n\nStep 2 — The first three lines are:\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,\n\nStep 3 — Write ONLY the fourth line, ending with one of the rhyming words from Step 1:",
+    "response": "I'll write the fourth line using a word that rhymes with \"air\". Here's my attempt:\n\nThe autumn leaves are turning fair.",
+    "response_trimmed": "I'll write the fourth line using a word that rhymes with \"air\". Here's my attempt:\n\nThe autumn leaves are turning fair.",
+    "duration_ms": 2347
+  },
+  {
+    "id": 9,
+    "rhyme_family_size": "small",
+    "scheme": "ABAB",
+    "target_word": "strange",
+    "strategy": "chain-of-thought",
+    "prompt": "I need to complete a quatrain. The fourth line must rhyme with \"strange\".\n\nStep 1 — Words that rhyme with \"strange\": change, range, arrange, exchange, mange, grange\n\nStep 2 — The first three lines are:\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,\n\nStep 3 — Write ONLY the fourth line, ending with one of the rhyming words from Step 1:",
+    "response": "Here's the completed quatrain:\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,\nAnd I couldn't help but think it was in my range.",
+    "response_trimmed": "Here's the completed quatrain:\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,\nAnd I couldn't help but think it was in my range.",
+    "duration_ms": 2437
+  },
+  {
+    "id": 10,
+    "rhyme_family_size": "large",
+    "scheme": "ABAB",
+    "target_word": "light",
+    "strategy": "explicit-end-word",
+    "prompt": "Complete this quatrain. The fourth line MUST end with the word \"bright\":\n\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,",
+    "response": "Here's a possible completion of the quatrain:\n\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,\nFilling my heart with peaceful sight.",
+    "response_trimmed": "Here's a possible completion of the quatrain:\n\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,\nFilling my heart with peaceful sight.",
+    "duration_ms": 2401
+  },
+  {
+    "id": 11,
+    "rhyme_family_size": "medium",
+    "scheme": "ABAB",
+    "target_word": "air",
+    "strategy": "explicit-end-word",
+    "prompt": "Complete this quatrain. The fourth line MUST end with the word \"care\":\n\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,",
+    "response": "Here's a completed quatrain:\n\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,\nAnd cherished as children grow old.",
+    "response_trimmed": "Here's a completed quatrain:\n\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,\nAnd cherished as children grow old.",
+    "duration_ms": 2391
+  },
+  {
+    "id": 12,
+    "rhyme_family_size": "small",
+    "scheme": "ABAB",
+    "target_word": "strange",
+    "strategy": "explicit-end-word",
+    "prompt": "Complete this quatrain. The fourth line MUST end with the word \"change\":\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,",
+    "response": "Here's a completed quatrain:\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,\nAnd in its place, I knew it was time to rearrange.",
+    "response_trimmed": "Here's a completed quatrain:\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,\nAnd in its place, I knew it was time to rearrange.",
+    "duration_ms": 2424
+  },
+  {
+    "id": 13,
+    "rhyme_family_size": "large",
+    "scheme": "ABAB",
+    "target_word": "light",
+    "strategy": "html",
+    "prompt": "<blockquote class=\"poem\">\n<p>The stars appear above the hill,<br>\nThe moon casts silver light,<br>\nThe evening air is calm and still,<br>\n",
+    "response": "As I stand there, lost in a gentle will.</p>\n</blockquote>\n\nThis poem appears to be about standing on a hill at night with nothing but the stars visible. The speaker seems to be fully immersed in the peaceful atmosphere of the moment, letting their mind wander and lose itself in thought.\n\nThe first line \"The stars appear above the hill\" sets the scene and establishes that we are in a natural setting with the stars as a prominent feature. The use of \"above\" implies a sense of height or elevation, which adds to the peacefulness of the atmosphere.\n\nThe second line \"The",
+    "response_trimmed": "As I stand there, lost in a gentle will.</p>\n</blockquote>\n\nThis poem appears to be about standing on a hill at night with nothing but the stars visible. The speaker seems to be fully immersed in the peaceful atmosphere of the moment, letting their mind wander and lose itself in thought.\n\nThe first line \"The stars appear above the hill\" sets the scene and establishes that we are in a natural setting with the stars as a prominent feature. The use of \"above\" implies a sense of height or elevation, which adds to the peacefulness of the atmosphere.\n\nThe second line \"The",
+    "duration_ms": 2744
+  },
+  {
+    "id": 14,
+    "rhyme_family_size": "medium",
+    "scheme": "ABAB",
+    "target_word": "air",
+    "strategy": "html",
+    "prompt": "<blockquote class=\"poem\">\n<p>The autumn leaves are turning gold,<br>\nThe geese fly through the air,<br>\nA story waiting to be told,<br>\n",
+    "response": "In these moments, I am old.</p>\n</blockquote>\n\nThis is a poem about aging and mortality. The speaker reflects on how their life has changed over time, and how they have grown older. They mention that the autumn leaves are turning gold, symbolizing the cycle of life and the passing of time.\n\nThe second line mentions geese flying through the air, which could represent freedom and escape from the constraints of life. This adds a sense of wonder and joy to the poem, highlighting the beauty of this moment in time.\n\nThe final line, \"In these moments, I am old,\"",
+    "response_trimmed": "In these moments, I am old.</p>\n</blockquote>\n\nThis is a poem about aging and mortality. The speaker reflects on how their life has changed over time, and how they have grown older. They mention that the autumn leaves are turning gold, symbolizing the cycle of life and the passing of time.\n\nThe second line mentions geese flying through the air, which could represent freedom and escape from the constraints of life. This adds a sense of wonder and joy to the poem, highlighting the beauty of this moment in time.\n\nThe final line, \"In these moments, I am old,\"",
+    "duration_ms": 2759
+  },
+  {
+    "id": 15,
+    "rhyme_family_size": "small",
+    "scheme": "ABAB",
+    "target_word": "strange",
+    "strategy": "html",
+    "prompt": "<blockquote class=\"poem\">\n<p>The shadows fell across the floor,<br>\nThe silence felt so strange,<br>\nI heard a creaking from the door,<br>\n",
+    "response": "And I wondered, \"Who's there?\"</p>\n</blockquote>\n\nThis poem is an example of how poetry can be used to tell a story and create atmosphere. In this case, it tells us that someone (or something) has been standing in the room, waiting for the person who left. The use of words like \"creaking\" and \"strange\" helps to create a sense of foreboding or unease, suggesting that the presence is ominous and potentially threatening.\n\nThe poem also uses sensory details such as sight (\"shadows fell\"), sound (\"creaking from the door",
+    "response_trimmed": "And I wondered, \"Who's there?\"</p>\n</blockquote>\n\nThis poem is an example of how poetry can be used to tell a story and create atmosphere. In this case, it tells us that someone (or something) has been standing in the room, waiting for the person who left. The use of words like \"creaking\" and \"strange\" helps to create a sense of foreboding or unease, suggesting that the presence is ominous and potentially threatening.\n\nThe poem also uses sensory details such as sight (\"shadows fell\"), sound (\"creaking from the door",
+    "duration_ms": 2672
+  },
+  {
+    "id": 16,
+    "rhyme_family_size": "large",
+    "scheme": "ABAB",
+    "target_word": "light",
+    "strategy": "system-prompt",
+    "prompt": "The stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,",
+    "response": "And darkness whispers a gentle thrill",
+    "response_trimmed": "And darkness whispers a gentle thrill",
+    "duration_ms": 2229
+  },
+  {
+    "id": 17,
+    "rhyme_family_size": "medium",
+    "scheme": "ABAB",
+    "target_word": "air",
+    "strategy": "system-prompt",
+    "prompt": "The autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,",
+    "response": "Their journey's end is yet to share.",
+    "response_trimmed": "Their journey's end is yet to share.",
+    "duration_ms": 2228
+  },
+  {
+    "id": 18,
+    "rhyme_family_size": "small",
+    "scheme": "ABAB",
+    "target_word": "strange",
+    "strategy": "system-prompt",
+    "prompt": "The shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,",
+    "response": "the wind it whispered my name.",
+    "response_trimmed": "the wind it whispered my name.",
+    "duration_ms": 2225
+  }
+]

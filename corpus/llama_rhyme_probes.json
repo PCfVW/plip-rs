@@ -1,0 +1,134 @@
+{
+  "model": "llama3.2:1b",
+  "description": "16 rhyme-completion probes for behavioral baseline of Llama 3.2 1B via Ollama. 2x2x3 factorial (scheme x instruction x rhyme-family size) + 4 anti-rewrite controls.",
+  "probes": [
+    {
+      "id": 1,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "style": "instructed",
+      "prompt": "Complete the quatrain with a fourth line that rhymes with the second:\n\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,"
+    },
+    {
+      "id": 2,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "style": "raw",
+      "prompt": "The stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,"
+    },
+    {
+      "id": 3,
+      "rhyme_family_size": "large",
+      "scheme": "AABB",
+      "target_word": "day",
+      "style": "instructed",
+      "prompt": "Complete the quatrain with a fourth line that rhymes with the third:\n\nThe birds sing sweetly in the trees,\nTheir songs drift on the breeze,\nThe sun shines bright throughout the day,"
+    },
+    {
+      "id": 4,
+      "rhyme_family_size": "large",
+      "scheme": "AABB",
+      "target_word": "day",
+      "style": "raw",
+      "prompt": "The birds sing sweetly in the trees,\nTheir songs drift on the breeze,\nThe sun shines bright throughout the day,"
+    },
+    {
+      "id": 5,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "style": "instructed",
+      "prompt": "Complete the quatrain with a fourth line that rhymes with the second:\n\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,"
+    },
+    {
+      "id": 6,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "style": "raw",
+      "prompt": "The autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,"
+    },
+    {
+      "id": 7,
+      "rhyme_family_size": "medium",
+      "scheme": "AABB",
+      "target_word": "gold",
+      "style": "instructed",
+      "prompt": "Complete the quatrain with a fourth line that rhymes with the third:\n\nThe river winds beside the road,\nThe farmer bears his heavy load,\nThe sunset paints the clouds in gold,"
+    },
+    {
+      "id": 8,
+      "rhyme_family_size": "medium",
+      "scheme": "AABB",
+      "target_word": "gold",
+      "style": "raw",
+      "prompt": "The river winds beside the road,\nThe farmer bears his heavy load,\nThe sunset paints the clouds in gold,"
+    },
+    {
+      "id": 9,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "style": "instructed",
+      "prompt": "Complete the quatrain with a fourth line that rhymes with the second:\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,"
+    },
+    {
+      "id": 10,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "style": "raw",
+      "prompt": "The shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,"
+    },
+    {
+      "id": 11,
+      "rhyme_family_size": "small",
+      "scheme": "AABB",
+      "target_word": "strength",
+      "style": "instructed",
+      "prompt": "Complete the quatrain with a fourth line that rhymes with the third:\n\nThe winter frost had gripped the land,\nThe trees stood bare and grand,\nThe hero called upon his strength,"
+    },
+    {
+      "id": 12,
+      "rhyme_family_size": "small",
+      "scheme": "AABB",
+      "target_word": "strength",
+      "style": "raw",
+      "prompt": "The winter frost had gripped the land,\nThe trees stood bare and grand,\nThe hero called upon his strength,"
+    },
+    {
+      "id": 13,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "sound",
+      "style": "anti-rewrite",
+      "prompt": "Complete the quatrain by adding ONLY a fourth line that rhymes with the second. Do NOT modify the first three lines:\n\nThe wind blows through the ancient pines,\nA deep and mournful sound,\nThe frost has traced its silver lines,"
+    },
+    {
+      "id": 14,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "rise",
+      "style": "anti-rewrite",
+      "prompt": "Complete the quatrain by adding ONLY a fourth line that rhymes with the second. Do NOT modify the first three lines:\n\nThe flowers bloom beside the lane,\nThe river starts to rise,\nI walk alone through gentle rain,"
+    },
+    {
+      "id": 15,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "change",
+      "style": "anti-rewrite",
+      "prompt": "Complete the quatrain by adding ONLY a fourth line that rhymes with the second. Do NOT modify the first three lines:\n\nThe old clock ticks upon the wall,\nThe seasons start to change,\nThe shadows slowly start to fall,"
+    },
+    {
+      "id": 16,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "night",
+      "style": "anti-rewrite",
+      "prompt": "Complete the quatrain by adding ONLY a fourth line that rhymes with the second. Do NOT modify the first three lines:\n\nThe wolves howl on the distant ridge,\nThey vanish in the night,\nThe river rushes past the bridge,"
+    }
+  ]
+}
