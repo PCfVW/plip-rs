@@ -23,6 +23,12 @@ builds that test bench.
 [6. File inventory](#6-file-inventory) |
 [7. Acknowledgments](#7-acknowledgments)
 
+**Documents:**
+[01-detection.md](01-detection.md) |
+[02-steering.md](02-steering.md) |
+[03-figure13-replication.md](03-figure13-replication.md) |
+[04-2.5M-word-level.md](04-2.5M-word-level.md)
+
 ---
 
 Anthropic reported that Claude 3.5 Haiku plans ahead when writing rhyming
@@ -41,7 +47,7 @@ This branch replicates that core finding using entirely open components:
 | Component | Anthropic | This work |
 |-----------|-----------|-----------|
 | Model | Claude 3.5 Haiku (proprietary) | Gemma 2 2B (open-weights, 2.6B params) |
-| CLT | 30M features (internal) | 426K features ([mntss/clt-gemma-2-2b-426k](https://huggingface.co/mntss/clt-gemma-2-2b-426k)) |
+| CLT | 30M features (internal) | 426K features ([mntss/clt-gemma-2-2b-426k](https://huggingface.co/mntss/clt-gemma-2-2b-426k)); 2.5M features ([mntss/clt-gemma-2-2b-2.5M](https://huggingface.co/mntss/clt-gemma-2-2b-2.5M)) — see [04-2.5M-word-level.md](04-2.5M-word-level.md) |
 | Toolkit | Internal infrastructure | Rust + [candle](https://github.com/huggingface/candle) (PLIP-rs) |
 | Hardware | (unspecified) | RTX 5060 Ti 16 GB (single consumer GPU) |
 | New code | -- | ~3,300 lines (`src/clt.rs` + `src/forward_gemma2.rs`) |
@@ -286,6 +292,17 @@ sweep the injection position. 136 pairs (4 prompts x 34 alternative groups).
 
 > Detail: [03-figure13-replication.md](03-figure13-replication.md)
 
+### The feature-granularity gap, closed
+
+The one structural difference remaining after the 426K replication — group-level
+vs. word-level control — was subsequently addressed by upgrading to the 2.5M CLT.
+At 98,304 features per layer, every rhyme word has its own dedicated feature
+(209 words, mean rank 1.0, zero cross-group contamination). The same Figure 13
+experiment produces 264 pairs (vs. 136) with 71% planning-site localization and
+a best redirect of 52.2%.
+
+> Detail: [04-2.5M-word-level.md](04-2.5M-word-level.md)
+
 ---
 
 ## 4. How to reproduce
@@ -371,12 +388,15 @@ They are not part of the Figure 13 experiment itself.
 
 ### The feature-granularity gap
 
-The one structural difference: Anthropic's 30M-feature CLT provides word-level
-control (they target "green" specifically), while our 426K-feature CLT operates
-at the phonetic-group level (we target the `-AW1-N-D` rhyme group, and "around"
-happens to be the strongest feature in that group). Despite this 70x coarser
-resolution, the 48% redirect demonstrates sufficient causal power to reproduce
-the phenomenon.
+Anthropic's 30M-feature CLT provides word-level control (they target "green"
+specifically), while the 426K-feature CLT operates at the phonetic-group level
+(we target the `-AW1-N-D` rhyme group, and "around" happens to be the strongest
+feature in that group). Despite this 70x coarser resolution, the 48% redirect
+demonstrates sufficient causal power to reproduce the phenomenon.
+
+This gap has been closed by the 2.5M CLT upgrade: at 98,304 features per layer,
+every rhyme word has its own dedicated feature. See
+[04-2.5M-word-level.md](04-2.5M-word-level.md).
 
 ---
 
@@ -444,7 +464,8 @@ the phenomenon.
 - **Anthropic** -- the original "Planning in Poems" finding
   ([Biology of a Large Language Model](https://transformer-circuits.pub/2025/attribution-graphs/biology.html#dives-poems),
   Lindsey et al., 2025)
-- **mntss** -- the [426K open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-426k) for Gemma 2 2B
+- **mntss** -- the [426K open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-426k) and
+  [2.5M open-weights CLT](https://huggingface.co/mntss/clt-gemma-2-2b-2.5M) for Gemma 2 2B
 - **HuggingFace [candle](https://github.com/huggingface/candle)** -- the Rust ML framework
   ([discussion #3368](https://github.com/huggingface/candle/discussions/3368))
 - **Wolfram [Mathematica](https://www.wolfram.com/mathematica/) 14.3** for figures.

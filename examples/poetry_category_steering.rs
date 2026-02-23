@@ -986,6 +986,9 @@ fn mode_explore_vocabulary(args: &Args) -> Result<()> {
 
     let json = serde_json::to_string_pretty(&output)?;
     if let Some(ref p) = args.output {
+        if let Some(parent) = p.parent() {
+            fs::create_dir_all(parent)?;
+        }
         fs::write(p, &json)?;
         eprintln!("Written to {}", p.display());
     } else {

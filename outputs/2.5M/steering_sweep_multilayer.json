@@ -1,0 +1,5376 @@
+{
+  "model": "google/gemma-2-2b",
+  "clt_repo": "mntss/clt-gemma-2-2b-2.5M",
+  "strength": 10.0,
+  "n_layers": 26,
+  "n_candidates": 28,
+  "results": [
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "snow",
+      "target_feature": {
+        "layer": 18,
+        "index": 7726
+      },
+      "source_layer": 18,
+      "n_injection_layers": 8,
+      "target_token_id": 8529,
+      "baseline_prob": 1.28266365e-11,
+      "max_steered_prob": 4.329895e-8,
+      "max_steered_position": 33,
+      "last_position_prob": 4.329895e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.1743225e-9
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 6.3460126e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 8.407237e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 8.045015e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 6.148427e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 7.465553e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 8.05976e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 7.1688616e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 6.8199096e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 6.9348205e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 6.9498246e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 7.099917e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 7.502617e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 6.821701e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 7.194523e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 6.4170025e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 7.556977e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 6.9367695e-10
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 7.3543555e-10
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 7.7943857e-10
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 6.999884e-10
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 8.2712903e-10
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 6.755504e-10
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 6.946734e-10
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 6.3684336e-10
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 7.692387e-10
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 8.122221e-10
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 7.156719e-10
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 6.7869554e-10
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 7.311969e-10
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 7.848314e-10
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 8.778432e-10
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 9.942331e-10
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 4.329895e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "too",
+      "target_feature": {
+        "layer": 18,
+        "index": 46523
+      },
+      "source_layer": 18,
+      "n_injection_layers": 8,
+      "target_token_id": 1980,
+      "baseline_prob": 8.7318215e-11,
+      "max_steered_prob": 1.9385867e-8,
+      "max_steered_position": 35,
+      "last_position_prob": 1.9385867e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 4.411811e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 7.896902e-9
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 8.31829e-9
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 8.125933e-9
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 7.984069e-9
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 7.922811e-9
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 8.015853e-9
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 7.820253e-9
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 7.195929e-9
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 7.8901445e-9
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 7.857015e-9
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 8.264321e-9
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 7.511113e-9
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 7.962267e-9
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 7.703104e-9
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 7.6829885e-9
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 7.897914e-9
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 7.3192314e-9
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 7.577568e-9
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 7.807258e-9
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 7.759832e-9
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 7.790965e-9
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 7.420216e-9
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 7.793842e-9
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 7.557364e-9
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 7.527654e-9
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 7.888347e-9
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 7.0060175e-9
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 7.470923e-9
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 7.1854274e-9
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 7.50236e-9
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 7.4266113e-9
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 7.2991084e-9
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 4.603245e-9
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 1.5184999e-9
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 1.9385867e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "two",
+      "target_feature": {
+        "layer": 19,
+        "index": 39669
+      },
+      "source_layer": 19,
+      "n_injection_layers": 7,
+      "target_token_id": 1378,
+      "baseline_prob": 5.9171465e-14,
+      "max_steered_prob": 3.8416943e-11,
+      "max_steered_position": 35,
+      "last_position_prob": 3.8416943e-11,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 5.7849897e-12
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 5.5670776e-12
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 5.5746367e-12
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 5.9984188e-12
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 5.401556e-12
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 5.5807104e-12
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 5.0194866e-12
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 5.8275602e-12
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 6.0225345e-12
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 5.51063e-12
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 5.6873035e-12
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 5.6438907e-12
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 5.2343524e-12
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 5.4746884e-12
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 5.5699004e-12
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 5.688592e-12
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 5.8818753e-12
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 5.9238517e-12
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 5.3521874e-12
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 5.4533053e-12
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 6.3065837e-12
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 6.020802e-12
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 5.6540285e-12
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 5.9241544e-12
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 5.1508394e-12
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 5.9648952e-12
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 5.577332e-12
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 5.1526856e-12
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 5.6150696e-12
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 5.776325e-12
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 5.6917444e-12
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 5.4653504e-12
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 5.0051547e-12
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 3.617906e-12
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 1.0624642e-12
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 3.8416943e-11
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "true",
+      "target_feature": {
+        "layer": 19,
+        "index": 70754
+      },
+      "source_layer": 19,
+      "n_injection_layers": 7,
+      "target_token_id": 1382,
+      "baseline_prob": 1.4366105e-11,
+      "max_steered_prob": 0.0000010936367,
+      "max_steered_position": 35,
+      "last_position_prob": 0.0000010936367,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.4072759e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 1.4051461e-9
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 1.3433714e-9
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 1.3968509e-9
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 1.4391173e-9
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 1.3750517e-9
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 1.3169839e-9
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 1.5228112e-9
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 1.4256881e-9
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 1.4508977e-9
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 1.3623975e-9
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 1.3541106e-9
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 1.4939551e-9
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 1.3147001e-9
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 1.3009094e-9
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 1.3954777e-9
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 1.4069723e-9
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 1.442625e-9
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 1.3640526e-9
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 1.3430365e-9
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 1.4052016e-9
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 1.2562891e-9
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 1.4547779e-9
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 1.3587507e-9
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 1.3927345e-9
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 1.4591468e-9
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 1.4359323e-9
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 1.3924855e-9
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 1.3404226e-9
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 1.3838882e-9
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 1.348737e-9
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 1.4283251e-9
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 1.3756448e-9
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 1.3647471e-9
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 1.952361e-9
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 0.0000010936367
+        }
+      ]
+    },
+    {
+      "prompt_text": "The stars were twinkling in the night,\nThe lanterns cast a golden light.\nShe wandered in the dark about,\nAnd found a hidden passage ",
+      "group": "-out",
+      "target_word": "about",
+      "feature_word": "without",
+      "target_feature": {
+        "layer": 20,
+        "index": 77102
+      },
+      "source_layer": 20,
+      "n_injection_layers": 6,
+      "target_token_id": 2346,
+      "baseline_prob": 1.2811067e-10,
+      "max_steered_prob": 0.000103586695,
+      "max_steered_position": 31,
+      "last_position_prob": 0.000103586695,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.9898119e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 1.8760846e-9
+        },
+        {
+          "position": 2,
+          "token": " stars",
+          "steered_prob": 1.945911e-9
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "steered_prob": 1.871649e-9
+        },
+        {
+          "position": 4,
+          "token": " twinkling",
+          "steered_prob": 1.7882129e-9
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "steered_prob": 1.9381932e-9
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 1.8817585e-9
+        },
+        {
+          "position": 7,
+          "token": " night",
+          "steered_prob": 1.7634504e-9
+        },
+        {
+          "position": 8,
+          "token": ",",
+          "steered_prob": 1.8429571e-9
+        },
+        {
+          "position": 9,
+          "token": "\n",
+          "steered_prob": 2.151483e-9
+        },
+        {
+          "position": 10,
+          "token": "The",
+          "steered_prob": 1.8097678e-9
+        },
+        {
+          "position": 11,
+          "token": " lanterns",
+          "steered_prob": 1.9226605e-9
+        },
+        {
+          "position": 12,
+          "token": " cast",
+          "steered_prob": 1.8485256e-9
+        },
+        {
+          "position": 13,
+          "token": " a",
+          "steered_prob": 1.885894e-9
+        },
+        {
+          "position": 14,
+          "token": " golden",
+          "steered_prob": 1.8454239e-9
+        },
+        {
+          "position": 15,
+          "token": " light",
+          "steered_prob": 1.8797588e-9
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 2.0603144e-9
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 1.8875181e-9
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "steered_prob": 1.9093416e-9
+        },
+        {
+          "position": 19,
+          "token": " wandered",
+          "steered_prob": 1.9740258e-9
+        },
+        {
+          "position": 20,
+          "token": " in",
+          "steered_prob": 1.8910944e-9
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "steered_prob": 1.8327521e-9
+        },
+        {
+          "position": 22,
+          "token": " dark",
+          "steered_prob": 1.839633e-9
+        },
+        {
+          "position": 23,
+          "token": " about",
+          "steered_prob": 1.7925855e-9
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 1.7987764e-9
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 1.9216433e-9
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "steered_prob": 1.8941082e-9
+        },
+        {
+          "position": 27,
+          "token": " found",
+          "steered_prob": 1.7916262e-9
+        },
+        {
+          "position": 28,
+          "token": " a",
+          "steered_prob": 1.8259481e-9
+        },
+        {
+          "position": 29,
+          "token": " hidden",
+          "steered_prob": 2.0843647e-9
+        },
+        {
+          "position": 30,
+          "token": " passage",
+          "steered_prob": 2.3251476e-9
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "steered_prob": 0.000103586695
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nHe raised his voice and gave a shout,\nThe truth was struggling to come ",
+      "group": "-out",
+      "target_word": "shout",
+      "feature_word": "without",
+      "target_feature": {
+        "layer": 20,
+        "index": 77102
+      },
+      "source_layer": 20,
+      "n_injection_layers": 6,
+      "target_token_id": 2346,
+      "baseline_prob": 2.5988657e-13,
+      "max_steered_prob": 0.0000032426653,
+      "max_steered_position": 34,
+      "last_position_prob": 0.0000032426653,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.5114483e-11
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 1.3122625e-11
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 1.4046368e-11
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 1.4485918e-11
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 1.3257292e-11
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 1.2999763e-11
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 1.3615518e-11
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 1.4480127e-11
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 1.2980697e-11
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 1.3747523e-11
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 1.4947404e-11
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 1.4037331e-11
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 1.4942865e-11
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 1.3872327e-11
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 1.4150415e-11
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 1.3996417e-11
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 1.3612672e-11
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 1.3657498e-11
+        },
+        {
+          "position": 18,
+          "token": "He",
+          "steered_prob": 1.44858335e-11
+        },
+        {
+          "position": 19,
+          "token": " raised",
+          "steered_prob": 1.3448712e-11
+        },
+        {
+          "position": 20,
+          "token": " his",
+          "steered_prob": 1.471393e-11
+        },
+        {
+          "position": 21,
+          "token": " voice",
+          "steered_prob": 1.4437973e-11
+        },
+        {
+          "position": 22,
+          "token": " and",
+          "steered_prob": 1.3993023e-11
+        },
+        {
+          "position": 23,
+          "token": " gave",
+          "steered_prob": 1.4943805e-11
+        },
+        {
+          "position": 24,
+          "token": " a",
+          "steered_prob": 1.4706375e-11
+        },
+        {
+          "position": 25,
+          "token": " shout",
+          "steered_prob": 1.3116611e-11
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 1.3917492e-11
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 1.4949264e-11
+        },
+        {
+          "position": 28,
+          "token": "The",
+          "steered_prob": 1.2852192e-11
+        },
+        {
+          "position": 29,
+          "token": " truth",
+          "steered_prob": 1.2842867e-11
+        },
+        {
+          "position": 30,
+          "token": " was",
+          "steered_prob": 1.2835166e-11
+        },
+        {
+          "position": 31,
+          "token": " struggling",
+          "steered_prob": 1.4061433e-11
+        },
+        {
+          "position": 32,
+          "token": " to",
+          "steered_prob": 1.4712077e-11
+        },
+        {
+          "position": 33,
+          "token": " come",
+          "steered_prob": 3.0229846e-11
+        },
+        {
+          "position": 34,
+          "token": " ",
+          "steered_prob": 0.0000032426653
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "though",
+      "target_feature": {
+        "layer": 21,
+        "index": 89350
+      },
+      "source_layer": 21,
+      "n_injection_layers": 5,
+      "target_token_id": 2862,
+      "baseline_prob": 2.5109585e-12,
+      "max_steered_prob": 1.3974473e-10,
+      "max_steered_position": 15,
+      "last_position_prob": 3.0153154e-11,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.2928802e-10
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 1.3223513e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 1.3701795e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 1.3183665e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 1.2424368e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 1.2327007e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 1.267092e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 1.2804062e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 1.2504692e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 1.3706998e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 1.3495498e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 1.331713e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 1.2317562e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 1.2620016e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 1.2425162e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 1.3974473e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 1.2512726e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 1.23197e-10
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 1.3112364e-10
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 1.2228617e-10
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 1.2327044e-10
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 1.292064e-10
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 1.2978346e-10
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 1.3709663e-10
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 1.2413551e-10
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 1.2039611e-10
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 1.3507358e-10
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 1.3073179e-10
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 1.3704941e-10
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 1.3705173e-10
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 1.2482503e-10
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 1.344004e-10
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 1.8102814e-11
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 3.0153154e-11
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "know",
+      "target_feature": {
+        "layer": 21,
+        "index": 51174
+      },
+      "source_layer": 21,
+      "n_injection_layers": 5,
+      "target_token_id": 1230,
+      "baseline_prob": 2.473506e-8,
+      "max_steered_prob": 0.0000041215503,
+      "max_steered_position": 33,
+      "last_position_prob": 0.0000041215503,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 0.0000017112483
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 0.0000011638595
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 0.0000010961618
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 0.0000012063888
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 0.0000012128411
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 0.0000011308991
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 0.0000011635593
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 0.0000011311272
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 0.0000012600104
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 0.0000012010258
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 0.0000011310906
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 0.0000012010685
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 0.0000012007438
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 0.0000011059095
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 0.0000011310476
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 0.0000012037102
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 0.0000012009356
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 0.0000012389761
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 0.0000011140337
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 0.00000116389
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 0.0000011397361
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 0.0000012007206
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 0.0000010717363
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 0.0000012390543
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 0.0000011141788
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 0.0000013370263
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 0.0000011308553
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 0.0000011408181
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 0.0000012007663
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 0.0000012389377
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 0.0000011281847
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 0.0000010600002
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 4.8705425e-7
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.0000041215503
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "new",
+      "target_feature": {
+        "layer": 22,
+        "index": 86352
+      },
+      "source_layer": 22,
+      "n_injection_layers": 4,
+      "target_token_id": 888,
+      "baseline_prob": 8.781823e-12,
+      "max_steered_prob": 0.000009444529,
+      "max_steered_position": 35,
+      "last_position_prob": 0.000009444529,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 8.9734187e-10
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 8.172151e-10
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 8.5137375e-10
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 8.389578e-10
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 7.972198e-10
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 8.1774065e-10
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 8.455338e-10
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 8.4256707e-10
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 8.073e-10
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 7.968069e-10
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 8.717938e-10
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 7.91816e-10
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 7.6923995e-10
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 8.179787e-10
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 8.117901e-10
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 7.81379e-10
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 7.9530377e-10
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 8.134321e-10
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 8.1893325e-10
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 8.517873e-10
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 8.277819e-10
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 8.4556095e-10
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 7.967057e-10
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 7.889609e-10
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 8.2491664e-10
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 8.3945867e-10
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 8.275121e-10
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 8.5768853e-10
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 7.9893464e-10
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 8.0767315e-10
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 8.428754e-10
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 7.7783896e-10
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 7.667322e-10
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 7.663201e-10
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 5.134169e-10
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 0.000009444529
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "you",
+      "target_feature": {
+        "layer": 22,
+        "index": 72623
+      },
+      "source_layer": 22,
+      "n_injection_layers": 4,
+      "target_token_id": 692,
+      "baseline_prob": 1.3206881e-12,
+      "max_steered_prob": 2.7734378e-8,
+      "max_steered_position": 35,
+      "last_position_prob": 2.7734378e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.294813e-10
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 1.2681257e-10
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 1.2664507e-10
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 1.2965039e-10
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 1.3193358e-10
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 1.245956e-10
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 1.3219313e-10
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 1.2084596e-10
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 1.2193829e-10
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 1.15970664e-10
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 1.1723406e-10
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 1.1508126e-10
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 1.1592976e-10
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 1.1698803e-10
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 1.2115237e-10
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 1.1810901e-10
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 1.2468797e-10
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 1.260154e-10
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 1.2713855e-10
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 1.2192254e-10
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 1.2249726e-10
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 1.2018488e-10
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 1.2631118e-10
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 1.3169861e-10
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 1.15879556e-10
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 1.2517834e-10
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 1.2158621e-10
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 1.1928189e-10
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 1.2610175e-10
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 1.1875831e-10
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 1.2765697e-10
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 1.2139696e-10
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 1.2388959e-10
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 1.0635186e-10
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 9.542329e-11
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 2.7734378e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "show",
+      "target_feature": {
+        "layer": 23,
+        "index": 94103
+      },
+      "source_layer": 23,
+      "n_injection_layers": 3,
+      "target_token_id": 1500,
+      "baseline_prob": 4.60866e-13,
+      "max_steered_prob": 2.4957657e-11,
+      "max_steered_position": 3,
+      "last_position_prob": 8.584294e-16,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.8816561e-11
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 2.3345213e-11
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 2.2432674e-11
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 2.4957657e-11
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 2.4569465e-11
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 2.4955694e-11
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 2.4570328e-11
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 2.3144136e-11
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 2.1503677e-11
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 2.2785092e-11
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 2.2982885e-11
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 2.314036e-11
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 2.4956528e-11
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 2.351745e-11
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 2.4953236e-11
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 2.2956687e-11
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 2.298014e-11
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 2.073012e-11
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 2.278553e-11
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 2.279651e-11
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 2.2783973e-11
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 2.2982718e-11
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 2.295287e-11
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 2.2982718e-11
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 2.2627341e-11
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 2.1491461e-11
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 2.2785853e-11
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 2.351938e-11
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 2.2982073e-11
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 2.2979582e-11
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 2.2434153e-11
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 2.1252604e-11
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 6.228427e-12
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 8.584294e-16
+        }
+      ]
+    },
+    {
+      "prompt_text": "The stars were twinkling in the night,\nThe lanterns cast a golden light.\nShe wandered in the dark about,\nAnd found a hidden passage ",
+      "group": "-out",
+      "target_word": "about",
+      "feature_word": "out",
+      "target_feature": {
+        "layer": 23,
+        "index": 49923
+      },
+      "source_layer": 23,
+      "n_injection_layers": 3,
+      "target_token_id": 921,
+      "baseline_prob": 1.9007632e-10,
+      "max_steered_prob": 8.000243e-9,
+      "max_steered_position": 31,
+      "last_position_prob": 8.000243e-9,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.9553281e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 2.9104485e-9
+        },
+        {
+          "position": 2,
+          "token": " stars",
+          "steered_prob": 2.637991e-9
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "steered_prob": 2.7302585e-9
+        },
+        {
+          "position": 4,
+          "token": " twinkling",
+          "steered_prob": 2.7457148e-9
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "steered_prob": 2.7728384e-9
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 2.8642588e-9
+        },
+        {
+          "position": 7,
+          "token": " night",
+          "steered_prob": 2.6416964e-9
+        },
+        {
+          "position": 8,
+          "token": ",",
+          "steered_prob": 2.8341323e-9
+        },
+        {
+          "position": 9,
+          "token": "\n",
+          "steered_prob": 2.8775713e-9
+        },
+        {
+          "position": 10,
+          "token": "The",
+          "steered_prob": 2.8046816e-9
+        },
+        {
+          "position": 11,
+          "token": " lanterns",
+          "steered_prob": 2.7119507e-9
+        },
+        {
+          "position": 12,
+          "token": " cast",
+          "steered_prob": 3.0452325e-9
+        },
+        {
+          "position": 13,
+          "token": " a",
+          "steered_prob": 2.7415663e-9
+        },
+        {
+          "position": 14,
+          "token": " golden",
+          "steered_prob": 2.7630849e-9
+        },
+        {
+          "position": 15,
+          "token": " light",
+          "steered_prob": 2.7548932e-9
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 2.7297642e-9
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 2.91144e-9
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "steered_prob": 2.8498714e-9
+        },
+        {
+          "position": 19,
+          "token": " wandered",
+          "steered_prob": 2.7878155e-9
+        },
+        {
+          "position": 20,
+          "token": " in",
+          "steered_prob": 2.8711358e-9
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "steered_prob": 2.7252927e-9
+        },
+        {
+          "position": 22,
+          "token": " dark",
+          "steered_prob": 2.6701277e-9
+        },
+        {
+          "position": 23,
+          "token": " about",
+          "steered_prob": 2.7783358e-9
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 2.718186e-9
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 2.886976e-9
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "steered_prob": 2.7976335e-9
+        },
+        {
+          "position": 27,
+          "token": " found",
+          "steered_prob": 2.7108804e-9
+        },
+        {
+          "position": 28,
+          "token": " a",
+          "steered_prob": 2.8203642e-9
+        },
+        {
+          "position": 29,
+          "token": " hidden",
+          "steered_prob": 2.1324427e-9
+        },
+        {
+          "position": 30,
+          "token": " passage",
+          "steered_prob": 5.233338e-10
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "steered_prob": 8.000243e-9
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nHe raised his voice and gave a shout,\nThe truth was struggling to come ",
+      "group": "-out",
+      "target_word": "shout",
+      "feature_word": "out",
+      "target_feature": {
+        "layer": 23,
+        "index": 49923
+      },
+      "source_layer": 23,
+      "n_injection_layers": 3,
+      "target_token_id": 921,
+      "baseline_prob": 4.2783602e-10,
+      "max_steered_prob": 1.872054e-7,
+      "max_steered_position": 34,
+      "last_position_prob": 1.872054e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 2.064349e-8
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 2.2406308e-8
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 2.1292285e-8
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 2.2172635e-8
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 2.2748251e-8
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 2.1704311e-8
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 2.1592406e-8
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 2.1455094e-8
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 2.4476984e-8
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 2.159334e-8
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 2.274657e-8
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 2.2488843e-8
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 2.1592736e-8
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 2.0822e-8
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 2.1455373e-8
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 2.14518e-8
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 2.2163226e-8
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 2.1545063e-8
+        },
+        {
+          "position": 18,
+          "token": "He",
+          "steered_prob": 2.1786523e-8
+        },
+        {
+          "position": 19,
+          "token": " raised",
+          "steered_prob": 2.057787e-8
+        },
+        {
+          "position": 20,
+          "token": " his",
+          "steered_prob": 2.1788725e-8
+        },
+        {
+          "position": 21,
+          "token": " voice",
+          "steered_prob": 2.1272172e-8
+        },
+        {
+          "position": 22,
+          "token": " and",
+          "steered_prob": 2.1122133e-8
+        },
+        {
+          "position": 23,
+          "token": " gave",
+          "steered_prob": 2.151701e-8
+        },
+        {
+          "position": 24,
+          "token": " a",
+          "steered_prob": 2.1593637e-8
+        },
+        {
+          "position": 25,
+          "token": " shout",
+          "steered_prob": 2.1158794e-8
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 2.2743812e-8
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 2.3192781e-8
+        },
+        {
+          "position": 28,
+          "token": "The",
+          "steered_prob": 2.267533e-8
+        },
+        {
+          "position": 29,
+          "token": " truth",
+          "steered_prob": 2.2164174e-8
+        },
+        {
+          "position": 30,
+          "token": " was",
+          "steered_prob": 2.2871584e-8
+        },
+        {
+          "position": 31,
+          "token": " struggling",
+          "steered_prob": 2.0931962e-8
+        },
+        {
+          "position": 32,
+          "token": " to",
+          "steered_prob": 2.164402e-8
+        },
+        {
+          "position": 33,
+          "token": " come",
+          "steered_prob": 3.1133947e-9
+        },
+        {
+          "position": 34,
+          "token": " ",
+          "steered_prob": 1.872054e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "who",
+      "target_feature": {
+        "layer": 23,
+        "index": 15981
+      },
+      "source_layer": 23,
+      "n_injection_layers": 3,
+      "target_token_id": 1064,
+      "baseline_prob": 1.2904797e-10,
+      "max_steered_prob": 1.1640276e-8,
+      "max_steered_position": 1,
+      "last_position_prob": 1.840184e-12,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 6.5129093e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 1.1640276e-8
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 1.107613e-8
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 1.1140667e-8
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 1.1137785e-8
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 1.1160172e-8
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 1.1525154e-8
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 1.1052112e-8
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 1.1287431e-8
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 1.0900766e-8
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 1.1150255e-8
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 1.1126224e-8
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 1.13790115e-8
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 1.1392054e-8
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 1.0901181e-8
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 1.0752562e-8
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 1.1253168e-8
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 1.1050106e-8
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 1.1095471e-8
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 1.1389113e-8
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 1.0743469e-8
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 1.0860252e-8
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 1.0918295e-8
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 1.1239569e-8
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 1.0279393e-8
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 1.1233474e-8
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 1.1565303e-8
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 1.0610726e-8
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 1.1138949e-8
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 9.75112e-9
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 1.12130305e-8
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 1.05922755e-8
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 1.0793932e-8
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 6.9488957e-9
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 1.1409232e-9
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 1.840184e-12
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "throw",
+      "target_feature": {
+        "layer": 24,
+        "index": 78290
+      },
+      "source_layer": 24,
+      "n_injection_layers": 2,
+      "target_token_id": 8734,
+      "baseline_prob": 1.1055601e-12,
+      "max_steered_prob": 4.6079247e-8,
+      "max_steered_position": 33,
+      "last_position_prob": 4.6079247e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 6.273669e-11
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 6.177485e-11
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 6.080079e-11
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 6.176491e-11
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 6.178584e-11
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 6.0815235e-11
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 6.1766196e-11
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 5.554648e-11
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 5.986748e-11
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 6.177722e-11
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 6.081872e-11
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 6.177501e-11
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 6.274139e-11
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 6.2745524e-11
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 6.0805985e-11
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 6.080939e-11
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 6.080603e-11
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 6.177424e-11
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 6.081665e-11
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 6.081546e-11
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 6.08181e-11
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 6.0801905e-11
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 6.0817365e-11
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 6.177507e-11
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 6.08098e-11
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 6.2754774e-11
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 5.7311184e-11
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 5.986274e-11
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 6.2748785e-11
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 6.177537e-11
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 6.0816685e-11
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 6.2742846e-11
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 6.37331e-11
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 4.6079247e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "so",
+      "target_feature": {
+        "layer": 25,
+        "index": 70598
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 712,
+      "baseline_prob": 3.1494475e-12,
+      "max_steered_prob": 0.7358172,
+      "max_steered_position": 33,
+      "last_position_prob": 0.7358172,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 1.7189203e-10
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.7358172
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "co",
+      "target_feature": {
+        "layer": 25,
+        "index": 51326
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 910,
+      "baseline_prob": 1.1471862e-13,
+      "max_steered_prob": 0.0007879952,
+      "max_steered_position": 33,
+      "last_position_prob": 0.0007879952,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 6.7172518e-12
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.0007879952
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "grow",
+      "target_feature": {
+        "layer": 25,
+        "index": 52789
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 2664,
+      "baseline_prob": 7.438001e-12,
+      "max_steered_prob": 0.0011805785,
+      "max_steered_position": 33,
+      "last_position_prob": 0.0011805785,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 4.0754353e-10
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.0011805785
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "go",
+      "target_feature": {
+        "layer": 25,
+        "index": 28986
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 871,
+      "baseline_prob": 9.605272e-13,
+      "max_steered_prob": 0.0000031038996,
+      "max_steered_position": 33,
+      "last_position_prob": 0.0000031038996,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 5.2835278e-11
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.0000031038996
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "no",
+      "target_feature": {
+        "layer": 25,
+        "index": 5076
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 793,
+      "baseline_prob": 4.1398707e-12,
+      "max_steered_prob": 9.007691e-10,
+      "max_steered_position": 33,
+      "last_position_prob": 9.007691e-10,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 2.2594782e-10
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 9.007691e-10
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "below",
+      "target_feature": {
+        "layer": 25,
+        "index": 73247
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 3582,
+      "baseline_prob": 1.7868991e-11,
+      "max_steered_prob": 0.00008958339,
+      "max_steered_position": 33,
+      "last_position_prob": 0.00008958339,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 9.831513e-10
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.00008958339
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "slow",
+      "target_feature": {
+        "layer": 25,
+        "index": 97279
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 6080,
+      "baseline_prob": 2.4966616e-11,
+      "max_steered_prob": 0.000094492934,
+      "max_steered_position": 33,
+      "last_position_prob": 0.000094492934,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 1.376012e-9
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 0.000094492934
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nThe world keeps spinning even so,\nThere is so much we do not ",
+      "group": "-ow",
+      "target_word": "so",
+      "feature_word": "pro",
+      "target_feature": {
+        "layer": 25,
+        "index": 94279
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 656,
+      "baseline_prob": 1.8653535e-11,
+      "max_steered_prob": 1.2262448e-7,
+      "max_steered_position": 33,
+      "last_position_prob": 1.2262448e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 18,
+          "token": "The",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 19,
+          "token": " world",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 20,
+          "token": " keeps",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 21,
+          "token": " spinning",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 22,
+          "token": " even",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 23,
+          "token": " so",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 26,
+          "token": "There",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 27,
+          "token": " is",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 28,
+          "token": " so",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 29,
+          "token": " much",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 30,
+          "token": " we",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 31,
+          "token": " do",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 32,
+          "token": " not",
+          "steered_prob": 1.0265675e-9
+        },
+        {
+          "position": 33,
+          "token": " ",
+          "steered_prob": 1.2262448e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The stars were twinkling in the night,\nThe lanterns cast a golden light.\nShe wandered in the dark about,\nAnd found a hidden passage ",
+      "group": "-out",
+      "target_word": "about",
+      "feature_word": "about",
+      "target_feature": {
+        "layer": 25,
+        "index": 57092
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 1105,
+      "baseline_prob": 2.2356101e-9,
+      "max_steered_prob": 0.0036269007,
+      "max_steered_position": 31,
+      "last_position_prob": 0.0036269007,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 2,
+          "token": " stars",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 4,
+          "token": " twinkling",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 7,
+          "token": " night",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 8,
+          "token": ",",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 9,
+          "token": "\n",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 10,
+          "token": "The",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 11,
+          "token": " lanterns",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 12,
+          "token": " cast",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 13,
+          "token": " a",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 14,
+          "token": " golden",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 15,
+          "token": " light",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 19,
+          "token": " wandered",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 20,
+          "token": " in",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 22,
+          "token": " dark",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 23,
+          "token": " about",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 24,
+          "token": ",",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 25,
+          "token": "\n",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 27,
+          "token": " found",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 28,
+          "token": " a",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 29,
+          "token": " hidden",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 30,
+          "token": " passage",
+          "steered_prob": 3.1240443e-8
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "steered_prob": 0.0036269007
+        }
+      ]
+    },
+    {
+      "prompt_text": "A sailor sailed across the bay,\nAnd dreamed of home throughout the day.\nHe raised his voice and gave a shout,\nThe truth was struggling to come ",
+      "group": "-out",
+      "target_word": "shout",
+      "feature_word": "about",
+      "target_feature": {
+        "layer": 25,
+        "index": 57092
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 1105,
+      "baseline_prob": 1.09860974e-11,
+      "max_steered_prob": 0.00031279656,
+      "max_steered_position": 34,
+      "last_position_prob": 0.00031279656,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 1,
+          "token": "A",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 2,
+          "token": " sailor",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 3,
+          "token": " sailed",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 4,
+          "token": " across",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 5,
+          "token": " the",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 6,
+          "token": " bay",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 7,
+          "token": ",",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 8,
+          "token": "\n",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 10,
+          "token": " dreamed",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 11,
+          "token": " of",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 12,
+          "token": " home",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 13,
+          "token": " throughout",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 14,
+          "token": " the",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 15,
+          "token": " day",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 16,
+          "token": ".",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 17,
+          "token": "\n",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 18,
+          "token": "He",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 19,
+          "token": " raised",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 20,
+          "token": " his",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 21,
+          "token": " voice",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 22,
+          "token": " and",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 23,
+          "token": " gave",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 24,
+          "token": " a",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 25,
+          "token": " shout",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 28,
+          "token": "The",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 29,
+          "token": " truth",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 30,
+          "token": " was",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 31,
+          "token": " struggling",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 32,
+          "token": " to",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 33,
+          "token": " come",
+          "steered_prob": 5.732631e-10
+        },
+        {
+          "position": 34,
+          "token": " ",
+          "steered_prob": 0.00031279656
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "to",
+      "target_feature": {
+        "layer": 25,
+        "index": 46148
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 577,
+      "baseline_prob": 1.6381929e-8,
+      "max_steered_prob": 0.97716105,
+      "max_steered_position": 35,
+      "last_position_prob": 0.97716105,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 0.0000012408377
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 0.97716105
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "do",
+      "target_feature": {
+        "layer": 25,
+        "index": 70439
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 749,
+      "baseline_prob": 3.7992114e-12,
+      "max_steered_prob": 3.6522434e-9,
+      "max_steered_position": 35,
+      "last_position_prob": 3.6522434e-9,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 3.477938e-10
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 3.6522434e-9
+        }
+      ]
+    },
+    {
+      "prompt_text": "The sun goes up, the sun goes down,\nThe moon shines bright above the town.\nNobody knows or remembers who,\nWould come to find a way back ",
+      "group": "-oo",
+      "target_word": "who",
+      "feature_word": "ou",
+      "target_feature": {
+        "layer": 25,
+        "index": 75246
+      },
+      "source_layer": 25,
+      "n_injection_layers": 1,
+      "target_token_id": 2595,
+      "baseline_prob": 9.203273e-12,
+      "max_steered_prob": 0.000001207663,
+      "max_steered_position": 35,
+      "last_position_prob": 0.000001207663,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<bos>",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 2,
+          "token": " sun",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 3,
+          "token": " goes",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 4,
+          "token": " up",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 5,
+          "token": ",",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 7,
+          "token": " sun",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 8,
+          "token": " goes",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 9,
+          "token": " down",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 10,
+          "token": ",",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 11,
+          "token": "\n",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 12,
+          "token": "The",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 13,
+          "token": " moon",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 14,
+          "token": " shines",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 15,
+          "token": " bright",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 16,
+          "token": " above",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 17,
+          "token": " the",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 18,
+          "token": " town",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 19,
+          "token": ".",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 20,
+          "token": "\n",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 21,
+          "token": "Nobody",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 22,
+          "token": " knows",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 23,
+          "token": " or",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 24,
+          "token": " remembers",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 25,
+          "token": " who",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 26,
+          "token": ",",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 27,
+          "token": "\n",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 28,
+          "token": "Would",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 29,
+          "token": " come",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 30,
+          "token": " to",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 31,
+          "token": " find",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 32,
+          "token": " a",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 33,
+          "token": " way",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 34,
+          "token": " back",
+          "steered_prob": 8.4745244e-10
+        },
+        {
+          "position": 35,
+          "token": " ",
+          "steered_prob": 0.000001207663
+        }
+      ]
+    }
+  ]
+}
