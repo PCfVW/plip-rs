@@ -3,11 +3,11 @@
 //! Custom implementation that runs layer-by-layer to capture
 //! intermediate activations for PLIP probing experiments.
 //!
-//! Based on the Code-LLaMA architecture from Meta.
+//! Based on the Code-LLaMA / Llama 3 architecture from Meta.
 //! Adapted from forward_qwen2.rs with simplifications:
 //! - No bias on any projections (Q, K, V, O, MLP)
-//! - Always separate lm_head (no tie_word_embeddings)
-//! - Full MHA (num_key_value_heads == num_attention_heads for 7B)
+//! - Supports both tied embeddings (Llama 3.2 1B) and separate lm_head (Code-LLaMA 7B)
+//! - GQA (num_key_value_heads < num_attention_heads) or full MHA
 
 use anyhow::{Context, Result};
 use candle_core::{DType, Device, IndexOp, Module, Tensor, D};
@@ -17,13 +17,13 @@ use rand::Rng;
 use tracing::info;
 
 use crate::attention::AttentionCache;
-use crate::cache::ActivationCache;
-use crate::intervention::{KnockoutSpec, SteeringSpec};
+use crate::cache::{ActivationCache, FullActivationCache};
+use crate::intervention::{CltInjectionSpec, KnockoutSpec, SteeringSpec};
 use crate::kv_cache::KVCache;
 use crate::masks::{create_causal_mask, create_generation_mask};
 use crate::model::PlipBackend;
 
-/// Model configuration (matches HuggingFace config.json for Code-LLaMA)
+/// Model configuration (matches HuggingFace config.json for LLaMA family)
 #[derive(Debug, Clone, serde::Deserialize)]
 pub struct LlamaConfig {
     pub hidden_size: usize,
@@ -38,6 +38,8 @@ pub struct LlamaConfig {
     pub rms_norm_eps: f64,
     #[serde(default = "default_max_position_embeddings")]
     pub max_position_embeddings: usize,
+    #[serde(default = "default_tie_word_embeddings")]
+    pub tie_word_embeddings: bool,
 }
 
 fn default_rope_theta() -> f64 {
@@ -50,6 +52,10 @@ fn default_rms_norm_eps() -> f64 {
 
 fn default_max_position_embeddings() -> usize {
     16384
+}
+
+fn default_tie_word_embeddings() -> bool {
+    false
 }
 
 /// Rotary Position Embeddings (RoPE)
@@ -693,7 +699,7 @@ pub struct PlipLlama {
     embed_tokens: Embedding,
     layers: Vec<DecoderLayer>,
     norm: RmsNorm,
-    lm_head: Linear, // Always separate (Code-LLaMA never ties embeddings)
+    lm_head: Option<Linear>,
     rotary: RotaryEmbedding,
     n_layers: usize,
     n_heads: usize,
@@ -777,9 +783,19 @@ impl PlipLlama {
         let norm =
             candle_nn::rms_norm(config.hidden_size, config.rms_norm_eps, vb_model.pp("norm"))?;
 
-        // LLaMA always has a separate lm_head
-        info!("Loading separate lm_head...");
-        let lm_head = linear_no_bias(config.hidden_size, config.vocab_size, vb.pp("lm_head"))?;
+        // Load separate lm_head only when not using weight tying.
+        // When tie_word_embeddings is true, logits = hidden @ embed_tokens.embeddings().T
+        let lm_head = if config.tie_word_embeddings {
+            info!("Using tied word embeddings (no separate lm_head)");
+            None
+        } else {
+            info!("Loading separate lm_head...");
+            Some(linear_no_bias(
+                config.hidden_size,
+                config.vocab_size,
+                vb.pp("lm_head"),
+            )?)
+        };
 
         let head_dim = config.hidden_size / config.num_attention_heads;
         let rotary = RotaryEmbedding::new(
@@ -820,6 +836,34 @@ impl PlipLlama {
             let seq_len = hidden.dim(1)?;
             let last_token = hidden.i((.., seq_len - 1, ..))?.squeeze(1)?;
             cache.push(last_token);
+
+            if (i + 1) % 10 == 0 {
+                info!("Processed layer {}/{}", i + 1, self.n_layers);
+            }
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        Ok((output, cache))
+    }
+
+    /// Forward pass that stores all-position activations per layer.
+    ///
+    /// Returns `(output, FullActivationCache)` where each cached tensor has
+    /// shape `(seq_len, d_model)` -- one per layer.
+    pub fn forward_with_full_cache(
+        &self,
+        input_ids: &Tensor,
+    ) -> Result<(Tensor, FullActivationCache)> {
+        let mut cache = FullActivationCache::with_capacity(self.n_layers);
+
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            hidden = layer.forward(&hidden, &self.rotary, 0)?;
+
+            // Store all positions: squeeze batch dim [1, seq_len, d_model] -> [seq_len, d_model]
+            let all_positions = hidden.squeeze(0)?;
+            cache.push(all_positions);
 
             if (i + 1) % 10 == 0 {
                 info!("Processed layer {}/{}", i + 1, self.n_layers);
@@ -963,7 +1007,11 @@ impl PlipLlama {
 
     /// Project hidden state directly to vocabulary logits (no normalization)
     pub fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
-        Ok(self.lm_head.forward(hidden)?)
+        if let Some(ref lm_head) = self.lm_head {
+            Ok(lm_head.forward(hidden)?)
+        } else {
+            Ok(hidden.matmul(&self.embed_tokens.embeddings().t()?)?)
+        }
     }
 
     /// Get top-k token predictions from logits
@@ -1020,7 +1068,7 @@ impl PlipLlama {
         let seq_len = output.dim(1)?;
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
 
-        Ok(self.lm_head.forward(&last_hidden)?)
+        self.project_to_vocab(&last_hidden)
     }
 
     /// Generate tokens autoregressively with KV-cache
@@ -1097,7 +1145,7 @@ impl PlipLlama {
         let seq_len = output.dim(1)?;
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
 
-        Ok(self.lm_head.forward(&last_hidden)?)
+        self.project_to_vocab(&last_hidden)
     }
 
     /// Generate with steering applied to prompt, then efficient KV-cache generation
@@ -1138,6 +1186,102 @@ impl PlipLlama {
 
         Ok(tokens)
     }
+
+    // -------------------------------------------------------------------
+    // CLT injection
+    // -------------------------------------------------------------------
+
+    /// Forward pass with CLT injection at specified layers/positions.
+    pub fn forward_with_clt_injection(
+        &self,
+        input_ids: &Tensor,
+        clt_spec: &CltInjectionSpec,
+        kv_cache: &mut KVCache,
+    ) -> Result<Tensor> {
+        let seq_len = input_ids.dim(1)?;
+        let start_pos = kv_cache.seq_len();
+
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+
+            // CLT INJECTION: add steering vectors at this layer
+            for inj in clt_spec.injections_for_layer(i) {
+                hidden = inject_at_position(&hidden, &inj.vector, inj.position)?;
+            }
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        self.project_to_vocab(&last_hidden)
+    }
+
+    /// Autoregressive generation with CLT injection during prompt prefill.
+    pub fn generate_with_clt_injection(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        clt_spec: &CltInjectionSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        let mut kv_cache = self.new_kv_cache();
+        let mut tokens = prompt_ids.to_vec();
+
+        // Prefill with CLT injection
+        let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
+        let logits = self.forward_with_clt_injection(&prompt_tensor, clt_spec, &mut kv_cache)?;
+
+        let mut next_token = sample_from_logits(&logits, temperature)?;
+        if stop_tokens.contains(&next_token) {
+            return Ok(tokens);
+        }
+        tokens.push(next_token);
+
+        // Continue generation without injection (standard KV-cache)
+        for _ in 1..max_tokens {
+            let input_tensor = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
+            let logits = self.forward_with_kv_cache(&input_tensor, &mut kv_cache)?;
+            next_token = sample_from_logits(&logits, temperature)?;
+            if stop_tokens.contains(&next_token) {
+                break;
+            }
+            tokens.push(next_token);
+        }
+
+        Ok(tokens)
+    }
+}
+
+/// Add a steering vector to the hidden state at a specific sequence position.
+fn inject_at_position(hidden: &Tensor, vector: &Tensor, position: usize) -> Result<Tensor> {
+    let (batch, seq_len, d_model) = hidden.dims3()?;
+    let pos_slice = hidden.narrow(1, position, 1)?; // [batch, 1, d_model]
+    let vec_expanded = vector
+        .to_dtype(hidden.dtype())?
+        .unsqueeze(0)?
+        .unsqueeze(0)?
+        .expand((batch, 1, d_model))?;
+    let pos_updated = (&pos_slice + &vec_expanded)?;
+
+    // Reassemble: before + updated_position + after
+    let mut parts: Vec<Tensor> = Vec::with_capacity(3);
+    if position > 0 {
+        parts.push(hidden.narrow(1, 0, position)?);
+    }
+    parts.push(pos_updated);
+    if position + 1 < seq_len {
+        parts.push(hidden.narrow(1, position + 1, seq_len - position - 1)?);
+    }
+    Ok(Tensor::cat(&parts, 1)?)
 }
 
 impl PlipBackend for PlipLlama {
@@ -1156,6 +1300,9 @@ impl PlipBackend for PlipLlama {
 
     fn forward_with_cache(&self, input_ids: &Tensor) -> Result<(Tensor, ActivationCache)> {
         self.forward_with_cache(input_ids)
+    }
+    fn forward_with_full_cache(&self, input_ids: &Tensor) -> Result<(Tensor, FullActivationCache)> {
+        self.forward_with_full_cache(input_ids)
     }
     fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         self.forward_with_attention(input_ids)
@@ -1219,6 +1366,38 @@ impl PlipBackend for PlipLlama {
             spec,
             device,
         )
+    }
+
+    fn forward_with_clt_injection(
+        &self,
+        input_ids: &Tensor,
+        clt_spec: &CltInjectionSpec,
+        kv_cache: &mut KVCache,
+    ) -> Result<Tensor> {
+        self.forward_with_clt_injection(input_ids, clt_spec, kv_cache)
+    }
+    fn generate_with_clt_injection(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        clt_spec: &CltInjectionSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        self.generate_with_clt_injection(
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            clt_spec,
+            device,
+        )
+    }
+
+    fn embedding_vector(&self, token_id: u32) -> Result<Tensor> {
+        let emb = self.embed_tokens.embeddings(); // [vocab_size, d_model]
+        Ok(emb.i(token_id as usize)?)
     }
 
     fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
