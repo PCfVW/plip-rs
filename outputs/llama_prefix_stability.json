@@ -1,0 +1,560 @@
+[
+  {
+    "id": 1,
+    "rhyme_family_size": "large",
+    "target_word": "light",
+    "line1": "The moon casts silver light,",
+    "baseline_ending": "night",
+    "full_response": "And fills my heart with gentle might.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And fills my heart with gentle might.",
+        "ending_word": "might",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "whispers secrets through the night.",
+        "ending_word": "night",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And fills",
+        "completion": "my heart with delight.",
+        "ending_word": "delight",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And fills my",
+        "completion": "heart with delight.",
+        "ending_word": "delight",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And fills my heart",
+        "completion": "with gentle night.",
+        "ending_word": "night",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And fills my heart with",
+        "completion": "delight.",
+        "ending_word": "delight",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 6,
+        "prefix_text": "And fills my heart with gentle",
+        "completion": "night.",
+        "ending_word": "night",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 6
+  },
+  {
+    "id": 2,
+    "rhyme_family_size": "large",
+    "target_word": "play",
+    "line1": "The children laugh and play,",
+    "baseline_ending": "sway",
+    "full_response": "Their joyful voices echo through the day.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "Their joyful voices echo through the day.",
+        "ending_word": "day",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "Their",
+        "completion": "happy faces sway.",
+        "ending_word": "sway",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "Their joyful",
+        "completion": "chatter fills the day.",
+        "ending_word": "day",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "Their joyful voices",
+        "completion": "sway.",
+        "ending_word": "sway",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "Their joyful voices echo",
+        "completion": "through the day.",
+        "ending_word": "day",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "Their joyful voices echo through",
+        "completion": "the day.",
+        "ending_word": "day",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 6,
+        "prefix_text": "Their joyful voices echo through the",
+        "completion": "day.",
+        "ending_word": "day",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 4
+  },
+  {
+    "id": 3,
+    "rhyme_family_size": "large",
+    "target_word": "sound",
+    "line1": "The thunder makes a sound,",
+    "baseline_ending": "around",
+    "full_response": "That echoes all around.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "That echoes all around.",
+        "ending_word": "around",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "That",
+        "completion": "echoes all around.",
+        "ending_word": "around",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "That echoes",
+        "completion": "all around.",
+        "ending_word": "around",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "That echoes all",
+        "completion": "around.",
+        "ending_word": "around",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 0
+  },
+  {
+    "id": 4,
+    "rhyme_family_size": "large",
+    "target_word": "rain",
+    "line1": "The clouds bring heavy rain,",
+    "baseline_ending": "vain",
+    "full_response": "And the stormy weather brings pain.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And the stormy weather brings pain.",
+        "ending_word": "pain",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "the thunder echoes through the pain.",
+        "ending_word": "pain",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And the",
+        "completion": "thunder rumbles through my brain.",
+        "ending_word": "brain",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And the stormy",
+        "completion": "mood remains.",
+        "ending_word": "remains",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And the stormy weather",
+        "completion": "reigns.",
+        "ending_word": "reigns",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And the stormy weather brings",
+        "completion": "pain.",
+        "ending_word": "pain",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 5
+  },
+  {
+    "id": 6,
+    "rhyme_family_size": "medium",
+    "target_word": "air",
+    "line1": "The geese fly through the air,",
+    "baseline_ending": "fair",
+    "full_response": "And leave a trail of beauty there.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And leave a trail of feathers there.",
+        "ending_word": "there",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "their honking echoes fill the lair.",
+        "ending_word": "lair",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And leave",
+        "completion": "a trail beyond compare.",
+        "ending_word": "compare",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And leave a",
+        "completion": "feathered trail to share.",
+        "ending_word": "share",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And leave a trail",
+        "completion": "of gentle care.",
+        "ending_word": "care",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And leave a trail of",
+        "completion": "feathers there.",
+        "ending_word": "there",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 6,
+        "prefix_text": "And leave a trail of beauty",
+        "completion": "there.",
+        "ending_word": "there",
+        "rhymes_with_target": false
+      }
+    ],
+    "stabilises_at": 5
+  },
+  {
+    "id": 7,
+    "rhyme_family_size": "medium",
+    "target_word": "gold",
+    "line1": "The sunset gleams like gold,",
+    "baseline_ending": "hold",
+    "full_response": "And paints the evening cold.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And paints the evening cold.",
+        "ending_word": "cold",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "the stars begin to unfold.",
+        "ending_word": "unfold",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And paints",
+        "completion": "the evening cold.",
+        "ending_word": "cold",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And paints the",
+        "completion": "evening cold.",
+        "ending_word": "cold",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And paints the evening",
+        "completion": "cold.",
+        "ending_word": "cold",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 2
+  },
+  {
+    "id": 8,
+    "rhyme_family_size": "medium",
+    "target_word": "fire",
+    "line1": "The embers feed the fire,",
+    "baseline_ending": "acquire",
+    "full_response": "And in its warmth, my heart will retire.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And warmth is born from its desire.",
+        "ending_word": "desire",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "whispers echo through the night.",
+        "ending_word": "night",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And in",
+        "completion": "silence, they conspire.",
+        "ending_word": "conspire",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And in its",
+        "completion": "warmth, my heart will retire.",
+        "ending_word": "retire",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And in its warmth,",
+        "completion": "desire.",
+        "ending_word": "desire",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And in its warmth, my",
+        "completion": "heart aspires.",
+        "ending_word": "aspires",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 6,
+        "prefix_text": "And in its warmth, my heart",
+        "completion": "feels.",
+        "ending_word": "feels",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 7,
+        "prefix_text": "And in its warmth, my heart will",
+        "completion": "desire.",
+        "ending_word": "desire",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 7
+  },
+  {
+    "id": 13,
+    "rhyme_family_size": "small",
+    "target_word": "truth",
+    "line1": "She spoke the honest truth,",
+    "baseline_ending": "youth",
+    "full_response": "And her words were a gentle youth.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And her words were a gentle youth.",
+        "ending_word": "youth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "iced her words to a gentle youth.",
+        "ending_word": "youth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And her",
+        "completion": "words were a gentle youth.",
+        "ending_word": "youth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And her words",
+        "completion": "left a lasting youth.",
+        "ending_word": "youth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And her words were",
+        "completion": "iced.",
+        "ending_word": "iced",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And her words were a",
+        "completion": "gentle youth.",
+        "ending_word": "youth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 6,
+        "prefix_text": "And her words were a gentle",
+        "completion": "proof.",
+        "ending_word": "proof",
+        "rhymes_with_target": false
+      }
+    ],
+    "stabilises_at": 6
+  },
+  {
+    "id": 14,
+    "rhyme_family_size": "small",
+    "target_word": "world",
+    "line1": "He traveled all the world,",
+    "baseline_ending": "unfurl",
+    "full_response": "And found a love that stood tall.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And found a love that stood tall.",
+        "ending_word": "tall",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "returned home with a story to unfurl.",
+        "ending_word": "unfurl",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And found",
+        "completion": "love in every hour.",
+        "ending_word": "hour",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And found a",
+        "completion": "heart that was unfurled.",
+        "ending_word": "unfurled",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And found a love",
+        "completion": "that stood tall.",
+        "ending_word": "tall",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And found a love that",
+        "completion": "was worth more.",
+        "ending_word": "more",
+        "rhymes_with_target": false
+      },
+      {
+        "prefix_words": 6,
+        "prefix_text": "And found a love that stood",
+        "completion": "after.",
+        "ending_word": "after",
+        "rhymes_with_target": false
+      }
+    ],
+    "stabilises_at": 6
+  },
+  {
+    "id": 15,
+    "rhyme_family_size": "small",
+    "target_word": "earth",
+    "line1": "The seeds lay in the earth,",
+    "baseline_ending": "birth",
+    "full_response": "And sprouted forth to give birth.",
+    "forks": [
+      {
+        "prefix_words": 0,
+        "prefix_text": "",
+        "completion": "And sprouted forth to give birth.",
+        "ending_word": "birth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 1,
+        "prefix_text": "And",
+        "completion": "planted deep, their future birth.",
+        "ending_word": "birth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 2,
+        "prefix_text": "And sprouted",
+        "completion": "rebirth.",
+        "ending_word": "rebirth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 3,
+        "prefix_text": "And sprouted forth",
+        "completion": "rebirth.",
+        "ending_word": "rebirth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 4,
+        "prefix_text": "And sprouted forth to",
+        "completion": "rebirth.",
+        "ending_word": "rebirth",
+        "rhymes_with_target": true
+      },
+      {
+        "prefix_words": 5,
+        "prefix_text": "And sprouted forth to give",
+        "completion": "birth.",
+        "ending_word": "birth",
+        "rhymes_with_target": true
+      }
+    ],
+    "stabilises_at": 5
+  }
+]

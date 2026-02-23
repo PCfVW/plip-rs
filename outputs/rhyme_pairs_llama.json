@@ -1,0 +1,324 @@
+{
+  "explore_json": "outputs/explore_vocab_llama.json",
+  "cmu_dict": "corpus/cmudict.dict",
+  "min_cosine": 0.3,
+  "n_features_loaded": 524288,
+  "n_clean_english": 79,
+  "n_in_cmu_dict": 78,
+  "n_rhyme_groups": 12,
+  "n_rhyming_words": 28,
+  "rhyme_groups": [
+    {
+      "rhyme_ending": "IY1",
+      "words": [
+        {
+          "word": "he",
+          "feature": {
+            "layer": 13,
+            "index": 30985
+          },
+          "cosine": 0.41423005,
+          "phonemes": "HH IY1"
+        },
+        {
+          "word": "be",
+          "feature": {
+            "layer": 9,
+            "index": 5488
+          },
+          "cosine": 0.38645893,
+          "phonemes": "B IY1"
+        },
+        {
+          "word": "ne",
+          "feature": {
+            "layer": 14,
+            "index": 27874
+          },
+          "cosine": 0.35579175,
+          "phonemes": "N IY1"
+        },
+        {
+          "word": "we",
+          "feature": {
+            "layer": 13,
+            "index": 32049
+          },
+          "cosine": 0.33256224,
+          "phonemes": "W IY1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AO1 R",
+      "words": [
+        {
+          "word": "for",
+          "feature": {
+            "layer": 1,
+            "index": 5297
+          },
+          "cosine": 0.54202664,
+          "phonemes": "F AO1 R"
+        },
+        {
+          "word": "or",
+          "feature": {
+            "layer": 3,
+            "index": 22663
+          },
+          "cosine": 0.33463284,
+          "phonemes": "AO1 R"
+        },
+        {
+          "word": "more",
+          "feature": {
+            "layer": 10,
+            "index": 18203
+          },
+          "cosine": 0.30319253,
+          "phonemes": "M AO1 R"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "UW1",
+      "words": [
+        {
+          "word": "to",
+          "feature": {
+            "layer": 14,
+            "index": 18284
+          },
+          "cosine": 0.4083826,
+          "phonemes": "T UW1"
+        },
+        {
+          "word": "qu",
+          "feature": {
+            "layer": 15,
+            "index": 8165
+          },
+          "cosine": 0.33358344,
+          "phonemes": "K UW1"
+        },
+        {
+          "word": "new",
+          "feature": {
+            "layer": 11,
+            "index": 20779
+          },
+          "cosine": 0.32512566,
+          "phonemes": "N UW1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AE1 T",
+      "words": [
+        {
+          "word": "that",
+          "feature": {
+            "layer": 14,
+            "index": 13043
+          },
+          "cosine": 0.49259523,
+          "phonemes": "DH AE1 T"
+        },
+        {
+          "word": "sat",
+          "feature": {
+            "layer": 14,
+            "index": 6132
+          },
+          "cosine": 0.32439846,
+          "phonemes": "S AE1 T"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 Z",
+      "words": [
+        {
+          "word": "is",
+          "feature": {
+            "layer": 4,
+            "index": 8361
+          },
+          "cosine": 0.4742261,
+          "phonemes": "IH1 Z"
+        },
+        {
+          "word": "his",
+          "feature": {
+            "layer": 3,
+            "index": 30599
+          },
+          "cosine": 0.3669666,
+          "phonemes": "HH IH1 Z"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AA1 R",
+      "words": [
+        {
+          "word": "are",
+          "feature": {
+            "layer": 6,
+            "index": 14873
+          },
+          "cosine": 0.45398903,
+          "phonemes": "AA1 R"
+        },
+        {
+          "word": "ar",
+          "feature": {
+            "layer": 14,
+            "index": 1026
+          },
+          "cosine": 0.30021375,
+          "phonemes": "AA1 R"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "ER1",
+      "words": [
+        {
+          "word": "were",
+          "feature": {
+            "layer": 4,
+            "index": 5192
+          },
+          "cosine": 0.435656,
+          "phonemes": "W ER1"
+        },
+        {
+          "word": "her",
+          "feature": {
+            "layer": 11,
+            "index": 20120
+          },
+          "cosine": 0.32924294,
+          "phonemes": "HH ER1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AE1 N",
+      "words": [
+        {
+          "word": "an",
+          "feature": {
+            "layer": 14,
+            "index": 12231
+          },
+          "cosine": 0.41875222,
+          "phonemes": "AE1 N"
+        },
+        {
+          "word": "can",
+          "feature": {
+            "layer": 14,
+            "index": 2839
+          },
+          "cosine": 0.37637222,
+          "phonemes": "K AE1 N"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "AH0",
+      "words": [
+        {
+          "word": "the",
+          "feature": {
+            "layer": 14,
+            "index": 7589
+          },
+          "cosine": 0.38952506,
+          "phonemes": "DH AH0"
+        },
+        {
+          "word": "le",
+          "feature": {
+            "layer": 14,
+            "index": 15075
+          },
+          "cosine": 0.38313574,
+          "phonemes": "L AH0"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 L",
+      "words": [
+        {
+          "word": "will",
+          "feature": {
+            "layer": 13,
+            "index": 26263
+          },
+          "cosine": 0.38864276,
+          "phonemes": "W IH1 L"
+        },
+        {
+          "word": "il",
+          "feature": {
+            "layer": 15,
+            "index": 19385
+          },
+          "cosine": 0.31782413,
+          "phonemes": "IH1 L"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "EY1",
+      "words": [
+        {
+          "word": "they",
+          "feature": {
+            "layer": 12,
+            "index": 9759
+          },
+          "cosine": 0.36398643,
+          "phonemes": "DH EY1"
+        },
+        {
+          "word": "ay",
+          "feature": {
+            "layer": 15,
+            "index": 6901
+          },
+          "cosine": 0.34388587,
+          "phonemes": "EY1"
+        }
+      ]
+    },
+    {
+      "rhyme_ending": "IH1 SH AH0 N",
+      "words": [
+        {
+          "word": "addition",
+          "feature": {
+            "layer": 9,
+            "index": 2383
+          },
+          "cosine": 0.30426463,
+          "phonemes": "AH0 D IH1 SH AH0 N"
+        },
+        {
+          "word": "nutrition",
+          "feature": {
+            "layer": 3,
+            "index": 202
+          },
+          "cosine": 0.30066293,
+          "phonemes": "N UW0 T R IH1 SH AH0 N"
+        }
+      ]
+    }
+  ]
+}

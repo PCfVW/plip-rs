@@ -64,3 +64,6 @@ outputs/_repro/
 
 # Large 2.5M CLT vocabulary scan outputs (regenerable via reproduce_pipeline)
 outputs/2.5M/explore_vocab_*.json
+
+# Large Llama vocabulary scan output (regenerable via suppress_inject_sweep)
+outputs/explore_vocab_llama.json

@@ -1,0 +1,7919 @@
+{
+  "model": "meta-llama/Llama-3.2-1B",
+  "clt_repo": "mntss/clt-llama-3.2-1b-524k",
+  "suppress_strength": 10.0,
+  "inject_strength": 10.0,
+  "n_layers": 16,
+  "n_pairs": 44,
+  "results": [
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "-ore",
+      "inject_word": "for",
+      "inject_feature": {
+        "layer": 1,
+        "index": 5297
+      },
+      "inject_source_layer": 1,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 15,
+      "inject_token_id": 369,
+      "baseline_p_inject": 0.000008446818,
+      "max_steered_p_inject": 0.0024323324,
+      "max_position": 30,
+      "last_position_p": 0.0024323324,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000009241166
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000010728107
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.000012162612
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.0000094279785
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.000011715841
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.000009452106
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000009633176
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.000008228971
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000029498124
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.000010662959
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.000008774072
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000009286526
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.000010285441
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.0000092970295
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.00001062777
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.000014992596
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.000009131387
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.0000095997075
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.000009289366
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.000009994496
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.000008354944
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.000009436297
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.00000894147
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.000010204182
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.00000819926
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.0000090895355
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.000008581042
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.000008480522
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.000007651604
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 0.000017814597
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0024323324
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "IH1 Z",
+      "inject_word": "his",
+      "inject_feature": {
+        "layer": 3,
+        "index": 30599
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 13,
+      "inject_token_id": 813,
+      "baseline_p_inject": 7.856765e-7,
+      "max_steered_p_inject": 0.0000013707498,
+      "max_position": 8,
+      "last_position_p": 9.544688e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 7.8164913e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 8.9215365e-7
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.000001011708
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 8.7866357e-7
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 8.5396977e-7
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 8.570418e-7
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 9.1558326e-7
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 8.238145e-7
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.0000013707498
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 8.28859e-7
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 8.142456e-7
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 8.3281117e-7
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 9.4696395e-7
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 8.3832856e-7
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 8.9040367e-7
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.0000010131462
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 8.1808304e-7
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 7.9116427e-7
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 8.230354e-7
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 8.754183e-7
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 8.8388117e-7
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 8.478229e-7
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 8.63065e-7
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.0000010358959
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 7.61605e-7
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 7.80777e-7
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 8.286796e-7
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 7.7694267e-7
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 8.3578885e-7
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 6.7142633e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 9.544688e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "IH1 SH AH0 N",
+      "inject_word": "nutrition",
+      "inject_feature": {
+        "layer": 3,
+        "index": 202
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 13,
+      "inject_token_id": 26677,
+      "baseline_p_inject": 1.8583148e-9,
+      "max_steered_p_inject": 2.3238985e-7,
+      "max_position": 30,
+      "last_position_p": 2.3238985e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 1.6719225e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 1.8292862e-9
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 1.8548755e-9
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 1.6580204e-9
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 1.7959039e-9
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 1.7980134e-9
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 1.9973692e-9
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 1.9391453e-9
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 1.5989954e-9
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 1.7537463e-9
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 1.784753e-9
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 1.9739115e-9
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 1.8695323e-9
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 1.943488e-9
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 1.7772553e-9
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 2.060853e-9
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 2.0039403e-9
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 1.8209185e-9
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 2.032876e-9
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 1.9406619e-9
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 2.0100626e-9
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 1.9453916e-9
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 1.7907792e-9
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 1.8437369e-9
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 1.977833e-9
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 2.0906672e-9
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 1.9341746e-9
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 1.894034e-9
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 2.0155817e-9
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 2.91969e-9
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 2.3238985e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "ER1",
+      "inject_word": "were",
+      "inject_feature": {
+        "layer": 4,
+        "index": 5192
+      },
+      "inject_source_layer": 4,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 12,
+      "inject_token_id": 1051,
+      "baseline_p_inject": 0.0000010738925,
+      "max_steered_p_inject": 0.000031521493,
+      "max_position": 30,
+      "last_position_p": 0.000031521493,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000012011495
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000013277368
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.0000012003284
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.0000011169659
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.0000010833134
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.0000010836002
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000012396589
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.0000011404386
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.0000016472164
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.0000012963036
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.0000012742346
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.0000011517479
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.0000011330732
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.0000010168785
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.0000010697258
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.0000013695806
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.000001128448
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.0000010656719
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.0000011287561
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.0000012130746
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.000001155571
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.0000012471221
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.0000012265158
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.0000013127179
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.0000011108024
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.0000011385234
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.0000011404675
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.0000010654998
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.0000010478312
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 7.010001e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.000031521493
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "AA1 R",
+      "inject_word": "are",
+      "inject_feature": {
+        "layer": 6,
+        "index": 14873
+      },
+      "inject_source_layer": 6,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 10,
+      "inject_token_id": 527,
+      "baseline_p_inject": 0.0000031074105,
+      "max_steered_p_inject": 0.0013502471,
+      "max_position": 30,
+      "last_position_p": 0.0013502471,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000003331455
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000033974954
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.0000031337452
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.0000032704208
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.000002847822
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.000002914327
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000003092885
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.00000358158
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000002736744
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.0000032317466
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.0000032860894
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000003095649
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.0000033330211
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.0000032740193
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.0000032594876
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.000003621096
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.0000030749006
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.0000030324502
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.0000031051318
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.0000031032969
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.0000031023094
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.0000032867729
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.0000030764584
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.0000031331597
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.0000028994327
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.0000033172519
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.0000031350205
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.0000030696522
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.0000032921382
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 0.0000036223864
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0013502471
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "-oo",
+      "inject_word": "new",
+      "inject_feature": {
+        "layer": 11,
+        "index": 20779
+      },
+      "inject_source_layer": 11,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 5,
+      "inject_token_id": 502,
+      "baseline_p_inject": 0.0000012168795,
+      "max_steered_p_inject": 0.000004749266,
+      "max_position": 30,
+      "last_position_p": 0.000004749266,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000012118302
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000014182378
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.0000012068759
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.000001217348
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.0000011975103
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.0000013087008
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000012771517
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.000001282437
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.0000022432453
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.0000014465451
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.0000011882798
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.0000012053923
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.0000012810309
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.0000012699048
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.0000013501462
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.0000020789982
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.0000012925225
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.0000011308176
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.000001120062
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.000001157409
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.0000013936803
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.0000012969645
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.0000012743901
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.0000014038031
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.0000012208963
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.000001118718
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.000001364693
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.0000011183598
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.0000011991145
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 7.221919e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.000004749266
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "EY1",
+      "inject_word": "they",
+      "inject_feature": {
+        "layer": 12,
+        "index": 9759
+      },
+      "inject_source_layer": 12,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 4,
+      "inject_token_id": 814,
+      "baseline_p_inject": 0.0000031074105,
+      "max_steered_p_inject": 0.000007661531,
+      "max_position": 30,
+      "last_position_p": 0.000007661531,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000030458893
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000037980226
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.0000035578475
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.000002895508
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.0000030711362
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.0000032442733
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000003260012
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.0000034648506
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000003504005
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.0000034557704
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.0000030583014
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000002898223
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.0000036030588
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.0000030867866
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.0000035315225
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.0000031593652
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.0000034942939
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.0000030374538
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.0000030978063
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.000003285894
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.0000035031424
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.000003278242
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.0000032453001
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.00000275442
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.0000030880888
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.0000031493712
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.0000035253986
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.000003075146
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.0000032836517
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 0.0000013038544
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.000007661531
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "IH1 L",
+      "inject_word": "will",
+      "inject_feature": {
+        "layer": 13,
+        "index": 26263
+      },
+      "inject_source_layer": 13,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 3,
+      "inject_token_id": 690,
+      "baseline_p_inject": 0.000003989994,
+      "max_steered_p_inject": 0.0031568506,
+      "max_position": 30,
+      "last_position_p": 0.0031568506,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000036879146
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000046025957
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.000004249887
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.0000039752176
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.0000041766757
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.000004493783
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000004213472
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.0000044786516
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000004555527
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.000004268626
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.000004441692
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.0000041349363
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.0000042287547
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.000003935396
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.000004488661
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.000004182245
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.000004029227
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.000003901873
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.000003984943
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.0000042503984
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.0000044712583
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.000004192829
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.0000041824405
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.000003715149
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.000004278163
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.000004143244
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.0000041771714
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.0000039786437
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.0000044579274
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 0.000006630983
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0031568506
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "AE1 N",
+      "inject_word": "an",
+      "inject_feature": {
+        "layer": 14,
+        "index": 12231
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 2,
+      "inject_token_id": 459,
+      "baseline_p_inject": 5.748132e-7,
+      "max_steered_p_inject": 0.00037197425,
+      "max_position": 30,
+      "last_position_p": 0.00037197425,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 5.4138474e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 6.1444456e-7
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 6.157418e-7
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 6.0777955e-7
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 5.7240186e-7
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 6.0565156e-7
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 6.0379625e-7
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 6.044214e-7
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 6.9160006e-7
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 6.519729e-7
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 6.4348836e-7
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 5.687063e-7
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 6.075547e-7
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 6.000617e-7
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 6.50259e-7
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 6.7869274e-7
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 6.0909883e-7
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 5.6072486e-7
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 5.598374e-7
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 6.0339363e-7
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 6.511123e-7
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 6.0517243e-7
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 6.266916e-7
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 5.7676357e-7
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 5.7829357e-7
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 5.729947e-7
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 6.0204934e-7
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 5.7365077e-7
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 6.0461196e-7
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 5.960951e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.00037197425
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "AH0",
+      "inject_word": "the",
+      "inject_feature": {
+        "layer": 14,
+        "index": 7589
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 2,
+      "inject_token_id": 279,
+      "baseline_p_inject": 0.000020262863,
+      "max_steered_p_inject": 0.000026097756,
+      "max_position": 8,
+      "last_position_p": 0.0000037059967,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000021479813
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000025964402
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.00002605302
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.000020349687
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.000020122316
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.000021418493
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000021341508
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.00002133192
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000026097756
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.000022943974
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.000015594012
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000016685352
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.00002134209
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.000019868088
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.00002298159
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.000023913772
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.000021490949
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.00001633772
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.000018553368
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.00002121548
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.000021467222
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.00002017572
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.000021901122
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.000018779352
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.000020338744
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.000020286067
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.00002130912
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.000019088495
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.000018814599
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 0.000004319855
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0000037059967
+        }
+      ]
+    },
+    {
+      "prompt_text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot ",
+      "natural_group": "-ee",
+      "alt_group": "-at",
+      "inject_word": "that",
+      "inject_feature": {
+        "layer": 14,
+        "index": 13043
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 4,
+      "n_suppress_entries": 15,
+      "n_inject_entries": 2,
+      "inject_token_id": 430,
+      "baseline_p_inject": 0.000005805407,
+      "max_steered_p_inject": 0.77701163,
+      "max_position": 30,
+      "last_position_p": 0.77701163,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000005118114
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000004224475
+        },
+        {
+          "position": 2,
+          "token": " birds",
+          "p_inject": 0.000005453728
+        },
+        {
+          "position": 3,
+          "token": " were",
+          "p_inject": 0.000007945997
+        },
+        {
+          "position": 4,
+          "token": " singing",
+          "p_inject": 0.0000066262387
+        },
+        {
+          "position": 5,
+          "token": " in",
+          "p_inject": 0.00000654433
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000060848743
+        },
+        {
+          "position": 7,
+          "token": " tree",
+          "p_inject": 0.000006152764
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.00000657928
+        },
+        {
+          "position": 9,
+          "token": "And",
+          "p_inject": 0.000007097447
+        },
+        {
+          "position": 10,
+          "token": " everything",
+          "p_inject": 0.000018752731
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000009885309
+        },
+        {
+          "position": 12,
+          "token": " wild",
+          "p_inject": 0.0000061060323
+        },
+        {
+          "position": 13,
+          "token": " and",
+          "p_inject": 0.0000064470446
+        },
+        {
+          "position": 14,
+          "token": " free",
+          "p_inject": 0.000006583036
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 0.000006845204
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 0.0000066092334
+        },
+        {
+          "position": 17,
+          "token": " river",
+          "p_inject": 0.00000641665
+        },
+        {
+          "position": 18,
+          "token": " ran",
+          "p_inject": 0.0000057472485
+        },
+        {
+          "position": 19,
+          "token": " down",
+          "p_inject": 0.0000060991447
+        },
+        {
+          "position": 20,
+          "token": " to",
+          "p_inject": 0.000006518313
+        },
+        {
+          "position": 21,
+          "token": " the",
+          "p_inject": 0.0000069799225
+        },
+        {
+          "position": 22,
+          "token": " sea",
+          "p_inject": 0.000006194547
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 0.000006612303
+        },
+        {
+          "position": 24,
+          "token": "There",
+          "p_inject": 0.000006184173
+        },
+        {
+          "position": 25,
+          "token": " is",
+          "p_inject": 0.0000058015116
+        },
+        {
+          "position": 26,
+          "token": " so",
+          "p_inject": 0.0000060684956
+        },
+        {
+          "position": 27,
+          "token": " much",
+          "p_inject": 0.000006157925
+        },
+        {
+          "position": 28,
+          "token": " we",
+          "p_inject": 0.0000073344195
+        },
+        {
+          "position": 29,
+          "token": " cannot",
+          "p_inject": 0.00009694057
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.77701163
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "IH1 Z",
+      "inject_word": "his",
+      "inject_feature": {
+        "layer": 3,
+        "index": 30599
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 13,
+      "inject_token_id": 813,
+      "baseline_p_inject": 0.0000011802367,
+      "max_steered_p_inject": 0.000030145387,
+      "max_position": 31,
+      "last_position_p": 0.000030145387,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000013723472
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000015538552
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.0000016981722
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.0000012920714
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.0000014646189
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.0000014243587
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000013902019
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.0000016122924
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.00000449845
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 0.0000013617154
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 0.0000011566185
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.0000010064832
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.0000011913835
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.000001151723
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.000001261061
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.000001462933
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 0.0000011829705
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.000002125599
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.0000017175731
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.0000015648791
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.0000016249597
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.0000012658179
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.000001601977
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 0.0000012530866
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.0000012820174
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.0000016330597
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000024787664
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.0000010947023
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.0000011359609
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 8.3240536e-7
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 0.0000011992597
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.000030145387
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "IH1 SH AH0 N",
+      "inject_word": "nutrition",
+      "inject_feature": {
+        "layer": 3,
+        "index": 202
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 13,
+      "inject_token_id": 26677,
+      "baseline_p_inject": 4.775771e-10,
+      "max_steered_p_inject": 1.9507315e-8,
+      "max_position": 31,
+      "last_position_p": 1.9507315e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 4.9853616e-10
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 4.964209e-10
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 6.1757643e-10
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 4.8467463e-10
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 6.778955e-10
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 5.472547e-10
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 6.1070055e-10
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 7.631252e-10
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 4.666031e-10
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 4.756586e-10
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 4.7955423e-10
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 4.516087e-10
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 5.252778e-10
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 4.858523e-10
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 5.3768884e-10
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 7.686464e-10
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 4.602803e-10
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 4.895364e-10
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 5.0183696e-10
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 4.741585e-10
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 4.921318e-10
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 4.849706e-10
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 6.0365957e-10
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 5.029076e-10
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 5.0039867e-10
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 5.1348265e-10
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 5.403173e-10
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 4.1505005e-10
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 5.1475973e-10
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 5.081496e-10
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 5.031885e-10
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 1.9507315e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "ER1",
+      "inject_word": "were",
+      "inject_feature": {
+        "layer": 4,
+        "index": 5192
+      },
+      "inject_source_layer": 4,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 12,
+      "inject_token_id": 1051,
+      "baseline_p_inject": 2.1832184e-7,
+      "max_steered_p_inject": 0.000004179755,
+      "max_position": 31,
+      "last_position_p": 0.000004179755,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 2.670568e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 2.5467133e-7
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 2.3988304e-7
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 2.2321838e-7
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 2.1683864e-7
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 2.5429452e-7
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 2.5795737e-7
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 2.5313233e-7
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 6.236691e-7
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 2.3964648e-7
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 2.1376871e-7
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 2.3249733e-7
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 2.6704018e-7
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 2.4447704e-7
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 2.6001484e-7
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 2.4839034e-7
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 1.9877244e-7
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 4.182555e-7
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 2.5501518e-7
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 2.6132807e-7
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 2.7775235e-7
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 2.7368307e-7
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 2.9168314e-7
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 2.5932482e-7
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 2.9317883e-7
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 2.9386987e-7
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 5.804844e-7
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 2.3745227e-7
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 2.1474092e-7
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 2.3261269e-7
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 2.8765592e-7
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.000004179755
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "AA1 R",
+      "inject_word": "are",
+      "inject_feature": {
+        "layer": 6,
+        "index": 14873
+      },
+      "inject_source_layer": 6,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 10,
+      "inject_token_id": 527,
+      "baseline_p_inject": 6.3173525e-7,
+      "max_steered_p_inject": 0.00021792963,
+      "max_position": 31,
+      "last_position_p": 0.00021792963,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 8.0046567e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 7.291886e-7
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 6.449847e-7
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 7.5889926e-7
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 6.687638e-7
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 7.1702283e-7
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 8.1260686e-7
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 7.4543226e-7
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.0000011534123
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 7.3922587e-7
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 6.5264607e-7
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 6.722154e-7
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 7.781503e-7
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 7.0991547e-7
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 7.074162e-7
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 8.725784e-7
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 6.4470055e-7
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.0000010290721
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 7.4178746e-7
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 7.0490114e-7
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 7.243758e-7
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 7.248917e-7
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 7.6603044e-7
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 6.7422286e-7
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 7.236855e-7
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 7.7005774e-7
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000010716013
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 6.3723684e-7
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 7.372148e-7
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 6.663325e-7
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 8.162516e-7
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.00021792963
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "-ee",
+      "inject_word": "be",
+      "inject_feature": {
+        "layer": 9,
+        "index": 5488
+      },
+      "inject_source_layer": 9,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 7,
+      "inject_token_id": 387,
+      "baseline_p_inject": 0.0000010415553,
+      "max_steered_p_inject": 0.000043967342,
+      "max_position": 31,
+      "last_position_p": 0.000043967342,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000012022182
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000012163287
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.0000011424111
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.0000010064336
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.0000011052741
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.0000012129747
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000001112016
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.0000010966896
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000002307272
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 0.0000011396602
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 0.0000010070521
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.0000011143856
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.0000012837181
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.0000011750334
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.0000013495687
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.000001350024
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 9.976326e-7
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.0000013147367
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.0000012388069
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.0000013118058
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.0000012634113
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.0000011970122
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.0000012846042
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 0.0000011203114
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.0000012142001
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.0000012912527
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000017422365
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.0000010856922
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.0000011299618
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 0.000001219496
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 0.0000014485438
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.000043967342
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "-oo",
+      "inject_word": "new",
+      "inject_feature": {
+        "layer": 11,
+        "index": 20779
+      },
+      "inject_source_layer": 11,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 5,
+      "inject_token_id": 502,
+      "baseline_p_inject": 0.0000010415553,
+      "max_steered_p_inject": 0.000003135589,
+      "max_position": 8,
+      "last_position_p": 9.382851e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000001204464
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000012136792
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.0000011866466
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.0000011445558
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.000001260413
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.0000012182326
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000012930515
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.0000012606154
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000003135589
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 0.0000010684196
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 0.0000011584798
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000001163037
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.0000013948979
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.0000014404526
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.000001369942
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.0000015674852
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 0.00000106742
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.0000027710935
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.00000113126
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.0000011058318
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.0000011875899
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.0000012346184
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.0000013707821
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 0.0000010052972
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.0000013114951
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.0000014246139
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000025377801
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.0000011996291
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.0000011731753
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 0.0000012704016
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 0.0000010147065
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 9.382851e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "EY1",
+      "inject_word": "they",
+      "inject_feature": {
+        "layer": 12,
+        "index": 9759
+      },
+      "inject_source_layer": 12,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 4,
+      "inject_token_id": 814,
+      "baseline_p_inject": 0.0000011802367,
+      "max_steered_p_inject": 0.0000053504373,
+      "max_position": 31,
+      "last_position_p": 0.0000053504373,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000013717249
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000013014336
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.0000013243956
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.000001244058
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.0000012458476
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.0000013890594
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000013187328
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.0000012992347
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.0000025072518
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 0.0000012171
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 0.0000011568154
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.0000010898536
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.0000014578937
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.0000013107676
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.000001430765
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.0000014459188
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 0.0000011137336
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.0000017656505
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.0000012844981
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.0000012815459
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.0000014657712
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.0000013769004
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.0000016028536
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 0.0000010503755
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.0000013058179
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.0000014029066
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000020676935
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.0000010838448
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.0000012593783
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 0.0000010601898
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 7.648034e-7
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.0000053504373
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "IH1 L",
+      "inject_word": "will",
+      "inject_feature": {
+        "layer": 13,
+        "index": 26263
+      },
+      "inject_source_layer": 13,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 3,
+      "inject_token_id": 690,
+      "baseline_p_inject": 9.191694e-7,
+      "max_steered_p_inject": 0.00032493562,
+      "max_position": 31,
+      "last_position_p": 0.00032493562,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000001112336
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000010683121
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.0000010410906
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.000001046459
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.0000010256903
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.0000011464371
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000011153026
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.0000010429875
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.0000015013586
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 9.681229e-7
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 9.593412e-7
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 8.934017e-7
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.0000011402025
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.0000010191719
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.0000011046991
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.0000011340068
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 8.6873644e-7
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.0000013087439
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.0000010738989
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.0000011512889
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.0000010758755
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.0000010627508
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.0000013059617
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 8.5074913e-7
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.0000010515256
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.0000012632119
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000018459152
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.0000010217134
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.0000012625302
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 0.0000012813846
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 0.0000011404699
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.00032493562
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "AE1 N",
+      "inject_word": "an",
+      "inject_feature": {
+        "layer": 14,
+        "index": 12231
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 2,
+      "inject_token_id": 459,
+      "baseline_p_inject": 6.3173525e-7,
+      "max_steered_p_inject": 0.0000107148,
+      "max_position": 31,
+      "last_position_p": 0.0000107148,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 6.8575105e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 6.374007e-7
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 6.620128e-7
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 7.085247e-7
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 7.00952e-7
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 6.64856e-7
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 7.6311744e-7
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 7.1269335e-7
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000001458869
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 6.112204e-7
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 6.078778e-7
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 6.144292e-7
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 7.337272e-7
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 6.6713756e-7
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 7.654833e-7
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 7.8975125e-7
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 5.938233e-7
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.0000010778316
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 6.925043e-7
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 7.3675136e-7
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 7.6675786e-7
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 6.793512e-7
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 8.3848914e-7
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 5.66852e-7
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 7.323801e-7
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 8.3079084e-7
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.0000014089964
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 6.261755e-7
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 7.2314504e-7
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 6.3568825e-7
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 6.775873e-7
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.0000107148
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "AH0",
+      "inject_word": "the",
+      "inject_feature": {
+        "layer": 14,
+        "index": 7589
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 2,
+      "inject_token_id": 279,
+      "baseline_p_inject": 0.000016292666,
+      "max_steered_p_inject": 0.00004010812,
+      "max_position": 8,
+      "last_position_p": 3.603304e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000018844872
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000018751894
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.000024827066
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.000018275701
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.000015934154
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.000015879103
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.000021090267
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.00001834359
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.00004010812
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 0.000015763708
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 0.000014730364
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.00001398183
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.000014190025
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.000017334474
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.000019761477
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.0000203247
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 0.000015589332
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.000029641902
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.000016719649
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.00002026459
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.000018581255
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.000015360198
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.000019097755
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 0.000013844834
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.000018901805
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.000021544969
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.000038678958
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.000017337048
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.000018566689
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 0.000014335724
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 0.000011522998
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 3.603304e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the ",
+      "natural_group": "-ore",
+      "alt_group": "-at",
+      "inject_word": "that",
+      "inject_feature": {
+        "layer": 14,
+        "index": 13043
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 34,
+      "n_inject_entries": 2,
+      "inject_token_id": 430,
+      "baseline_p_inject": 0.0000030138401,
+      "max_steered_p_inject": 0.3196224,
+      "max_position": 31,
+      "last_position_p": 0.3196224,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000030608219
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000030398144
+        },
+        {
+          "position": 2,
+          "token": " waves",
+          "p_inject": 0.0000016816641
+        },
+        {
+          "position": 3,
+          "token": " came",
+          "p_inject": 0.00000379264
+        },
+        {
+          "position": 4,
+          "token": " crashing",
+          "p_inject": 0.000004040128
+        },
+        {
+          "position": 5,
+          "token": " on",
+          "p_inject": 0.0000067705
+        },
+        {
+          "position": 6,
+          "token": " the",
+          "p_inject": 0.0000036652061
+        },
+        {
+          "position": 7,
+          "token": " shore",
+          "p_inject": 0.000003399783
+        },
+        {
+          "position": 8,
+          "token": ",\n",
+          "p_inject": 0.000005818201
+        },
+        {
+          "position": 9,
+          "token": "The",
+          "p_inject": 0.0000031004636
+        },
+        {
+          "position": 10,
+          "token": " wind",
+          "p_inject": 0.0000033356193
+        },
+        {
+          "position": 11,
+          "token": " was",
+          "p_inject": 0.000004964077
+        },
+        {
+          "position": 12,
+          "token": " how",
+          "p_inject": 0.000008815289
+        },
+        {
+          "position": 13,
+          "token": "ling",
+          "p_inject": 0.0000036384151
+        },
+        {
+          "position": 14,
+          "token": " more",
+          "p_inject": 0.0000041456283
+        },
+        {
+          "position": 15,
+          "token": " and",
+          "p_inject": 0.0000040214386
+        },
+        {
+          "position": 16,
+          "token": " more",
+          "p_inject": 0.0000030242218
+        },
+        {
+          "position": 17,
+          "token": ".\n",
+          "p_inject": 0.000005141961
+        },
+        {
+          "position": 18,
+          "token": "She",
+          "p_inject": 0.0000035049127
+        },
+        {
+          "position": 19,
+          "token": " asked",
+          "p_inject": 0.0000035537148
+        },
+        {
+          "position": 20,
+          "token": " what",
+          "p_inject": 0.000003459495
+        },
+        {
+          "position": 21,
+          "token": " all",
+          "p_inject": 0.000003480444
+        },
+        {
+          "position": 22,
+          "token": " the",
+          "p_inject": 0.0000045318106
+        },
+        {
+          "position": 23,
+          "token": " fuss",
+          "p_inject": 0.0000028783236
+        },
+        {
+          "position": 24,
+          "token": " was",
+          "p_inject": 0.000003720608
+        },
+        {
+          "position": 25,
+          "token": " for",
+          "p_inject": 0.0000037550813
+        },
+        {
+          "position": 26,
+          "token": ",\n",
+          "p_inject": 0.000005707843
+        },
+        {
+          "position": 27,
+          "token": "And",
+          "p_inject": 0.000003019833
+        },
+        {
+          "position": 28,
+          "token": " opened",
+          "p_inject": 0.0000037133261
+        },
+        {
+          "position": 29,
+          "token": " up",
+          "p_inject": 0.0000041922335
+        },
+        {
+          "position": 30,
+          "token": " the",
+          "p_inject": 0.000015417338
+        },
+        {
+          "position": 31,
+          "token": " ",
+          "p_inject": 0.3196224
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "-ore",
+      "inject_word": "for",
+      "inject_feature": {
+        "layer": 1,
+        "index": 5297
+      },
+      "inject_source_layer": 1,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 15,
+      "inject_token_id": 369,
+      "baseline_p_inject": 6.36639e-8,
+      "max_steered_p_inject": 0.0014420627,
+      "max_position": 30,
+      "last_position_p": 0.0014420627,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 6.608621e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 6.435546e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 5.670322e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 5.4632952e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 6.1881565e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 5.2412243e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 5.2565465e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 6.373381e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 4.589371e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 6.164273e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 7.215863e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 6.197893e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 5.3505367e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 5.9401398e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 6.1619964e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 8.105849e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 4.213977e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 5.647524e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 5.454193e-8
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 5.2010268e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 4.7754455e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 4.1927606e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 6.606489e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 6.1528056e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 3.3729165e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 5.481174e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 4.9051373e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 8.270679e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 4.5862123e-8
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 8.679024e-8
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0014420627
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "IH1 Z",
+      "inject_word": "his",
+      "inject_feature": {
+        "layer": 3,
+        "index": 30599
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 13,
+      "inject_token_id": 813,
+      "baseline_p_inject": 2.4931138e-8,
+      "max_steered_p_inject": 0.00005286531,
+      "max_position": 30,
+      "last_position_p": 0.00005286531,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 2.3596247e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 2.7564765e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 2.8540141e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 2.1741748e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 2.2110168e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 2.1906379e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 2.0540059e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 2.1895145e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 2.1917002e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 2.2659103e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 2.2321352e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 2.1692541e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 2.2184388e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 2.367159e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 2.8302642e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 2.5383706e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 2.320176e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 2.3815579e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 2.1804462e-8
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 2.9158812e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 2.9821628e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 2.7767204e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 2.5374614e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 2.6765125e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 1.5022227e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 2.2658456e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 2.3753882e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 2.8532819e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 2.814392e-8
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 2.8918109e-8
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.00005286531
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "IH1 SH AH0 N",
+      "inject_word": "nutrition",
+      "inject_feature": {
+        "layer": 3,
+        "index": 202
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 13,
+      "inject_token_id": 26677,
+      "baseline_p_inject": 1.2806497e-9,
+      "max_steered_p_inject": 0.0000013367764,
+      "max_position": 30,
+      "last_position_p": 0.0000013367764,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 1.2505039e-9
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 1.24532e-9
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 1.1098807e-9
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 1.2299793e-9
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 1.133073e-9
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 1.1308294e-9
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 1.1202806e-9
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 1.0487371e-9
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 1.263008e-9
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 1.0262602e-9
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 1.2862835e-9
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 1.3631347e-9
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 1.3209328e-9
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 1.2946821e-9
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 1.1498917e-9
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 1.3298077e-9
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 1.2404112e-9
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 1.2962674e-9
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 1.3491548e-9
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 1.3267606e-9
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 1.3549196e-9
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 1.2847573e-9
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 1.1982492e-9
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 1.496379e-9
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 1.3459196e-9
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 1.2143574e-9
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 1.3562153e-9
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 1.2572663e-9
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 1.3837042e-9
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 1.3232124e-9
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0000013367764
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "ER1",
+      "inject_word": "were",
+      "inject_feature": {
+        "layer": 4,
+        "index": 5192
+      },
+      "inject_source_layer": 4,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 12,
+      "inject_token_id": 1051,
+      "baseline_p_inject": 3.0072695e-8,
+      "max_steered_p_inject": 0.0000030785322,
+      "max_position": 30,
+      "last_position_p": 0.0000030785322,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 3.4298093e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 2.8099748e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 2.4748076e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 2.9015453e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 2.5959478e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 2.4547235e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 3.3735976e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 2.174372e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 2.758581e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 2.8216332e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 2.514386e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 3.3637992e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 2.872733e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 2.9407486e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 3.0988204e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 3.2914123e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 3.0364237e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 2.9614835e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 3.2164557e-8
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 2.7259457e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 3.003115e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 2.9281e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 3.0437032e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 3.1971954e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 2.527155e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 2.9982065e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 2.919829e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 2.7628323e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 3.1932245e-8
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 2.8996492e-8
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0000030785322
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "AA1 R",
+      "inject_word": "are",
+      "inject_feature": {
+        "layer": 6,
+        "index": 14873
+      },
+      "inject_source_layer": 6,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 10,
+      "inject_token_id": 527,
+      "baseline_p_inject": 5.9806695e-8,
+      "max_steered_p_inject": 0.00013373126,
+      "max_position": 30,
+      "last_position_p": 0.00013373126,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 6.23975e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 5.694654e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 5.924061e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 4.932587e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 4.8614048e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 5.2554732e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 5.9247604e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 4.130327e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 5.982626e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 5.2964364e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 5.1189648e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 5.7585062e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 5.841515e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 5.6645295e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 6.317578e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 6.58886e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 6.835463e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 5.636491e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 5.807117e-8
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 5.6200584e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 6.6678744e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 5.810614e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 5.6718676e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 6.4320275e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 5.0784042e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 5.4496148e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 5.8141495e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 5.5160662e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 5.518133e-8
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 5.646548e-8
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.00013373126
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "-ee",
+      "inject_word": "be",
+      "inject_feature": {
+        "layer": 9,
+        "index": 5488
+      },
+      "inject_source_layer": 9,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 7,
+      "inject_token_id": 387,
+      "baseline_p_inject": 1.5272174e-7,
+      "max_steered_p_inject": 0.000020253485,
+      "max_position": 30,
+      "last_position_p": 0.000020253485,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 1.4403018e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 1.3091146e-7
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 1.5198187e-7
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 1.2521679e-7
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 1.3023883e-7
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 1.2683508e-7
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 1.4073105e-7
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 9.271144e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 1.3612978e-7
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 1.3307884e-7
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 1.4529124e-7
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 1.1148894e-7
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 1.2075992e-7
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 1.4006821e-7
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 1.4012257e-7
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 1.2990711e-7
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 1.736236e-7
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 1.4313075e-7
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 1.3519396e-7
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 1.5251617e-7
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 1.4159495e-7
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 1.391187e-7
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 1.4208075e-7
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 1.5730645e-7
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 1.3098705e-7
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 1.2373293e-7
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 1.5511279e-7
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 1.4280168e-7
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 1.4502062e-7
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 1.0948027e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.000020253485
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "EY1",
+      "inject_word": "they",
+      "inject_feature": {
+        "layer": 12,
+        "index": 9759
+      },
+      "inject_source_layer": 12,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 4,
+      "inject_token_id": 814,
+      "baseline_p_inject": 1.5601508e-8,
+      "max_steered_p_inject": 6.873271e-7,
+      "max_position": 30,
+      "last_position_p": 6.873271e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 1.5951757e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 1.6603748e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 1.6145073e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 1.561962e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 1.27590205e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 1.3819859e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 1.48079895e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 1.1462712e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 1.4670422e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 1.4345599e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 1.5185519e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 1.3432588e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 1.3963771e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 1.4073287e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 1.5241257e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 1.5838475e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 1.5108705e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 1.4854252e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 1.5154688e-8
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 1.4931071e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 1.505677e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 1.4332668e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 1.517649e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 1.489576e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 1.2764665e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 1.37483935e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 1.4535401e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 1.4976925e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 1.299788e-8
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 1.0740426e-8
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 6.873271e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "IH1 L",
+      "inject_word": "will",
+      "inject_feature": {
+        "layer": 13,
+        "index": 26263
+      },
+      "inject_source_layer": 13,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 3,
+      "inject_token_id": 690,
+      "baseline_p_inject": 9.263041e-8,
+      "max_steered_p_inject": 0.00028880668,
+      "max_position": 30,
+      "last_position_p": 0.00028880668,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 9.693745e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 8.83936e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 8.756895e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 9.2405784e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 8.0979305e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 7.8367506e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 9.2744244e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 6.719139e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 8.5753804e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 8.45712e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 9.3262756e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 8.790054e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 8.5104205e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 9.351212e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 8.5043254e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 8.1668574e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 9.524832e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 8.4779664e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 1.020881e-7
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 9.711348e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 8.693131e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 8.440533e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 9.288561e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 9.747617e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 7.885694e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 8.6321144e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 8.6121965e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 8.632598e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 1.0773436e-7
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 1.04722616e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.00028880668
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "AE1 N",
+      "inject_word": "an",
+      "inject_feature": {
+        "layer": 14,
+        "index": 12231
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 2,
+      "inject_token_id": 459,
+      "baseline_p_inject": 2.270006e-8,
+      "max_steered_p_inject": 0.0000045465586,
+      "max_position": 30,
+      "last_position_p": 0.0000045465586,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 2.3631161e-8
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 2.437232e-8
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 2.2896575e-8
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 2.3679604e-8
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 2.0002162e-8
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 2.0671363e-8
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 2.2521837e-8
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 1.7158367e-8
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 2.1138561e-8
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 2.2105091e-8
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 2.4491593e-8
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 2.3227667e-8
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 2.222275e-8
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 2.4616702e-8
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 2.2108068e-8
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 2.319869e-8
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 2.5213534e-8
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 2.2303803e-8
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 2.5294286e-8
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 2.3788823e-8
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 2.2824258e-8
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 2.2061593e-8
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 2.3532296e-8
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 2.4577059e-8
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 1.8797694e-8
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 2.1452523e-8
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 2.1107523e-8
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 2.145176e-8
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 2.4001787e-8
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 2.4363038e-8
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.0000045465586
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "AH0",
+      "inject_word": "the",
+      "inject_feature": {
+        "layer": 14,
+        "index": 7589
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 2,
+      "inject_token_id": 279,
+      "baseline_p_inject": 3.0372345e-7,
+      "max_steered_p_inject": 4.7300767e-7,
+      "max_position": 1,
+      "last_position_p": 2.3445152e-8,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 3.3574798e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 4.7300767e-7
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 3.4534833e-7
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 3.2589452e-7
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 2.7548026e-7
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 2.739219e-7
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 3.027995e-7
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 2.0675785e-7
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 2.8299362e-7
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 2.7839639e-7
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 3.0517887e-7
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 2.8246367e-7
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 2.9463607e-7
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 2.715764e-7
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 2.8034097e-7
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 3.0169232e-7
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 3.3972518e-7
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 2.7972982e-7
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 3.3908427e-7
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 3.0860454e-7
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 3.0312472e-7
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 2.5731526e-7
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 2.9259982e-7
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 3.172785e-7
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 2.2053658e-7
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 2.620959e-7
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 2.6688198e-7
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 2.8001452e-7
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 2.4392776e-7
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 1.3076144e-7
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 2.3445152e-8
+        }
+      ]
+    },
+    {
+      "prompt_text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to ",
+      "natural_group": "-oo",
+      "alt_group": "-at",
+      "inject_word": "that",
+      "inject_feature": {
+        "layer": 14,
+        "index": 13043
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 3,
+      "n_suppress_entries": 8,
+      "n_inject_entries": 2,
+      "inject_token_id": 430,
+      "baseline_p_inject": 1.960986e-7,
+      "max_steered_p_inject": 0.45185935,
+      "max_position": 30,
+      "last_position_p": 0.45185935,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 1.8493736e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 1.09805605e-7
+        },
+        {
+          "position": 2,
+          "token": " morning",
+          "p_inject": 1.7421118e-7
+        },
+        {
+          "position": 3,
+          "token": " sky",
+          "p_inject": 1.9711645e-7
+        },
+        {
+          "position": 4,
+          "token": " was",
+          "p_inject": 1.9147409e-7
+        },
+        {
+          "position": 5,
+          "token": " painted",
+          "p_inject": 1.7734298e-7
+        },
+        {
+          "position": 6,
+          "token": " blue",
+          "p_inject": 2.008822e-7
+        },
+        {
+          "position": 7,
+          "token": ",\n",
+          "p_inject": 1.338996e-7
+        },
+        {
+          "position": 8,
+          "token": "The",
+          "p_inject": 1.8255484e-7
+        },
+        {
+          "position": 9,
+          "token": " garden",
+          "p_inject": 2.1721945e-7
+        },
+        {
+          "position": 10,
+          "token": " spark",
+          "p_inject": 2.3079863e-7
+        },
+        {
+          "position": 11,
+          "token": "led",
+          "p_inject": 2.819098e-7
+        },
+        {
+          "position": 12,
+          "token": " bright",
+          "p_inject": 1.8988779e-7
+        },
+        {
+          "position": 13,
+          "token": " with",
+          "p_inject": 2.71439e-7
+        },
+        {
+          "position": 14,
+          "token": " dew",
+          "p_inject": 1.8094585e-7
+        },
+        {
+          "position": 15,
+          "token": ".\n",
+          "p_inject": 1.9414794e-7
+        },
+        {
+          "position": 16,
+          "token": "The",
+          "p_inject": 2.1931967e-7
+        },
+        {
+          "position": 17,
+          "token": " world",
+          "p_inject": 1.9228068e-7
+        },
+        {
+          "position": 18,
+          "token": " had",
+          "p_inject": 2.1877177e-7
+        },
+        {
+          "position": 19,
+          "token": " started",
+          "p_inject": 1.9837307e-7
+        },
+        {
+          "position": 20,
+          "token": " fresh",
+          "p_inject": 2.0236459e-7
+        },
+        {
+          "position": 21,
+          "token": " and",
+          "p_inject": 1.7753865e-7
+        },
+        {
+          "position": 22,
+          "token": " new",
+          "p_inject": 2.0282208e-7
+        },
+        {
+          "position": 23,
+          "token": ",\n",
+          "p_inject": 2.2067536e-7
+        },
+        {
+          "position": 24,
+          "token": "And",
+          "p_inject": 1.6353827e-7
+        },
+        {
+          "position": 25,
+          "token": " there",
+          "p_inject": 1.7900751e-7
+        },
+        {
+          "position": 26,
+          "token": " was",
+          "p_inject": 1.810004e-7
+        },
+        {
+          "position": 27,
+          "token": " nothing",
+          "p_inject": 1.9237889e-7
+        },
+        {
+          "position": 28,
+          "token": " left",
+          "p_inject": 2.5727238e-7
+        },
+        {
+          "position": 29,
+          "token": " to",
+          "p_inject": 0.0000014074762
+        },
+        {
+          "position": 30,
+          "token": " ",
+          "p_inject": 0.45185935
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "-ore",
+      "inject_word": "for",
+      "inject_feature": {
+        "layer": 1,
+        "index": 5297
+      },
+      "inject_source_layer": 1,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 15,
+      "inject_token_id": 369,
+      "baseline_p_inject": 0.000003637762,
+      "max_steered_p_inject": 0.0088989595,
+      "max_position": 32,
+      "last_position_p": 0.0088989595,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000003720197
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000039518686
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.0000034790205
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.0000034972481
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000032894097
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.000003852659
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.0000038036926
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.000004541176
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000037726668
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.000008449317
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000034553882
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.0000029544642
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000036062122
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.0000050718822
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.0000042258253
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000036793112
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.000008051285
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.0000043261894
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000032209866
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.0000036511171
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000040249497
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.0000035495314
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.0000033791994
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.000003640789
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.0000032798184
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000039601946
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.000002486812
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.000003573887
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.000003158533
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000048663933
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.0000073150163
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 0.000003631117
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.0088989595
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "IH1 Z",
+      "inject_word": "his",
+      "inject_feature": {
+        "layer": 3,
+        "index": 30599
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 13,
+      "inject_token_id": 813,
+      "baseline_p_inject": 0.0000056342765,
+      "max_steered_p_inject": 0.0020799574,
+      "max_position": 32,
+      "last_position_p": 0.0020799574,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000059291892
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000057563484
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.000006255922
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.00000514468
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000050425942
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.00000624327
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.000006217773
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.000005160367
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.000004805122
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.000007692582
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000051787506
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.000005466619
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000052109162
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.000005399936
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.000005206116
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000049978225
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.000006052697
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.000005192987
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000055524474
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.0000054409506
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.000005034067
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.0000055068713
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.000005840417
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.0000054217467
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.000006013178
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.000006092227
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.000004378001
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.0000049820474
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.000006183785
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000057577286
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.000005064127
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 0.0000048633765
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.0020799574
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "IH1 SH AH0 N",
+      "inject_word": "nutrition",
+      "inject_feature": {
+        "layer": 3,
+        "index": 202
+      },
+      "inject_source_layer": 3,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 13,
+      "inject_token_id": 26677,
+      "baseline_p_inject": 8.519299e-10,
+      "max_steered_p_inject": 1.3072174e-7,
+      "max_position": 32,
+      "last_position_p": 1.3072174e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 8.116004e-10
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 8.6706475e-10
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 8.6776075e-10
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 8.595731e-10
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 8.328881e-10
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 7.4135353e-10
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 7.556211e-10
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 8.7033253e-10
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 7.825446e-10
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 6.971594e-10
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 8.541022e-10
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 8.0571444e-10
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 7.941427e-10
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 8.585058e-10
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 8.3451757e-10
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 8.7188445e-10
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 8.726596e-10
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 8.464103e-10
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 8.60102e-10
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 7.994877e-10
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 8.1637763e-10
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 8.457322e-10
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 8.6495316e-10
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 9.152452e-10
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 8.435549e-10
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 8.639044e-10
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 9.017814e-10
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 8.545037e-10
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 6.956501e-10
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 8.307814e-10
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 9.40662e-10
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 7.0663797e-10
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 1.3072174e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "ER1",
+      "inject_word": "were",
+      "inject_feature": {
+        "layer": 4,
+        "index": 5192
+      },
+      "inject_source_layer": 4,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 12,
+      "inject_token_id": 1051,
+      "baseline_p_inject": 0.0000010422362,
+      "max_steered_p_inject": 0.00003868904,
+      "max_position": 32,
+      "last_position_p": 0.00003868904,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000010720711
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 9.59458e-7
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.000001059579
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.0000011275218
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000011046811
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.000001020064
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.0000010489522
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.0000012083692
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000011738966
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 9.794202e-7
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000010556349
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.0000010421605
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000010110474
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.0000011264046
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 9.630344e-7
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000010015309
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 9.554781e-7
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 9.660708e-7
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000010706825
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.000001032108
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000011323173
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 9.712536e-7
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.0000010003125
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 9.831862e-7
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.000001073249
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000010910919
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 9.521355e-7
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.000001039072
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.0000011713788
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 9.365183e-7
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.0000011382236
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 6.171187e-7
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.00003868904
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "AA1 R",
+      "inject_word": "are",
+      "inject_feature": {
+        "layer": 6,
+        "index": 14873
+      },
+      "inject_source_layer": 6,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 10,
+      "inject_token_id": 527,
+      "baseline_p_inject": 0.000001614247,
+      "max_steered_p_inject": 0.007271887,
+      "max_position": 32,
+      "last_position_p": 0.007271887,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000015984468
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000016140804
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.0000016445742
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.0000017897235
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000015908223
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.0000019432327
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.0000017599695
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.0000018753443
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000019390673
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.0000016327639
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000018140258
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.0000017062041
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000016350988
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.0000016021472
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.0000017787839
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000017050806
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.0000017380098
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.0000015886542
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000016615586
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.0000016080162
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000015987782
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.0000017263532
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.000001914693
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.0000016343453
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.0000016372786
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000017288388
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.0000014426093
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.0000016749417
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.0000016252695
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000016691553
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.0000017194071
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 9.859164e-7
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.007271887
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "-ee",
+      "inject_word": "be",
+      "inject_feature": {
+        "layer": 9,
+        "index": 5488
+      },
+      "inject_source_layer": 9,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 7,
+      "inject_token_id": 387,
+      "baseline_p_inject": 0.000004122124,
+      "max_steered_p_inject": 0.0007092786,
+      "max_position": 32,
+      "last_position_p": 0.0007092786,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000049281207
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000004541133
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.000004363001
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.0000045230026
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000041614053
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.0000043513505
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.000004120692
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.0000044074472
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000041884737
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.00000391443
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000044327558
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.00000456624
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000036072483
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.000004382062
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.0000045355314
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000043707164
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.000004199926
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.000004024165
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.000004554799
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.000004341923
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000046022847
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.000004455046
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.0000041558096
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.0000045563515
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.000004150525
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000045719025
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.0000041354956
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.000004152665
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.0000041053613
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000045560137
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.000004037834
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 0.0000024451185
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.0007092786
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "-oo",
+      "inject_word": "new",
+      "inject_feature": {
+        "layer": 11,
+        "index": 20779
+      },
+      "inject_source_layer": 11,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 5,
+      "inject_token_id": 502,
+      "baseline_p_inject": 0.0000020727343,
+      "max_steered_p_inject": 0.0000036078295,
+      "max_position": 9,
+      "last_position_p": 0.0000025712586,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000022104202
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000002444541
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.0000022570946
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.000002188723
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000022576903
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.0000023465757
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.0000022549682
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.0000024886267
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000020795626
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.0000036078295
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000021790534
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.0000022974957
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000022762813
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.0000022982322
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.000002234743
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.000002248103
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.0000033508315
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.0000022922638
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000021416774
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.0000021856054
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000020311327
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.0000021123385
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.0000020431435
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.0000022927443
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.000002366395
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000022862057
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.0000024997285
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.0000020846637
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.000002062571
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000019389909
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.0000019820995
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 0.0000012563642
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.0000025712586
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "EY1",
+      "inject_word": "they",
+      "inject_feature": {
+        "layer": 12,
+        "index": 9759
+      },
+      "inject_source_layer": 12,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 4,
+      "inject_token_id": 814,
+      "baseline_p_inject": 7.163178e-7,
+      "max_steered_p_inject": 7.9091564e-7,
+      "max_position": 6,
+      "last_position_p": 4.2295994e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 7.5707055e-7
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 7.156552e-7
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 7.6927796e-7
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 7.8782546e-7
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 7.3597846e-7
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 7.5031403e-7
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 7.9091564e-7
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 6.7442664e-7
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 7.4183953e-7
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 6.762965e-7
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 7.448652e-7
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 7.418141e-7
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 6.054885e-7
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 7.2253596e-7
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 7.6869e-7
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 7.094727e-7
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 6.9476147e-7
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 6.740209e-7
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 7.4403135e-7
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 7.433588e-7
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 6.9369435e-7
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 7.2283245e-7
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 6.6952117e-7
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 6.819822e-7
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 7.5813915e-7
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 6.2666624e-7
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 7.374844e-7
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 7.428709e-7
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 6.956947e-7
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 7.594418e-7
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 5.5581245e-7
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 2.602812e-7
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 4.2295994e-7
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "IH1 L",
+      "inject_word": "will",
+      "inject_feature": {
+        "layer": 13,
+        "index": 26263
+      },
+      "inject_source_layer": 13,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 3,
+      "inject_token_id": 690,
+      "baseline_p_inject": 0.000001947154,
+      "max_steered_p_inject": 0.007606709,
+      "max_position": 32,
+      "last_position_p": 0.007606709,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000018306692
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000020144114
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.0000020374366
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.0000020073246
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000018836079
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.0000019336026
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.0000018822202
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.0000018521471
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000019713177
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.0000018282275
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000018259826
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.0000020168193
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000018098542
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.0000019866661
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.0000018240095
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.000001956603
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.0000019927168
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.000001960593
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000019752654
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.0000019737251
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000018782869
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.0000019654722
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.0000018177224
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.0000018719983
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.000001978683
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000020614686
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.0000020690002
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.0000020175585
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.0000019471036
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000021735837
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.000002321618
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 0.0000015514622
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.007606709
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "AE1 N",
+      "inject_word": "an",
+      "inject_feature": {
+        "layer": 14,
+        "index": 12231
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 2,
+      "inject_token_id": 459,
+      "baseline_p_inject": 0.0000011810084,
+      "max_steered_p_inject": 0.00017707855,
+      "max_position": 32,
+      "last_position_p": 0.00017707855,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.0000011990031
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.0000012974958
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.0000012786822
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.0000012033282
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.0000011876016
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.0000012810245
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.0000011914105
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.0000011921386
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.0000012708099
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.0000012705642
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.0000011903616
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.000001181503
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.0000011081027
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.0000012156169
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.0000011915058
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000012090741
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.0000012788895
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.0000011767214
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.0000012601947
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.0000012026126
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.0000011923537
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.0000011760296
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.0000011841335
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.000001183282
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.0000011801424
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000011798285
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.0000011800156
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.0000012606853
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.0000011956378
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.0000011816028
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.0000012140964
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 7.965251e-7
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 0.00017707855
+        }
+      ]
+    },
+    {
+      "prompt_text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the ",
+      "natural_group": "-at",
+      "alt_group": "AH0",
+      "inject_word": "the",
+      "inject_feature": {
+        "layer": 14,
+        "index": 7589
+      },
+      "inject_source_layer": 14,
+      "n_suppress_features": 2,
+      "n_suppress_entries": 4,
+      "n_inject_entries": 2,
+      "inject_token_id": 279,
+      "baseline_p_inject": 0.000014387629,
+      "max_steered_p_inject": 0.000019992101,
+      "max_position": 2,
+      "last_position_p": 8.3070756e-7,
+      "positions": [
+        {
+          "position": 0,
+          "token": "<|begin_of_text|>",
+          "p_inject": 0.000016273078
+        },
+        {
+          "position": 1,
+          "token": "The",
+          "p_inject": 0.000015323085
+        },
+        {
+          "position": 2,
+          "token": " old",
+          "p_inject": 0.000019992101
+        },
+        {
+          "position": 3,
+          "token": " man",
+          "p_inject": 0.00001683812
+        },
+        {
+          "position": 4,
+          "token": " wore",
+          "p_inject": 0.000016583705
+        },
+        {
+          "position": 5,
+          "token": " a",
+          "p_inject": 0.000015415017
+        },
+        {
+          "position": 6,
+          "token": " t",
+          "p_inject": 0.000016291075
+        },
+        {
+          "position": 7,
+          "token": "attered",
+          "p_inject": 0.000015572205
+        },
+        {
+          "position": 8,
+          "token": " hat",
+          "p_inject": 0.000015450969
+        },
+        {
+          "position": 9,
+          "token": ",\n",
+          "p_inject": 0.000015423082
+        },
+        {
+          "position": 10,
+          "token": "Upon",
+          "p_inject": 0.000015343578
+        },
+        {
+          "position": 11,
+          "token": " the",
+          "p_inject": 0.000015400788
+        },
+        {
+          "position": 12,
+          "token": " porch",
+          "p_inject": 0.000011862802
+        },
+        {
+          "position": 13,
+          "token": " he",
+          "p_inject": 0.000014820549
+        },
+        {
+          "position": 14,
+          "token": " always",
+          "p_inject": 0.000014559994
+        },
+        {
+          "position": 15,
+          "token": " sat",
+          "p_inject": 0.0000145360855
+        },
+        {
+          "position": 16,
+          "token": ".\n",
+          "p_inject": 0.000015830867
+        },
+        {
+          "position": 17,
+          "token": "He",
+          "p_inject": 0.000014406072
+        },
+        {
+          "position": 18,
+          "token": " told",
+          "p_inject": 0.000014325491
+        },
+        {
+          "position": 19,
+          "token": " the",
+          "p_inject": 0.000014287233
+        },
+        {
+          "position": 20,
+          "token": " tale",
+          "p_inject": 0.000014391724
+        },
+        {
+          "position": 21,
+          "token": " of",
+          "p_inject": 0.000015426556
+        },
+        {
+          "position": 22,
+          "token": " this",
+          "p_inject": 0.000012611907
+        },
+        {
+          "position": 23,
+          "token": " and",
+          "p_inject": 0.0000136044455
+        },
+        {
+          "position": 24,
+          "token": " that",
+          "p_inject": 0.000014377504
+        },
+        {
+          "position": 25,
+          "token": ",\n",
+          "p_inject": 0.0000136631625
+        },
+        {
+          "position": 26,
+          "token": "And",
+          "p_inject": 0.000014339428
+        },
+        {
+          "position": 27,
+          "token": " in",
+          "p_inject": 0.00001549967
+        },
+        {
+          "position": 28,
+          "token": " the",
+          "p_inject": 0.000014692549
+        },
+        {
+          "position": 29,
+          "token": " corner",
+          "p_inject": 0.000014608771
+        },
+        {
+          "position": 30,
+          "token": " slept",
+          "p_inject": 0.000011058795
+        },
+        {
+          "position": 31,
+          "token": " the",
+          "p_inject": 0.0000068214417
+        },
+        {
+          "position": 32,
+          "token": " ",
+          "p_inject": 8.3070756e-7
+        }
+      ]
+    }
+  ]
+}

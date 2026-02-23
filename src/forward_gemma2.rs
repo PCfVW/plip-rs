@@ -1053,6 +1053,38 @@ impl PlipGemma2 {
         Ok((output, cache))
     }
 
+    /// Forward pass that skips the specified layers (layer indices pass hidden
+    /// state through unchanged).  Returns the normed last-token hidden state
+    /// with shape `[1, d_model]`, suitable for `logit_lens_top_k` / vocab
+    /// projection.
+    pub fn forward_with_layer_skip(
+        &self,
+        input_ids: &Tensor,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        let seq_len = input_ids.dim(1)?;
+        let device = input_ids.device();
+        let dtype = self.embed_tokens.embeddings().dtype();
+
+        // Embedding with sqrt(hidden_size) scaling
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+        let normalizer = (self.config.hidden_size as f64).sqrt();
+        hidden = (hidden * normalizer)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            if skip_layers.contains(&i) {
+                continue;
+            }
+            let mask = self.mask_for_layer(i, seq_len, device, dtype)?;
+            hidden = layer.forward(&hidden, &self.rotary, &mask, 0)?;
+        }
+
+        // Final norm, extract last-token hidden → [1, d_model]
+        let output = self.norm.forward(&hidden)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        Ok(last_hidden)
+    }
+
     /// Forward pass with attention weight capture.
     pub fn forward_with_attention(&self, input_ids: &Tensor) -> Result<(Tensor, AttentionCache)> {
         let seq_len = input_ids.dim(1)?;
@@ -1149,6 +1181,81 @@ impl PlipGemma2 {
         let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
         let logits = last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?;
         self.apply_final_softcap(&logits)
+    }
+
+    /// Forward pass with KV-cache that skips specified layers.
+    ///
+    /// Skipped layers pass hidden state through unchanged and leave their
+    /// KV-cache entries untouched.
+    pub fn forward_with_kv_cache_and_layer_skip(
+        &self,
+        input_ids: &Tensor,
+        kv_cache: &mut KVCache,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        let seq_len = input_ids.dim(1)?;
+        let start_pos = kv_cache.seq_len();
+
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+        let normalizer = (self.config.hidden_size as f64).sqrt();
+        hidden = (hidden * normalizer)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            if skip_layers.contains(&i) {
+                continue;
+            }
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        let logits = last_hidden.matmul(&self.embed_tokens.embeddings().t()?)?;
+        self.apply_final_softcap(&logits)
+    }
+
+    /// Generate tokens with specified layers skipped.
+    pub fn generate_with_layer_skip(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        skip_layers: &std::collections::HashSet<usize>,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        let mut kv_cache = KVCache::new(self.config.num_hidden_layers);
+        let mut tokens = prompt_ids.to_vec();
+
+        // Prefill
+        let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
+        let logits =
+            self.forward_with_kv_cache_and_layer_skip(&prompt_tensor, &mut kv_cache, skip_layers)?;
+
+        let mut next_token = sample_token(&logits, temperature)?;
+        if stop_tokens.contains(&next_token) {
+            return Ok(tokens);
+        }
+        tokens.push(next_token);
+
+        // Autoregressive
+        for _ in 1..max_tokens {
+            let input = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
+            let logits =
+                self.forward_with_kv_cache_and_layer_skip(&input, &mut kv_cache, skip_layers)?;
+            next_token = sample_token(&logits, temperature)?;
+            if stop_tokens.contains(&next_token) {
+                break;
+            }
+            tokens.push(next_token);
+        }
+
+        Ok(tokens)
     }
 
     /// Forward pass with attention steering intervention (post-softmax).
@@ -1500,6 +1607,33 @@ impl PlipBackend for PlipGemma2 {
 
     fn forward_with_full_cache(&self, input_ids: &Tensor) -> Result<(Tensor, FullActivationCache)> {
         self.forward_with_full_cache(input_ids)
+    }
+
+    fn forward_with_layer_skip(
+        &self,
+        input_ids: &Tensor,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        self.forward_with_layer_skip(input_ids, skip_layers)
+    }
+
+    fn generate_with_layer_skip(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        skip_layers: &std::collections::HashSet<usize>,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        self.generate_with_layer_skip(
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            skip_layers,
+            device,
+        )
     }
 
     fn embedding_vector(&self, token_id: u32) -> Result<Tensor> {

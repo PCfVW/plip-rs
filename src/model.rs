@@ -202,6 +202,32 @@ pub trait PlipBackend {
         anyhow::bail!("forward_with_full_cache not supported for this architecture")
     }
 
+    /// Forward pass that skips specified layers, returning the normed
+    /// last-token hidden state `[1, d_model]`.
+    ///
+    /// Each layer index in `skip_layers` is bypassed (hidden state passes
+    /// through unchanged).  Used for causal intervention experiments.
+    fn forward_with_layer_skip(
+        &self,
+        _input_ids: &Tensor,
+        _skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        anyhow::bail!("forward_with_layer_skip not supported for this architecture")
+    }
+
+    /// Generate tokens with specified layers skipped throughout.
+    fn generate_with_layer_skip(
+        &self,
+        _prompt_ids: &[u32],
+        _max_tokens: usize,
+        _temperature: f32,
+        _stop_tokens: &[u32],
+        _skip_layers: &std::collections::HashSet<usize>,
+        _device: &Device,
+    ) -> Result<Vec<u32>> {
+        anyhow::bail!("generate_with_layer_skip not supported for this architecture")
+    }
+
     fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
         None
     }
@@ -470,6 +496,46 @@ impl PlipModel {
         let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
         let (_, cache) = self.model.forward_with_full_cache(&input_tensor)?;
         Ok(cache)
+    }
+
+    /// Forward pass that skips specified layers, returning the normed
+    /// last-token hidden state `[1, d_model]`.
+    ///
+    /// Used for causal intervention experiments: skipping a set of layers
+    /// tests whether those layers are causally necessary for a behaviour.
+    pub fn forward_with_layer_skip(
+        &self,
+        text: &str,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        let input_ids = self.tokenizer.encode(text)?;
+        let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
+        self.model
+            .forward_with_layer_skip(&input_tensor, skip_layers)
+    }
+
+    /// Generate text with specified layers skipped throughout.
+    ///
+    /// Used for causal intervention experiments: generate full output with
+    /// certain layers disabled to test their causal contribution.
+    pub fn generate_with_layer_skip(
+        &self,
+        text: &str,
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<String> {
+        let prompt_ids = self.tokenizer.encode(text)?;
+        let tokens = self.model.generate_with_layer_skip(
+            &prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            skip_layers,
+            &self.device,
+        )?;
+        self.tokenizer.decode(&tokens, true)
     }
 
     /// Number of layers in the model

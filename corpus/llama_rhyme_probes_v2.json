@@ -1,0 +1,171 @@
+{
+  "model": "llama3.2:1b",
+  "description": "18 strategy probes to maximise Llama 3.2 1B rhyming success. 6 strategies x 3 rhyme-family sizes (large/medium/small). Same base quatrains as v1 for comparability.",
+  "probes": [
+    {
+      "id": 1,
+      "rhyme_family_size": "large",
+      "scheme": "couplet",
+      "target_word": "light",
+      "strategy": "couplet",
+      "raw_mode": false,
+      "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe moon casts silver light,"
+    },
+    {
+      "id": 2,
+      "rhyme_family_size": "medium",
+      "scheme": "couplet",
+      "target_word": "air",
+      "strategy": "couplet",
+      "raw_mode": false,
+      "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe geese fly through the air,"
+    },
+    {
+      "id": 3,
+      "rhyme_family_size": "small",
+      "scheme": "couplet",
+      "target_word": "strange",
+      "strategy": "couplet",
+      "raw_mode": false,
+      "prompt": "Write exactly one line of poetry that rhymes with this line:\nThe silence felt so strange,"
+    },
+    {
+      "id": 4,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "strategy": "few-shot",
+      "raw_mode": false,
+      "prompt": "Complete each quatrain with a fourth line that rhymes with the second line.\n\nExample 1:\nThe river runs beside the lane,\nThe children laugh and play,\nThe flowers bloom despite the rain,\nAnd brighten up the day.\n\nExample 2:\nThe mountains rise above the plain,\nThe eagle soars on high,\nThe shepherd walks the path again,\nBeneath the open sky.\n\nExample 3:\nThe candle flickers in the room,\nThe fire starts to fade,\nThe roses wither past their bloom,\nAnd cast a darker shade.\n\nNow complete this one (fourth line must rhyme with \"light\"):\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,"
+    },
+    {
+      "id": 5,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "strategy": "few-shot",
+      "raw_mode": false,
+      "prompt": "Complete each quatrain with a fourth line that rhymes with the second line.\n\nExample 1:\nThe river runs beside the lane,\nThe children laugh and play,\nThe flowers bloom despite the rain,\nAnd brighten up the day.\n\nExample 2:\nThe mountains rise above the plain,\nThe eagle soars on high,\nThe shepherd walks the path again,\nBeneath the open sky.\n\nExample 3:\nThe candle flickers in the room,\nThe fire starts to fade,\nThe roses wither past their bloom,\nAnd cast a darker shade.\n\nNow complete this one (fourth line must rhyme with \"air\"):\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,"
+    },
+    {
+      "id": 6,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "strategy": "few-shot",
+      "raw_mode": false,
+      "prompt": "Complete each quatrain with a fourth line that rhymes with the second line.\n\nExample 1:\nThe river runs beside the lane,\nThe children laugh and play,\nThe flowers bloom despite the rain,\nAnd brighten up the day.\n\nExample 2:\nThe mountains rise above the plain,\nThe eagle soars on high,\nThe shepherd walks the path again,\nBeneath the open sky.\n\nExample 3:\nThe candle flickers in the room,\nThe fire starts to fade,\nThe roses wither past their bloom,\nAnd cast a darker shade.\n\nNow complete this one (fourth line must rhyme with \"strange\"):\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,"
+    },
+    {
+      "id": 7,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "strategy": "chain-of-thought",
+      "raw_mode": false,
+      "prompt": "I need to complete a quatrain. The fourth line must rhyme with \"light\".\n\nStep 1 — Words that rhyme with \"light\": bright, night, sight, might, flight, right, tight, white\n\nStep 2 — The first three lines are:\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,\n\nStep 3 — Write ONLY the fourth line, ending with one of the rhyming words from Step 1:"
+    },
+    {
+      "id": 8,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "strategy": "chain-of-thought",
+      "raw_mode": false,
+      "prompt": "I need to complete a quatrain. The fourth line must rhyme with \"air\".\n\nStep 1 — Words that rhyme with \"air\": bare, care, dare, fair, glare, pair, rare, share, stare, there, wear\n\nStep 2 — The first three lines are:\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,\n\nStep 3 — Write ONLY the fourth line, ending with one of the rhyming words from Step 1:"
+    },
+    {
+      "id": 9,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "strategy": "chain-of-thought",
+      "raw_mode": false,
+      "prompt": "I need to complete a quatrain. The fourth line must rhyme with \"strange\".\n\nStep 1 — Words that rhyme with \"strange\": change, range, arrange, exchange, mange, grange\n\nStep 2 — The first three lines are:\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,\n\nStep 3 — Write ONLY the fourth line, ending with one of the rhyming words from Step 1:"
+    },
+    {
+      "id": 10,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "strategy": "explicit-end-word",
+      "raw_mode": false,
+      "prompt": "Complete this quatrain. The fourth line MUST end with the word \"bright\":\n\nThe stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,"
+    },
+    {
+      "id": 11,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "strategy": "explicit-end-word",
+      "raw_mode": false,
+      "prompt": "Complete this quatrain. The fourth line MUST end with the word \"care\":\n\nThe autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,"
+    },
+    {
+      "id": 12,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "strategy": "explicit-end-word",
+      "raw_mode": false,
+      "prompt": "Complete this quatrain. The fourth line MUST end with the word \"change\":\n\nThe shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,"
+    },
+    {
+      "id": 13,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "strategy": "html",
+      "raw_mode": true,
+      "prompt": "<blockquote class=\"poem\">\n<p>The stars appear above the hill,<br>\nThe moon casts silver light,<br>\nThe evening air is calm and still,<br>\n"
+    },
+    {
+      "id": 14,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "strategy": "html",
+      "raw_mode": true,
+      "prompt": "<blockquote class=\"poem\">\n<p>The autumn leaves are turning gold,<br>\nThe geese fly through the air,<br>\nA story waiting to be told,<br>\n"
+    },
+    {
+      "id": 15,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "strategy": "html",
+      "raw_mode": true,
+      "prompt": "<blockquote class=\"poem\">\n<p>The shadows fell across the floor,<br>\nThe silence felt so strange,<br>\nI heard a creaking from the door,<br>\n"
+    },
+    {
+      "id": 16,
+      "rhyme_family_size": "large",
+      "scheme": "ABAB",
+      "target_word": "light",
+      "strategy": "system-prompt",
+      "raw_mode": false,
+      "system_prompt": "You are a master poet. When given three lines of an ABAB quatrain, you reply with ONLY the fourth line. The fourth line must rhyme with the SECOND line. Output nothing else — no explanation, no preamble, just the single line of poetry.",
+      "prompt": "The stars appear above the hill,\nThe moon casts silver light,\nThe evening air is calm and still,"
+    },
+    {
+      "id": 17,
+      "rhyme_family_size": "medium",
+      "scheme": "ABAB",
+      "target_word": "air",
+      "strategy": "system-prompt",
+      "raw_mode": false,
+      "system_prompt": "You are a master poet. When given three lines of an ABAB quatrain, you reply with ONLY the fourth line. The fourth line must rhyme with the SECOND line. Output nothing else — no explanation, no preamble, just the single line of poetry.",
+      "prompt": "The autumn leaves are turning gold,\nThe geese fly through the air,\nA story waiting to be told,"
+    },
+    {
+      "id": 18,
+      "rhyme_family_size": "small",
+      "scheme": "ABAB",
+      "target_word": "strange",
+      "strategy": "system-prompt",
+      "raw_mode": false,
+      "system_prompt": "You are a master poet. When given three lines of an ABAB quatrain, you reply with ONLY the fourth line. The fourth line must rhyme with the SECOND line. Output nothing else — no explanation, no preamble, just the single line of poetry.",
+      "prompt": "The shadows fell across the floor,\nThe silence felt so strange,\nI heard a creaking from the door,"
+    }
+  ]
+}

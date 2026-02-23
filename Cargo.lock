@@ -2111,6 +2111,7 @@ dependencies = [
  "tokenizers",
  "tracing",
  "tracing-subscriber",
+ "ureq",
 ]
 
 [[package]]

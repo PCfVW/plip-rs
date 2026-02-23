@@ -1,0 +1,1022 @@
+[
+  {
+    "id": 1,
+    "target_word": "light",
+    "line1": "The moon casts silver light,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The stars shine bright,",
+        "last_word": "bright",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 1000000000000000000000000000",
+        "last_word": "1000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "The moon casts silver light,",
+        "last_word": "light",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "The moon is a symbol of the moon,",
+        "last_word": "moon",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The sun is on the",
+        "last_word": "the",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": " whoſe influence we can hardly find.",
+        "last_word": "find",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": " върху the water,",
+        "last_word": "water",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The stars are bright,",
+        "last_word": "bright",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "target_word": "play",
+    "line1": "The children laugh and play,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The adults talk and pray,",
+        "last_word": "pray",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 1000000000000000000000000000",
+        "last_word": "1000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "and the play area is a great place to sit and play.",
+        "last_word": "play",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "and the adults laugh and play.",
+        "last_word": "play",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The parents and the teachers,",
+        "last_word": "teachers",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "They play play play play",
+        "last_word": "play",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "They are happy and they are free.",
+        "last_word": "free",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The adults work and play,",
+        "last_word": "play",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "target_word": "sound",
+    "line1": "The thunder makes a sound,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The lightning makes a flash,",
+        "last_word": "flash",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 1000000000000000000000000000",
+        "last_word": "1000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "The sound of a thing that is already in the hands of the editor,",
+        "last_word": "editor",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "The thunder makes a sound,",
+        "last_word": "sound",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The sky is full of,",
+        "last_word": "of",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The rain rain rain again again again again again again again again again again again again again again again again again again again again again again again again again again",
+        "last_word": "again",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The rain rain rain,",
+        "last_word": "rain",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The rain makes a sound,",
+        "last_word": "sound",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "target_word": "rain",
+    "line1": "The clouds bring heavy rain,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The rain brings the thunder,",
+        "last_word": "thunder",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The <strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong>",
+        "last_word": "<strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong><strong",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "The wind brings heavy rain,",
+        "last_word": "rain",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "The wind blows hard,",
+        "last_word": "hard",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The rain is the night-time,",
+        "last_word": "night-time",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The rain rain rain rain rain",
+        "last_word": "rain",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The rain wet the ground,",
+        "last_word": "ground",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The rain brings heavy rain,",
+        "last_word": "rain",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "target_word": "air",
+    "line1": "The geese fly through the air,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The wind blows through the trees,",
+        "last_word": "trees",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The air,",
+        "last_word": "air",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "The geese fly through the air,",
+        "last_word": "air",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "The geese fly through the air,",
+        "last_word": "air",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The birds are in the,",
+        "last_word": "the",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "They are not afraid fear fear fear fear",
+        "last_word": "fear",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "They fly away from the human human human human human human",
+        "last_word": "human",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "They fly through the air,",
+        "last_word": "air",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "target_word": "gold",
+    "line1": "The sunset gleams like gold,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The moon shines like a diamond,",
+        "last_word": "diamond",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 2000000000000000000000000000",
+        "last_word": "2000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "The sunset gleams like gold,",
+        "last_word": "gold",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "The sun is setting on the horizon.",
+        "last_word": "horizon",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The night is cold,",
+        "last_word": "cold",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The sunset is beautiful indeed.",
+        "last_word": "indeed",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The sky is blue and bright,",
+        "last_word": "bright",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The sky is full of stars,",
+        "last_word": "stars",
+        "rhymes": false
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "target_word": "fire",
+    "line1": "The embers feed the fire,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "The fire feeds the embers,",
+        "last_word": "embers",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 1000000000000000000000000000",
+        "last_word": "1000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "The fire is the fire, and the fire is the fire, but the fire is the fire, but the fire is the fire, but the fire",
+        "last_word": "fire",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "The embers feed the fire,",
+        "last_word": "fire",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The fire is the best,",
+        "last_word": "best",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The fire fire fire.",
+        "last_word": "fire",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The fire burns the forest,",
+        "last_word": "forest",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The fire feeds the fire,",
+        "last_word": "fire",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "target_word": "truth",
+    "line1": "She spoke the honest truth,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "She was not afraid to say,",
+        "last_word": "say",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 1999999999999999999999999999",
+        "last_word": "1999999999999999999999999999",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "She spoke the honest truth,",
+        "last_word": "truth",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "I'm not sure if you're aware of it, but I'm not sure if you're aware of it.",
+        "last_word": "it",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "I was the one,",
+        "last_word": "one",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": " when they asked why you didn'",
+        "last_word": "didn",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The truth that she knew would hurt him.",
+        "last_word": "him",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "I listened to her words,",
+        "last_word": "words",
+        "rhymes": false
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "target_word": "world",
+    "line1": "He traveled all the world,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "And saw the wonders of the earth,",
+        "last_word": "earth",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 2000000000000000000000000000",
+        "last_word": "2000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "He was the one who had the same name.",
+        "last_word": "name",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "And saw the sights, and the sounds, and the sights, and the sounds, and the sights, and the sounds, and the sights, and",
+        "last_word": "and",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "He was the best,",
+        "last_word": "best",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "the world of human human human human human human human human human human human human human human human human human human human human human human human human human human human",
+        "last_word": "human",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "The world of human human human human human human human human human human human human human human human human human human human human human human human human human human human",
+        "last_word": "human",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "He saw all the world,",
+        "last_word": "world",
+        "rhymes": true
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "target_word": "earth",
+    "line1": "The seeds lay in the earth,",
+    "groups": [
+      {
+        "group_name": "baseline",
+        "skipped_layers": [],
+        "generated_text": "Waiting for the right time to sprout.",
+        "last_word": "sprout",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L0-4",
+        "skipped_layers": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ],
+        "generated_text": "The 1000000000000000000000000000",
+        "last_word": "1000000000000000000000000000",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L5-9",
+        "skipped_layers": [
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "generated_text": "They are not far from each other",
+        "last_word": "other",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L10-14",
+        "skipped_layers": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ],
+        "generated_text": "In the earth,",
+        "last_word": "earth",
+        "rhymes": true
+      },
+      {
+        "group_name": "skip L15-19",
+        "skipped_layers": [
+          15,
+          16,
+          17,
+          18,
+          19
+        ],
+        "generated_text": "The sun and the moon, and the sun and the",
+        "last_word": "the",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L20-25",
+        "skipped_layers": [
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "the seeds of the future future future future future future future future future future future future future future future future future future future future future future future future future future",
+        "last_word": "future",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L22-25",
+        "skipped_layers": [
+          22,
+          23,
+          24,
+          25
+        ],
+        "generated_text": "They grew grow grow until they grew into a beautiful flower.",
+        "last_word": "flower",
+        "rhymes": false
+      },
+      {
+        "group_name": "skip L24-25",
+        "skipped_layers": [
+          24,
+          25
+        ],
+        "generated_text": "The seeds lay in the earth,",
+        "last_word": "earth",
+        "rhymes": true
+      }
+    ]
+  }
+]

@@ -459,6 +459,19 @@ every rhyme word has its own dedicated feature. See
 
 ---
 
+## See also
+
+**[Planning Circuit Hunt](../planning-circuit-hunt/README.md)** extends
+this work to a cross-model comparison between Gemma 2 2B and Llama 3.2 1B.
+Using the logit lens, CLT feature mapping, and layer suppression, it
+identifies a two-stage planning mechanism (search + commitment) and shows
+that Llama has the search stage but lacks the commitment circuit that
+sustains the rhyme signal through the final layers. The layer suppression
+experiment provides the first causal evidence: skipping L22-25 in Gemma
+destroys rhyming completely (0/10).
+
+---
+
 ## 7. Acknowledgments
 
 - **Anthropic** -- the original "Planning in Poems" finding
