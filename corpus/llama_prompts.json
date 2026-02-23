@@ -1,0 +1,28 @@
+{
+  "prompts": [
+    {
+      "group": "-ee",
+      "rhyme_ending": "IY1",
+      "target_word": "free",
+      "text": "The birds were singing in the tree,\nAnd everything was wild and free.\nThe river ran down to the sea,\nThere is so much we cannot"
+    },
+    {
+      "group": "-ore",
+      "rhyme_ending": "AO1 R",
+      "target_word": "more",
+      "text": "The waves came crashing on the shore,\nThe wind was howling more and more.\nShe asked what all the fuss was for,\nAnd opened up the"
+    },
+    {
+      "group": "-oo",
+      "rhyme_ending": "UW1",
+      "target_word": "new",
+      "text": "The morning sky was painted blue,\nThe garden sparkled bright with dew.\nThe world had started fresh and new,\nAnd there was nothing left to"
+    },
+    {
+      "group": "-at",
+      "rhyme_ending": "AE1 T",
+      "target_word": "sat",
+      "text": "The old man wore a tattered hat,\nUpon the porch he always sat.\nHe told the tale of this and that,\nAnd in the corner slept the"
+    }
+  ]
+}

@@ -59,6 +59,10 @@ struct Args {
     #[arg(long, default_value_t = 10.0)]
     inject_strength: f32,
 
+    /// Path to prompts JSON (overrides built-in prompts)
+    #[arg(long)]
+    prompts: Option<PathBuf>,
+
     /// Force CPU execution
     #[arg(long)]
     cpu: bool,
@@ -122,52 +126,74 @@ struct PositionResult {
     p_inject: f32,
 }
 
-// ── Prompts (same 4 as Versions A/B/C) ─────────────────────────────────────
+// ── Prompts ─────────────────────────────────────────────────────────────────
 
+#[derive(Deserialize)]
 struct CompletionPrompt {
-    group: &'static str,
-    rhyme_ending: &'static str,
-    target_word: &'static str,
-    text: &'static str,
+    group: String,
+    rhyme_ending: String,
+    target_word: String,
+    text: String,
 }
 
-fn make_sweep_prompts() -> Vec<CompletionPrompt> {
+#[derive(Deserialize)]
+struct PromptsFile {
+    prompts: Vec<CompletionPrompt>,
+}
+
+fn load_or_default_prompts(path: Option<&PathBuf>) -> Result<Vec<CompletionPrompt>> {
+    if let Some(p) = path {
+        let data = fs::read_to_string(p)
+            .with_context(|| format!("reading prompts from {}", p.display()))?;
+        let pf: PromptsFile = serde_json::from_str(&data)?;
+        eprintln!("Loaded {} prompts from {}", pf.prompts.len(), p.display());
+        Ok(pf.prompts)
+    } else {
+        Ok(make_default_prompts())
+    }
+}
+
+fn make_default_prompts() -> Vec<CompletionPrompt> {
     vec![
         CompletionPrompt {
-            group: "-ow",
-            rhyme_ending: "OW1",
-            target_word: "so",
+            group: "-ow".into(),
+            rhyme_ending: "OW1".into(),
+            target_word: "so".into(),
             text: "A sailor sailed across the bay,\n\
                    And dreamed of home throughout the day.\n\
                    The world keeps spinning even so,\n\
-                   There is so much we do not",
+                   There is so much we do not"
+                .into(),
         },
         CompletionPrompt {
-            group: "-out",
-            rhyme_ending: "AW1 T",
-            target_word: "about",
+            group: "-out".into(),
+            rhyme_ending: "AW1 T".into(),
+            target_word: "about".into(),
             text: "The stars were twinkling in the night,\n\
                    The lanterns cast a golden light.\n\
                    She wandered in the dark about,\n\
-                   And found a hidden passage",
+                   And found a hidden passage"
+                .into(),
         },
         CompletionPrompt {
-            group: "-out",
-            rhyme_ending: "AW1 T",
-            target_word: "shout",
+            group: "-out".into(),
+            rhyme_ending: "AW1 T".into(),
+            target_word: "shout".into(),
             text: "A sailor sailed across the bay,\n\
                    And dreamed of home throughout the day.\n\
                    He raised his voice and gave a shout,\n\
-                   The truth was struggling to come",
+                   The truth was struggling to come"
+                .into(),
         },
         CompletionPrompt {
-            group: "-oo",
-            rhyme_ending: "UW1",
-            target_word: "who",
+            group: "-oo".into(),
+            rhyme_ending: "UW1".into(),
+            target_word: "who".into(),
             text: "The sun goes up, the sun goes down,\n\
                    The moon shines bright above the town.\n\
                    Nobody knows or remembers who,\n\
-                   Would come to find a way back",
+                   Would come to find a way back"
+                .into(),
         },
     ]
 }
@@ -200,14 +226,14 @@ fn build_experiment_pairs(
     let all_endings: Vec<String> = ending_to_features.keys().cloned().collect();
 
     for (prompt_idx, prompt) in prompts.iter().enumerate() {
-        let natural_ending = prompt.rhyme_ending;
+        let natural_ending = &prompt.rhyme_ending;
         let natural_features: Vec<CltFeatureId> = ending_to_features
-            .get(natural_ending)
+            .get(natural_ending.as_str())
             .map(|fs| fs.iter().map(|(_, f)| *f).collect())
             .unwrap_or_default();
 
         for alt_ending in &all_endings {
-            if *alt_ending == natural_ending {
+            if *alt_ending == *natural_ending {
                 continue;
             }
             let alt_features = match ending_to_features.get(alt_ending) {
@@ -264,7 +290,7 @@ fn main() -> Result<()> {
     }
 
     // 2. Build experiment pairs
-    let prompts = make_sweep_prompts();
+    let prompts = load_or_default_prompts(args.prompts.as_ref())?;
     let ending_display_names = build_ending_display_names(&prompts);
     let pairs = build_experiment_pairs(&prompts, &ending_to_features, &ending_display_names);
 
