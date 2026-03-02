@@ -1,0 +1,4110 @@
+{
+  "model": "meta-llama/Llama-3.2-1B",
+  "n_layers": 16,
+  "n_couplets": 15,
+  "results": [
+    {
+      "id": 1,
+      "target_word": "light",
+      "rhyme_family": [
+        "light",
+        "night",
+        "bright",
+        "sight",
+        "might",
+        "flight",
+        "right",
+        "tight",
+        "white",
+        "bite",
+        "kite",
+        "quite",
+        "knight",
+        "delight",
+        "blight",
+        "plight",
+        "slight",
+        "fright",
+        "height"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 6.308578e-7,
+          "rhyme_family_prob": 0.0000021071533,
+          "target_word_rank": 12154
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", and the sky, the sky, the sky, the sky, the sky, the sky, the sky, the sky, the sky, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 7.160786e-8,
+          "rhyme_family_prob": 8.737064e-7,
+          "target_word_rank": 8456
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 8.358995e-7,
+          "rhyme_family_prob": 0.000004147019,
+          "target_word_rank": 10912
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The moon is a silver orb,",
+          "last_word": "orb",
+          "rhymes": false,
+          "target_word_prob": 0.0000010197459,
+          "rhyme_family_prob": 0.000008049526,
+          "target_word_rank": 9984
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The moon is a silver orb,",
+          "last_word": "orb",
+          "rhymes": false,
+          "target_word_prob": 0.000001223216,
+          "rhyme_family_prob": 0.00007403757,
+          "target_word_rank": 8561
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "bright as a star,",
+          "last_word": "star",
+          "rhymes": false,
+          "target_word_prob": 0.000003611714,
+          "rhyme_family_prob": 0.0023682162,
+          "target_word_rank": 4985
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "ight, and the moon, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the moon,",
+          "last_word": "moon",
+          "rhymes": false,
+          "target_word_prob": 0.0000023631846,
+          "rhyme_family_prob": 0.9930544,
+          "target_word_rank": 86
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", and the sky, the sky, the sky, the sky, the sky, the sky",
+          "last_word": "sky",
+          "rhymes": false,
+          "target_word_prob": 7.2889486e-7,
+          "rhyme_family_prob": 0.0000039125257,
+          "target_word_rank": 2327
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 9.461877e-7,
+          "rhyme_family_prob": 0.0000035030916,
+          "target_word_rank": 11065
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 0.0000011832207,
+          "rhyme_family_prob": 0.00000545601,
+          "target_word_rank": 10592
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 8.99476e-7,
+          "rhyme_family_prob": 0.000022732422,
+          "target_word_rank": 11701
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "bright as a star,",
+          "last_word": "star",
+          "rhymes": false,
+          "target_word_prob": 2.2555932e-7,
+          "rhyme_family_prob": 0.0005407273,
+          "target_word_rank": 14145
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "ight, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000008688769,
+          "rhyme_family_prob": 0.9367558,
+          "target_word_rank": 102
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the five, the five, the five, the five, the light, the light",
+          "last_word": "light",
+          "rhymes": true,
+          "target_word_prob": 8.4208295e-7,
+          "rhyme_family_prob": 0.0000027875685,
+          "target_word_rank": 1887
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 7.492813e-7,
+          "rhyme_family_prob": 0.0000027097947,
+          "target_word_rank": 11705
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 9.2902104e-7,
+          "rhyme_family_prob": 0.0000035760277,
+          "target_word_rank": 11085
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 0.0000027778515,
+          "rhyme_family_prob": 0.000012054445,
+          "target_word_rank": 7815
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "bright as a star,",
+          "last_word": "star",
+          "rhymes": false,
+          "target_word_prob": 0.000003995163,
+          "rhyme_family_prob": 0.0007022793,
+          "target_word_rank": 4974
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": "ight, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the moon, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.00014068077,
+          "rhyme_family_prob": 0.017370401,
+          "target_word_rank": 303
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "  The moon is the moon, the moon is the moon, the moon, the moon, the moon, the moon, the moon, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 4.8059952e-8,
+          "rhyme_family_prob": 4.0713888e-7,
+          "target_word_rank": 6835
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 8.657556e-7,
+          "rhyme_family_prob": 0.0000038801736,
+          "target_word_rank": 10907
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The moon is a silvered,",
+          "last_word": "silvered",
+          "rhymes": false,
+          "target_word_prob": 0.0000011071724,
+          "rhyme_family_prob": 0.000007767675,
+          "target_word_rank": 9870
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The moon is a silver,",
+          "last_word": "silver",
+          "rhymes": false,
+          "target_word_prob": 0.000001873399,
+          "rhyme_family_prob": 0.00009609928,
+          "target_word_rank": 7873
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "bright as a star,",
+          "last_word": "star",
+          "rhymes": false,
+          "target_word_prob": 0.0000074094796,
+          "rhyme_family_prob": 0.009378593,
+          "target_word_rank": 3945
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "ight,",
+          "last_word": "ight",
+          "rhymes": false,
+          "target_word_prob": 1.006271e-7,
+          "rhyme_family_prob": 0.9579153,
+          "target_word_rank": 344
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The moon is a silver light,",
+          "last_word": "light",
+          "rhymes": true,
+          "target_word_prob": 7.4755246e-7,
+          "rhyme_family_prob": 0.00000284712,
+          "target_word_rank": 11446
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The moon is a silver light,",
+          "last_word": "light",
+          "rhymes": true,
+          "target_word_prob": 8.657556e-7,
+          "rhyme_family_prob": 0.0000038801736,
+          "target_word_rank": 10907
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The moonlight is silver,",
+          "last_word": "silver",
+          "rhymes": false,
+          "target_word_prob": 0.0000011071724,
+          "rhyme_family_prob": 0.000007767675,
+          "target_word_rank": 9870
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "target_word": "play",
+      "rhyme_family": [
+        "play",
+        "day",
+        "way",
+        "say",
+        "stay",
+        "sway",
+        "ray",
+        "bay",
+        "may",
+        "lay",
+        "pay",
+        "gray",
+        "away",
+        "display",
+        "pray",
+        "stray",
+        "clay",
+        "hay",
+        "decay",
+        "delay"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000037928573,
+          "rhyme_family_prob": 0.000004351127,
+          "target_word_rank": 7969
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": "The children are the children are the the the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000034467128,
+          "rhyme_family_prob": 0.00003986088,
+          "target_word_rank": 777
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The children laugh and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000005237973,
+          "rhyme_family_prob": 0.000006403438,
+          "target_word_rank": 6801
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The children laugh and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000059190456,
+          "rhyme_family_prob": 0.000008408902,
+          "target_word_rank": 6278
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The children laugh and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000006859115,
+          "rhyme_family_prob": 0.000027097884,
+          "target_word_rank": 5342
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "say, “I’m glad to see you, sir,” said the young man, “I’m glad to see you, sir,” said the young",
+          "last_word": "young",
+          "rhymes": false,
+          "target_word_prob": 0.000005138312,
+          "rhyme_family_prob": 0.0001540553,
+          "target_word_rank": 5126
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": " pray, and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.021618169,
+          "rhyme_family_prob": 0.6240898,
+          "target_word_rank": 3
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", (The children, the children, the, the, the, the, the, the, the, the, the, the, the,",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000002489685,
+          "rhyme_family_prob": 0.0000028333359,
+          "target_word_rank": 646
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The children laugh and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000056179388,
+          "rhyme_family_prob": 0.0000066135644,
+          "target_word_rank": 6771
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The children laugh and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000076674605,
+          "rhyme_family_prob": 0.000009745517,
+          "target_word_rank": 5912
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "The children laugh, and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000010197983,
+          "rhyme_family_prob": 0.000029339913,
+          "target_word_rank": 4696
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "say, “I’m glad to see you, sir,” said the young man, “I’m glad to see you, sir,” said the young",
+          "last_word": "young",
+          "rhymes": false,
+          "target_word_prob": 0.0000062663385,
+          "rhyme_family_prob": 0.00024736457,
+          "target_word_rank": 4291
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": " disport, 1. 2. 1. 2. 1. 1. 2. 1. 2,",
+          "last_word": "2",
+          "rhymes": false,
+          "target_word_prob": 0.00010443902,
+          "rhyme_family_prob": 0.0026623756,
+          "target_word_rank": 670
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", (the five, the five, the five, the five, the five, the five, the five, the five, the, the,",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.0000020792177,
+          "rhyme_family_prob": 0.0000021887158,
+          "target_word_rank": 457
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000066452826,
+          "rhyme_family_prob": 0.0000074764134,
+          "target_word_rank": 6148
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000009217947,
+          "rhyme_family_prob": 0.000010483965,
+          "target_word_rank": 5176
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "play, in the activity of children, especially those who are young children, especially those who are young children, especially those who are young children, especially",
+          "last_word": "especially",
+          "rhymes": false,
+          "target_word_prob": 0.00001539944,
+          "rhyme_family_prob": 0.000023651726,
+          "target_word_rank": 3257
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "say, “I’m glad to see you, sir.”",
+          "last_word": "sir.”",
+          "rhymes": false,
+          "target_word_prob": 0.0000026479768,
+          "rhyme_family_prob": 0.0005319389,
+          "target_word_rank": 5607
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " disport, 1. 1. 1. 1. 1. 1. 1. 1. 1.",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.00006280687,
+          "rhyme_family_prob": 0.0021045513,
+          "target_word_rank": 1447
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "1. The children are the children are the children are the children are the children are the children are the children are the children are the children are the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000004097482,
+          "rhyme_family_prob": 0.0000060613206,
+          "target_word_rank": 2742
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000052786413,
+          "rhyme_family_prob": 0.000006412577,
+          "target_word_rank": 6770
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000008001689,
+          "rhyme_family_prob": 0.000010389385,
+          "target_word_rank": 5538
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The children laugh and play,",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.00002025801,
+          "rhyme_family_prob": 0.000040334184,
+          "target_word_rank": 3153
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "play, in the activity of children, especially those who are young children, especially those who are young children, especially those who are young children, especially",
+          "last_word": "especially",
+          "rhymes": false,
+          "target_word_prob": 0.00022397378,
+          "rhyme_family_prob": 0.0009694309,
+          "target_word_rank": 487
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": " pray, and sing,",
+          "last_word": "sing",
+          "rhymes": false,
+          "target_word_prob": 0.22069183,
+          "rhyme_family_prob": 0.77880585,
+          "target_word_rank": 1
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000004792963,
+          "rhyme_family_prob": 0.000005583962,
+          "target_word_rank": 7109
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.0000052786413,
+          "rhyme_family_prob": 0.000006412577,
+          "target_word_rank": 6770
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The children laugh and play",
+          "last_word": "play",
+          "rhymes": true,
+          "target_word_prob": 0.000008001689,
+          "rhyme_family_prob": 0.000010389385,
+          "target_word_rank": 5538
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "target_word": "sound",
+      "rhyme_family": [
+        "sound",
+        "ground",
+        "found",
+        "round",
+        "bound",
+        "around",
+        "mound",
+        "pound",
+        "hound",
+        "wound",
+        "profound",
+        "abound",
+        "astound"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 4.235529e-7,
+          "rhyme_family_prob": 0.0000034064096,
+          "target_word_rank": 14464
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", the sound of the sound of the sound of the sound of the sound of the sound of the sound of the sound of the sound of the sound",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 9.488511e-9,
+          "rhyme_family_prob": 3.3759926e-7,
+          "target_word_rank": 16708
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 7.3943187e-7,
+          "rhyme_family_prob": 0.000020661591,
+          "target_word_rank": 11676
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000012002583,
+          "rhyme_family_prob": 0.00013429637,
+          "target_word_rank": 9663
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000033366,
+          "rhyme_family_prob": 0.012863906,
+          "target_word_rank": 5865
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "ound, and the sound, and the sound, and the sound, and the sound, and the sound, and the sound, and the sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000067614765,
+          "rhyme_family_prob": 0.9175776,
+          "target_word_rank": 2741
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "ound, and the, and the, and the, and the, and the, and the, and the, and the, and the, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 3.3643588e-10,
+          "rhyme_family_prob": 1.9997838,
+          "target_word_rank": 609
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ". The morning. The morning. The morning. The morning. The morning. The morning. The morning. The morning. The morning. The morning",
+          "last_word": "morning",
+          "rhymes": false,
+          "target_word_prob": 6.853066e-8,
+          "rhyme_family_prob": 0.0000013660899,
+          "target_word_rank": 9258
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 6.3890155e-7,
+          "rhyme_family_prob": 0.000008013973,
+          "target_word_rank": 12782
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 9.582157e-7,
+          "rhyme_family_prob": 0.000022409338,
+          "target_word_rank": 11326
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000023538382,
+          "rhyme_family_prob": 0.0007517074,
+          "target_word_rank": 8401
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "ound, and the, and the, and the, and the, and the, and the, and the, and the, and the, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 0.0000050528092,
+          "rhyme_family_prob": 0.1846142,
+          "target_word_rank": 4952
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "ound, and the, the, the, the, the, the, the, the, the, the, the, the, the, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 2.8161802e-9,
+          "rhyme_family_prob": 1.9992828,
+          "target_word_rank": 407
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the five, the five, the, the, the, the, the, a, a, the, a, a, a, a",
+          "last_word": "a",
+          "rhymes": false,
+          "target_word_prob": 8.5091145e-8,
+          "rhyme_family_prob": 0.0000011237009,
+          "target_word_rank": 7457
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 4.916736e-7,
+          "rhyme_family_prob": 0.0000046346504,
+          "target_word_rank": 13682
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 6.3694375e-7,
+          "rhyme_family_prob": 0.000007227779,
+          "target_word_rank": 12775
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000020617015,
+          "rhyme_family_prob": 0.0000770489,
+          "target_word_rank": 9578
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "- The thunder, the thunder, the thunder, the thunder, the thunder, the thunder, the thunder, the thunder, the thunder, the thunder",
+          "last_word": "thunder",
+          "rhymes": false,
+          "target_word_prob": 0.000014547244,
+          "rhyme_family_prob": 0.046463102,
+          "target_word_rank": 2967
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": "ound, and the, and the, the, the, the, the, the, the, the, the, the, the, the,",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000020472206,
+          "rhyme_family_prob": 0.8007598,
+          "target_word_rank": 4243
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": ". The thunder is the sound of the thunder is the thunder sound of the thunder sound of the thunder sound of the thunder sound of the thunder sound of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 7.049985e-9,
+          "rhyme_family_prob": 1.2905798e-7,
+          "target_word_rank": 15872
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 7.93176e-7,
+          "rhyme_family_prob": 0.00002205438,
+          "target_word_rank": 11620
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000012737881,
+          "rhyme_family_prob": 0.0001419851,
+          "target_word_rank": 9787
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000026851535,
+          "rhyme_family_prob": 0.017058231,
+          "target_word_rank": 6938
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "ound, and the sound of the sound of the sound of the sound of the sound of the sound of the sound of the sound of the sound of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 5.4812375e-7,
+          "rhyme_family_prob": 1.2386194,
+          "target_word_rank": 7405
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "ound, and the sound, and the sound, and the sound, and the sound, and the sound, and the sound, and the sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 2.1189609e-13,
+          "rhyme_family_prob": 1.9961972,
+          "target_word_rank": 113594
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 5.87303e-7,
+          "rhyme_family_prob": 0.000008225438,
+          "target_word_rank": 12988
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 7.93176e-7,
+          "rhyme_family_prob": 0.00002205438,
+          "target_word_rank": 11620
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The thunder makes a sound,",
+          "last_word": "sound",
+          "rhymes": true,
+          "target_word_prob": 0.0000012737881,
+          "rhyme_family_prob": 0.0001419851,
+          "target_word_rank": 9787
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "target_word": "rain",
+      "rhyme_family": [
+        "rain",
+        "pain",
+        "gain",
+        "main",
+        "vain",
+        "plain",
+        "chain",
+        "train",
+        "brain",
+        "strain",
+        "remain",
+        "again",
+        "drain",
+        "lane",
+        "crane",
+        "bane",
+        "wane",
+        "reign",
+        "feign"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000023012255,
+          "rhyme_family_prob": 0.000013327184,
+          "target_word_rank": 9409
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", the clouds are the clouds are the clouds are the clouds are the clouds are the clouds are the clouds are the clouds are the clouds are clouds are",
+          "last_word": "are",
+          "rhymes": false,
+          "target_word_prob": 8.0291204e-7,
+          "rhyme_family_prob": 0.000038554146,
+          "target_word_rank": 6989
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000028642999,
+          "rhyme_family_prob": 0.000026429303,
+          "target_word_rank": 8611
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.00000359175,
+          "rhyme_family_prob": 0.0000523068,
+          "target_word_rank": 7763
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000059820813,
+          "rhyme_family_prob": 0.00053382275,
+          "target_word_rank": 5936
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "mainly cloudy skies, but not raining.",
+          "last_word": "raining",
+          "rhymes": false,
+          "target_word_prob": 0.000019657065,
+          "rhyme_family_prob": 0.010422828,
+          "target_word_rank": 2888
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "ane of the clouds, the clouds, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000014687118,
+          "rhyme_family_prob": 1.9934058,
+          "target_word_rank": 10
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", the morning, the morning, the morning, the morning,",
+          "last_word": "morning",
+          "rhymes": false,
+          "target_word_prob": 0.0000011952385,
+          "rhyme_family_prob": 0.00003072516,
+          "target_word_rank": 3751
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000028835418,
+          "rhyme_family_prob": 0.000018876055,
+          "target_word_rank": 8914
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.000003664578,
+          "rhyme_family_prob": 0.00002825836,
+          "target_word_rank": 8286
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "and the rain is falling",
+          "last_word": "falling",
+          "rhymes": false,
+          "target_word_prob": 0.00001542137,
+          "rhyme_family_prob": 0.00014300508,
+          "target_word_rank": 4425
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "mainly cloudy skies",
+          "last_word": "skies",
+          "rhymes": false,
+          "target_word_prob": 0.000049493803,
+          "rhyme_family_prob": 0.0021302348,
+          "target_word_rank": 1750
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "aneat 1. 2. 3. 4. 5. 6. 7. 8. 9. ",
+          "last_word": "9",
+          "rhymes": false,
+          "target_word_prob": 0.0006707556,
+          "rhyme_family_prob": 1.723345,
+          "target_word_rank": 12
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the light the light, the light, the, the, the, the, the, the, the, the, the, the, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.0000022565632,
+          "rhyme_family_prob": 0.00003090397,
+          "target_word_rank": 2020
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.000002534266,
+          "rhyme_family_prob": 0.00001599392,
+          "target_word_rank": 9275
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The rain is falling on the ground, and the rain is falling on the ground.",
+          "last_word": "ground",
+          "rhymes": false,
+          "target_word_prob": 0.0000027393257,
+          "rhyme_family_prob": 0.000019551855,
+          "target_word_rank": 9180
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "The rain is falling from the sky.",
+          "last_word": "sky",
+          "rhymes": false,
+          "target_word_prob": 0.000004492955,
+          "rhyme_family_prob": 0.00003534209,
+          "target_word_rank": 7734
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "rain and wind",
+          "last_word": "wind",
+          "rhymes": false,
+          "target_word_prob": 0.00002616335,
+          "rhyme_family_prob": 0.00047571375,
+          "target_word_rank": 2423
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": "aneat 1. 2. 3. 4. 5. 6. 7. 8. 9. ",
+          "last_word": "9",
+          "rhymes": false,
+          "target_word_prob": 0.00012800837,
+          "rhyme_family_prob": 1.5662767,
+          "target_word_rank": 70
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": ", the rain clouds are coming down hard and the rain is coming down hard and the rain is coming down hard and the rain is coming down hard and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 6.4768517e-7,
+          "rhyme_family_prob": 0.00001862125,
+          "target_word_rank": 5526
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000026901082,
+          "rhyme_family_prob": 0.000028804556,
+          "target_word_rank": 8855
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.000003154124,
+          "rhyme_family_prob": 0.000065241045,
+          "target_word_rank": 8260
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The clouds bring heavy rain, the rain is coming down on the city of the city of the city of the city of the city of the city of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000061448704,
+          "rhyme_family_prob": 0.0009332222,
+          "target_word_rank": 6128
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "rain and thunderstorms",
+          "last_word": "thunderstorms",
+          "rhymes": false,
+          "target_word_prob": 0.000029184881,
+          "rhyme_family_prob": 0.12069237,
+          "target_word_rank": 2051
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "ane of the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 2.9662223e-7,
+          "rhyme_family_prob": 1.8245118,
+          "target_word_rank": 68
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The rain is falling from the sky,",
+          "last_word": "sky",
+          "rhymes": false,
+          "target_word_prob": 0.0000024819046,
+          "rhyme_family_prob": 0.000019290945,
+          "target_word_rank": 9128
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The rain is falling from the sky,",
+          "last_word": "sky",
+          "rhymes": false,
+          "target_word_prob": 0.0000026901082,
+          "rhyme_family_prob": 0.000028804556,
+          "target_word_rank": 8855
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The rain is falling from the sky,",
+          "last_word": "sky",
+          "rhymes": false,
+          "target_word_prob": 0.000003154124,
+          "rhyme_family_prob": 0.000065241045,
+          "target_word_rank": 8260
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "target_word": "time",
+      "rhyme_family": [
+        "time",
+        "rhyme",
+        "climb",
+        "crime",
+        "dime",
+        "lime",
+        "mime",
+        "prime",
+        "chime",
+        "sublime",
+        "paradigm",
+        "thyme"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.0000037287268,
+          "rhyme_family_prob": 0.000006779739,
+          "target_word_rank": 7448
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", the time, the time, the old clock, the old clock, the clock, the old clock, the clock, the old clock, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.0000014611845,
+          "rhyme_family_prob": 0.0000014927083,
+          "target_word_rank": 723
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000004071166,
+          "rhyme_family_prob": 0.0000140092225,
+          "target_word_rank": 7105
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000004700577,
+          "rhyme_family_prob": 0.00003530081,
+          "target_word_rank": 6570
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000009781959,
+          "rhyme_family_prob": 0.0007176276,
+          "target_word_rank": 4279
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "The clock is a device that measures time.",
+          "last_word": "time",
+          "rhymes": true,
+          "target_word_prob": 0.00004846714,
+          "rhyme_family_prob": 0.029467551,
+          "target_word_rank": 1299
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "yme, and the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 1.8085531e-11,
+          "rhyme_family_prob": 0.959617,
+          "target_word_rank": 124429
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", and the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.00002130089,
+          "rhyme_family_prob": 0.000021750051,
+          "target_word_rank": 433
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000003945902,
+          "rhyme_family_prob": 0.000009498779,
+          "target_word_rank": 7310
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.0000041546514,
+          "rhyme_family_prob": 0.000014274227,
+          "target_word_rank": 7285
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.0000053846566,
+          "rhyme_family_prob": 0.00008371235,
+          "target_word_rank": 6708
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "Time is a measure of duration of an event or period of time",
+          "last_word": "time",
+          "rhymes": true,
+          "target_word_prob": 0.000016284572,
+          "rhyme_family_prob": 0.0052719926,
+          "target_word_rank": 3255
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": " vernier, 1. 1. 1. 1. 1. 1. 1. 1. 1.",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.000014579593,
+          "rhyme_family_prob": 0.0008188913,
+          "target_word_rank": 16077
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the powers of the the powers of the powers the powers the, the powers the the powers the powers the the powers the powers the powers the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000012081152,
+          "rhyme_family_prob": 0.000012231321,
+          "target_word_rank": 371
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000004264703,
+          "rhyme_family_prob": 0.000008162473,
+          "target_word_rank": 6993
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.0000057471607,
+          "rhyme_family_prob": 0.0000109643215,
+          "target_word_rank": 6148
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "The clock is a device that is used to measure the time.",
+          "last_word": "time",
+          "rhymes": true,
+          "target_word_prob": 0.000014352445,
+          "rhyme_family_prob": 0.00003679029,
+          "target_word_rank": 3964
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "time, time, the time, the time, the time, the time, the time, the time, the time, the time, the time",
+          "last_word": "time",
+          "rhymes": true,
+          "target_word_prob": 0.00003117369,
+          "rhyme_family_prob": 0.0035422223,
+          "target_word_rank": 2269
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " mira. 1. 1. 1. 1. 1. 1. 1. 1. 1.",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.000049762435,
+          "rhyme_family_prob": 0.0002629268,
+          "target_word_rank": 2058
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": " \t\t-1. The clock hands point to the time.",
+          "last_word": "time",
+          "rhymes": true,
+          "target_word_prob": 5.744772e-7,
+          "rhyme_family_prob": 6.027487e-7,
+          "target_word_rank": 1345
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000004601461,
+          "rhyme_family_prob": 0.000015847352,
+          "target_word_rank": 6823
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.0000056878807,
+          "rhyme_family_prob": 0.000045162073,
+          "target_word_rank": 6228
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000006827997,
+          "rhyme_family_prob": 0.001135833,
+          "target_word_rank": 5809
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "ime is a measure of time.",
+          "last_word": "time",
+          "rhymes": true,
+          "target_word_prob": 5.814753e-7,
+          "rhyme_family_prob": 0.1598724,
+          "target_word_rank": 15647
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "ymeasures of the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 1.09829606e-13,
+          "rhyme_family_prob": 0.84481984,
+          "target_word_rank": 128035
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000004411697,
+          "rhyme_family_prob": 0.00001025833,
+          "target_word_rank": 6956
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The clock is a device that measures time. It is a device that measures time. It is a device that measures time. It is a device that",
+          "last_word": "that",
+          "rhymes": false,
+          "target_word_prob": 0.000004601461,
+          "rhyme_family_prob": 0.000015847352,
+          "target_word_rank": 6823
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The time is a measure of the duration of a period of time is the period of time is the measure of duration of time is the measure of duration",
+          "last_word": "duration",
+          "rhymes": false,
+          "target_word_prob": 0.0000056878807,
+          "rhyme_family_prob": 0.000045162073,
+          "target_word_rank": 6228
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "target_word": "air",
+      "rhyme_family": [
+        "air",
+        "there",
+        "fair",
+        "care",
+        "bare",
+        "dare",
+        "rare",
+        "share",
+        "stare",
+        "where",
+        "pair",
+        "aware",
+        "compare",
+        "despair",
+        "prayer",
+        "hair",
+        "chair",
+        "bear",
+        "wear",
+        "spare",
+        "snare",
+        "glare"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 6.568321e-8,
+          "rhyme_family_prob": 0.0010264342,
+          "target_word_rank": 30747
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", and the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.5965226e-7,
+          "rhyme_family_prob": 0.00010953059,
+          "target_word_rank": 3281
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 7.7188055e-8,
+          "rhyme_family_prob": 0.0019887763,
+          "target_word_rank": 27405
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 8.7896666e-8,
+          "rhyme_family_prob": 0.003852457,
+          "target_word_rank": 24913
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.7014317e-7,
+          "rhyme_family_prob": 0.012303287,
+          "target_word_rank": 17016
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "The geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 7.114334e-7,
+          "rhyme_family_prob": 0.031396393,
+          "target_word_rank": 9890
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": " dare not to the air, and the air, and the air, and the air, and the air, and the air, and the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 4.5118634e-7,
+          "rhyme_family_prob": 0.93366826,
+          "target_word_rank": 9882
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ". the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 8.2650655e-7,
+          "rhyme_family_prob": 0.000017203334,
+          "target_word_rank": 952
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 7.744948e-8,
+          "rhyme_family_prob": 0.002058588,
+          "target_word_rank": 28848
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 9.903034e-8,
+          "rhyme_family_prob": 0.0035977801,
+          "target_word_rank": 26325
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "and the air is the air is the air is the air is the air is the air is the air is the air is the air is the air",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.0222121e-7,
+          "rhyme_family_prob": 0.01379864,
+          "target_word_rank": 24209
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "are the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 0.000001073182,
+          "rhyme_family_prob": 0.05677182,
+          "target_word_rank": 9361
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": " dare not, but the, and, and, and, and, and, and, and, and, and, and, and, and,",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 0.000003865962,
+          "rhyme_family_prob": 0.76305604,
+          "target_word_rank": 6561
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 5.9109425e-7,
+          "rhyme_family_prob": 0.000009181657,
+          "target_word_rank": 847
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 5.5044527e-8,
+          "rhyme_family_prob": 0.001418093,
+          "target_word_rank": 33920
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 5.5164804e-8,
+          "rhyme_family_prob": 0.0020041321,
+          "target_word_rank": 34465
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "and the air is the air is the air is the air is the air is the air is the air is the air is the air is the air",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.7895118e-7,
+          "rhyme_family_prob": 0.0027130926,
+          "target_word_rank": 22507
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "the air is a very thin and the air is a very thin and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 0.0000051171633,
+          "rhyme_family_prob": 0.03250038,
+          "target_word_rank": 5248
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " spare, and, and, and, and, and, and, and, and, and, and, and, and, and, and,",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 0.0000016613976,
+          "rhyme_family_prob": 0.46267784,
+          "target_word_rank": 31249
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": " 1. The geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.433756e-7,
+          "rhyme_family_prob": 0.00024006896,
+          "target_word_rank": 5669
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 8.267296e-8,
+          "rhyme_family_prob": 0.0017659202,
+          "target_word_rank": 27397
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.0123035e-7,
+          "rhyme_family_prob": 0.0026913472,
+          "target_word_rank": 24918
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.8821416e-7,
+          "rhyme_family_prob": 0.009354142,
+          "target_word_rank": 19058
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "The geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 6.8089173e-7,
+          "rhyme_family_prob": 0.022093166,
+          "target_word_rank": 11712
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": " dare not to the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 6.032071e-8,
+          "rhyme_family_prob": 0.9782881,
+          "target_word_rank": 22433
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 7.098847e-8,
+          "rhyme_family_prob": 0.0013381288,
+          "target_word_rank": 29292
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 8.267296e-8,
+          "rhyme_family_prob": 0.0017659202,
+          "target_word_rank": 27397
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "And the geese fly through the air,",
+          "last_word": "air",
+          "rhymes": true,
+          "target_word_prob": 1.0123035e-7,
+          "rhyme_family_prob": 0.0026913472,
+          "target_word_rank": 24918
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "target_word": "gold",
+      "rhyme_family": [
+        "gold",
+        "old",
+        "bold",
+        "cold",
+        "fold",
+        "hold",
+        "told",
+        "sold",
+        "mold",
+        "behold",
+        "unfold",
+        "rolled",
+        "controlled"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 9.2728453e-7,
+          "rhyme_family_prob": 0.0000014263412,
+          "target_word_rank": 13427
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", the sun’s rays,",
+          "last_word": "rays",
+          "rhymes": false,
+          "target_word_prob": 9.649876e-8,
+          "rhyme_family_prob": 3.6131246e-7,
+          "target_word_rank": 4773
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000013090006,
+          "rhyme_family_prob": 0.0000024976,
+          "target_word_rank": 11567
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000015779989,
+          "rhyme_family_prob": 0.0000044309445,
+          "target_word_rank": 10433
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000032012972,
+          "rhyme_family_prob": 0.000034700428,
+          "target_word_rank": 6911
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "old man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 0.000016587866,
+          "rhyme_family_prob": 0.0005505727,
+          "target_word_rank": 2723
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": " unfold, and the sun, the sun, the sun, the sun, the sun, the sun, the sun, the sun, the sun,",
+          "last_word": "sun",
+          "rhymes": false,
+          "target_word_prob": 0.00003709483,
+          "rhyme_family_prob": 0.83967495,
+          "target_word_rank": 249
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", and the clouds, and the clouds, and the clouds,",
+          "last_word": "clouds",
+          "rhymes": false,
+          "target_word_prob": 9.251123e-8,
+          "rhyme_family_prob": 0.0000015841889,
+          "target_word_rank": 4154
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000014071902,
+          "rhyme_family_prob": 0.000002201914,
+          "target_word_rank": 11699
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.000002104799,
+          "rhyme_family_prob": 0.00000343097,
+          "target_word_rank": 10087
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "the sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.000005015252,
+          "rhyme_family_prob": 0.000013768839,
+          "target_word_rank": 6428
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "old man, the sun is setting, the sky is a deep blue, the sun is setting, the sky is a deep blue, the sun is",
+          "last_word": "is",
+          "rhymes": false,
+          "target_word_prob": 0.00001577319,
+          "rhyme_family_prob": 0.00021391344,
+          "target_word_rank": 2870
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": " unfold, and the sun, the sun, the sun, the sun, the sun, the sun, the sun, the sun, the sun,",
+          "last_word": "sun",
+          "rhymes": false,
+          "target_word_prob": 0.0000056029844,
+          "rhyme_family_prob": 0.5990347,
+          "target_word_rank": 7421
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", and the five, the five,",
+          "last_word": "five",
+          "rhymes": false,
+          "target_word_prob": 1.0857118e-7,
+          "rhyme_family_prob": 0.0000018732175,
+          "target_word_rank": 4032
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000011264531,
+          "rhyme_family_prob": 0.0000017669649,
+          "target_word_rank": 12714
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "the sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.000001353206,
+          "rhyme_family_prob": 0.0000021664648,
+          "target_word_rank": 12100
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "the sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000027985798,
+          "rhyme_family_prob": 0.0000051541397,
+          "target_word_rank": 9023
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "gold, gold, gold, gold, gold, gold, gold, gold, gold, gold, gold, gold, gold, gold, gold,",
+          "last_word": "gold",
+          "rhymes": true,
+          "target_word_prob": 0.00008948476,
+          "rhyme_family_prob": 0.00020068795,
+          "target_word_rank": 869
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " behold, the moon is shining bright, and the moon is shining bright, the moon is shining bright, the moon is shining bright, the moon is",
+          "last_word": "is",
+          "rhymes": false,
+          "target_word_prob": 0.0000046617124,
+          "rhyme_family_prob": 0.58156866,
+          "target_word_rank": 11019
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "  The sun is setting down",
+          "last_word": "down",
+          "rhymes": false,
+          "target_word_prob": 1.5223334e-7,
+          "rhyme_family_prob": 5.4540664e-7,
+          "target_word_rank": 6708
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000011074676,
+          "rhyme_family_prob": 0.000002213272,
+          "target_word_rank": 12371
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000013514298,
+          "rhyme_family_prob": 0.0000038745056,
+          "target_word_rank": 11443
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000016833606,
+          "rhyme_family_prob": 0.000024640016,
+          "target_word_rank": 9894
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "folded in the sky,",
+          "last_word": "sky",
+          "rhymes": false,
+          "target_word_prob": 0.0000034167915,
+          "rhyme_family_prob": 0.00064459536,
+          "target_word_rank": 6601
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": " behold the sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000011262542,
+          "rhyme_family_prob": 0.85561097,
+          "target_word_rank": 2008
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000010872392,
+          "rhyme_family_prob": 0.0000018274079,
+          "target_word_rank": 12601
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000011074676,
+          "rhyme_family_prob": 0.000002213272,
+          "target_word_rank": 12371
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The sun is setting,",
+          "last_word": "setting",
+          "rhymes": false,
+          "target_word_prob": 0.0000013514298,
+          "rhyme_family_prob": 0.0000038745056,
+          "target_word_rank": 11443
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "target_word": "fire",
+      "rhyme_family": [
+        "fire",
+        "hire",
+        "wire",
+        "desire",
+        "tire",
+        "inspire",
+        "acquire",
+        "higher",
+        "entire",
+        "admire",
+        "liar",
+        "dire",
+        "sire",
+        "pyre",
+        "mire",
+        "conspire",
+        "expire"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000005858614,
+          "rhyme_family_prob": 0.00082386256,
+          "target_word_rank": 9215
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ". The fire was the the the the the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.8130557e-7,
+          "rhyme_family_prob": 0.00008108646,
+          "target_word_rank": 7273
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000007385695,
+          "rhyme_family_prob": 0.0012305344,
+          "target_word_rank": 8342
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000009429612,
+          "rhyme_family_prob": 0.0017115505,
+          "target_word_rank": 7352
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.00001991766,
+          "rhyme_family_prob": 0.0074936817,
+          "target_word_rank": 4625
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "ire, and the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000046801277,
+          "rhyme_family_prob": 0.17435253,
+          "target_word_rank": 2088
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "pire, and the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 5.610384e-13,
+          "rhyme_family_prob": 0.9749305,
+          "target_word_rank": 127078
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ". the the the the the the the the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 1.3904165e-7,
+          "rhyme_family_prob": 0.00004252136,
+          "target_word_rank": 5256
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000007448683,
+          "rhyme_family_prob": 0.0010116004,
+          "target_word_rank": 8250
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.00000897669,
+          "rhyme_family_prob": 0.0011999365,
+          "target_word_rank": 7466
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000012424546,
+          "rhyme_family_prob": 0.002994106,
+          "target_word_rank": 6406
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "ire, and the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000046292218,
+          "rhyme_family_prob": 0.14094144,
+          "target_word_rank": 1961
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": " expire, and the, and, and, and, and, and, and, and, and, and, and, and, and, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 4.423967e-9,
+          "rhyme_family_prob": 0.462814,
+          "target_word_rank": 120718
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ",;",
+          "last_word": "",
+          "rhymes": false,
+          "target_word_prob": 5.0735014e-8,
+          "rhyme_family_prob": 0.000034429628,
+          "target_word_rank": 5114
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000005297252,
+          "rhyme_family_prob": 0.0009866619,
+          "target_word_rank": 9872
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000004429544,
+          "rhyme_family_prob": 0.0013278208,
+          "target_word_rank": 10970
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "The embers feed the fire, The embers feed the fire, The embers feed the fire, The embers feed the fire, The em",
+          "last_word": "em",
+          "rhymes": false,
+          "target_word_prob": 0.0000041534595,
+          "rhyme_family_prob": 0.0031894196,
+          "target_word_rank": 11012
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": ": : : : : 1. a. a. : a. a. : a. a. a. a. : a. a",
+          "last_word": "a",
+          "rhymes": false,
+          "target_word_prob": 0.000028885544,
+          "rhyme_family_prob": 0.107560195,
+          "target_word_rank": 2280
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " ero, 1, 1, 1, 1, 1, 1, 1, 1, 1, ",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.0000035552794,
+          "rhyme_family_prob": 0.0028532888,
+          "target_word_rank": 60575
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "1. The fire was in the fire in the fire in the fire in the fire in the fire in the fire in the fire in the fire in",
+          "last_word": "in",
+          "rhymes": false,
+          "target_word_prob": 1.5453472e-7,
+          "rhyme_family_prob": 0.00006734689,
+          "target_word_rank": 7630
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.0000058485134,
+          "rhyme_family_prob": 0.0011817577,
+          "target_word_rank": 9256
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000006853793,
+          "rhyme_family_prob": 0.00173714,
+          "target_word_rank": 8741
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.000009791613,
+          "rhyme_family_prob": 0.0086088,
+          "target_word_rank": 7412
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "ire, and the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire, the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.0000048209413,
+          "rhyme_family_prob": 0.27472067,
+          "target_word_rank": 9623
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "pire, and the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 2.3419735e-13,
+          "rhyme_family_prob": 0.94658124,
+          "target_word_rank": 126814
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.0000058490023,
+          "rhyme_family_prob": 0.001013204,
+          "target_word_rank": 9282
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The embers feed the fire,",
+          "last_word": "fire",
+          "rhymes": true,
+          "target_word_prob": 0.0000058485134,
+          "rhyme_family_prob": 0.0011817577,
+          "target_word_rank": 9256
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The fire at the fire at the fire at the fire at the fire at the fire at the fire at the fire at the fire at the fire at",
+          "last_word": "at",
+          "rhymes": false,
+          "target_word_prob": 0.000006853793,
+          "rhyme_family_prob": 0.00173714,
+          "target_word_rank": 8741
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "target_word": "stone",
+      "rhyme_family": [
+        "stone",
+        "bone",
+        "tone",
+        "lone",
+        "zone",
+        "throne",
+        "phone",
+        "own",
+        "known",
+        "blown",
+        "grown",
+        "shown",
+        "moan",
+        "groan",
+        "clone",
+        "drone"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000011538043,
+          "rhyme_family_prob": 0.0018530944,
+          "target_word_rank": 9375
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": "  The castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 1.0207338e-7,
+          "rhyme_family_prob": 0.0029956747,
+          "target_word_rank": 7214
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.000001748554,
+          "rhyme_family_prob": 0.0026387395,
+          "target_word_rank": 8174
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.000002408758,
+          "rhyme_family_prob": 0.003636044,
+          "target_word_rank": 7279
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.00000770735,
+          "rhyme_family_prob": 0.012404697,
+          "target_word_rank": 4466
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "an old castle, the walls of stone, the castle walls of stone, the castle walls of stone, the castle walls of stone, the castle walls",
+          "last_word": "walls",
+          "rhymes": false,
+          "target_word_prob": 0.000021772297,
+          "rhyme_family_prob": 0.37623203,
+          "target_word_rank": 2188
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "an old castle, the walls of stone, the castle walls of stone, the castle walls of stone, the castle walls of stone, the castle walls",
+          "last_word": "walls",
+          "rhymes": false,
+          "target_word_prob": 3.975175e-7,
+          "rhyme_family_prob": 1.8885429,
+          "target_word_rank": 278
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": "  The St Mary’s church, the St Mary’s church, the St Mary’s the St St St St St St St St St St St",
+          "last_word": "st",
+          "rhymes": false,
+          "target_word_prob": 2.7089155e-7,
+          "rhyme_family_prob": 0.0008931282,
+          "target_word_rank": 3004
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000017520788,
+          "rhyme_family_prob": 0.0029953255,
+          "target_word_rank": 8475
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000023646885,
+          "rhyme_family_prob": 0.00487578,
+          "target_word_rank": 8021
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.000005308507,
+          "rhyme_family_prob": 0.014054197,
+          "target_word_rank": 6314
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "known as the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000012559461,
+          "rhyme_family_prob": 0.033347793,
+          "target_word_rank": 3545
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "an old castle, the castle, the castle, the castle, the castle, the castle, the castle, the castle, the castle, the castle",
+          "last_word": "castle",
+          "rhymes": false,
+          "target_word_prob": 0.0000029417724,
+          "rhyme_family_prob": 1.4968585,
+          "target_word_rank": 742
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": "  Thé́́, the;",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.3549088e-7,
+          "rhyme_family_prob": 0.0014648957,
+          "target_word_rank": 2728
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The castle walls are made of stone, and the castle walls are made of stone, and the castle walls are made of stone, and the castle walls",
+          "last_word": "walls",
+          "rhymes": false,
+          "target_word_prob": 0.0000012675109,
+          "rhyme_family_prob": 0.002455264,
+          "target_word_rank": 9161
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The castle walls are made of stone, and the castle walls are made of stone, and the castle walls are made of stone, and the castle walls",
+          "last_word": "walls",
+          "rhymes": false,
+          "target_word_prob": 0.0000017275711,
+          "rhyme_family_prob": 0.0035621638,
+          "target_word_rank": 8582
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of the castle of",
+          "last_word": "of",
+          "rhymes": false,
+          "target_word_prob": 0.0000054748684,
+          "rhyme_family_prob": 0.010605362,
+          "target_word_rank": 6069
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "owning the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000010332275,
+          "rhyme_family_prob": 0.03516755,
+          "target_word_rank": 3371
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " blown away",
+          "last_word": "away",
+          "rhymes": false,
+          "target_word_prob": 0.0000059989575,
+          "rhyme_family_prob": 0.8455973,
+          "target_word_rank": 2794
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "  The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 4.8706536e-8,
+          "rhyme_family_prob": 0.0048355195,
+          "target_word_rank": 10489
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000016131678,
+          "rhyme_family_prob": 0.0029359504,
+          "target_word_rank": 8517
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000022662343,
+          "rhyme_family_prob": 0.0046740538,
+          "target_word_rank": 7675
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.000005040667,
+          "rhyme_family_prob": 0.02494305,
+          "target_word_rank": 5849
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "an old castle, the walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000117267955,
+          "rhyme_family_prob": 0.58645535,
+          "target_word_rank": 3113
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": " blown away,",
+          "last_word": "away",
+          "rhymes": false,
+          "target_word_prob": 0.000001082967,
+          "rhyme_family_prob": 1.1443045,
+          "target_word_rank": 328
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.000001364671,
+          "rhyme_family_prob": 0.0023331514,
+          "target_word_rank": 8940
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000016131678,
+          "rhyme_family_prob": 0.0029359504,
+          "target_word_rank": 8517
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The castle walls of stone,",
+          "last_word": "stone",
+          "rhymes": true,
+          "target_word_prob": 0.0000022662343,
+          "rhyme_family_prob": 0.0046740538,
+          "target_word_rank": 7675
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "target_word": "dream",
+      "rhyme_family": [
+        "dream",
+        "stream",
+        "seem",
+        "team",
+        "beam",
+        "cream",
+        "gleam",
+        "scheme",
+        "theme",
+        "extreme",
+        "esteem",
+        "scream",
+        "steam"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000011513877,
+          "rhyme_family_prob": 0.00024991506,
+          "target_word_rank": 8140
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": "a man and a woman",
+          "last_word": "woman",
+          "rhymes": false,
+          "target_word_prob": 4.4869523e-7,
+          "rhyme_family_prob": 0.000047907914,
+          "target_word_rank": 3310
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000015326098,
+          "rhyme_family_prob": 0.00045422587,
+          "target_word_rank": 7450
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.000002057714,
+          "rhyme_family_prob": 0.00073550595,
+          "target_word_rank": 6752
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000043312084,
+          "rhyme_family_prob": 0.0032796187,
+          "target_word_rank": 5177
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.000033677414,
+          "rhyme_family_prob": 0.016713893,
+          "target_word_rank": 1732
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "steam rising from the ground,",
+          "last_word": "ground",
+          "rhymes": false,
+          "target_word_prob": 0.0046382714,
+          "rhyme_family_prob": 0.025048323,
+          "target_word_rank": 4
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ". I was a boy, and a boy, and a boy, and a boy, and a boy, and a boy, and a boy,",
+          "last_word": "boy",
+          "rhymes": false,
+          "target_word_prob": 0.0000014809681,
+          "rhyme_family_prob": 0.0003599428,
+          "target_word_rank": 9048
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000017483229,
+          "rhyme_family_prob": 0.0002959682,
+          "target_word_rank": 6996
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000026543917,
+          "rhyme_family_prob": 0.00035065235,
+          "target_word_rank": 5997
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000074559825,
+          "rhyme_family_prob": 0.0007703031,
+          "target_word_rank": 4243
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "I was in a dream, I was in a dream, I was in a dream, I was in a dream, I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.00004104845,
+          "rhyme_family_prob": 0.004142433,
+          "target_word_rank": 1894
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "steam and smoke,",
+          "last_word": "smoke",
+          "rhymes": false,
+          "target_word_prob": 0.03195271,
+          "rhyme_family_prob": 0.18720007,
+          "target_word_rank": 3
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": "a (a) (a, b, ab, ab, ab, (a, b, (a, b, (a, (C",
+          "last_word": "(c",
+          "rhymes": false,
+          "target_word_prob": 0.0000012352727,
+          "rhyme_family_prob": 0.0001988288,
+          "target_word_rank": 3553
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000013849593,
+          "rhyme_family_prob": 0.00023442673,
+          "target_word_rank": 7596
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "I was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 0.0000016985734,
+          "rhyme_family_prob": 0.00021082956,
+          "target_word_rank": 6975
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.000004762562,
+          "rhyme_family_prob": 0.00014473076,
+          "target_word_rank": 4868
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "I was in a dream, I was in a dream, I was in a dream, I was in a dream, I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.00003482524,
+          "rhyme_family_prob": 0.0018043588,
+          "target_word_rank": 1970
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " steamy, and the, and the, and the, and the, and the, and the, and the, and the, and the,",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.0056993533,
+          "rhyme_family_prob": 0.17134503,
+          "target_word_rank": 7
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "a dream I had last night,",
+          "last_word": "night",
+          "rhymes": false,
+          "target_word_prob": 5.4339626e-8,
+          "rhyme_family_prob": 0.00003512454,
+          "target_word_rank": 5866
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.000002132326,
+          "rhyme_family_prob": 0.00038415825,
+          "target_word_rank": 6480
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0000043108694,
+          "rhyme_family_prob": 0.0006060499,
+          "target_word_rank": 4898
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.000030244722,
+          "rhyme_family_prob": 0.0020321745,
+          "target_word_rank": 1757
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "dreamed a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.0010781775,
+          "rhyme_family_prob": 0.00843081,
+          "target_word_rank": 65
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "dreamed a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.16804545,
+          "rhyme_family_prob": 0.17979853,
+          "target_word_rank": 1
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "I was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 0.0000016207324,
+          "rhyme_family_prob": 0.0003106715,
+          "target_word_rank": 7224
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "I was in a dream,",
+          "last_word": "dream",
+          "rhymes": true,
+          "target_word_prob": 0.000002132326,
+          "rhyme_family_prob": 0.00038415825,
+          "target_word_rank": 6480
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "I was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 0.0000043108694,
+          "rhyme_family_prob": 0.0006060499,
+          "target_word_rank": 4898
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "target_word": "strange",
+      "rhyme_family": [
+        "strange",
+        "change",
+        "range",
+        "arrange",
+        "exchange",
+        "grange"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 5.9581726e-7,
+          "rhyme_family_prob": 0.0000016025222,
+          "target_word_rank": 10169
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": "I was the last night",
+          "last_word": "night",
+          "rhymes": false,
+          "target_word_prob": 1.8778495e-7,
+          "rhyme_family_prob": 6.6675375e-7,
+          "target_word_rank": 7663
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000019108031,
+          "rhyme_family_prob": 0.0000072648927,
+          "target_word_rank": 6929
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000055459855,
+          "rhyme_family_prob": 0.000034660792,
+          "target_word_rank": 4519
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "I was a child,",
+          "last_word": "child",
+          "rhymes": false,
+          "target_word_prob": 0.000097789154,
+          "rhyme_family_prob": 0.0018721265,
+          "target_word_rank": 871
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "angelesbiancafeeling",
+          "last_word": "angelesbiancafeeling",
+          "rhymes": false,
+          "target_word_prob": 0.0024726705,
+          "rhyme_family_prob": 0.10861178,
+          "target_word_rank": 44
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "angelesbiancafeeling",
+          "last_word": "angelesbiancafeeling",
+          "rhymes": false,
+          "target_word_prob": 0.00012334075,
+          "rhyme_family_prob": 0.99995434,
+          "target_word_rank": 2
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", the morning, the morning, the morning,",
+          "last_word": "morning",
+          "rhymes": false,
+          "target_word_prob": 6.730818e-7,
+          "rhyme_family_prob": 8.552966e-7,
+          "target_word_rank": 2151
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000012620146,
+          "rhyme_family_prob": 0.0000032908501,
+          "target_word_rank": 8096
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "the silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000023544233,
+          "rhyme_family_prob": 0.0000070727174,
+          "target_word_rank": 6651
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "I was a child,",
+          "last_word": "child",
+          "rhymes": false,
+          "target_word_prob": 0.000015908501,
+          "rhyme_family_prob": 0.00014336727,
+          "target_word_rank": 2993
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "change the world,",
+          "last_word": "world",
+          "rhymes": false,
+          "target_word_prob": 0.00014173372,
+          "rhyme_family_prob": 0.020059843,
+          "target_word_rank": 772
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "angeleslie, the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.007535824,
+          "rhyme_family_prob": 0.99571115,
+          "target_word_rank": 1
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": "- The Five, The Five, The, The, The, The, The, The, The, The, The, The, The, The",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 2.7038104e-7,
+          "rhyme_family_prob": 3.8565634e-7,
+          "target_word_rank": 3027
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 9.459464e-7,
+          "rhyme_family_prob": 0.000002127942,
+          "target_word_rank": 8915
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000014058319,
+          "rhyme_family_prob": 0.000002967114,
+          "target_word_rank": 7955
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "the silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.000007028924,
+          "rhyme_family_prob": 0.0000147596,
+          "target_word_rank": 4475
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "change the world,",
+          "last_word": "world",
+          "rhymes": false,
+          "target_word_prob": 0.00037567556,
+          "rhyme_family_prob": 0.0032938553,
+          "target_word_rank": 312
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " strange, strange, strange, strange, strange, strange, strange, strange, strange, strange, strange, strange strange strange strange strange strange strange strange",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.010725793,
+          "rhyme_family_prob": 0.018435929,
+          "target_word_rank": 0
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "I’m sorry for the things I said,",
+          "last_word": "said",
+          "rhymes": false,
+          "target_word_prob": 7.088703e-8,
+          "rhyme_family_prob": 2.452097e-7,
+          "target_word_rank": 7916
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000012538218,
+          "rhyme_family_prob": 0.000007717701,
+          "target_word_rank": 8016
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000025470056,
+          "rhyme_family_prob": 0.00004532614,
+          "target_word_rank": 6282
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.000018207389,
+          "rhyme_family_prob": 0.005078144,
+          "target_word_rank": 2560
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "angelesseriously, I was a little girl, and I was a little girl, and I was a little girl, and I was a little",
+          "last_word": "little",
+          "rhymes": false,
+          "target_word_prob": 0.0001472971,
+          "rhyme_family_prob": 0.46884167,
+          "target_word_rank": 335
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "angelesseriously, I was a",
+          "last_word": "a",
+          "rhymes": false,
+          "target_word_prob": 0.00001222906,
+          "rhyme_family_prob": 0.90893906,
+          "target_word_rank": 10
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 8.9175336e-7,
+          "rhyme_family_prob": 0.000003522595,
+          "target_word_rank": 8965
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000012538218,
+          "rhyme_family_prob": 0.000007717701,
+          "target_word_rank": 8016
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "The silence felt so strange,",
+          "last_word": "strange",
+          "rhymes": true,
+          "target_word_prob": 0.0000025470056,
+          "rhyme_family_prob": 0.00004532614,
+          "target_word_rank": 6282
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "target_word": "love",
+      "rhyme_family": [
+        "love",
+        "above",
+        "dove",
+        "of",
+        "shove",
+        "glove",
+        "thereof"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000038434996,
+          "rhyme_family_prob": 0.000003973183,
+          "target_word_rank": 4954
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": "I love you so much,",
+          "last_word": "much",
+          "rhymes": false,
+          "target_word_prob": 0.0000020726081,
+          "rhyme_family_prob": 0.0003744014,
+          "target_word_rank": 1228
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000004268333,
+          "rhyme_family_prob": 0.000004683317,
+          "target_word_rank": 4574
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000049645996,
+          "rhyme_family_prob": 0.0000062247695,
+          "target_word_rank": 4122
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000063570897,
+          "rhyme_family_prob": 0.000026039681,
+          "target_word_rank": 3262
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "of the world.",
+          "last_word": "world",
+          "rhymes": false,
+          "target_word_prob": 0.000028562092,
+          "rhyme_family_prob": 0.0014441244,
+          "target_word_rank": 947
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": " thereof, and I am.",
+          "last_word": "am",
+          "rhymes": false,
+          "target_word_prob": 9.523683e-12,
+          "rhyme_family_prob": 0.9999992,
+          "target_word_rank": 2693
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": ", And I, O, O, O, O, O, O, O, O, O, O O, O, O O O",
+          "last_word": "o",
+          "rhymes": false,
+          "target_word_prob": 0.0000027491362,
+          "rhyme_family_prob": 0.0006857589,
+          "target_word_rank": 847
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000030643173,
+          "rhyme_family_prob": 0.0000032955895,
+          "target_word_rank": 5403
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000024998258,
+          "rhyme_family_prob": 0.0000029073344,
+          "target_word_rank": 5874
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000011574418,
+          "rhyme_family_prob": 0.0000036480533,
+          "target_word_rank": 7498
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "of the world.",
+          "last_word": "world",
+          "rhymes": false,
+          "target_word_prob": 0.000003467445,
+          "rhyme_family_prob": 0.000074035765,
+          "target_word_rank": 4075
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": " thereof, and I am so much, and so much, and so much, and so much, and so much, and so much, and so",
+          "last_word": "so",
+          "rhymes": false,
+          "target_word_prob": 8.0046485e-9,
+          "rhyme_family_prob": 0.9999719,
+          "target_word_rank": 272
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", and the five, (P, (P, (P, ( P, ( P, ( P, ( P, ( P, (",
+          "last_word": "",
+          "rhymes": false,
+          "target_word_prob": 0.0000011071743,
+          "rhyme_family_prob": 0.00039851118,
+          "target_word_rank": 816
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000029983905,
+          "rhyme_family_prob": 0.0000031375694,
+          "target_word_rank": 5603
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000024864964,
+          "rhyme_family_prob": 0.0000026802627,
+          "target_word_rank": 6044
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000001998643,
+          "rhyme_family_prob": 0.0000031609502,
+          "target_word_rank": 6634
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "of the love of the love of the love of the love of the love of the love of the love of the love of of the love of of",
+          "last_word": "of",
+          "rhymes": true,
+          "target_word_prob": 0.000005054275,
+          "rhyme_family_prob": 0.00005949779,
+          "target_word_rank": 3711
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " thereof, and I am so much, and so much, and so much, and so much, and so much, and so much, and so",
+          "last_word": "so",
+          "rhymes": false,
+          "target_word_prob": 6.3367344e-7,
+          "rhyme_family_prob": 0.99971515,
+          "target_word_rank": 34
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "  I love you so much,",
+          "last_word": "much",
+          "rhymes": false,
+          "target_word_prob": 2.6396958e-7,
+          "rhyme_family_prob": 0.000107043306,
+          "target_word_rank": 1441
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000005411767,
+          "rhyme_family_prob": 0.000005785596,
+          "target_word_rank": 4086
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000006748263,
+          "rhyme_family_prob": 0.000007885499,
+          "target_word_rank": 3614
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000009383724,
+          "rhyme_family_prob": 0.000044473898,
+          "target_word_rank": 2753
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "of the world,",
+          "last_word": "world",
+          "rhymes": false,
+          "target_word_prob": 0.0000075507237,
+          "rhyme_family_prob": 0.026979985,
+          "target_word_rank": 2469
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": " thereof,",
+          "last_word": "thereof",
+          "rhymes": true,
+          "target_word_prob": 8.2803247e-13,
+          "rhyme_family_prob": 0.999999,
+          "target_word_rank": 6647
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.0000047203844,
+          "rhyme_family_prob": 0.000004940663,
+          "target_word_rank": 4492
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000005411767,
+          "rhyme_family_prob": 0.000005785596,
+          "target_word_rank": 4086
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "I never knew such love,",
+          "last_word": "love",
+          "rhymes": true,
+          "target_word_prob": 0.000006748263,
+          "rhyme_family_prob": 0.000007885499,
+          "target_word_rank": 3614
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "target_word": "truth",
+      "rhyme_family": [
+        "truth",
+        "youth",
+        "tooth",
+        "booth",
+        "smooth",
+        "sleuth",
+        "ruth",
+        "uncouth"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000018279065,
+          "rhyme_family_prob": 0.00000290952,
+          "target_word_rank": 8388
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ". She said,",
+          "last_word": "said",
+          "rhymes": false,
+          "target_word_prob": 8.641036e-9,
+          "rhyme_family_prob": 3.2812256e-8,
+          "target_word_rank": 4207
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000037042723,
+          "rhyme_family_prob": 0.000007362163,
+          "target_word_rank": 6238
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000065728755,
+          "rhyme_family_prob": 0.000018339586,
+          "target_word_rank": 4734
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.000016617316,
+          "rhyme_family_prob": 0.0003027845,
+          "target_word_rank": 2934
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "I am not a",
+          "last_word": "a",
+          "rhymes": false,
+          "target_word_prob": 0.000091533744,
+          "rhyme_family_prob": 0.015868802,
+          "target_word_rank": 968
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "uth, 1",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.000083667794,
+          "rhyme_family_prob": 0.8360166,
+          "target_word_rank": 16
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": " 1. The least the the the the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.0000051302195,
+          "rhyme_family_prob": 0.000012398385,
+          "target_word_rank": 2339
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000029571243,
+          "rhyme_family_prob": 0.000004709147,
+          "target_word_rank": 6945
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.000004334291,
+          "rhyme_family_prob": 0.0000072612834,
+          "target_word_rank": 5983
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "I am not a woman,",
+          "last_word": "woman",
+          "rhymes": false,
+          "target_word_prob": 0.000020413829,
+          "rhyme_family_prob": 0.000037538506,
+          "target_word_rank": 2726
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "truth,",
+          "last_word": "truth",
+          "rhymes": true,
+          "target_word_prob": 0.00014243506,
+          "rhyme_family_prob": 0.0006289447,
+          "target_word_rank": 812
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "uth, 1",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.0020426137,
+          "rhyme_family_prob": 0.07064491,
+          "target_word_rank": 5
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the least the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.00000463475,
+          "rhyme_family_prob": 0.000008088631,
+          "target_word_rank": 1375
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000021727362,
+          "rhyme_family_prob": 0.0000034860714,
+          "target_word_rank": 7802
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000027503427,
+          "rhyme_family_prob": 0.000004302692,
+          "target_word_rank": 7018
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "she said,",
+          "last_word": "said",
+          "rhymes": false,
+          "target_word_prob": 0.000015210681,
+          "rhyme_family_prob": 0.000018800913,
+          "target_word_rank": 2870
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "_The truth is the truth,_",
+          "last_word": "truth",
+          "rhymes": true,
+          "target_word_prob": 0.00040503463,
+          "rhyme_family_prob": 0.0009948686,
+          "target_word_rank": 247
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": " merci, 1. 1. 1. 1. 1. 1. 1. 1. 1.",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 0.00024752,
+          "rhyme_family_prob": 0.0011655348,
+          "target_word_rank": 99
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "  She said,",
+          "last_word": "said",
+          "rhymes": false,
+          "target_word_prob": 7.3487976e-9,
+          "rhyme_family_prob": 2.172793e-8,
+          "target_word_rank": 5540
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000039269758,
+          "rhyme_family_prob": 0.00000827206,
+          "target_word_rank": 6229
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.000007677528,
+          "rhyme_family_prob": 0.000025042289,
+          "target_word_rank": 4617
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.00003564158,
+          "rhyme_family_prob": 0.00081503537,
+          "target_word_rank": 1970
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "outhere, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 0.00018122265,
+          "rhyme_family_prob": 0.55513686,
+          "target_word_rank": 208
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "uthers, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 0.00003206192,
+          "rhyme_family_prob": 0.70154047,
+          "target_word_rank": 12
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000027511114,
+          "rhyme_family_prob": 0.0000049367272,
+          "target_word_rank": 7130
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.0000039269758,
+          "rhyme_family_prob": 0.00000827206,
+          "target_word_rank": 6229
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "She was a good girl,",
+          "last_word": "girl",
+          "rhymes": false,
+          "target_word_prob": 0.000007677528,
+          "rhyme_family_prob": 0.000025042289,
+          "target_word_rank": 4617
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "target_word": "world",
+      "rhyme_family": [
+        "world",
+        "curled",
+        "unfurled",
+        "whirled",
+        "hurled",
+        "swirled",
+        "pearled",
+        "furled",
+        "twirled"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "And he was a man of the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 1.2769017e-7,
+          "rhyme_family_prob": 0.00078779773,
+          "target_word_rank": 21143
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": ", and the world, and the world, and the world, and the world, and the world, and the world, and the world, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 1.6978441e-7,
+          "rhyme_family_prob": 0.000031802807,
+          "target_word_rank": 4159
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "And he was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 1.3663649e-7,
+          "rhyme_family_prob": 0.008250283,
+          "target_word_rank": 20141
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "And he was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 1.7304846e-7,
+          "rhyme_family_prob": 0.108877495,
+          "target_word_rank": 18280
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.5317097e-8,
+          "rhyme_family_prob": 6.356714,
+          "target_word_rank": 13993
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 6.745285e-9,
+          "rhyme_family_prob": 6.9865584,
+          "target_word_rank": 7737
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.5925473e-16,
+          "rhyme_family_prob": 7.0,
+          "target_word_rank": 38
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": "    the the the the the the the the the the the the the the the the the the the the the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.0000027704136,
+          "rhyme_family_prob": 0.000016111377,
+          "target_word_rank": 695
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "And he was a man of the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 1.7626913e-7,
+          "rhyme_family_prob": 0.0020315023,
+          "target_word_rank": 18814
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "And he was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 2.5775938e-7,
+          "rhyme_family_prob": 0.0069065657,
+          "target_word_rank": 16781
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 5.9505294e-7,
+          "rhyme_family_prob": 1.1177249,
+          "target_word_rank": 12166
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.6229952e-8,
+          "rhyme_family_prob": 6.9415874,
+          "target_word_rank": 7609
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 2.853914e-14,
+          "rhyme_family_prob": 7.0,
+          "target_word_rank": 43
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": ", the above the the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000007388461,
+          "rhyme_family_prob": 0.000036885333,
+          "target_word_rank": 555
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "And he was a man of the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 1.4164512e-7,
+          "rhyme_family_prob": 0.0013533983,
+          "target_word_rank": 20571
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "And he was a man of the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 1.7125036e-7,
+          "rhyme_family_prob": 0.002534167,
+          "target_word_rank": 19059
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "He traveled all the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 6.8824187e-7,
+          "rhyme_family_prob": 0.03667371,
+          "target_word_rank": 12610
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.8387785e-8,
+          "rhyme_family_prob": 6.909406,
+          "target_word_rank": 8342
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": "led by the king of the king of the king of the king of the king of the king of the king of the king of the king of the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 1.5428112e-13,
+          "rhyme_family_prob": 7.0,
+          "target_word_rank": 51
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": " \tHe went to the sea,",
+          "last_word": "sea",
+          "rhymes": false,
+          "target_word_prob": 1.19139926e-7,
+          "rhyme_family_prob": 0.000064365086,
+          "target_word_rank": 10420
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "And he was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 1.5232197e-7,
+          "rhyme_family_prob": 0.01109412,
+          "target_word_rank": 19858
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "And he was a man of the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 1.7274286e-7,
+          "rhyme_family_prob": 0.16315575,
+          "target_word_rank": 19091
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 1.21904264e-8,
+          "rhyme_family_prob": 6.75846,
+          "target_word_rank": 15509
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 4.508741e-12,
+          "rhyme_family_prob": 6.999977,
+          "target_word_rank": 9338
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "led by the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 3.4528564e-20,
+          "rhyme_family_prob": 7.0,
+          "target_word_rank": 577
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "And he was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 1.3360537e-7,
+          "rhyme_family_prob": 0.003062104,
+          "target_word_rank": 20952
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "And he was a man of the world,",
+          "last_word": "world",
+          "rhymes": true,
+          "target_word_prob": 1.5232197e-7,
+          "rhyme_family_prob": 0.01109412,
+          "target_word_rank": 19858
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "And he was a man,",
+          "last_word": "man",
+          "rhymes": false,
+          "target_word_prob": 1.7274286e-7,
+          "rhyme_family_prob": 0.16315575,
+          "target_word_rank": 19091
+        }
+      ]
+    },
+    {
+      "id": 15,
+      "target_word": "earth",
+      "rhyme_family": [
+        "earth",
+        "birth",
+        "worth",
+        "mirth",
+        "berth",
+        "girth",
+        "dearth",
+        "rebirth",
+        "hearth"
+      ],
+      "conditions": [
+        {
+          "condition": "baseline",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 7.385398e-7,
+          "rhyme_family_prob": 0.0015231352,
+          "target_word_rank": 10190
+        },
+        {
+          "condition": "double_pass_12-15",
+          "generated_text": "                              ",
+          "last_word": "",
+          "rhymes": false,
+          "target_word_prob": 2.637326e-7,
+          "rhyme_family_prob": 0.0037722536,
+          "target_word_rank": 3858
+        },
+        {
+          "condition": "unembed_12-15_s=1.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000010202448,
+          "rhyme_family_prob": 0.0028821256,
+          "target_word_rank": 8823
+        },
+        {
+          "condition": "unembed_12-15_s=2.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000014440418,
+          "rhyme_family_prob": 0.0067882915,
+          "target_word_rank": 7725
+        },
+        {
+          "condition": "unembed_12-15_s=5.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000024218157,
+          "rhyme_family_prob": 0.13155812,
+          "target_word_rank": 6105
+        },
+        {
+          "condition": "unembed_12-15_s=10.0",
+          "generated_text": "irth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 1.9035197e-7,
+          "rhyme_family_prob": 2.8974802,
+          "target_word_rank": 4569
+        },
+        {
+          "condition": "unembed_12-15_s=20.0",
+          "generated_text": "irth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 2.7346975e-12,
+          "rhyme_family_prob": 2.9999993,
+          "target_word_rank": 75
+        },
+        {
+          "condition": "double_pass_10-15",
+          "generated_text": "           ,",
+          "last_word": "",
+          "rhymes": false,
+          "target_word_prob": 9.455421e-7,
+          "rhyme_family_prob": 0.0056387023,
+          "target_word_rank": 1324
+        },
+        {
+          "condition": "unembed_10-15_s=1.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 9.449506e-7,
+          "rhyme_family_prob": 0.0018320584,
+          "target_word_rank": 9367
+        },
+        {
+          "condition": "unembed_10-15_s=2.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000012765906,
+          "rhyme_family_prob": 0.002479869,
+          "target_word_rank": 8342
+        },
+        {
+          "condition": "unembed_10-15_s=5.0",
+          "generated_text": "And the earth is the seed of the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.00000390462,
+          "rhyme_family_prob": 0.0140983295,
+          "target_word_rank": 5603
+        },
+        {
+          "condition": "unembed_10-15_s=10.0",
+          "generated_text": "irth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.000001343812,
+          "rhyme_family_prob": 1.9255786,
+          "target_word_rank": 6287
+        },
+        {
+          "condition": "unembed_10-15_s=20.0",
+          "generated_text": "irth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 2.0592124e-9,
+          "rhyme_family_prob": 2.9971747,
+          "target_word_rank": 101
+        },
+        {
+          "condition": "double_pass_8-15",
+          "generated_text": " 1",
+          "last_word": "1",
+          "rhymes": false,
+          "target_word_prob": 7.3131883e-7,
+          "rhyme_family_prob": 0.0049415007,
+          "target_word_rank": 870
+        },
+        {
+          "condition": "unembed_8-15_s=1.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 7.353064e-7,
+          "rhyme_family_prob": 0.0016144956,
+          "target_word_rank": 10080
+        },
+        {
+          "condition": "unembed_8-15_s=2.0",
+          "generated_text": "And the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 7.21178e-7,
+          "rhyme_family_prob": 0.0017946803,
+          "target_word_rank": 10069
+        },
+        {
+          "condition": "unembed_8-15_s=5.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000011837676,
+          "rhyme_family_prob": 0.004305148,
+          "target_word_rank": 9108
+        },
+        {
+          "condition": "unembed_8-15_s=10.0",
+          "generated_text": "thoung, and the, and the, and the, and the, and the, and the, and the, and the, and the",
+          "last_word": "the",
+          "rhymes": false,
+          "target_word_prob": 0.000001835046,
+          "rhyme_family_prob": 0.3891952,
+          "target_word_rank": 8054
+        },
+        {
+          "condition": "unembed_8-15_s=20.0",
+          "generated_text": "irth, and the, and the, and the, and the, and the, and the, and the, and, and, and, and",
+          "last_word": "and",
+          "rhymes": false,
+          "target_word_prob": 4.2373009e-7,
+          "rhyme_family_prob": 2.6830223,
+          "target_word_rank": 133
+        },
+        {
+          "condition": "double_pass_14-15",
+          "generated_text": "  The earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 3.131154e-8,
+          "rhyme_family_prob": 0.00057505514,
+          "target_word_rank": 6516
+        },
+        {
+          "condition": "unembed_14-15_s=1.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.000001170551,
+          "rhyme_family_prob": 0.003986014,
+          "target_word_rank": 8637
+        },
+        {
+          "condition": "unembed_14-15_s=2.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000017590221,
+          "rhyme_family_prob": 0.010582582,
+          "target_word_rank": 7449
+        },
+        {
+          "condition": "unembed_14-15_s=5.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000047132485,
+          "rhyme_family_prob": 0.19228704,
+          "target_word_rank": 4870
+        },
+        {
+          "condition": "unembed_14-15_s=10.0",
+          "generated_text": "irth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 1.18564305e-8,
+          "rhyme_family_prob": 2.9989836,
+          "target_word_rank": 1527
+        },
+        {
+          "condition": "unembed_14-15_s=20.0",
+          "generated_text": "irth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth, and the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 4.6588858e-15,
+          "rhyme_family_prob": 3.0,
+          "target_word_rank": 45
+        },
+        {
+          "condition": "sustained_14-15_s=0.5",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 9.847205e-7,
+          "rhyme_family_prob": 0.0024507935,
+          "target_word_rank": 9203
+        },
+        {
+          "condition": "sustained_14-15_s=1.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.000001170551,
+          "rhyme_family_prob": 0.003986014,
+          "target_word_rank": 8637
+        },
+        {
+          "condition": "sustained_14-15_s=2.0",
+          "generated_text": "And the earth is the earth,",
+          "last_word": "earth",
+          "rhymes": true,
+          "target_word_prob": 0.0000017590221,
+          "rhyme_family_prob": 0.010582582,
+          "target_word_rank": 7449
+        }
+      ]
+    }
+  ]
+}

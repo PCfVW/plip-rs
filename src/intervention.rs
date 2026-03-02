@@ -1572,6 +1572,102 @@ impl CltLogitShiftResult {
     }
 }
 
+// ============================================================
+// Part 6: Recurrent Pass (layer re-execution with feedback)
+// ============================================================
+
+/// Specification for a recurrent pass through a block of layers.
+///
+/// The recurrence re-runs layers `loop_start..=loop_end` a second time,
+/// with optional feedback injected into the hidden state between passes.
+/// This gives the model extra depth to sustain signals that concentrate
+/// in the loop layers — analogous to the DRC's recurrent computation
+/// in Sokoban (Taufeeque et al., 2024).
+#[derive(Debug, Clone)]
+pub struct RecurrentPassSpec {
+    /// First layer of the recurrent block (inclusive).
+    pub loop_start: usize,
+    /// Last layer of the recurrent block (inclusive).
+    pub loop_end: usize,
+    /// Feedback vectors to inject between pass 1 and pass 2.
+    /// Applied as: `hidden[pos] += strength * vector`.
+    /// If empty, pass 2 receives the identical input (pure depth increase).
+    pub feedback: Vec<RecurrentFeedbackEntry>,
+    /// If true, apply the recurrent block at every autoregressive generation
+    /// step, not just during prefill. Analogous to the DRC's per-tick recurrence.
+    pub sustained: bool,
+}
+
+/// A single feedback injection between recurrent passes.
+#[derive(Debug, Clone)]
+pub struct RecurrentFeedbackEntry {
+    /// Token position in the sequence to inject feedback at.
+    pub position: usize,
+    /// Feedback direction vector, shape `[d_model]`.
+    pub vector: Tensor,
+    /// Amplification strength.
+    pub strength: f32,
+}
+
+impl RecurrentPassSpec {
+    /// Create a spec with no feedback (pure double-pass).
+    pub fn no_feedback(loop_start: usize, loop_end: usize) -> Self {
+        Self {
+            loop_start,
+            loop_end,
+            feedback: Vec::new(),
+            sustained: false,
+        }
+    }
+
+    /// Set the sustained flag (builder pattern).
+    #[must_use]
+    pub fn with_sustained(mut self, sustained: bool) -> Self {
+        self.sustained = sustained;
+        self
+    }
+
+    /// Add a feedback entry.
+    pub fn add_feedback(&mut self, position: usize, vector: Tensor, strength: f32) {
+        self.feedback.push(RecurrentFeedbackEntry {
+            position,
+            vector,
+            strength,
+        });
+    }
+
+    /// Validate against model dimensions.
+    pub fn validate(&self, n_layers: usize, seq_len: usize, d_model: usize) -> Result<()> {
+        anyhow::ensure!(
+            self.loop_start <= self.loop_end,
+            "loop_start ({}) > loop_end ({})",
+            self.loop_start,
+            self.loop_end
+        );
+        anyhow::ensure!(
+            self.loop_end < n_layers,
+            "loop_end ({}) >= n_layers ({})",
+            self.loop_end,
+            n_layers
+        );
+        for entry in &self.feedback {
+            anyhow::ensure!(
+                entry.position < seq_len,
+                "feedback position {} >= seq_len {}",
+                entry.position,
+                seq_len
+            );
+            anyhow::ensure!(
+                entry.vector.dim(0)? == d_model,
+                "feedback vector dim {} != d_model {}",
+                entry.vector.dim(0)?,
+                d_model
+            );
+        }
+        Ok(())
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

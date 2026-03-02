@@ -253,6 +253,14 @@ path = "examples/couplet_clt_circuit.rs"
 name = "couplet_clt_decoder_vocab"
 path = "examples/couplet_clt_decoder_vocab.rs"
 
+[[example]]
+name = "llama_layer_suppression"
+path = "examples/llama_layer_suppression.rs"
+
+[[example]]
+name = "recurrent_block_rhyme"
+path = "examples/recurrent_block_rhyme.rs"
+
 [profile.release]
 lto = true
 codegen-units = 1

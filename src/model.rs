@@ -20,8 +20,8 @@ use crate::forward_qwen2::PlipQwen2;
 use crate::forward_rwkv6::PlipRwkv6;
 use crate::intervention::{
     measure_attention_to_targets, AblationResult, CltInjectionSpec, CltLogitShiftResult,
-    KnockoutSpec, StateAblationResult, StateKnockoutSpec, StateSteeringResult, StateSteeringSpec,
-    SteeringResult, SteeringSpec,
+    KnockoutSpec, RecurrentPassSpec, StateAblationResult, StateKnockoutSpec, StateSteeringResult,
+    StateSteeringSpec, SteeringResult, SteeringSpec,
 };
 use crate::kv_cache::KVCache;
 use crate::logit_lens::{decode_predictions_with, LogitLensAnalysis, LogitLensResult};
@@ -230,6 +230,36 @@ pub trait PlipBackend {
 
     fn chat_template(&self, _prompt: &str, _system_prompt: Option<&str>) -> Option<String> {
         None
+    }
+
+    /// Forward pass with recurrent re-execution of a layer block.
+    ///
+    /// Runs layers `[loop_start..=loop_end]` twice. Without feedback, pass 2
+    /// receives pass 1's output (true recurrence). With feedback, pass 2
+    /// receives the saved pre-loop state plus injected feedback vectors.
+    /// Returns the normed hidden state `[batch, seq_len, d_model]`.
+    fn forward_with_recurrent_pass(
+        &self,
+        _input_ids: &Tensor,
+        _spec: &RecurrentPassSpec,
+    ) -> Result<Tensor> {
+        anyhow::bail!("forward_with_recurrent_pass not supported for this architecture")
+    }
+
+    /// Generate tokens with recurrent re-execution during prefill.
+    ///
+    /// The recurrence applies only to the prefill pass; autoregressive
+    /// decoding steps use the standard single-pass forward.
+    fn generate_with_recurrent_pass(
+        &self,
+        _prompt_ids: &[u32],
+        _max_tokens: usize,
+        _temperature: f32,
+        _stop_tokens: &[u32],
+        _spec: &RecurrentPassSpec,
+        _device: &Device,
+    ) -> Result<Vec<u32>> {
+        anyhow::bail!("generate_with_recurrent_pass not supported for this architecture")
     }
 
     /// Get the raw embedding vector for a single token.
@@ -538,6 +568,42 @@ impl PlipModel {
         self.tokenizer.decode(&tokens, true)
     }
 
+    /// Forward pass with recurrent re-execution of a layer block.
+    ///
+    /// Without feedback: pass 2 input = pass 1 output (true recurrence).
+    /// With feedback: pass 2 input = saved pre-loop state + feedback.
+    /// Returns the normed hidden state `[batch, seq_len, d_model]`.
+    pub fn forward_with_recurrent_pass(
+        &self,
+        text: &str,
+        spec: &RecurrentPassSpec,
+    ) -> Result<Tensor> {
+        let input_ids = self.tokenizer.encode(text)?;
+        let input_tensor = Tensor::new(&input_ids[..], &self.device)?.unsqueeze(0)?;
+        self.model.forward_with_recurrent_pass(&input_tensor, spec)
+    }
+
+    /// Generate text with recurrent re-execution during prefill.
+    pub fn generate_with_recurrent_pass(
+        &self,
+        text: &str,
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &RecurrentPassSpec,
+    ) -> Result<String> {
+        let prompt_ids = self.tokenizer.encode(text)?;
+        let tokens = self.model.generate_with_recurrent_pass(
+            &prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            spec,
+            &self.device,
+        )?;
+        self.tokenizer.decode(&tokens, true)
+    }
+
     /// Number of layers in the model
     pub fn n_layers(&self) -> usize {
         self.model.n_layers()
@@ -610,6 +676,13 @@ impl PlipModel {
     /// this is also the unembedding direction — useful for CLT decoder projection scoring.
     pub fn token_embedding(&self, token_id: u32) -> Result<Tensor> {
         self.model.embedding_vector(token_id)
+    }
+
+    /// Project a hidden state to vocabulary logits.
+    ///
+    /// Takes a 1-D hidden `[d_model]` or 2-D `[1, d_model]` and returns logits `[vocab_size]`.
+    pub fn project_to_vocab(&self, hidden: &Tensor) -> Result<Tensor> {
+        self.model.project_to_vocab(hidden)
     }
 
     /// Encode text into token IDs.

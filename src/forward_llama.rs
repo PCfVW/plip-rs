@@ -18,7 +18,7 @@ use tracing::info;
 
 use crate::attention::AttentionCache;
 use crate::cache::{ActivationCache, FullActivationCache};
-use crate::intervention::{CltInjectionSpec, KnockoutSpec, SteeringSpec};
+use crate::intervention::{CltInjectionSpec, KnockoutSpec, RecurrentPassSpec, SteeringSpec};
 use crate::kv_cache::KVCache;
 use crate::masks::{create_causal_mask, create_generation_mask};
 use crate::model::PlipBackend;
@@ -1259,6 +1259,396 @@ impl PlipLlama {
 
         Ok(tokens)
     }
+
+    /// Forward pass that skips the specified layers.
+    ///
+    /// Returns the normed last-token hidden state `[1, d_model]`.
+    pub fn forward_with_layer_skip(
+        &self,
+        input_ids: &Tensor,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        let seq_len = input_ids.dim(1)?;
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            if skip_layers.contains(&i) {
+                continue;
+            }
+            hidden = layer.forward(&hidden, &self.rotary, 0)?;
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        Ok(last_hidden)
+    }
+
+    /// Forward pass with KV-cache that skips the specified layers.
+    ///
+    /// Returns logits for the last token.
+    pub fn forward_with_kv_cache_and_layer_skip(
+        &self,
+        input_ids: &Tensor,
+        kv_cache: &mut KVCache,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        let start_pos = kv_cache.seq_len();
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+
+        for (i, layer) in self.layers.iter().enumerate() {
+            if skip_layers.contains(&i) {
+                continue;
+            }
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        let seq_len = output.dim(1)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        self.project_to_vocab(&last_hidden)
+    }
+
+    /// Generate tokens autoregressively, skipping the specified layers.
+    pub fn generate_with_layer_skip(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        skip_layers: &std::collections::HashSet<usize>,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        let mut kv_cache = self.new_kv_cache();
+        let mut tokens = prompt_ids.to_vec();
+
+        // Prefill
+        let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
+        let logits =
+            self.forward_with_kv_cache_and_layer_skip(&prompt_tensor, &mut kv_cache, skip_layers)?;
+
+        let mut next_token = sample_from_logits(&logits, temperature)?;
+        if stop_tokens.contains(&next_token) {
+            return Ok(tokens);
+        }
+        tokens.push(next_token);
+
+        // Autoregressive generation
+        for _ in 1..max_tokens {
+            let input_tensor = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
+            let logits = self.forward_with_kv_cache_and_layer_skip(
+                &input_tensor,
+                &mut kv_cache,
+                skip_layers,
+            )?;
+            next_token = sample_from_logits(&logits, temperature)?;
+            if stop_tokens.contains(&next_token) {
+                break;
+            }
+            tokens.push(next_token);
+        }
+
+        Ok(tokens)
+    }
+
+    /// Forward pass with recurrent re-execution of a layer block.
+    ///
+    /// Flow: embed → layers[0..loop_start) → save_input
+    ///   → layers[loop_start..=loop_end] (pass 1) → pass_1_output
+    ///   → if feedback: pass 2 input = saved_input + feedback
+    ///     else:        pass 2 input = pass_1_output  (true recurrence)
+    ///   → layers[loop_start..=loop_end] (pass 2)
+    ///   → layers[(loop_end+1)..n_layers) → norm
+    ///
+    /// Returns the normed hidden state `[batch, seq_len, d_model]`.
+    /// The caller projects to vocab as needed (e.g., last-token logits).
+    pub fn forward_with_recurrent_pass(
+        &self,
+        input_ids: &Tensor,
+        spec: &RecurrentPassSpec,
+    ) -> Result<Tensor> {
+        let seq_len = input_ids.dim(1)?;
+        spec.validate(self.layers.len(), seq_len, self.hidden_size)?;
+
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+
+        // Pre-loop layers
+        for layer in &self.layers[..spec.loop_start] {
+            hidden = layer.forward(&hidden, &self.rotary, 0)?;
+        }
+
+        // Save input to the loop block (needed for feedback injection)
+        let saved_input = if spec.feedback.is_empty() {
+            None
+        } else {
+            Some(hidden.clone())
+        };
+
+        // Pass 1 through loop layers
+        for layer in &self.layers[spec.loop_start..=spec.loop_end] {
+            hidden = layer.forward(&hidden, &self.rotary, 0)?;
+        }
+        // hidden now holds pass 1 output
+
+        // Determine pass 2 input
+        if let Some(saved) = saved_input {
+            // With feedback: inject into saved pre-loop state
+            hidden = saved;
+            for entry in &spec.feedback {
+                let scaled = (&entry.vector * f64::from(entry.strength))?;
+                hidden = inject_at_position(&hidden, &scaled, entry.position)?;
+            }
+        }
+        // Without feedback: hidden stays as pass 1 output (true recurrence,
+        // like the DRC where each tick's output feeds the next tick's input)
+
+        // Pass 2 through loop layers
+        for layer in &self.layers[spec.loop_start..=spec.loop_end] {
+            hidden = layer.forward(&hidden, &self.rotary, 0)?;
+        }
+
+        // Post-loop layers
+        for layer in &self.layers[(spec.loop_end + 1)..] {
+            hidden = layer.forward(&hidden, &self.rotary, 0)?;
+        }
+
+        Ok(self.norm.forward(&hidden)?)
+    }
+
+    /// Generate tokens with recurrent re-execution during prefill.
+    ///
+    /// The recurrence (double pass + optional feedback) applies only to the
+    /// prefill step. Subsequent autoregressive decoding uses standard
+    /// single-pass forward through the KV-cache.
+    ///
+    /// Without feedback: pass 2 input = pass 1 output (true recurrence).
+    /// With feedback: pass 2 input = saved pre-loop state + feedback.
+    pub fn generate_with_recurrent_pass(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &RecurrentPassSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        let seq_len = prompt_ids.len();
+        spec.validate(self.layers.len(), seq_len, self.hidden_size)?;
+
+        let mut kv_cache = self.new_kv_cache();
+        let mut tokens = prompt_ids.to_vec();
+        let prompt_tensor = Tensor::new(&tokens[..], device)?.unsqueeze(0)?;
+
+        let mut hidden = self.embed_tokens.forward(&prompt_tensor)?;
+
+        // Pre-loop layers: populate KV-cache
+        for (i, layer) in self.layers[..spec.loop_start].iter().enumerate() {
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                0,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        // Save input to loop block (needed for feedback injection)
+        let saved_input = if spec.feedback.is_empty() {
+            None
+        } else {
+            Some(hidden.clone())
+        };
+
+        // Pass 1 through loop layers: populate KV-cache (will be reset)
+        for (j, layer) in self.layers[spec.loop_start..=spec.loop_end]
+            .iter()
+            .enumerate()
+        {
+            let i = spec.loop_start + j;
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                0,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+        // hidden now holds pass 1 output
+
+        // Reset KV-cache slots for loop layers (pass 2 will repopulate)
+        for i in spec.loop_start..=spec.loop_end {
+            kv_cache.keys[i] = None;
+            kv_cache.values[i] = None;
+        }
+
+        // Determine pass 2 input
+        if let Some(saved) = saved_input {
+            // With feedback: inject into saved pre-loop state
+            hidden = saved;
+            for entry in &spec.feedback {
+                let scaled = (&entry.vector * f64::from(entry.strength))?;
+                hidden = inject_at_position(&hidden, &scaled, entry.position)?;
+            }
+        }
+        // Without feedback: hidden stays as pass 1 output (true recurrence)
+
+        // Pass 2 through loop layers: repopulate KV-cache
+        for (j, layer) in self.layers[spec.loop_start..=spec.loop_end]
+            .iter()
+            .enumerate()
+        {
+            let i = spec.loop_start + j;
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                0,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        // Post-loop layers: populate remaining KV-cache slots
+        for (j, layer) in self.layers[(spec.loop_end + 1)..].iter().enumerate() {
+            let i = spec.loop_end + 1 + j;
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                0,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        // Compute logits from prefill and sample first token
+        let output = self.norm.forward(&hidden)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        let logits = self.project_to_vocab(&last_hidden)?;
+
+        let mut next_token = sample_from_logits(&logits, temperature)?;
+        if stop_tokens.contains(&next_token) {
+            return Ok(tokens);
+        }
+        tokens.push(next_token);
+
+        // Autoregressive generation
+        for _ in 1..max_tokens {
+            let input_tensor = Tensor::new(&[next_token], device)?.unsqueeze(0)?;
+            let logits = if spec.sustained && !spec.feedback.is_empty() {
+                // Sustained recurrence: apply recurrent block at every step
+                self.forward_with_kv_cache_recurrent(&input_tensor, &mut kv_cache, spec)?
+            } else {
+                // Standard single-pass (no recurrence during generation)
+                self.forward_with_kv_cache(&input_tensor, &mut kv_cache)?
+            };
+            next_token = sample_from_logits(&logits, temperature)?;
+            if stop_tokens.contains(&next_token) {
+                break;
+            }
+            tokens.push(next_token);
+        }
+
+        Ok(tokens)
+    }
+
+    /// Forward a single token through the recurrent block with KV-cache.
+    ///
+    /// Used during autoregressive generation when `spec.sustained` is true.
+    /// Applies the two-pass recurrent block at every generation step, injecting
+    /// feedback at position 0 (the current token being generated).
+    fn forward_with_kv_cache_recurrent(
+        &self,
+        input_ids: &Tensor,
+        kv_cache: &mut KVCache,
+        spec: &RecurrentPassSpec,
+    ) -> Result<Tensor> {
+        let start_pos = kv_cache.seq_len();
+        let mut hidden = self.embed_tokens.forward(input_ids)?;
+
+        // Pre-loop layers: standard forward with cache
+        for (i, layer) in self.layers[..spec.loop_start].iter().enumerate() {
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        // Save pre-loop output for feedback injection
+        let saved_input = hidden.clone();
+
+        // Pass 1 through loop layers
+        for (j, layer) in self.layers[spec.loop_start..=spec.loop_end]
+            .iter()
+            .enumerate()
+        {
+            let i = spec.loop_start + j;
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        // Trim loop layer cache back to pre-pass-1 length.
+        // Unlike prefill (which sets to None), generation must preserve
+        // previous tokens' K/V — only remove the newly appended entry.
+        for i in spec.loop_start..=spec.loop_end {
+            if let Some(ref k) = kv_cache.keys[i] {
+                kv_cache.keys[i] = Some(k.narrow(2, 0, start_pos)?);
+            }
+            if let Some(ref v) = kv_cache.values[i] {
+                kv_cache.values[i] = Some(v.narrow(2, 0, start_pos)?);
+            }
+        }
+
+        // Apply feedback at position 0 (the single token being processed)
+        hidden = saved_input;
+        for entry in &spec.feedback {
+            let scaled = (&entry.vector * f64::from(entry.strength))?;
+            hidden = inject_at_position(&hidden, &scaled, 0)?;
+        }
+
+        // Pass 2 through loop layers with feedback-conditioned input
+        for (j, layer) in self.layers[spec.loop_start..=spec.loop_end]
+            .iter()
+            .enumerate()
+        {
+            let i = spec.loop_start + j;
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        // Post-loop layers
+        for (j, layer) in self.layers[(spec.loop_end + 1)..].iter().enumerate() {
+            let i = spec.loop_end + 1 + j;
+            hidden = layer.forward_with_cache(
+                &hidden,
+                &self.rotary,
+                start_pos,
+                &mut kv_cache.keys[i],
+                &mut kv_cache.values[i],
+            )?;
+        }
+
+        let output = self.norm.forward(&hidden)?;
+        let seq_len = output.dim(1)?;
+        let last_hidden = output.i((.., seq_len - 1, ..))?.squeeze(1)?;
+        self.project_to_vocab(&last_hidden)
+    }
 }
 
 /// Add a steering vector to the hidden state at a specific sequence position.
@@ -1391,6 +1781,59 @@ impl PlipBackend for PlipLlama {
             temperature,
             stop_tokens,
             clt_spec,
+            device,
+        )
+    }
+
+    fn forward_with_layer_skip(
+        &self,
+        input_ids: &Tensor,
+        skip_layers: &std::collections::HashSet<usize>,
+    ) -> Result<Tensor> {
+        self.forward_with_layer_skip(input_ids, skip_layers)
+    }
+
+    fn generate_with_layer_skip(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        skip_layers: &std::collections::HashSet<usize>,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        self.generate_with_layer_skip(
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            skip_layers,
+            device,
+        )
+    }
+
+    fn forward_with_recurrent_pass(
+        &self,
+        input_ids: &Tensor,
+        spec: &RecurrentPassSpec,
+    ) -> Result<Tensor> {
+        self.forward_with_recurrent_pass(input_ids, spec)
+    }
+    fn generate_with_recurrent_pass(
+        &self,
+        prompt_ids: &[u32],
+        max_tokens: usize,
+        temperature: f32,
+        stop_tokens: &[u32],
+        spec: &RecurrentPassSpec,
+        device: &Device,
+    ) -> Result<Vec<u32>> {
+        self.generate_with_recurrent_pass(
+            prompt_ids,
+            max_tokens,
+            temperature,
+            stop_tokens,
+            spec,
             device,
         )
     }

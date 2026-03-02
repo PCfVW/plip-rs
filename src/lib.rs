@@ -98,6 +98,8 @@ pub use intervention::{
     InterventionType,
     KnockoutSpec,
     LayerSpec,
+    RecurrentFeedbackEntry,
+    RecurrentPassSpec,
     StateAblationResult,
     StateKnockoutSpec,
     StateSteeringResult,
