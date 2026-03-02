@@ -7,7 +7,7 @@ here, the recurrent pulse that sustains the rhyme plan through generation.*
 
 **Model:** Llama 3.2 1B (`meta-llama/Llama-3.2-1B`, 16 layers)
 
-**Hardware:** RTX 5060 Ti 16 GB, CUDA
+**Hardware:** RTX 5060 Ti 16 GB, CUDA 13.1
 
 ---
 
@@ -141,9 +141,8 @@ add ~50% overhead per couplet because each generation step runs the recurrent
 block (two passes through L14-15 with KV-cache trimming).
 
 **Requirements:**
-- Llama 3.2 1B weights cached locally from HuggingFace
-  (`meta-llama/Llama-3.2-1B`)
-- CUDA-capable GPU with >= 4 GB VRAM (the model is ~4 GB in BF16)
+- Llama 3.2 1B weights cached locally from HuggingFace (`meta-llama/Llama-3.2-1B`)
+- CUDA-capable GPU with >= 8 GB VRAM (the model is ~4 GB in BF16)
 
 ---
 

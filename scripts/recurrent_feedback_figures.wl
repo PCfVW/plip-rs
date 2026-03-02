@@ -154,9 +154,9 @@ fig2grid = Table[
   Module[{val = coupletGrid[[row, col + 2]], word = generatedWords[[row, col + 1]]},
     {If[val == 1, successColor, failureColor],
      Rectangle[{col - 1, 15 - row}, {col, 16 - row}],
-     Black,
+     White,
      Text[
-       Style[word, 10, If[val == 1, Bold, Plain]],
+       Style[word, 10, Bold],
        {col - 0.5, 15.5 - row}
      ]}
   ],
@@ -195,7 +195,7 @@ convHighlight = {
 (* Regression highlight: dashed border on couplet 14, prefill s=1.0 (col 2) *)
 regrHighlight = {
   RGBColor[0.6, 0.1, 0.1], AbsoluteThickness[2], Dashing[{0.02, 0.01}],
-  Line[{{1, 0}, {2, 0}, {2, 1}, {1, 1}, {1, 0}}]
+  Line[{{1, 1}, {2, 1}, {2, 2}, {1, 2}, {1, 1}}]
 };
 
 fig2 = Graphics[{
